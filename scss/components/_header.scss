@@ -1,0 +1,12 @@
+header {
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+    justify-content: space-between;
+
+    h1 {
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+}

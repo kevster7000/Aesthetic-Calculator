@@ -1,0 +1,10 @@
+/* basic helper functions, mixins, and placeholders go here */
+
+%offscreen {
+    position: absolute;
+    left: -10000px;
+}
+
+%nowrap {
+    white-space: nowrap;
+}

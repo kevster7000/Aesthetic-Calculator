@@ -1,0 +1,11 @@
+/* fonts and typography go here */
+
+@import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
+
+body {
+    font-family: "Montserrat", Arial, Helvetica, sans-serif;
+}
+
+form, input, button, input, textarea {
+    font: inherit;
+}

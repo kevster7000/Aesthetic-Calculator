@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="Kevin Tang">
+    <meta name="description" content="An aesthetic and multi-themed calculator">
+    <title>Aesthetic Calculator</title>
+    <link rel="icon" href="">
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script type="module" src="js/main.js"></script>
+</head>
+<body>
+    <header>
+        <button>
+            <a href="./"><i class="fa-brands fa-github"></i></a>
+        </button>
+
+        <h1>Aesthetic Calculator</h1>
+
+        <nav>
+            <h2 class="offscreen">Select Theme</h2>
+            <button>
+                Select Theme
+                <!-- dropdown icon -->
+            </button>
+            <div class="current_theme">
+
+            </div>
+            <div>
+                <button id="theme_white"></button>
+                <!-- etc -->
+            </div>
+        </nav>
+    </header>
+
+    <main class="calculator">
+        <button><i class="fa-solid fa-clock-rotate-left"></i></button>
+
+        <section class="calculator__display">
+            <!-- make this scrollable - overflow:auto -->
+            <input type="text">
+
+            <!-- maybe don't use a input - just a div iwth the content editable attribute ? -->
+        </section>
+
+        <section class="calculator__buttons">
+            <!-- temporary buttons - just to list them out -->
+            <button>clear</button>
+            <button>del</button>
+            <button>+</button>
+            <button>-</button>
+            <button>&#215;</button>
+            <button>&#247;</button>
+            <button>.</button>
+            <button>(</button>
+            <button>)</button>
+            <button>^</button>
+            <button>&#9141;</button>
+            <button>0</button>
+            <button>1</button>
+            <button>2</button>
+            <button>3</button>
+            <button>4</button>
+            <button>5</button>
+            <button>6</button>
+            <button>7</button>
+            <button>8</button>
+            <button>9</button>
+            <button>=</button>
+        </section>
+    </main>
+</body>
+</html>

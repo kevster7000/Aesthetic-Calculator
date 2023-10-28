@@ -1,0 +1,52 @@
+/* all variables go here - I much prefer to use CSS variables in :root over Sass variables */
+@import url("https://fonts.googleapis.com/css2?family=Montserrat&display=swap");
+:root {
+  /****************** COLORS ******************/
+  /****************** SHADOWS ******************/
+  /****************** BORDERS ******************/
+  --BORDER-HELP: 1px solid red;
+  /****************** PADDING & MARGIN ******************/
+  /****************** FONT SIZES ******************/
+  /* etc */
+}
+
+/* media queries go here */
+/* basic helper functions, mixins, and placeholders go here */
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+img, video {
+  display: block;
+}
+
+/* fonts and typography go here */
+body {
+  font-family: "Montserrat", Arial, Helvetica, sans-serif;
+}
+
+form, input, button, input, textarea {
+  font: inherit;
+}
+
+header {
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-flow: row nowrap;
+      flex-flow: row nowrap;
+  -ms-flex-align: center;
+      align-items: center;
+  -ms-flex-pack: justify;
+      justify-content: space-between;
+}
+header h1 {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+body {
+  min-height: 100vh;
+}/*# sourceMappingURL=main.css.map */
