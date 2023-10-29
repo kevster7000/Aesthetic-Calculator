@@ -13,63 +13,78 @@
 </head>
 <body>
     <header>
-        <button>
-            <a href="./"><i class="fa-brands fa-github"></i></a>
+        <button class="github__btn">
+            <a href="./">
+                <i class="fa-brands fa-github"></i>
+                <span class="github__text">GitHub</span>
+            </a>
         </button>
 
         <h1>Aesthetic Calculator</h1>
 
-        <nav>
+        <nav class="themes">
             <h2 class="offscreen">Select Theme</h2>
-            <button>
-                Select Theme
-                <!-- dropdown icon -->
-            </button>
-            <div class="current_theme">
 
-            </div>
-            <div>
-                <button id="theme_white"></button>
+            <button class="themes__btn">
+                <span class="themes__text">Select Theme</span>
+                <div class="themes__current"></div>
+                <i class="fa-solid fa-caret-down"></i>
+            </button>
+
+            <div class="themes__panel">
+                <button id="white" class="themes_panel-option"></button>
                 <!-- etc -->
             </div>
         </nav>
     </header>
 
     <main class="calculator">
-        <button><i class="fa-solid fa-clock-rotate-left"></i></button>
+        <div class="calculator__container">
+            <section class="calculator__history">
+                <h3 class="offscreen">Calculator History</h3>
+                <div class="calculator__history-entry">
 
-        <section class="calculator__display">
-            <!-- make this scrollable - overflow:auto -->
-            <input type="text">
+                </div>
+                <!-- will be populated with js -->
+                <!-- also make this scrollable -->
+            </section>
 
-            <!-- maybe don't use a input - just a div iwth the content editable attribute ? -->
-        </section>
+            <section class="calculator__display">
+                <h3 class="offscreen">Calculator Display</h2>
+                <button id="calculator-history-btn"><i class="fa-solid fa-clock-rotate-left"></i></button>
+                <!-- make this scrollable - overflow:auto -->
+                <input type="text">
 
-        <section class="calculator__buttons">
-            <!-- temporary buttons - just to list them out -->
-            <button>clear</button>
-            <button>del</button>
-            <button>+</button>
-            <button>-</button>
-            <button>&#215;</button>
-            <button>&#247;</button>
-            <button>.</button>
-            <button>(</button>
-            <button>)</button>
-            <button>^</button>
-            <button>&#9141;</button>
-            <button>0</button>
-            <button>1</button>
-            <button>2</button>
-            <button>3</button>
-            <button>4</button>
-            <button>5</button>
-            <button>6</button>
-            <button>7</button>
-            <button>8</button>
-            <button>9</button>
-            <button>=</button>
-        </section>
+                <!-- maybe don't use a input - just a div iwth the content editable attribute ? -->
+            </section>
+
+            <section class="calculator__btns">
+                <h3 class="offscreen">Calculator Buttons</h3>
+                <div id="calculator__theme-header"></div>
+                <button id="btn-del">del<!-- <i class="fa-solid fa-delete-left"></i> --></button>
+                <button id="btn-cle">AC</button>
+                <button id="btn-pa1">(</button>
+                <button id="btn-pa2">)</button>
+                <button id="btn-per">%</button>
+                <button id="btn-exp">^</button>
+                <button id="btn-b7">7</button>
+                <button id="btn-b8">8</button>
+                <button id="btn-b9">9</button>
+                <button id="btn-div">&#247;</button>
+                <button id="btn-b4">4</button>
+                <button id="btn-b5">5</button>
+                <button id="btn-b6">6</button>
+                <button id="btn-mul">&#215;</button>
+                <button id="btn-b1">1</button>
+                <button id="btn-b2">2</button>
+                <button id="btn-b3">3</button>
+                <button id="btn-sub">-</button>
+                <button id="btn-b0">0</button>
+                <button id="btn-dec">.</button>
+                <button id="btn-eq">=</button>
+                <button id="btn-add">+</button>
+            </section>
+        </div>
     </main>
 </body>
 </html>

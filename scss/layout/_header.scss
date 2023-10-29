@@ -1,0 +1,30 @@
+header {
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+    justify-content: space-between;
+
+    h1 {
+        margin-top: 0.5rem;
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        @extend %nowrap;
+    }
+
+    .github__btn {
+        margin-left: 0.5rem;
+        background: none;
+        border: none;
+
+        .github__text {
+            display: none;
+        }
+
+        @include media-sm {
+            .github__text {
+                display: inline;
+            }
+        }
+    }
+}

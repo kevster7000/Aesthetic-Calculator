@@ -7,8 +7,8 @@ use this string for calculating and parsing */
 
     Also check for excessive characters
     DO NOT ALLOW THE USER TO DO THE following:
+    - type spaces (make character space large in textfield so that it looks like there are automatic spacing between characters)
     - type multiple decimals per operand
-    - type more than one space between operator or operand
     - type consecutive operators
 
     - only allow decimals to be typed once per operand, never anywhere else
@@ -28,7 +28,7 @@ use this string for calculating and parsing */
 
 
 
-/* also make the user able to type any of the buttons such as space, +, -, enter, etc rather than having to click everything*/
+/* also make the user able to type any of the buttons such as , +, -, enter, etc rather than having to click everything*/
 
 /* also allow the display panel to be contenteditable so that the user can click and edit the text */
 

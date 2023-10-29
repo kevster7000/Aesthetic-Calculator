@@ -12,6 +12,15 @@
 
 /* media queries go here */
 /* basic helper functions, mixins, and placeholders go here */
+.offscreen {
+  position: absolute;
+  left: -10000px;
+}
+
+header h1 {
+  white-space: nowrap;
+}
+
 * {
   padding: 0;
   margin: 0;
@@ -27,8 +36,42 @@ body {
   font-family: "Montserrat", Arial, Helvetica, sans-serif;
 }
 
-form, input, button, input, textarea {
+form, input, button, label, textarea {
   font: inherit;
+}
+
+.themes__btn {
+  display: -ms-flexbox;
+  display: flex;
+  gap: 0.25rem;
+  -ms-flex-flow: row wrap;
+      flex-flow: row wrap;
+  padding: 0.25rem;
+  -ms-flex-pack: center;
+      justify-content: center;
+  -ms-flex-align: center;
+      align-items: center;
+}
+.themes__btn .themes__current {
+  width: 15px;
+  height: 15px;
+  background: red;
+  border-radius: 50%;
+  border: 1px solid black;
+}
+.themes__btn .themes__text {
+  display: none;
+}
+@media screen and (min-width: 576px) {
+  .themes__btn .themes__text {
+    display: inline;
+  }
+}
+.themes__panel {
+  display: none;
+}
+.themes__panel.active {
+  display: grid;
 }
 
 header {
@@ -42,11 +85,131 @@ header {
       justify-content: space-between;
 }
 header h1 {
+  margin-top: 0.5rem;
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
 }
+header .github__btn {
+  margin-left: 0.5rem;
+  background: none;
+  border: none;
+}
+header .github__btn .github__text {
+  display: none;
+}
+@media screen and (min-width: 576px) {
+  header .github__btn .github__text {
+    display: inline;
+  }
+}
+
+.calculator {
+  display: grid;
+  place-items: center;
+  height: 100%;
+}
+.calculator__container {
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-flow: column nowrap;
+      flex-flow: column nowrap;
+  width: clamp(300px, 60vw, 600px);
+  height: 50vh;
+  background: greenyellow;
+}
+.calculator__container .calculator__display {
+  padding: 0.5rem;
+  position: relative;
+}
+.calculator__container .calculator__display input {
+  width: 100%;
+}
+.calculator__container .calculator__display button {
+  position: absolute;
+  right: 0;
+  transform: translateX(-0.5rem);
+}
+.calculator__container .calculator__btns {
+  -ms-flex-positive: 1;
+      flex-grow: 1;
+  display: grid;
+  grid-template-areas: "th th del cle" "pa1 pa2 per exp" "b7 b8 b9 div" "b4 b5 b6 mul" "b1 b2 b3 sub" "b0 dec eq add";
+}
+.calculator__container .calculator__btns #calculator__theme-header {
+  grid-area: th;
+}
+.calculator__container .calculator__btns #btn-cle {
+  grid-area: cle;
+}
+.calculator__container .calculator__btns #btn-del {
+  grid-area: del;
+}
+.calculator__container .calculator__btns #btn-exp {
+  grid-area: exp;
+}
+.calculator__container .calculator__btns #btn-per {
+  grid-area: per;
+}
+.calculator__container .calculator__btns #btn-pa1 {
+  grid-area: pa1;
+}
+.calculator__container .calculator__btns #btn-pa2 {
+  grid-area: pa2;
+}
+.calculator__container .calculator__btns #btn-div {
+  grid-area: div;
+}
+.calculator__container .calculator__btns #btn-mul {
+  grid-area: mul;
+}
+.calculator__container .calculator__btns #btn-sub {
+  grid-area: sub;
+}
+.calculator__container .calculator__btns #btn-add {
+  grid-area: add;
+}
+.calculator__container .calculator__btns #btn-dec {
+  grid-area: dec;
+}
+.calculator__container .calculator__btns #btn-eq {
+  grid-area: eq;
+}
+.calculator__container .calculator__btns #btn-b0 {
+  grid-area: b0;
+}
+.calculator__container .calculator__btns #btn-b1 {
+  grid-area: b1;
+}
+.calculator__container .calculator__btns #btn-b2 {
+  grid-area: b2;
+}
+.calculator__container .calculator__btns #btn-b3 {
+  grid-area: b3;
+}
+.calculator__container .calculator__btns #btn-b4 {
+  grid-area: b4;
+}
+.calculator__container .calculator__btns #btn-b5 {
+  grid-area: b5;
+}
+.calculator__container .calculator__btns #btn-b6 {
+  grid-area: b6;
+}
+.calculator__container .calculator__btns #btn-b7 {
+  grid-area: b7;
+}
+.calculator__container .calculator__btns #btn-b8 {
+  grid-area: b8;
+}
+.calculator__container .calculator__btns #btn-b9 {
+  grid-area: b9;
+}
+.calculator__container .calculator__btns button {
+  margin: 0.25rem;
+}
 
 body {
-  min-height: 100vh;
+  height: 100vh;
+  overflow: hidden;
 }/*# sourceMappingURL=main.css.map */

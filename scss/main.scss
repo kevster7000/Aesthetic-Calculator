@@ -3,10 +3,22 @@
 
 @import 
     './components/buttons',
-    './components/header';
+    './components/history',
+    './components/themes';
+
+@import
+    './layout/header';
+
+@import
+    './vendors/fontawesome';
 
 @import 'calc';
 
+.offscreen {
+    @extend %offscreen;
+}
+
 body {
-    min-height: 100vh;
+    height: 100vh;
+    overflow: hidden;
 }

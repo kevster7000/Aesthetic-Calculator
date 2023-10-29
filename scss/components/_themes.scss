@@ -1,0 +1,37 @@
+.themes {
+
+    &__btn {
+        display: flex;
+        gap: 0.25rem;
+        flex-flow: row wrap;
+        padding: 0.25rem;
+        justify-content: center;
+        align-items: center;
+
+        .themes__current {
+            width: 15px;
+            height: 15px;
+            background: red;
+            border-radius: 50%;
+            border: 1px solid black;
+        }
+
+        .themes__text {
+            display: none;
+        }
+
+        @include media-sm {
+            .themes__text {
+                display: inline;
+            }
+        }
+    }
+
+    &__panel {
+        display: none;
+    }
+
+    &__panel.active {
+        display: grid;
+    }
+}
