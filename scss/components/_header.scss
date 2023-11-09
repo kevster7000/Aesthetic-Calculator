@@ -3,6 +3,7 @@ header {
     flex-flow: row nowrap;
     align-items: center;
     justify-content: space-between;
+    background-color: var(--BG-COLOR);
 
     h1 {
         margin-top: 0.5rem;
@@ -10,12 +11,20 @@ header {
         left: 50%;
         transform: translateX(-50%);
         @extend %nowrap;
+        font-size: clamp(1.25rem, 7vw, 2rem);
+    }
+
+    @include media-sm {
+        h1 {
+            font-size: 2rem;
+        }
     }
 
     .github__btn {
         margin-left: 0.5rem;
         background: none;
         border: none;
+        font-size: clamp(1.25rem, 5vw, 1.5rem);
 
         .github__text {
             display: none;

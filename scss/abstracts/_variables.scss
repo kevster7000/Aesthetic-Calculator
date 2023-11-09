@@ -1,11 +1,19 @@
 /* all variables go here - I much prefer to use CSS variables in :root over Sass variables */
 
 :root {
-    /****************** COLORS ******************/
-    
-    
-    /****************** SHADOWS ******************/
+    /* Default theme is white */
 
+    /****************** COLORS ******************/
+    --BG-COLOR: #fcfcfc;
+    --TEXT-COLOR: #111;
+
+    --CALC-BG-COLOR: #c4c4c4;
+    --BTN-BORDER-COLOR: #4d4d4d;
+
+    /****************** SHADOWS ******************/
+    --BTN-SHADOW: 0px 0px 5px var(--BTN-BORDER-COLOR);
+
+    --CALC-SHADOW: 0px 0px 15px var(--CALC-BG-COLOR);
 
     /****************** BORDERS ******************/
     --BORDER-HELP: 1px solid red;

@@ -1,12 +1,16 @@
-@mixin button-interact($box-shadow, $text-shadow) {
-    transition: box-shadow 0.25s, text-shadow 0.25s, filter 0.15s;
+@mixin button-init($box-shadow) {
+    margin: 0.25rem;
+    border-radius: 7px;
+    border: 1px solid var(--BTN-BORDER-COLOR);
+    cursor: pointer;
+    transition: box-shadow 0.25s, text-shadow 0.25s, filter 0.1s;
+    color: var(--TEXT-COLOR);
     
     &:hover, &:focus-visible {
         box-shadow: $box-shadow;
-        text-shadow: $text-shadow;
     }
 
     &:active {
-        filter: brightness(0.9);
+        filter: brightness(0.95);
     }
 }

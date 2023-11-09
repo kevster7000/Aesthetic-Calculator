@@ -32,8 +32,13 @@
             </button>
 
             <div class="themes__panel">
-                <button id="white" class="themes_panel-option"></button>
-                <!-- etc -->
+                <button id="white" class="themes__panel-option"></button>
+                <button id="white" class="themes__panel-option"></button>
+                <button id="white" class="themes__panel-option"></button>
+                <button id="white" class="themes__panel-option"></button>
+                <button id="white" class="themes__panel-option"></button>
+                <button id="white" class="themes__panel-option"></button>
+                <!-- populate with JS -->
             </div>
         </nav>
     </header>
@@ -49,41 +54,44 @@
                 <!-- also make this scrollable -->
             </section>
 
-            <section class="calculator__display">
-                <h3 class="offscreen">Calculator Display</h2>
-                <button id="calculator-history-btn"><i class="fa-solid fa-clock-rotate-left"></i></button>
-                <!-- make this scrollable - overflow:auto -->
-                <input type="text">
+            <form action="" method="post">
 
-                <!-- maybe don't use a input - just a div iwth the content editable attribute ? -->
-            </section>
+                <section class="calculator__display">
+                    <h3 class="offscreen">Calculator Display</h2>
+                    <button id="calculator-history-btn"><i class="fa-solid fa-clock-rotate-left"></i></button>
+                    <label for="userInput">User Input</label>
+                    <input type="text" id="userInput" name="userInput" autocomplete="off">
+                </section>
 
-            <section class="calculator__btns">
-                <h3 class="offscreen">Calculator Buttons</h3>
-                <div id="calculator__theme-header"></div>
-                <button id="btn-del">del<!-- <i class="fa-solid fa-delete-left"></i> --></button>
-                <button id="btn-cle">AC</button>
-                <button id="btn-pa1">(</button>
-                <button id="btn-pa2">)</button>
-                <button id="btn-per">%</button>
-                <button id="btn-exp">^</button>
-                <button id="btn-b7">7</button>
-                <button id="btn-b8">8</button>
-                <button id="btn-b9">9</button>
-                <button id="btn-div">&#247;</button>
-                <button id="btn-b4">4</button>
-                <button id="btn-b5">5</button>
-                <button id="btn-b6">6</button>
-                <button id="btn-mul">&#215;</button>
-                <button id="btn-b1">1</button>
-                <button id="btn-b2">2</button>
-                <button id="btn-b3">3</button>
-                <button id="btn-sub">-</button>
-                <button id="btn-b0">0</button>
-                <button id="btn-dec">.</button>
-                <button id="btn-eq">=</button>
-                <button id="btn-add">+</button>
-            </section>
+                <section class="calculator__btns">
+                    <h3 class="offscreen">Calculator Buttons</h3>
+                    <div id="calculator__theme-header"></div>
+                    
+                    <button id="btn-del"><i class="fa-solid fa-delete-left"></i></button>
+                    <button id="btn-cle" type="reset">Clear</button>
+                    <button id="btn-pa1" class="btn-operator">(</button>
+                    <button id="btn-pa2" class="btn-operator">)</button>
+                    <button id="btn-per" class="btn-operator">%</button>
+                    <button id="btn-exp" class="btn-operator">^</button>
+                    <button id="btn-b7">7</button>
+                    <button id="btn-b8">8</button>
+                    <button id="btn-b9">9</button>
+                    <button id="btn-div" class="btn-operator">&#247;</button>
+                    <button id="btn-b4">4</button>
+                    <button id="btn-b5">5</button>
+                    <button id="btn-b6">6</button>
+                    <button id="btn-mul" class="btn-operator">&#215;</button>
+                    <button id="btn-b1">1</button>
+                    <button id="btn-b2">2</button>
+                    <button id="btn-b3">3</button>
+                    <button id="btn-sub" class="btn-operator">-</button>
+                    <button id="btn-b0">0</button>
+                    <button id="btn-dec">.</button>
+                    <button id="btn-eq" type="submit">=</button>
+                    <button id="btn-add" class="btn-operator">+</button>
+                </section>
+
+            </form>
         </div>
     </main>
 </body>

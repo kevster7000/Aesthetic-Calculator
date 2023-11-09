@@ -1,3 +1,6 @@
+let input = document.querySelector("#userInput");
+
+
 /* everytime they hit an arithmetic button, add onto the string in the display panel
 use this string for calculating and parsing */
 
@@ -25,10 +28,25 @@ use this string for calculating and parsing */
     Then, we will evaluate this postfix expressiosn by using a stack for operators
 */
 
+/* FOR REGEX, use a while loop until end of input string
+add each char to a temp string until we hit an operator such as (), +, -, etc
+Then, use regex to make sure this temp string is correctly formatted
+
+Example of regex for now: [0-9]*.[0-9]+[ ]*[+ or - or ...]
+*/
 
 
 
 /* also make the user able to type any of the buttons such as , +, -, enter, etc rather than having to click everything*/
+window.addEventListener("keydown", (event) => {
+    if(event.key === '') {
+        //error handling
+    }
+    else if(event.key === '') {
+
+    }
+})
+
 
 /* also allow the display panel to be contenteditable so that the user can click and edit the text */
 
@@ -37,4 +55,3 @@ use this string for calculating and parsing */
     everytime the user hits enter or clicks =, if no error, store the displayed expression string as the key and the result as the value in session storage
     If the user hits the history button, display all of these key/value pairs in session storage on the side of the calculator.
 */
-console.log("hey");

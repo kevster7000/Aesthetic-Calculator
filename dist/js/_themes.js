@@ -22,6 +22,8 @@ const colors = {
     'pink': []
 };
 
+// make colors into the themse array of objects -> hard code theme colors
+
 const colorVariables = [];
 
 const themes = {}; //an obj of objs
