@@ -2,17 +2,14 @@
     position: relative;
 
     &__btn {
-        display: flex;
+        @include flex;
         gap: 0.25rem;
-        flex-flow: row wrap;
         padding: 0.25rem;
-        justify-content: center;
-        align-items: center;
 
         .themes__current {
             width: 15px;
             height: 15px;
-            background: red;
+            background: var(--BG-COLOR);
             border-radius: 50%;
             border: 1px solid black;
         }
@@ -30,8 +27,6 @@
 
     &__panel {
         display: none;
-        //display: flex;
-        flex-flow: row wrap;
         position: absolute;
         gap: 0.25rem;
         left: 0;
@@ -49,6 +44,6 @@
     }
 
     &__panel.active {
-        display: flex;
+        @include flex(center, center, row, wrap);
     }
 }

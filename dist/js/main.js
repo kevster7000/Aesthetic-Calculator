@@ -1,3 +1,47 @@
+import themes, {colorVariables} from "./themes.js";
+
+/**********************************************************************************/
+/*                                     Themes                                     */
+/**********************************************************************************/
+
+// USE LOCAL storage to store theme
+// get current theme (if null), then set to white, otherwise set the theme accordingly
+
+const themesButton = document.querySelector(".themes__btn");
+const themesPanel = document.querySelector(".themes__panel");
+themesButton.addEventListener("click", () => {
+    themesPanel.classList.toggle("active");
+})
+
+setThemes();
+
+function setThemes() {
+    const themesContainer = document.querySelector(".themes__panel");
+    Object.keys(themes).forEach((theme) => {
+
+        const newTheme = document.createElement("div");
+        newTheme.id = theme;
+        newTheme.classList.add("themes__panel-option");
+        newTheme.style.backgroundColor = themes[theme][0];
+        newTheme.addEventListener("click", () => {updateTheme(themes[theme])});
+        themesContainer.append(newTheme);
+
+        // themesContainer.innerHTML += `<div id="${theme}" class="themes__panel-option" style="background-color: ${themes[theme][0]}">`;
+    });
+}
+
+function updateTheme(themeColors) {
+    for(let i = 0; i < colorVariables.length; i ++) {
+        document.documentElement.style.setProperty(colorVariables[i], themeColors[i]);
+    }
+    const themeCurrent = document.querySelector(".themes__current");
+    themeCurrent.style.setProperty("backgroundColor", themeColors[0]);
+}
+
+/**********************************************************************************/
+/*                                Calculator Input                                */
+/**********************************************************************************/
+
 let input = document.querySelector("#userInput");
 
 
@@ -55,3 +99,5 @@ window.addEventListener("keydown", (event) => {
     everytime the user hits enter or clicks =, if no error, store the displayed expression string as the key and the result as the value in session storage
     If the user hits the history button, display all of these key/value pairs in session storage on the side of the calculator.
 */
+
+// USE session storage to store history

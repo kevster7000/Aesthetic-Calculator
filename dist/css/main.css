@@ -3,7 +3,7 @@
 :root {
   /* Default theme is white */
   /****************** COLORS ******************/
-  --BG-COLOR: #fcfcfc;
+  --BG-COLOR: #f0f0f0;
   --TEXT-COLOR: #111;
   --CALC-BG-COLOR: #c4c4c4;
   --BTN-BORDER-COLOR: #4d4d4d;
@@ -19,7 +19,7 @@
 
 /* media queries go here */
 /* basic helper functions, mixins, and placeholders go here */
-.offscreen, .calculator__container form .calculator__display label {
+.offscreen, .calculator__container .calculator__display label {
   position: absolute;
   left: -10000px;
 }
@@ -50,12 +50,12 @@ form, input, button, label, textarea {
 header {
   display: -ms-flexbox;
   display: flex;
-  -ms-flex-flow: row nowrap;
-      flex-flow: row nowrap;
-  -ms-flex-align: center;
-      align-items: center;
   -ms-flex-pack: justify;
       justify-content: space-between;
+  -ms-flex-align: center;
+      align-items: center;
+  -ms-flex-flow: row nowrap;
+      flex-flow: row nowrap;
   background-color: var(--BG-COLOR);
 }
 header h1 {
@@ -91,19 +91,19 @@ header .github__btn .github__text {
 .themes__btn {
   display: -ms-flexbox;
   display: flex;
-  gap: 0.25rem;
-  -ms-flex-flow: row wrap;
-      flex-flow: row wrap;
-  padding: 0.25rem;
   -ms-flex-pack: center;
       justify-content: center;
   -ms-flex-align: center;
       align-items: center;
+  -ms-flex-flow: row nowrap;
+      flex-flow: row nowrap;
+  gap: 0.25rem;
+  padding: 0.25rem;
 }
 .themes__btn .themes__current {
   width: 15px;
   height: 15px;
-  background: red;
+  background: var(--BG-COLOR);
   border-radius: 50%;
   border: 1px solid black;
 }
@@ -138,15 +138,19 @@ header .github__btn .github__text {
   display: flex;
 }
 
-.calculator {
+.calculator__container {
   display: grid;
   place-items: center;
   height: 100%;
   background-color: var(--BG-COLOR);
 }
-.calculator__container {
+.calculator__container .calculator {
   display: -ms-flexbox;
   display: flex;
+  -ms-flex-pack: unset;
+      justify-content: unset;
+  -ms-flex-align: unset;
+      align-items: unset;
   -ms-flex-flow: column nowrap;
       flex-flow: column nowrap;
   width: clamp(300px, 70vw, 500px);
@@ -155,49 +159,48 @@ header .github__btn .github__text {
   box-shadow: var(--CALC-SHADOW);
   border-radius: 9px;
   padding: 0.5rem;
+  -webkit-backdrop-filter: blur(100px);
+          backdrop-filter: blur(100px);
 }
-.calculator__container form {
-  height: 100%;
+.calculator__container .calculator__display {
   display: -ms-flexbox;
   display: flex;
-  -ms-flex-flow: column nowrap;
-      flex-flow: column nowrap;
-  padding: 0.5rem;
-  gap: 0.5rem;
-}
-.calculator__container form .calculator__display {
-  margin: 0.25rem;
-  position: relative;
-  display: -ms-flexbox;
-  display: flex;
+  -ms-flex-pack: center;
+      justify-content: center;
+  -ms-flex-align: center;
+      align-items: center;
   -ms-flex-flow: row nowrap;
       flex-flow: row nowrap;
+  padding: 0.5rem;
+  margin: 0.25rem;
 }
-.calculator__container form .calculator__display input, .calculator__container form .calculator__display > button {
+.calculator__container .calculator__display input, .calculator__container .calculator__display > button {
   padding: clamp(0.5rem, 2.5vw, 1.075rem);
 }
-.calculator__container form .calculator__display input {
-  width: 100%;
+.calculator__container .calculator__display input {
+  -ms-flex-positive: 1;
+      flex-grow: 1;
 }
-.calculator__container form .calculator__display > button {
+.calculator__container .calculator__display > button {
   -ms-flex-order: 1;
       order: 1;
 }
-.calculator__container form .calculator__btns {
+.calculator__container .calculator__btns {
   -ms-flex-positive: 1;
       flex-grow: 1;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  padding: 0;
+  padding: 0.5rem;
+  padding-top: 0.25rem;
 }
-.calculator__container form .calculator__btns #calculator__theme-header {
+.calculator__container .calculator__btns #calculator__theme-header {
   margin: 0.25rem;
   border-radius: 7px;
   border: 1px solid var(--BTN-BORDER-COLOR);
   background-color: lightblue;
   grid-column: 1/3;
 }
-.calculator__container form .calculator__btns button {
+.calculator__container .calculator__btns button {
   margin: 0.25rem;
   border-radius: 7px;
   border: 1px solid var(--BTN-BORDER-COLOR);
@@ -205,19 +208,19 @@ header .github__btn .github__text {
   transition: box-shadow 0.25s, text-shadow 0.25s, filter 0.1s;
   color: var(--TEXT-COLOR);
 }
-.calculator__container form .calculator__btns button:hover, .calculator__container form .calculator__btns button:focus-visible {
+.calculator__container .calculator__btns button:hover, .calculator__container .calculator__btns button:focus-visible {
   box-shadow: var(--BTN-SHADOW);
 }
-.calculator__container form .calculator__btns button:active {
+.calculator__container .calculator__btns button:active {
   filter: brightness(0.95);
 }
-.calculator__container form .calculator__btns #btn-eq {
+.calculator__container .calculator__btns #btn-eq {
   background: lightblue;
 }
-.calculator__container form .calculator__btns #btn-cle, .calculator__container form .calculator__btns #btn-del {
+.calculator__container .calculator__btns #btn-cle, .calculator__container .calculator__btns #btn-del {
   background-color: aliceblue;
 }
-.calculator__container form .calculator__btns .btn-operator {
+.calculator__container .calculator__btns .btn-operator {
   background-color: azure;
 }
 
