@@ -3,8 +3,10 @@
 :root {
     /* Default theme is white */
 
+    // TODO: MAKE THESE VARIABLES NAMES MORE Semantic and meaningful
+
     /****************** COLORS ******************/
-    --BG-COLOR: #f0f0f0;
+    --MAIN-COLOR: #f7f7f7;
     --TEXT-COLOR: #111;
 
     --CALC-BG-COLOR: #c4c4c4;
@@ -18,7 +20,7 @@
     /****************** BORDERS ******************/
     --BORDER-HELP: 1px solid red;
 
-    /****************** PADDING & MARGIN ******************/
+    /****************** SPACING (PADDING & MARGIN) ******************/
 
 
     /****************** FONT SIZES ******************/

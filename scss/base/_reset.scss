@@ -4,6 +4,7 @@
     box-sizing: border-box;
 }
 
-img, video {
+img, picture, video, canvas, svg {
     display: block;
+    max-width: 100%;
 }

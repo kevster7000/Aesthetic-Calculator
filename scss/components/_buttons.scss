@@ -5,6 +5,7 @@
     cursor: pointer;
     transition: box-shadow 0.25s, text-shadow 0.25s, filter 0.1s;
     color: var(--TEXT-COLOR);
+    position: relative;
     
     &:hover, &:focus-visible {
         box-shadow: $box-shadow;
@@ -12,5 +13,19 @@
 
     &:active {
         filter: brightness(0.95);
+    }
+
+    // TODO: Finish the button displays and their shadows and shtuff
+
+    &::before {
+        content: "";
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        border-radius: 6px;
+        width: 85%;
+        height: 85%;
+        background-image: radial-gradient(transparent, hsla(195, 53%, 79%, 0.7));
     }
 }

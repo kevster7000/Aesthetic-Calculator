@@ -20,9 +20,9 @@ const themes = {
     indigo: ["purple"],
     purple: ["purple"],
     magenta: ["magenta"],
-    pink: ["pink"]
+    pink: ["pink"],
 };
 
-export const colorVariables = ["--BG-COLOR"];
+export const colorVariables = ["--MAIN-COLOR"];
 
 export default themes;

@@ -4,38 +4,50 @@ import themes, {colorVariables} from "./themes.js";
 /*                                     Themes                                     */
 /**********************************************************************************/
 
-// USE LOCAL storage to store theme
-// get current theme (if null), then set to white, otherwise set the theme accordingly
+initThemes();
 
-const themesButton = document.querySelector(".themes__btn");
-const themesPanel = document.querySelector(".themes__panel");
-themesButton.addEventListener("click", () => {
-    themesPanel.classList.toggle("active");
-})
+function initThemes() {
+    const themesButton = document.querySelector(".themes__btn");
+    const themesPanel = document.querySelector(".themes__panel");
+    themesButton.addEventListener("click", () => {
+        themesPanel.classList.toggle("active");
+    })
 
-setThemes();
+    setThemes(getTheme());
+}
 
-function setThemes() {
+function getTheme() {
+    return localStorage.getItem("theme") ?? "white";
+}
+
+function setThemes(themeStored) {
     const themesContainer = document.querySelector(".themes__panel");
     Object.keys(themes).forEach((theme) => {
 
-        const newTheme = document.createElement("div");
+        // themesContainer.innerHTML += `<div id="${theme}" class="themes__panel-option" style="background-color: ${themes[theme][0]}">`;
+
+        const newTheme = document.createElement("button");
         newTheme.id = theme;
+        newTheme.title = theme;
         newTheme.classList.add("themes__panel-option");
         newTheme.style.backgroundColor = themes[theme][0];
-        newTheme.addEventListener("click", () => {updateTheme(themes[theme])});
+        newTheme.addEventListener("click", () => {
+            updateTheme(themes[theme], theme);
+        });
         themesContainer.append(newTheme);
 
-        // themesContainer.innerHTML += `<div id="${theme}" class="themes__panel-option" style="background-color: ${themes[theme][0]}">`;
+        if(theme === themeStored) updateTheme(themes[themeStored], theme);
     });
-}
 
-function updateTheme(themeColors) {
-    for(let i = 0; i < colorVariables.length; i ++) {
-        document.documentElement.style.setProperty(colorVariables[i], themeColors[i]);
+    function updateTheme(themeColors, incTheme) {
+        for(let i = 0; i < colorVariables.length; i ++) {
+            document.documentElement.style.setProperty(colorVariables[i], themeColors[i]);
+        }
+        const themeCurrent = document.querySelector(".themes__current");
+        themeCurrent.style.setProperty("backgroundColor", themeColors[0]);
+        themeCurrent.title = incTheme;
+        localStorage.setItem("theme", incTheme);
     }
-    const themeCurrent = document.querySelector(".themes__current");
-    themeCurrent.style.setProperty("backgroundColor", themeColors[0]);
 }
 
 /**********************************************************************************/
@@ -56,7 +68,7 @@ use this string for calculating and parsing */
     DO NOT ALLOW THE USER TO DO THE following:
     - type spaces (make character space large in textfield so that it looks like there are automatic spacing between characters)
     - type multiple decimals per operand
-    - type consecutive operators
+    - type consecutive operators (they may swap operators though)
 
     - only allow decimals to be typed once per operand, never anywhere else
     - more error handling
@@ -82,14 +94,14 @@ Example of regex for now: [0-9]*.[0-9]+[ ]*[+ or - or ...]
 
 
 /* also make the user able to type any of the buttons such as , +, -, enter, etc rather than having to click everything*/
+const validKeys = ['']
 window.addEventListener("keydown", (event) => {
-    if(event.key === '') {
+    if(validKeys.includes(event.key)) {
         //error handling
-    }
-    else if(event.key === '') {
 
+        
     }
-})
+});
 
 
 /* also allow the display panel to be contenteditable so that the user can click and edit the text */

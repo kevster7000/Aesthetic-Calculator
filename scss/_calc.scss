@@ -2,12 +2,12 @@
     display: grid;
     place-items: center;
     height: 100%;
-    background-color: var(--BG-COLOR);
+    background-color: var(--MAIN-COLOR);
 
     .calculator {
         @include flex(unset, unset, column);
         width: clamp(300px, 70vw, 500px);
-        height: clamp(350px, 60vmax, 500px);
+        height: clamp(350px, 75vmax, 650px);
         background: var(--CALC-BG-COLOR);
         box-shadow: var(--CALC-SHADOW);
         border-radius: 9px;
@@ -43,6 +43,8 @@
             grid-template-columns: repeat(4, 1fr);
             padding: 0.5rem;
             padding-top: 0.25rem;
+
+            // TODO: The colors below are obv not correct - make em match the default theme of white
 
             #calculator__theme-header {
                 margin: 0.25rem;

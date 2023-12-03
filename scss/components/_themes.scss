@@ -9,7 +9,7 @@
         .themes__current {
             width: 15px;
             height: 15px;
-            background: var(--BG-COLOR);
+            background: var(--MAIN-COLOR);
             border-radius: 50%;
             border: 1px solid black;
         }
@@ -26,6 +26,7 @@
     }
 
     &__panel {
+        z-index: 1;
         display: none;
         position: absolute;
         gap: 0.25rem;

@@ -3,7 +3,7 @@
 :root {
   /* Default theme is white */
   /****************** COLORS ******************/
-  --BG-COLOR: #f0f0f0;
+  --MAIN-COLOR: #f7f7f7;
   --TEXT-COLOR: #111;
   --CALC-BG-COLOR: #c4c4c4;
   --BTN-BORDER-COLOR: #4d4d4d;
@@ -12,7 +12,7 @@
   --CALC-SHADOW: 0px 0px 15px var(--CALC-BG-COLOR);
   /****************** BORDERS ******************/
   --BORDER-HELP: 1px solid red;
-  /****************** PADDING & MARGIN ******************/
+  /****************** SPACING (PADDING & MARGIN) ******************/
   /****************** FONT SIZES ******************/
   /* etc */
 }
@@ -34,8 +34,9 @@ header h1 {
   box-sizing: border-box;
 }
 
-img, video {
+img, picture, video, canvas, svg {
   display: block;
+  max-width: 100%;
 }
 
 /* fonts and typography go here */
@@ -56,7 +57,7 @@ header {
       align-items: center;
   -ms-flex-flow: row nowrap;
       flex-flow: row nowrap;
-  background-color: var(--BG-COLOR);
+  background-color: var(--MAIN-COLOR);
 }
 header h1 {
   margin-top: 0.5rem;
@@ -103,7 +104,7 @@ header .github__btn .github__text {
 .themes__btn .themes__current {
   width: 15px;
   height: 15px;
-  background: var(--BG-COLOR);
+  background: var(--MAIN-COLOR);
   border-radius: 50%;
   border: 1px solid black;
 }
@@ -116,9 +117,8 @@ header .github__btn .github__text {
   }
 }
 .themes__panel {
+  z-index: 1;
   display: none;
-  -ms-flex-flow: row wrap;
-      flex-flow: row wrap;
   position: absolute;
   gap: 0.25rem;
   left: 0;
@@ -136,13 +136,19 @@ header .github__btn .github__text {
 .themes__panel.active {
   display: -ms-flexbox;
   display: flex;
+  -ms-flex-pack: center;
+      justify-content: center;
+  -ms-flex-align: center;
+      align-items: center;
+  -ms-flex-flow: row wrap;
+      flex-flow: row wrap;
 }
 
 .calculator__container {
   display: grid;
   place-items: center;
   height: 100%;
-  background-color: var(--BG-COLOR);
+  background-color: var(--MAIN-COLOR);
 }
 .calculator__container .calculator {
   display: -ms-flexbox;
@@ -154,7 +160,7 @@ header .github__btn .github__text {
   -ms-flex-flow: column nowrap;
       flex-flow: column nowrap;
   width: clamp(300px, 70vw, 500px);
-  height: clamp(350px, 60vmax, 500px);
+  height: clamp(350px, 75vmax, 650px);
   background: var(--CALC-BG-COLOR);
   box-shadow: var(--CALC-SHADOW);
   border-radius: 9px;
@@ -207,12 +213,24 @@ header .github__btn .github__text {
   cursor: pointer;
   transition: box-shadow 0.25s, text-shadow 0.25s, filter 0.1s;
   color: var(--TEXT-COLOR);
+  position: relative;
 }
 .calculator__container .calculator__btns button:hover, .calculator__container .calculator__btns button:focus-visible {
   box-shadow: var(--BTN-SHADOW);
 }
 .calculator__container .calculator__btns button:active {
   filter: brightness(0.95);
+}
+.calculator__container .calculator__btns button::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 6px;
+  width: 85%;
+  height: 85%;
+  background-image: radial-gradient(transparent, hsla(195, 53%, 79%, 0.7));
 }
 .calculator__container .calculator__btns #btn-eq {
   background: lightblue;
@@ -226,5 +244,12 @@ header .github__btn .github__text {
 
 body {
   height: 100vh;
-  overflow: hidden;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-pack: unset;
+      justify-content: unset;
+  -ms-flex-align: unset;
+      align-items: unset;
+  -ms-flex-flow: column nowrap;
+      flex-flow: column nowrap;
 }/*# sourceMappingURL=main.css.map */
