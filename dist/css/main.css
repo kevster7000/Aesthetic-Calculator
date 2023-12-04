@@ -5,13 +5,37 @@
   /****************** COLORS ******************/
   --MAIN-COLOR: #f7f7f7;
   --TEXT-COLOR: #111;
-  --CALC-BG-COLOR: #c4c4c4;
-  --BTN-BORDER-COLOR: #4d4d4d;
+  --TEXT-COLOR-OPPOSITE: #f7f7f7;
+  --CALC-BG-LIGHT: hsla(0, 2%, 89%, 57.5%);
+  --CALC-BG-DARK: hsla(0, 0%, 76%, 65%);
+  --CALC-BG-DARKER: hsla(0, 0%, 57%, 70%);
+  --CALC-BORDER-COLOR: hsla(0, 0%, 96%, 0.95);
+  --CALC-SHADOW-COLOR: hsla(0, 0%, 57%, 0.75);
+  --BTN-BG-OPERAND-LIGHT: #f7f7f7;
+  --BTN-BG-OPERAND-LIGHT80: hsla(0, 0%, 97%, 80%);
+  --BTN-BG-OPERAND-LIGHT60: hsla(0, 0%, 97%, 60%);
+  --BTN-BG-OPERAND-DARK: hsl(0, 0%, 87%);
+  --BTN-BG-OPERAND-DARK80: hsla(0, 0%, 87%, 80%);
+  --BTN-BG-OPERAND-DARK60: hsla(0, 0%, 87%, 60%);
+  --BTN-BG-OPERATOR-LIGHT: hsl(197, 32%, 91%);
+  --BTN-BG-OPERATOR-LIGHT80: hsla(197, 32%, 91%, 80%);
+  --BTN-BG-OPERATOR-LIGHT60: hsla(197, 32%, 91%, 60%);
+  --BTN-BG-OPERATOR-DARK: hsl(204, 15%, 75%);
+  --BTN-BG-OPERATOR-DARK80: hsla(204, 15%, 75%, 80%);
+  --BTN-BG-OPERATOR-DARK60: hsla(204, 15%, 75%, 60%);
+  --BTN-BG-SPECIAL-LIGHT: hsl(200, 3%, 65%);
+  --BTN-BG-SPECIAL-LIGHT80: hsl(200, 3%, 65%, 80%);
+  --BTN-BG-SPECIAL-LIGHT60: hsl(200, 3%, 65%, 60%);
+  --BTN-BG-SPECIAL-DARK: hsl(195, 2%, 45%);
+  --BTN-BG-SPECIAL-DARK80: hsl(195, 2%, 45%, 80%);
+  --BTN-BG-SPECIAL-DARK60: hsl(195, 2%, 45%, 60%);
+  --BTN-SHADOW-COLOR: hsla(0, 0%, 21%, 37.5%);
   /****************** SHADOWS ******************/
-  --BTN-SHADOW: 0px 0px 5px var(--BTN-BORDER-COLOR);
-  --CALC-SHADOW: 0px 0px 15px var(--CALC-BG-COLOR);
+  --CALC-SHADOW: 2px 2px 20px var(--CALC-SHADOW-COLOR),
+                 2px 2px 36px var(--CALC-SHADOW-COLOR);
+  --BTN-SHADOW: 3px 2px 16px var(--BTN-SHADOW-COLOR);
   /****************** BORDERS ******************/
-  --BORDER-HELP: 1px solid red;
+  --CALC-BORDER: 1px solid var(--CALC-BORDER-COLOR);
   /****************** SPACING (PADDING & MARGIN) ******************/
   /****************** FONT SIZES ******************/
   /* etc */
@@ -161,12 +185,14 @@ header .github__btn .github__text {
       flex-flow: column nowrap;
   width: clamp(300px, 70vw, 500px);
   height: clamp(350px, 75vmax, 650px);
-  background: var(--CALC-BG-COLOR);
+  background-color: var(--CALC-BG-LIGHT);
+  background-image: linear-gradient(135deg, var(--CALC-BG-DARK), var(--CALC-BG-LIGHT), var(--CALC-BG-LIGHT), var(--CALC-BG-LIGHT), var(--CALC-BG-DARK), var(--CALC-BG-DARKER));
   box-shadow: var(--CALC-SHADOW);
-  border-radius: 9px;
+  border-radius: 32px;
+  border: var(--CALC-BORDER);
   padding: 0.5rem;
-  -webkit-backdrop-filter: blur(100px);
-          backdrop-filter: blur(100px);
+  -webkit-backdrop-filter: blur(2px);
+          backdrop-filter: blur(2px);
 }
 .calculator__container .calculator__display {
   display: -ms-flexbox;
@@ -200,26 +226,55 @@ header .github__btn .github__text {
   padding-top: 0.25rem;
 }
 .calculator__container .calculator__btns #calculator__theme-header {
-  margin: 0.25rem;
-  border-radius: 7px;
-  border: 1px solid var(--BTN-BORDER-COLOR);
-  background-color: lightblue;
   grid-column: 1/3;
+  margin: 0.25rem;
+  border-radius: 20px;
+  border: none;
+  position: relative;
+  box-shadow: var(--BTN-SHADOW);
+  font-size: 1.25rem;
+  color: var(--TEXT-COLOR-OPPOSITE);
+  background-color: var(--BTN-BG-SPECIAL);
+  background-image: linear-gradient(135deg, var(--BTN-BG-SPECIAL-LIGHT), var(--BTN-BG-SPECIAL-DARK));
+}
+.calculator__container .calculator__btns #calculator__theme-header::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 16px;
+  width: 93%;
+  height: 85%;
+}
+.calculator__container .calculator__btns #calculator__theme-header::before {
+  background-image: linear-gradient(135deg, var(--BTN-BG-SPECIAL-DARK80), var(--BTN-BG-SPECIAL-DARK60), transparent, var(--BTN-BG-SPECIAL-LIGHT60), var(--BTN-BG-SPECIAL-LIGHT80));
+}
+.calculator__container .calculator__btns #calculator__theme-header::before {
+  background-image: linear-gradient(135deg, var(--BTN-BG-SPECIAL-DARK80), var(--BTN-BG-SPECIAL-DARK60), transparent, var(--BTN-BG-SPECIAL-LIGHT60), var(--BTN-BG-SPECIAL-LIGHT80));
 }
 .calculator__container .calculator__btns button {
   margin: 0.25rem;
-  border-radius: 7px;
-  border: 1px solid var(--BTN-BORDER-COLOR);
-  cursor: pointer;
-  transition: box-shadow 0.25s, text-shadow 0.25s, filter 0.1s;
-  color: var(--TEXT-COLOR);
+  border-radius: 20px;
+  border: none;
   position: relative;
+  box-shadow: var(--BTN-SHADOW);
+  font-size: 1.25rem;
+  cursor: pointer;
+  transition: text-shadow 0.25s, filter 0.1s;
+  color: var(--TEXT-COLOR);
+  background-color: var(--BTN-BG-OPERAND-LIGHT);
+  background-image: linear-gradient(135deg, var(--BTN-BG-OPERAND-LIGHT), var(--BTN-BG-OPERAND-DARK));
+}
+.calculator__container .calculator__btns button span {
+  position: relative;
+  z-index: 1;
 }
 .calculator__container .calculator__btns button:hover, .calculator__container .calculator__btns button:focus-visible {
-  box-shadow: var(--BTN-SHADOW);
+  filter: brightness(1.025);
 }
 .calculator__container .calculator__btns button:active {
-  filter: brightness(0.95);
+  filter: brightness(0.98);
 }
 .calculator__container .calculator__btns button::before {
   content: "";
@@ -227,19 +282,28 @@ header .github__btn .github__text {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  border-radius: 6px;
+  border-radius: 16px;
   width: 85%;
   height: 85%;
-  background-image: radial-gradient(transparent, hsla(195, 53%, 79%, 0.7));
 }
-.calculator__container .calculator__btns #btn-eq {
-  background: lightblue;
-}
-.calculator__container .calculator__btns #btn-cle, .calculator__container .calculator__btns #btn-del {
-  background-color: aliceblue;
+.calculator__container .calculator__btns button::before {
+  background-image: linear-gradient(135deg, var(--BTN-BG-OPERAND-DARK), var(--BTN-BG-OPERAND-DARK80), transparent, var(--BTN-BG-OPERAND-LIGHT80), var(--BTN-BG-OPERAND-LIGHT));
 }
 .calculator__container .calculator__btns .btn-operator {
-  background-color: azure;
+  color: var(--TEXT-COLOR);
+  background-color: var(--BTN-BG-OPERATOR-LIGHT);
+  background-image: linear-gradient(135deg, var(--BTN-BG-OPERATOR-LIGHT), var(--BTN-BG-OPERATOR-DARK));
+}
+.calculator__container .calculator__btns .btn-operator::before {
+  background-image: linear-gradient(135deg, var(--BTN-BG-OPERATOR-DARK80), var(--BTN-BG-OPERATOR-DARK80), transparent, var(--BTN-BG-OPERATOR-LIGHT80), var(--BTN-BG-OPERATOR-LIGHT));
+}
+.calculator__container .calculator__btns #btn-eq, .calculator__container .calculator__btns #btn-cle, .calculator__container .calculator__btns #btn-del {
+  color: var(--TEXT-COLOR-OPPOSITE);
+  background-color: var(--BTN-BG-SPECIAL);
+  background-image: linear-gradient(135deg, var(--BTN-BG-SPECIAL-LIGHT), var(--BTN-BG-SPECIAL-DARK));
+}
+.calculator__container .calculator__btns #btn-eq::before, .calculator__container .calculator__btns #btn-cle::before, .calculator__container .calculator__btns #btn-del::before {
+  background-image: linear-gradient(135deg, var(--BTN-BG-SPECIAL-DARK80), var(--BTN-BG-SPECIAL-DARK60), transparent, var(--BTN-BG-SPECIAL-LIGHT60), var(--BTN-BG-SPECIAL-LIGHT80));
 }
 
 body {

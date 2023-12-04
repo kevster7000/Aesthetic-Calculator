@@ -3,22 +3,49 @@
 :root {
     /* Default theme is white */
 
-    // TODO: MAKE THESE VARIABLES NAMES MORE Semantic and meaningful
-
     /****************** COLORS ******************/
     --MAIN-COLOR: #f7f7f7;
     --TEXT-COLOR: #111;
+    --TEXT-COLOR-OPPOSITE: #f7f7f7;
 
-    --CALC-BG-COLOR: #c4c4c4;
-    --BTN-BORDER-COLOR: #4d4d4d;
+    --CALC-BG-LIGHT: hsla(0, 2%, 89%, 57.5%);
+    --CALC-BG-DARK: hsla(0, 0%, 76%, 65%);
+    --CALC-BG-DARKER: hsla(0, 0%, 57%, 70%);
+
+    --CALC-BORDER-COLOR: hsla(0, 0%, 96%, 0.95);
+    --CALC-SHADOW-COLOR: hsla(0, 0%, 57%, 0.75);
+
+    --BTN-BG-OPERAND-LIGHT: #f7f7f7;
+    --BTN-BG-OPERAND-LIGHT80: hsla(0, 0%, 97%, 80%);
+    --BTN-BG-OPERAND-LIGHT60: hsla(0, 0%, 97%, 60%);
+    --BTN-BG-OPERAND-DARK: hsl(0, 0%, 87%);
+    --BTN-BG-OPERAND-DARK80: hsla(0, 0%, 87%, 80%);
+    --BTN-BG-OPERAND-DARK60: hsla(0, 0%, 87%, 60%);
+
+    --BTN-BG-OPERATOR-LIGHT: hsl(197, 32%, 91%);
+    --BTN-BG-OPERATOR-LIGHT80: hsla(197, 32%, 91%, 80%);
+    --BTN-BG-OPERATOR-LIGHT60: hsla(197, 32%, 91%, 60%);
+    --BTN-BG-OPERATOR-DARK: hsl(204, 15%, 75%);
+    --BTN-BG-OPERATOR-DARK80: hsla(204, 15%, 75%, 80%);
+    --BTN-BG-OPERATOR-DARK60: hsla(204, 15%, 75%, 60%);
+
+    --BTN-BG-SPECIAL-LIGHT: hsl(200, 3%, 65%);
+    --BTN-BG-SPECIAL-LIGHT80: hsl(200, 3%, 65%, 80%);
+    --BTN-BG-SPECIAL-LIGHT60: hsl(200, 3%, 65%, 60%);
+    --BTN-BG-SPECIAL-DARK: hsl(195, 2%, 45%);
+    --BTN-BG-SPECIAL-DARK80: hsl(195, 2%, 45%, 80%);
+    --BTN-BG-SPECIAL-DARK60: hsl(195, 2%, 45%, 60%);
+    
+    --BTN-SHADOW-COLOR: hsla(0, 0%, 21%, 37.5%);
 
     /****************** SHADOWS ******************/
-    --BTN-SHADOW: 0px 0px 5px var(--BTN-BORDER-COLOR);
-
-    --CALC-SHADOW: 0px 0px 15px var(--CALC-BG-COLOR);
+    --CALC-SHADOW: 2px 2px 20px var(--CALC-SHADOW-COLOR), 
+                   2px 2px 36px var(--CALC-SHADOW-COLOR);
+    
+    --BTN-SHADOW: 3px 2px 16px var(--BTN-SHADOW-COLOR);
 
     /****************** BORDERS ******************/
-    --BORDER-HELP: 1px solid red;
+    --CALC-BORDER: 1px solid var(--CALC-BORDER-COLOR);
 
     /****************** SPACING (PADDING & MARGIN) ******************/
 

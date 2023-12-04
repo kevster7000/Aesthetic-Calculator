@@ -1,5 +1,5 @@
 const themes = {
-    white: ["white"],
+    white: ["#f7f7f7"],
     black: ["black"],
     lightGray: ["gainsboro"],
     gray: ["#c4c4c4"],

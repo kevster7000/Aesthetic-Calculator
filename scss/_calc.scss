@@ -3,17 +3,27 @@
     place-items: center;
     height: 100%;
     background-color: var(--MAIN-COLOR);
+    // background-image: url("./../img/360_F_294561375_CBNtbEztfsJCvSMfJVPC0QhA5MEYdmvg.jpg");
 
     .calculator {
         @include flex(unset, unset, column);
         width: clamp(300px, 70vw, 500px);
         height: clamp(350px, 75vmax, 650px);
-        background: var(--CALC-BG-COLOR);
+        background-color: var(--CALC-BG-LIGHT);
+        background-image: linear-gradient(
+            135deg, 
+            var(--CALC-BG-DARK),
+            var(--CALC-BG-LIGHT), 
+            var(--CALC-BG-LIGHT), 
+            var(--CALC-BG-LIGHT), 
+            var(--CALC-BG-DARK),
+            var(--CALC-BG-DARKER));
         box-shadow: var(--CALC-SHADOW);
-        border-radius: 9px;
+        border-radius: 32px;
+        border: var(--CALC-BORDER);
         padding: 0.5rem;
 
-        backdrop-filter: blur(100px);
+        backdrop-filter: blur(2px);
 
         &__display {
             @include flex;
@@ -44,32 +54,24 @@
             padding: 0.5rem;
             padding-top: 0.25rem;
 
-            // TODO: The colors below are obv not correct - make em match the default theme of white
-
             #calculator__theme-header {
-                margin: 0.25rem;
-                border-radius: 7px;
-                border: 1px solid var(--BTN-BORDER-COLOR);
-                background-color: lightblue;
                 grid-column: 1/3;
+                @include button-init(false);
+                @include button-color(false, false, false);
             }
 
             button {
-                @include button-init(var(--BTN-SHADOW));
-            }
-
-            #btn-eq {
-                background: lightblue;
-            }
-
-            #btn-cle, #btn-del {
-                background-color: aliceblue;
+                @include button-init();
+                @include button-color();
             }
 
             .btn-operator {
-                background-color: azure;
+                @include button-color(false, true);
             }
 
+            #btn-eq, #btn-cle, #btn-del {
+                @include button-color(false, false);
+            }
         }
     }
 }
