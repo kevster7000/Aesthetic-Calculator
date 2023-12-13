@@ -4,6 +4,9 @@ import themes, {colorVariables} from "./themes.js";
 /*                                     Themes                                     */
 /**********************************************************************************/
 
+// TODO - create a click away function.
+// IF themes panel is open and the user clicks outside of it, the panel will close
+
 initThemes();
 
 function initThemes() {
@@ -103,9 +106,15 @@ window.addEventListener("keydown", (event) => {
     }
 });
 
+/**********************************************************************************/
+/*                                    History                                     */
+/**********************************************************************************/
 
-/* also allow the display panel to be contenteditable so that the user can click and edit the text */
+let historyButton = document.querySelector("#calculator-history-btn");
 
+historyButton.addEventListener("click", () => {
+    historyButton.classList.toggle("history-active");
+});
 
 /* also make a history section
     everytime the user hits enter or clicks =, if no error, store the displayed expression string as the key and the result as the value in session storage
@@ -113,3 +122,18 @@ window.addEventListener("keydown", (event) => {
 */
 
 // USE session storage to store history
+
+
+/* 
+CLick on history button - show history panel on the right
+THe history panel should be the same height and width as the calculator itself
+
+CLicking on an entry in the history panel will copy it to the calculator
+each entry should also have an option to delete
+
+At the top of the history panel, there should be a clear button that really just clears the session storage
+
+Once the window gets too small for the history panel to open up on the side, it will instead be integrated into the calculator.
+Sort of like a dropdown, the history panel will slide down from the top of the calculator, but leaves the calculator panel visible.
+
+*/

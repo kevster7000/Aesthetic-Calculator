@@ -1,19 +1,29 @@
-@import './abstracts/variables', './abstracts/responsive', './abstracts/config';
-@import './base/reset', './base/typography';
+@import 
+    './abstracts/variables', 
+    './abstracts/responsive', 
+    './abstracts/config';
+
+@import 
+    './base/reset', 
+    './base/typography';
 
 @import 
     './components/buttons',
     './components/header',
+    './components/footer',
     './components/history',
     './components/themes';
 
 @import 'calc';
 
-.offscreen {
-    @extend %offscreen;
+#outer-container {
+    height: 100vh;
+    @include flex(unset, unset, column);
+
+    //FIND a better bg image or make one urself - make it move infintely with JS or CSS
+    background-image: url("./../img/360_F_294561375_CBNtbEztfsJCvSMfJVPC0QhA5MEYdmvg.jpg");
 }
 
 body {
-    height: 100vh;
-    @include flex(unset, unset, column);
+    min-height: 100vh;
 }

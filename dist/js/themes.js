@@ -1,9 +1,7 @@
 const themes = {
     white: ["#f7f7f7"],
-    black: ["black"],
-    lightGray: ["gainsboro"],
     gray: ["#c4c4c4"],
-    darkGray: ["gray"],
+    black: ["black"],
     brown: ["brown"],
     maroon: ["maroon"],
     red: ["red"],

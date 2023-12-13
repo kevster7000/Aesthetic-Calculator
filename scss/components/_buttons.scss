@@ -4,11 +4,17 @@
     border: none;
     position: relative;
     box-shadow: var(--BTN-SHADOW);
-    font-size: 1.25rem;
+    font-size: 1.35rem;
+    line-height: 1.35rem;
+    outline-color: transparent;
 
     @if $isButton {
         cursor: pointer;
-        transition: text-shadow 0.25s, filter 0.1s;
+        transition: 
+            text-shadow 0.125s, 
+            filter 0.075s,
+            box-shadow 0.075s,
+            transform 0.075s;
 
         span {
             position: relative;
@@ -16,11 +22,19 @@
         }
     
         &:hover, &:focus-visible {
-            filter: brightness(1.025);
+            filter: brightness(1.055);
+            box-shadow: var(--BTN-SHADOW-ACTIVE);
+            transform: translate(0, -1%);
         }
 
         &:active {
-            filter: brightness(0.98);
+            filter: brightness(0.925);
+            transform: translate(0, 1%);
+            transition: 
+                text-shadow 0.125s, 
+                filter 0.075s,
+                box-shadow 0.075s,
+                transform 0.0075s;
         }
 
         &::before {
@@ -64,6 +78,10 @@
                 transparent, 
                 var(--BTN-BG-OPERAND-LIGHT80), var(--BTN-BG-OPERAND-LIGHT));
         }
+
+        &:hover, &:focus-visible {
+            text-shadow: var(--BTN-TSHADOW-OPERAND);
+        }
     }
     @else if $operator {
         color: var(--TEXT-COLOR);
@@ -80,6 +98,10 @@
                 transparent, 
                 var(--BTN-BG-OPERATOR-LIGHT80), var(--BTN-BG-OPERATOR-LIGHT));
         }
+
+        &:hover, &:focus-visible {
+            text-shadow: var(--BTN-TSHADOW-OPERATOR);
+        }
     }
     @else {
         color: var(--TEXT-COLOR-OPPOSITE);
@@ -95,6 +117,10 @@
                 var(--BTN-BG-SPECIAL-DARK80), var(--BTN-BG-SPECIAL-DARK60), 
                 transparent, 
                 var(--BTN-BG-SPECIAL-LIGHT60), var(--BTN-BG-SPECIAL-LIGHT80));
+        }
+
+        &:hover, &:focus-visible {
+            text-shadow: var(--BTN-TSHADOW-SPECIAL);
         }
     }
 

@@ -1,10 +1,20 @@
 .themes {
-    position: relative;
+    display: none;
+    position: absolute;
+    right: 0;
+    top: 0;
+    transform: translateY(50%);
+    margin-right: 1.25rem;
+
+    h2 {
+        @extend %offscreen;
+    }
 
     &__btn {
         @include flex;
         gap: 0.25rem;
         padding: 0.25rem;
+        cursor: pointer;
 
         .themes__current {
             width: 15px;
@@ -18,7 +28,7 @@
             display: none;
         }
 
-        @include media-sm {
+        @include media-md {
             .themes__text {
                 display: inline;
             }
@@ -46,5 +56,11 @@
 
     &__panel.active {
         @include flex(center, center, row, wrap);
+    }
+}
+
+@include media-sm {
+    .themes {
+        display: block;
     }
 }

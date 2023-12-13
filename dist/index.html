@@ -7,7 +7,7 @@
     <meta name="author" content="Kevin Tang">
     <meta name="description" content="An aesthetic and multi-themed calculator">
     <title>Aesthetic Calculator</title>
-    <link rel="icon" href="">
+    <link rel="icon" href="./img/favicon.png">
     <link rel="stylesheet" href="css/main.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
         integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
@@ -16,85 +16,212 @@
 </head>
 
 <body>
-    <header>
-        <a class="github__btn" href="./">
-            <i class="fa-brands fa-github"></i>
-            <span class="github__text">GitHub</span>
-        </a>
+    <div id="outer-container">
+        <header>
+            <a class="github__btn" href="./">
+                <i class="fa-brands fa-github"></i>
+                <span class="github__text">GitHub</span>
+            </a>
 
-        <h1>Aesthetic Calculator</h1>
+            <h1>Aesthetic Calculator</h1>
 
-        <nav class="themes">
-            <h2 class="offscreen">Select Theme</h2>
-
-            <button class="themes__btn">
-                <span class="themes__text">Select Theme</span>
-                <div class="themes__current"></div>
-                <i class="fa-solid fa-caret-down"></i>
+            <button class="mobile-options">
+                <i class="fa-solid fa-ellipsis-vertical"></i>
             </button>
 
-            <div class="themes__panel">
-                <!-- populated with JS -->
-            </div>
-        </nav>
-    </header>
+            <nav class="themes">
+                <h2>Select Theme</h2>
 
-    <main class="calculator__container">
-        <div class="calculator">
-            <section class="calculator__history">
-                <h3 class="offscreen">Calculator History</h3>
-                <div class="calculator__history-entry">
+                <button class="themes__btn">
+                    <div class="themes__current"></div>
+                    <span class="themes__text">Select Theme</span>
+                    <i class="fa-solid fa-chevron-down"></i>
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
 
+                <div class="themes__panel">
+                    <!-- populated with JS -->
                 </div>
-                <!-- will be populated with js -->
-                <!-- also make this scrollable -->
-            </section>
+            </nav>
+        </header>
 
-            <section>
-                <!-- 
-                Make this section encapsulate the form below.
-                Make the top portion of the calulator seamless and integrating into the backgound of the calculator.
-                Essentially, the buttons and the history buttons will be the only things floating on the calc.
-                The input will have a slight border and maybe shadow
-                Everytime the user successfully enters an expression, it will move upwards and shrink to a smaller text - the result will replace the input
-                -->
-            </section>
+        <main class="calculator__container">
+            <div class="calculator">
+                <section class="calculator__history">
+                    <h3>Calculator History</h3>
+                    <div class="calculator__history-entry">
 
-            <form action="" method="post" class="calculator__display">
-                <label for="userInput">User Input</label>
-                <input type="text" id="userInput" name="userInput" autocomplete="off">
-                <button id="calculator-history-btn"><i class="fa-solid fa-clock-rotate-left"></i></button>
-            </form>
+                    </div>
+                    <!-- will be populated with js -->
+                    <!-- also make this scrollable -->
+                </section>
 
-            <section class="calculator__btns">
-                <h3 class="offscreen">Calculator Buttons</h3>
-                
-                <div id="calculator__theme-header"></div>
+                <section class="calculator__panel">
+                    <h3>Calculator Panel</h3>
 
-                <button id="btn-del"><span><i class="fa-solid fa-delete-left"></i></span></button>
-                <button id="btn-cle" type="reset"><span>Clear</span></button>
-                <button id="btn-pa1" class="btn-operator"><span>(</span></button>
-                <button id="btn-pa2" class="btn-operator"><span>)</span></button>
-                <button id="btn-per" class="btn-operator"><span>%</span></button>
-                <button id="btn-exp" class="btn-operator"><span>^</span></button>
-                <button id="btn-b7"><span>7</span></button>
-                <button id="btn-b8"><span>8</span></button>
-                <button id="btn-b9"><span>9</span></button>
-                <button id="btn-div" class="btn-operator"><span>&#247;</span></button>
-                <button id="btn-b4"><span>4</span></button>
-                <button id="btn-b5"><span>5</span></button>
-                <button id="btn-b6"><span>6</span></button>
-                <button id="btn-mul" class="btn-operator"><span>&#215;</span></button>
-                <button id="btn-b1"><span>1</span></button>
-                <button id="btn-b2"><span>2</span></button>
-                <button id="btn-b3"><span>3</span></button>
-                <button id="btn-sub" class="btn-operator"><span>-</span></button>
-                <button id="btn-b0"><span>0</span></button>
-                <button id="btn-dec"><span>.</span></button>
-                <button id="btn-eq" type="submit"><span>=</span></button>
-                <button id="btn-add" class="btn-operator"><span>+</span></button>
-            </section>
-        </div>
-    </main>
+                    <button id="calculator-history-btn">
+                        <i title="Show History" class="fa-solid fa-clock-rotate-left"></i>
+                        <i title="Go Back" class="fa-solid fa-arrow-down"></i>
+                    </button>
+                        
+                    <form action="" class="calculator__panel-input">
+                        <p class="calculator__panel-input-prev">123 + 456</p>
+                        <label for="userInput">User Input</label>
+                        <input type="text" id="userInput" name="userInput" autocomplete="off">
+                    </form>
+                </section>
+
+                <section class="calculator__btns">
+                    <h3>Calculator Buttons</h3>
+                    
+                    <button id="calculator__theme-header"><span>New Background</span></button>
+
+                    <button type="button" id="btn-del" class="btn-special"><span><i class="fa-solid fa-delete-left"></i></span></button>
+                    <button id="btn-cle" class="btn-special" type="reset"><span>Clear</span></button>
+
+                    <button id="btn-pa1" class="btn-operator"><span>(</span></button>
+                    <button id="btn-pa2" class="btn-operator"><span>)</span></button>
+                    <button id="btn-per" class="btn-operator"><span>%</span></button>
+                    <button id="btn-exp" class="btn-operator"><span>^</span></button>
+
+                    <button id="btn-b7" class="btn-operand"><span>7</span></button>
+                    <button id="btn-b8" class="btn-operand"><span>8</span></button>
+                    <button id="btn-b9" class="btn-operand"><span>9</span></button>
+
+                    <button id="btn-div" class="btn-operator"><span>&#247;</span></button>
+
+                    <button id="btn-b4" class="btn-operand"><span>4</span></button>
+                    <button id="btn-b5" class="btn-operand"><span>5</span></button>
+                    <button id="btn-b6" class="btn-operand"><span>6</span></button>
+
+                    <button id="btn-mul" class="btn-operator"><span>&#215;</span></button>
+
+                    <button id="btn-b1" class="btn-operand"><span>1</span></button>
+                    <button id="btn-b2" class="btn-operand"><span>2</span></button>
+                    <button id="btn-b3" class="btn-operand"><span>3</span></button>
+
+                    <button id="btn-sub" class="btn-operator"><span>-</span></button>
+
+                    <button id="btn-b0" class="btn-operand"><span>0</span></button>
+                    <button id="btn-dec" class="btn-operand"><span>.</span></button>
+
+                    <button id="btn-eq" class="btn-special" type="submit"><span>=</span></button>
+
+                    <button id="btn-add" class="btn-operator"><span>+</span></button>
+                </section>
+            </div>
+        </main>
+
+        <footer>
+            <!-- Make each keyword in the shortcut like the https://docs.github.com/en/desktop/overview/github-desktop-keyboard-shortcuts -->
+            <div class="keyboard-shortcuts">
+                <p>
+                    Tip: You can use your keyboard to input any of the buttons on the calculator.
+                    To see more keyboard interactions, click the button below or press K.
+                </p>
+
+                <button>
+                    <i class="fa-solid fa-chevron-up"></i>
+                    <i class="fa-solid fa-chevron-down"></i>
+                    <span class="">Show </span>Keyboard Shortcuts
+                </button>
+
+                <table>
+                    <thead>
+                        <tr>
+                            <th>&nbsp;</th>
+                            <th>Keyboard Shortcut</th>
+                            <th>Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td rowspan="10" style="text-orientation: sideways-right; writing-mode: vertical-lr;">Calculator</td>
+                            <td>*</td>
+                            <td>&#215; Multiply</td>
+                        </tr>
+                        <tr>
+                            <td>/</td>
+                            <td>&#247; Divide</td>
+                        </tr>
+                        <tr>
+                            <td>Enter</td>
+                            <td>= Equals</td>
+                        </tr>
+                        <tr>
+                            <td>Backspace</td>
+                            <td><i class="fa-solid fa-delete-left" style="transform: scale(0.7) translateX(-50%); width: calc(1ch - 1px);"></i> Delete</td>
+                        </tr>
+                        <tr>
+                            <td>Esc</td>
+                            <td>Clear</td>
+                        </tr>
+                        <tr>
+                            <td>N</td>
+                            <td>New Background</td>
+                        </tr>
+                        <tr>
+                            <td>K</td>
+                            <td>Show Keyboard <br> Shortcuts</td>
+                        </tr>
+                        <tr>
+                            <td>H</td>
+                            <td>Show History</td>
+                        </tr>
+                            <td>T</td>
+                            <td>Show Themes</td>
+                        </tr>
+                        </tr>
+                            <td>S</td>
+                            <td>Show Settings</td>
+                        </tr>
+                        <tr>
+                            <td rowspan="7" style="text-orientation: sideways-right; writing-mode: vertical-lr;">Button Navigation</td>
+                            <td>Space</td>
+                            <td>Press Button</td>
+                        </tr>
+                        <tr>
+                            <td>Tab</td>
+                            <td>Next Button</td>
+                        </tr>
+                        <tr>
+                            <td>Shift + Tab</td>
+                            <td>Previous Button</td>
+                        </tr>
+                        <tr>
+                            <td><i class="fa-solid fa-up-long"></i></td>
+                            <td>Move Up</td>
+                        </tr>
+                        <tr>
+                            <td><i class="fa-solid fa-down-long"></i></td>
+                            <td>Move Down</td>
+                        </tr>
+                        <tr>
+                            <td><i class="fa-solid fa-right-long"></i></td>
+                            <td>Move Right</td>
+                        </tr>
+                        <tr>
+                            <td><i class="fa-solid fa-left-long"></i></td>
+                            <td>Move Left</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="settings">
+                <button><i class="fa-solid fa-gear"></i></button>
+                <div class="settings__panel">
+                    <form action="" class="thousands-separator">
+                        <label for="">Thousands Separator</label>
+                        <input type="checkbox">
+                    </form>
+                    <button>
+                        <i class="fa-solid fa-trash"></i>
+                        <span>Clear Background</span>
+                    </button>
+                </div>
+            </div>
+        </footer>
+    </div>
 </body>
 </html>

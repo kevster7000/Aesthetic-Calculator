@@ -1,36 +1,68 @@
 header {
-    @include flex(space-between);
-    background-color: var(--MAIN-COLOR);
+    @include flex(center);
+    background-color: var(--MAIN-COLOR75);
+    padding: 0.5rem;
 
     h1 {
-        margin-top: 0.5rem;
-        position: absolute;
-        left: 50%;
-        transform: translateX(-50%);
         @extend %nowrap;
         font-size: clamp(1.25rem, 7vw, 2rem);
+        text-align: center;
+        position: relative;
+        top: 10%;
+
+        // add some effect to this based on color theme
+    }
+
+    .mobile-options {
+        display: block;
+        position: absolute;
+        right: 0;
+        top: 0;
+        transform: translateY(75%);
+        margin-right: 1.25rem;
     }
 
     @include media-sm {
         h1 {
             font-size: 2rem;
         }
+
+        .mobile-options {
+            display: none;
+        }
     }
 
     .github__btn {
-        margin-left: 0.5rem;
+        position: absolute;
+        left: 0;
+        top: 0;
+        transform: translateY(50%);
+        margin-left: 1.25rem;
+
         background: none;
         border: none;
         font-size: clamp(1.25rem, 5vw, 1.5rem);
+        display: none;
 
         .github__text {
             display: none;
         }
 
-        @include media-sm {
+        @include media-md {
             .github__text {
                 display: inline;
             }
+        }
+
+        &:any-link {
+            color: var(--TEXT-COLOR)
+        }
+        
+    }
+
+    @include media-sm {
+        .github__btn {
+            display: block;
         }
     }
 }
