@@ -54,12 +54,12 @@ footer {
             padding: 0.25rem;
             font-size: 1.5rem;
             transition: transform 0.75s, filter 0.5s;
-            color: hsl(0, 0%, 24%);
+            color: var(--TEXT-COLOR);
             cursor: pointer;
 
             &:is(:hover, :focus-visible) {
                 transform: rotate(120deg) scale(1.2);
-                filter: drop-shadow(1px -1px 2px rgb(179, 179, 179));
+                filter: drop-shadow(1px -1px 2px rgb(199, 199, 199));
             }
         }
 

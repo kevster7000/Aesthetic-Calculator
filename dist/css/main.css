@@ -35,8 +35,6 @@
   --BTN-TSHADOW-SPECIAL-COLOR: hsla(0, 0%, 72%, 0.5);
   --PANEL-BG: ;
   --PANEL-SHADOW-COLOR: ;
-  --FEAT-MAIN-COLOR: ;
-  --FEAT-TEXT-COLOR: ;
   /****************** SHADOWS ******************/
   --CALC-SHADOW:
       2px 2px 20px var(--CALC-SHADOW-COLOR),
@@ -97,19 +95,18 @@ header {
       flex-flow: row nowrap;
   background-color: var(--MAIN-COLOR75);
   padding: 0.5rem;
+  position: relative;
 }
 header h1 {
   font-size: clamp(1.25rem, 7vw, 2rem);
   text-align: center;
-  position: relative;
-  top: 10%;
 }
 header .mobile-options {
   display: block;
   position: absolute;
   right: 0;
-  top: 0;
-  transform: translateY(75%);
+  top: 50%;
+  transform: translate(-50%);
   margin-right: 1.25rem;
 }
 @media screen and (min-width: 576px) {
@@ -121,15 +118,21 @@ header .mobile-options {
   }
 }
 header .github__btn {
+  padding: 0.25rem;
   position: absolute;
   left: 0;
-  top: 0;
-  transform: translateY(50%);
+  top: 50%;
+  transform: translateY(-50%);
   margin-left: 1.25rem;
+  font-size: clamp(1.25rem, 5vw, 1.5rem);
+  font-weight: bold;
+  text-decoration: none;
   background: none;
   border: none;
-  font-size: clamp(1.25rem, 5vw, 1.5rem);
   display: none;
+}
+header .github__btn i {
+  font-size: 1.75rem;
 }
 header .github__btn .github__text {
   display: none;
@@ -216,12 +219,12 @@ footer .settings > button {
   padding: 0.25rem;
   font-size: 1.5rem;
   transition: transform 0.75s, filter 0.5s;
-  color: hsl(0, 0%, 24%);
+  color: var(--TEXT-COLOR);
   cursor: pointer;
 }
 footer .settings > button:is(:hover, :focus-visible) {
   transform: rotate(120deg) scale(1.2);
-  filter: drop-shadow(1px -1px 2px rgb(179, 179, 179));
+  filter: drop-shadow(1px -1px 2px rgb(199, 199, 199));
 }
 footer .settings__panel {
   border-radius: 10px;
@@ -269,8 +272,8 @@ footer .settings__panel form input {
   display: none;
   position: absolute;
   right: 0;
-  top: 0;
-  transform: translateY(50%);
+  top: 50%;
+  transform: translateY(-50%);
   margin-right: 1.25rem;
 }
 .themes__btn {
