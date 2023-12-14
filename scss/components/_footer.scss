@@ -50,16 +50,20 @@ footer {
             translate: 0 -100%;
             background-color: transparent;
             border: none;
-            outline: none;
+            width: 40px;
+            height: 40px;
             padding: 0.25rem;
             font-size: 1.5rem;
-            transition: transform 0.75s, filter 0.5s;
             color: var(--TEXT-COLOR);
             cursor: pointer;
 
-            &:is(:hover, :focus-visible) {
+            i {
+                transition: transform 0.75s, text-shadow 0.5s;
+            }
+
+            &:is(:hover, :focus-visible) i {
                 transform: rotate(120deg) scale(1.2);
-                filter: drop-shadow(1px -1px 2px rgb(199, 199, 199));
+                text-shadow: 1px -1px 2px rgb(189, 189, 189);
             }
         }
 

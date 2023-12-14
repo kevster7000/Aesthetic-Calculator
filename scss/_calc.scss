@@ -75,8 +75,8 @@
                 }
 
                 i[title="Go Back"] {
-                    display: none;
-                    animation: fade-out 0.25s forwards;
+                    opacity: 0;
+                    // animation: fade-out 0.25s forwards;
                 }
 
                 &.history-active {
@@ -88,35 +88,11 @@
                     transform: translate(-100%);
 
                     i[title="Show History"] {
-                        display: none;
                         animation: fade-out 0.25s forwards;
                     }
     
                     i[title="Go Back"] {
-                        display: inline-block;
                         animation: fade-in 0.5s forwards;
-                    }
-                }
-
-                @keyframes fade-out {
-                    from {
-                        opacity: 100%;
-                        display: inline-block;
-                    }
-                    to {
-                        opacity: 0%;
-                        display: none;
-                    }
-                }
-                
-                @keyframes fade-in {
-                    from {
-                        opacity: 0%;
-                        display: none;
-                    }
-                    to {
-                        opacity: 100%;
-                        display: inline-block;
                     }
                 }
             }

@@ -33,6 +33,31 @@
                 display: inline;
             }
         }
+
+        i[title="Open Themes"] {
+            animation: fade-in 0.5s forwards;
+        }
+
+        i[title="Close Themes"] {
+            position: absolute;
+            right: 0;
+            top: 50%;
+            transform: translate(-60%, -45%);
+            opacity: 0;
+            
+            // animation: fade-out 0.25s forwards;
+        }
+
+        &.themes-active {
+
+            i[title="Open Themes"] {
+                animation: fade-out 0.25s forwards;
+            }
+
+            i[title="Close Themes"] {
+                animation: fade-in 0.5s forwards;
+            }
+        }
     }
 
     &__panel {
@@ -52,10 +77,10 @@
             border: 1px solid black;
             cursor: pointer;
         }
-    }
 
-    &__panel.active {
-        @include flex(center, center, row, wrap);
+        &.panel-active {
+            @include flex(center, center, row, wrap);
+        }
     }
 }
 

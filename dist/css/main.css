@@ -64,6 +64,22 @@ header h1 {
   white-space: nowrap;
 }
 
+@keyframes fade-out {
+  from {
+    opacity: 100%;
+  }
+  to {
+    opacity: 0%;
+  }
+}
+@keyframes fade-in {
+  from {
+    opacity: 0%;
+  }
+  to {
+    opacity: 100%;
+  }
+}
 * {
   padding: 0;
   margin: 0;
@@ -215,16 +231,19 @@ footer .settings > button {
   translate: 0 -100%;
   background-color: transparent;
   border: none;
-  outline: none;
+  width: 40px;
+  height: 40px;
   padding: 0.25rem;
   font-size: 1.5rem;
-  transition: transform 0.75s, filter 0.5s;
   color: var(--TEXT-COLOR);
   cursor: pointer;
 }
-footer .settings > button:is(:hover, :focus-visible) {
+footer .settings > button i {
+  transition: transform 0.75s, text-shadow 0.5s;
+}
+footer .settings > button:is(:hover, :focus-visible) i {
   transform: rotate(120deg) scale(1.2);
-  filter: drop-shadow(1px -1px 2px rgb(199, 199, 199));
+  text-shadow: 1px -1px 2px rgb(189, 189, 189);
 }
 footer .settings__panel {
   border-radius: 10px;
@@ -304,6 +323,22 @@ footer .settings__panel form input {
     display: inline;
   }
 }
+.themes__btn i[title="Open Themes"] {
+  animation: fade-in 0.5s forwards;
+}
+.themes__btn i[title="Close Themes"] {
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translate(-60%, -45%);
+  opacity: 0;
+}
+.themes__btn.themes-active i[title="Open Themes"] {
+  animation: fade-out 0.25s forwards;
+}
+.themes__btn.themes-active i[title="Close Themes"] {
+  animation: fade-in 0.5s forwards;
+}
 .themes__panel {
   z-index: 1;
   display: none;
@@ -321,7 +356,7 @@ footer .settings__panel form input {
   border: 1px solid black;
   cursor: pointer;
 }
-.themes__panel.active {
+.themes__panel.panel-active {
   display: -ms-flexbox;
   display: flex;
   -ms-flex-pack: center;
@@ -400,8 +435,7 @@ footer .settings__panel form input {
   animation: fade-in 0.5s forwards;
 }
 .calculator__container .calculator__panel #calculator-history-btn i[title="Go Back"] {
-  display: none;
-  animation: fade-out 0.25s forwards;
+  opacity: 0;
 }
 .calculator__container .calculator__panel #calculator-history-btn.history-active {
   border-radius: 50% 0 20px 50%;
@@ -410,32 +444,10 @@ footer .settings__panel form input {
   transform: translate(-100%);
 }
 .calculator__container .calculator__panel #calculator-history-btn.history-active i[title="Show History"] {
-  display: none;
   animation: fade-out 0.25s forwards;
 }
 .calculator__container .calculator__panel #calculator-history-btn.history-active i[title="Go Back"] {
-  display: inline-block;
   animation: fade-in 0.5s forwards;
-}
-@keyframes fade-out {
-  from {
-    opacity: 100%;
-    display: inline-block;
-  }
-  to {
-    opacity: 0%;
-    display: none;
-  }
-}
-@keyframes fade-in {
-  from {
-    opacity: 0%;
-    display: none;
-  }
-  to {
-    opacity: 100%;
-    display: inline-block;
-  }
 }
 .calculator__container .calculator__panel-input {
   display: -ms-flexbox;

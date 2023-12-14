@@ -12,9 +12,23 @@ initThemes();
 function initThemes() {
     const themesButton = document.querySelector(".themes__btn");
     const themesPanel = document.querySelector(".themes__panel");
+    const themesCloseButton = document.querySelector(`.themes__btn i[title="Close Themes"]`);
+
+    let themeClicked = false;
+
     themesButton.addEventListener("click", () => {
-        themesPanel.classList.toggle("active");
-    })
+        themesPanel.classList.toggle("panel-active");
+        themesButton.classList.toggle("themes-active");
+
+        if(themeClicked) {
+            themesCloseButton.style.setProperty("animation", "fade-out 0.25s forwards");
+            themeClicked = false;
+        }
+        else {
+            themesCloseButton.style.setProperty("animation", "fade-in 0.5s forwards");
+            themeClicked = true;
+        }
+    });
 
     setThemes(getTheme());
 }
@@ -110,11 +124,27 @@ window.addEventListener("keydown", (event) => {
 /*                                    History                                     */
 /**********************************************************************************/
 
-let historyButton = document.querySelector("#calculator-history-btn");
+initHistory();
 
-historyButton.addEventListener("click", () => {
-    historyButton.classList.toggle("history-active");
-});
+function initHistory() {
+    let historyButton = document.querySelector("#calculator-history-btn");
+    const historyCloseButton = document.querySelector(`#calculator-history-btn i[title="Go Back"]`);
+
+    let historyClicked = false;
+
+    historyButton.addEventListener("click", () => {
+        historyButton.classList.toggle("history-active");
+
+        if(historyClicked) {
+            historyCloseButton.style.setProperty("animation", "fade-out 0.25s forwards");
+            historyClicked = false;
+        }
+        else {
+            historyCloseButton.style.setProperty("animation", "fade-in 0.5s forwards");
+            historyClicked = true;
+        }
+    });
+}
 
 /* also make a history section
     everytime the user hits enter or clicks =, if no error, store the displayed expression string as the key and the result as the value in session storage
@@ -137,3 +167,7 @@ Once the window gets too small for the history panel to open up on the side, it 
 Sort of like a dropdown, the history panel will slide down from the top of the calculator, but leaves the calculator panel visible.
 
 */
+
+/**********************************************************************************/
+/*                                     Footer                                     */
+/**********************************************************************************/
