@@ -1,29 +1,4 @@
 @import url("https://fonts.googleapis.com/css2?family=Montserrat&display=swap");
-.themes h2, .calculator__history h3, .calculator__panel h3, .calculator__panel-input label, .calculator__btns h3 {
-  position: absolute;
-  left: -10000px;
-}
-
-header h1 {
-  white-space: nowrap;
-}
-
-@keyframes fade-out {
-  from {
-    opacity: 100%;
-  }
-  to {
-    opacity: 0%;
-  }
-}
-@keyframes fade-in {
-  from {
-    opacity: 0%;
-  }
-  to {
-    opacity: 100%;
-  }
-}
 :root {
   /* Default theme is white */
   /****************** COLORS ******************/
@@ -80,6 +55,31 @@ header h1 {
   --SPACING-XS: 0.125rem;
   /****************** FONT SIZES ******************/
   --FS-MD: 1rem;
+}
+.themes h2, .calculator__history h3, .calculator__panel h3, .calculator__panel-input label, .calculator__btns h3 {
+  position: absolute;
+  left: -10000px;
+}
+
+header h1 {
+  white-space: nowrap;
+}
+
+@keyframes fade-out {
+  from {
+    opacity: 100%;
+  }
+  to {
+    opacity: 0%;
+  }
+}
+@keyframes fade-in {
+  from {
+    opacity: 0%;
+  }
+  to {
+    opacity: 100%;
+  }
 }
 * {
   padding: 0;
