@@ -1,55 +1,76 @@
-@mixin calc-button-init() {
-    margin: var(--SPACING-SM);
-    border-radius: 20px;
-    border: none;
-    position: relative;
-    box-shadow: var(--BTN-SHADOW);
-    font-size: 1.35rem;
-    line-height: 1.35rem;
-    outline-color: transparent;
+@use "./../../abstracts/" as *;
 
-    cursor: pointer;
-    transition: 
-        text-shadow 0.125s, 
-        filter 0.075s,
-        box-shadow 0.075s,
-        transform 0.075s;
+.calculator__btns {
+    flex-grow: 1;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    padding: var(--SPACING-MD);
+    padding-top: var(--SPACING-SM);
 
-    span {
+    h3 {
+        @extend %offscreen;
+    }
+
+    button {
+        margin: var(--SPACING-SM);
+        border-radius: 20px;
+        border: none;
         position: relative;
-        z-index: 1;
-    }
+        box-shadow: var(--BTN-SHADOW);
+        font-size: 1.35rem;
+        line-height: 1.35rem;
+        outline-color: transparent;
     
-    &:hover, &:focus-visible {
-        filter: brightness(1.055);
-        box-shadow: var(--BTN-SHADOW-ACTIVE);
-        transform: translate(0, -1%);
-    }
-
-    &:active {
-        filter: brightness(0.925);
-        transform: translate(0, 1%);
+        cursor: pointer;
         transition: 
             text-shadow 0.125s, 
             filter 0.075s,
             box-shadow 0.075s,
-            transform 0.0075s;
+            transform 0.075s;
+    
+        span {
+            position: relative;
+            z-index: 1;
+        }
+        
+        &:hover, &:focus-visible {
+            filter: brightness(1.055);
+            box-shadow: var(--BTN-SHADOW-ACTIVE);
+            transform: translate(0, -1%);
+        }
+    
+        &:active {
+            filter: brightness(0.925);
+            transform: translate(0, 1%);
+            transition: 
+                text-shadow 0.125s, 
+                filter 0.075s,
+                box-shadow 0.075s,
+                transform 0.0075s;
+        }
+    
+        &::before {
+            content: "";
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            border-radius: 16px;
+            width: 85%;
+            height: 85%;
+        }
     }
 
-    &::before {
-        content: "";
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        border-radius: 16px;
-        width: 85%;
-        height: 85%;
+    #calculator__theme-header {
+        font-size: 1.3rem;
+        grid-column: 1/3;
+        
+        &::before {
+            width: 93%;
+        }
     }
-}
 
-@mixin calc-button-color($operand: true, $operator: false) {
-    @if $operand {
+    .btn-operand {
         color: var(--TEXT-COLOR);
         background-color: var(--BTN-BG-OPERAND-LIGHT);
         background-image: linear-gradient(
@@ -69,7 +90,8 @@
             text-shadow: var(--BTN-TSHADOW-OPERAND);
         }
     }
-    @else if $operator {
+
+    .btn-operator {
         color: var(--TEXT-COLOR);
         background-color: var(--BTN-BG-OPERATOR-LIGHT);
         background-image: linear-gradient(
@@ -89,9 +111,10 @@
             text-shadow: var(--BTN-TSHADOW-OPERATOR);
         }
     }
-    @else {
+
+    .btn-special, #calculator__theme-header {
         color: var(--TEXT-COLOR-OPPOSITE);
-        background-color: var(--BTN-BG-SPECIAL);
+        background-color: var(--BTN-BG-SPECIAL-LIGHT);
         background-image: linear-gradient(
             135deg, 
             var(--BTN-BG-SPECIAL-LIGHT), 
@@ -108,5 +131,9 @@
         &:hover, &:focus-visible {
             text-shadow: var(--BTN-TSHADOW-SPECIAL);
         }
+    }
+
+    #btn-eq, #btn-add, #btn-sub, #btn-mul, #btn-div, #btn-exp, #btn-dec {
+        font-size: 1.75rem;
     }
 }
