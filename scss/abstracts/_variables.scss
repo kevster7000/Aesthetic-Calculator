@@ -1,4 +1,6 @@
-/* all variables go here */
+// all variables go here
+
+@use "./responsive" as *;
 
 :root {
     /* Default theme is white */
@@ -61,21 +63,28 @@
     --BTN-TSHADOW-SPECIAL: 0 0 3px var(--BTN-TSHADOW-SPECIAL-COLOR);
 
     /****************** BORDERS ******************/
+
+    //TODO
+
     --CALC-BORDER: 1px solid var(--CALC-BORDER-COLOR);
+
+    /****************** SPACING (PADDING & MARGIN & GAP) ******************/
+
+    //TODO: MAKE ALL SPACING AND FONT-SIZES use the calc(function)
+    //THEN, make them all into certain media queries
+    //THIS WILL HANDLE ALL SPACING AND FONT SIZE RESPONSIVENESS
+
+    --SPACING-XL: 1.25rem;
+    --SPACING-LG: 1rem;
+    --SPACING-MD: 0.5rem;
+    --SPACING-SM: 0.25rem;
+    --SPACING-XS: 0.125rem;
+
+    @include media-lg {
+        // you get the memo kevin
+        // redefine all spacing in here
+    }
+
+    /****************** FONT SIZES ******************/
+    --FS-MD: 1rem;
 }
-
-
-/* all maps go here */
-// to call a map, use map-get($map_name, key);
-
-/****************** SPACING (PADDING & MARGIN) ******************/
-$spacing: (
-    "regular": 1rem,
-
-);
-
-/****************** FONT SIZES ******************/
-$font-size: (
-    "regular": 1rem,
-
-);

@@ -1,0 +1,63 @@
+@use "./../../abstracts" as *;
+
+.settings {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    margin: var(--SPACING-LG);
+
+    > button {
+        position: absolute;
+        right: 0;
+        top: 0;
+        translate: 0 -100%;
+        background-color: transparent;
+        border: none;
+        width: 40px;
+        height: 40px;
+        padding: var(--SPACING-SM);
+        font-size: 1.5rem;
+        color: var(--TEXT-COLOR);
+        cursor: pointer;
+
+        i {
+            transition: transform 0.75s, text-shadow 0.5s;
+        }
+
+        &:is(:hover, :focus-visible) i {
+            transform: rotate(120deg) scale(1.2);
+            text-shadow: 1px -1px 2px rgb(189, 189, 189);
+        }
+    }
+
+    &__panel {
+        border-radius: 10px;
+        background-color: var(--MAIN-COLOR);
+        padding: var(--SPACING-MD);
+        position: absolute;
+        right: 0;
+        bottom: 40px;
+        @include flex(center, flex-start, column);
+        gap: var(--SPACING-XS) var(--SPACING-SM);
+
+        button, form {
+            @include flex(flex-start);
+            gap: var(--SPACING-MD);
+            width: 100%;
+            background-color: transparent;
+            border: 1px solid transparent;
+            padding: var(--SPACING-SM);
+
+            &:hover {
+                border: 1px solid white;
+            }
+        }
+
+        form input {
+            order: -1;
+            accent-color: var(--TEXT-COLOR);
+            border: 1px solid red;
+        }
+    }
+}

@@ -1,0 +1,73 @@
+@use "./../../abstracts" as *;
+
+#calculator-history-btn {
+    width: 10%;
+    aspect-ratio: 1/1;
+    position: relative;
+    left: 100%;
+    top: 0;
+    transform: translate(-100%);
+    border-radius: 1px;
+    cursor: pointer;
+    border: none;
+    outline-color: transparent;
+    border-radius: 50% 20px 0 50%;
+    background-color: var(--BTN-BG-SPECIAL-LIGHT80);
+    transition: 
+        border-radius 0.25s, 
+        filter 0.1s,
+        text-shadow 0.125s,
+        box-shadow 0.075s;
+
+    &:hover, &:focus-visible {
+        filter: brightness(1.2);
+    }
+
+    &:active {
+        filter: brightness(0.8);
+    }
+
+    //TODO - add more styling to this button: gradient & shadow and hover/focus/active effects
+
+    i {
+        display: inline-block;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+
+    i[title="Show History"] {
+        animation: fade-in 0.5s forwards;
+    }
+
+    i[title="Go Back"] {
+        opacity: 0;
+        // animation: fade-out 0.25s forwards;
+    }
+
+    &.history-active {
+        border-radius: 50% 0 20px 50%;
+
+        // TODO - make button move to bottom
+        left: 100%;
+        top: 0;
+        transform: translate(-100%);
+
+        i[title="Show History"] {
+            animation: fade-out 0.25s forwards;
+        }
+
+        i[title="Go Back"] {
+            animation: fade-in 0.5s forwards;
+        }
+    }
+}
+
+.calculator__history {
+
+    h3 {
+        @extend %offscreen;
+    }
+    
+}

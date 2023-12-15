@@ -1,0 +1,47 @@
+@use "./../../abstracts" as *;
+
+.calculator__panel {
+    padding: var(--SPACING-MD);
+    margin: var(--SPACING-SM);
+    margin-bottom: 0;
+
+    h3 {
+        @extend %offscreen;
+    }
+
+    &-input {
+        @include flex(center, flex-end, column);
+        padding-top: 0.5rem;
+
+        label {
+            @extend %offscreen;
+        }
+
+        input {
+            padding: var(--SPACING-SM);
+            font-size: 2.5rem;
+            text-align: right;
+        }
+
+        input {
+            flex-grow: 1;
+            width: 100%;
+            overflow-x: auto;
+            background-color: transparent;
+            border: none;
+            outline-color: transparent;
+
+            // TODO - add more styling to the input box as well as HTML attributes such as placeholder and whatnot
+        }
+
+        &-prev {
+            width: 100%;
+            text-align: end;
+            padding: var(--SPACING-SM);
+            margin-bottom: var(--SPACING-SM);
+            overflow-x: scroll;
+
+            //TODO - edit the scrollbar
+        }
+    }
+}

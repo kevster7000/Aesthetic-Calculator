@@ -1,0 +1,41 @@
+@use "./../../abstracts" as *;
+
+.github__btn {
+    padding: var(--SPACING-SM);
+    margin-left: var(--SPACING-XL);
+    font-size: clamp(1.25rem, 5vw, 1.5rem);
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    font-weight: bold;
+    text-decoration: none;
+    background: none;
+    border: none;
+    display: none;
+
+    i {
+        font-size: 1.75rem;
+    }
+
+    .github__text {
+        display: none;
+    }
+
+    @include media-md {
+        .github__text {
+            display: inline;
+        }
+    }
+
+    &:any-link {
+        color: var(--TEXT-COLOR)
+    }
+    
+}
+
+@include media-sm {
+    .github__btn {
+        display: block;
+    }
+}

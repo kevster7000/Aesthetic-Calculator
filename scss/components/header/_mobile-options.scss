@@ -1,0 +1,20 @@
+@use "./../../abstracts" as *;
+
+.mobile-options {
+    display: block;
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translate(-50%);
+    margin-right: var(--SPACING-XL);
+}
+
+@include media-sm {
+    h1 {
+        font-size: 2rem;
+    }
+
+    .mobile-options {
+        display: none;
+    }
+}

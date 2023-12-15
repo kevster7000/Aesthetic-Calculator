@@ -1,5 +1,5 @@
-@mixin button-init($isButton: true) {
-    margin: 0.25rem;
+@mixin calc-button-init() {
+    margin: var(--SPACING-SM);
     border-radius: 20px;
     border: none;
     position: relative;
@@ -8,61 +8,47 @@
     line-height: 1.35rem;
     outline-color: transparent;
 
-    @if $isButton {
-        cursor: pointer;
+    cursor: pointer;
+    transition: 
+        text-shadow 0.125s, 
+        filter 0.075s,
+        box-shadow 0.075s,
+        transform 0.075s;
+
+    span {
+        position: relative;
+        z-index: 1;
+    }
+    
+    &:hover, &:focus-visible {
+        filter: brightness(1.055);
+        box-shadow: var(--BTN-SHADOW-ACTIVE);
+        transform: translate(0, -1%);
+    }
+
+    &:active {
+        filter: brightness(0.925);
+        transform: translate(0, 1%);
         transition: 
             text-shadow 0.125s, 
             filter 0.075s,
             box-shadow 0.075s,
-            transform 0.075s;
-
-        span {
-            position: relative;
-            z-index: 1;
-        }
-    
-        &:hover, &:focus-visible {
-            filter: brightness(1.055);
-            box-shadow: var(--BTN-SHADOW-ACTIVE);
-            transform: translate(0, -1%);
-        }
-
-        &:active {
-            filter: brightness(0.925);
-            transform: translate(0, 1%);
-            transition: 
-                text-shadow 0.125s, 
-                filter 0.075s,
-                box-shadow 0.075s,
-                transform 0.0075s;
-        }
-
-        &::before {
-            content: "";
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            border-radius: 16px;
-            width: 85%;
-            height: 85%;
-        }
+            transform 0.0075s;
     }
-    @else {
-        &::before {
-            content: "";
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            border-radius: 16px;
-            width: 93%;
-            height: 85%;
-        }
+
+    &::before {
+        content: "";
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        border-radius: 16px;
+        width: 85%;
+        height: 85%;
     }
 }
 
-@mixin button-color($operand: true, $operator: false, $isButton: true) {
+@mixin calc-button-color($operand: true, $operator: false) {
     @if $operand {
         color: var(--TEXT-COLOR);
         background-color: var(--BTN-BG-OPERAND-LIGHT);
@@ -121,16 +107,6 @@
 
         &:hover, &:focus-visible {
             text-shadow: var(--BTN-TSHADOW-SPECIAL);
-        }
-    }
-
-    @if not $isButton {
-        &::before {
-            background-image: linear-gradient(
-                135deg, 
-                var(--BTN-BG-SPECIAL-DARK80), var(--BTN-BG-SPECIAL-DARK60), 
-                transparent, 
-                var(--BTN-BG-SPECIAL-LIGHT60), var(--BTN-BG-SPECIAL-LIGHT80));
         }
     }
 }

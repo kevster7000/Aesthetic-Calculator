@@ -1,0 +1,16 @@
+@use "./../abstracts" as *;
+
+header {
+    @include flex(center);
+    padding: var(--SPACING-MD);
+    background-color: var(--MAIN-COLOR75);
+    position: relative;
+
+    h1 {
+        @extend %nowrap;
+        font-size: clamp(1.25rem, 7vw, 2rem);
+        text-align: center;
+
+        // add some effect to this based on color theme
+    }
+}
