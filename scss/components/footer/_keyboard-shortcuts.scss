@@ -22,11 +22,61 @@
         }
     }
 
-    > button {
-        padding: var(--SPACING-SM) var(--SPACING-MD);
+    &__btn {
+        @include neumorphic(FOOTER-BTN);
+        padding: var(--SPACING-MD);
+        cursor: pointer;
+
+        #open-keyboard-shortcuts {
+            animation: fade-in 0.5s forwards;
+        }
+
+        #close-keyboard-shortcuts {
+            position: absolute;
+            left: 0%;
+            top: 50%;
+            transform: translate(50%, -45%);
+            opacity: 0;
+            
+            // animation: fade-out 0.25s forwards;
+        }
+
+        &.keyboard-shortcuts-active {
+
+            #open-keyboard-shortcuts {
+                animation: fade-out 0.25s forwards;
+            }
+
+            #close-keyboard-shortcuts {
+                animation: fade-in 0.5s forwards;
+            }
+        }
     }
 
-    table {
-        display: block;
+    &__panel {
+        display: none;
+        @include neumorphic(FOOTER-BTN);
+        padding: var(--SPACING-MD);
+        margin-top: var(--SPACING-LG);
+        border-radius: 10px;
+
+        &.panel-active {
+            display: block;
+            animation: show-panel 1s backwards;
+        }
+
+        @keyframes show-panel {
+            from {
+                height: 0px;
+            }
+            to {
+                height: 100%;
+            }
+        }
+
+        .fa-delete-left {
+            transform: scale(0.7) translateX(-50%); 
+            width: calc(1ch - 1px);
+        }
     }
 }

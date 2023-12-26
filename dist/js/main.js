@@ -12,7 +12,7 @@ initThemes();
 function initThemes() {
     const themesButton = document.querySelector(".themes__btn");
     const themesPanel = document.querySelector(".themes__panel");
-    const themesCloseButton = document.querySelector(`.themes__btn i[title="Close Themes"]`);
+    const themesCloseButton = document.querySelector(`#close-themes`);
 
     let themeClicked = false;
 
@@ -127,8 +127,8 @@ window.addEventListener("keydown", (event) => {
 initHistory();
 
 function initHistory() {
-    let historyButton = document.querySelector("#calculator-history-btn");
-    const historyCloseButton = document.querySelector(`#calculator-history-btn i[title="Go Back"]`);
+    const historyButton = document.querySelector("#calculator-history-btn");
+    const historyCloseButton = document.querySelector(`#close-history`);
 
     let historyClicked = false;
 
@@ -171,3 +171,30 @@ Sort of like a dropdown, the history panel will slide down from the top of the c
 /**********************************************************************************/
 /*                                     Footer                                     */
 /**********************************************************************************/
+
+// TODO - create a click away function.
+// IF themes panel is open and the user clicks outside of it, the panel will close
+
+initFooter();
+
+function initFooter() {
+    const keyboardShortcutsButton = document.querySelector(".keyboard-shortcuts__btn");
+    const keyboardShortcutsPanel = document.querySelector(".keyboard-shortcuts__panel");
+    const keyboardShortcutsCloseButton = document.querySelector(`#close-keyboard-shortcuts`);
+
+    let keyboardShortcutsClicked = false;
+
+    keyboardShortcutsButton.addEventListener("click", () => {
+        keyboardShortcutsPanel.classList.toggle("panel-active");
+        keyboardShortcutsButton.classList.toggle("keyboard-shortcuts-active");
+
+        if(keyboardShortcutsClicked) {
+            keyboardShortcutsCloseButton.style.setProperty("animation", "fade-out 0.25s forwards");
+            keyboardShortcutsClicked = false;
+        }
+        else {
+            keyboardShortcutsCloseButton.style.setProperty("animation", "fade-in 0.5s forwards");
+            keyboardShortcutsClicked = true;
+        }
+    });
+}

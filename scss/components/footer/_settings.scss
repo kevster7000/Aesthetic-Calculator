@@ -12,7 +12,6 @@
         right: 0;
         top: 0;
         translate: 0 -100%;
-        background-color: transparent;
         border: none;
         width: 40px;
         height: 40px;
@@ -21,25 +20,28 @@
         color: var(--TEXT-COLOR);
         cursor: pointer;
 
+        @include neumorphic(FOOTER-BTN);
+
         i {
             transition: transform 0.75s, text-shadow 0.5s;
         }
 
         &:is(:hover, :focus-visible) i {
-            transform: rotate(120deg) scale(1.2);
+            transform: rotate(120deg) scale(1.15);
             text-shadow: 1px -1px 2px rgb(189, 189, 189);
         }
     }
 
     &__panel {
+        @include neumorphic(FOOTER-BTN);
         border-radius: 10px;
-        background-color: var(--MAIN-COLOR);
         padding: var(--SPACING-MD);
         position: absolute;
         right: 0;
         bottom: 40px;
         @include flex(center, flex-start, column);
         gap: var(--SPACING-XS) var(--SPACING-SM);
+        margin-bottom: 1rem;
 
         button, form {
             @include flex(flex-start);

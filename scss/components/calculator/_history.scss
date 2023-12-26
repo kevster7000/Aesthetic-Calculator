@@ -37,11 +37,11 @@
         transform: translate(-50%, -50%);
     }
 
-    i[title="Show History"] {
+    #open-history {
         animation: fade-in 0.5s forwards;
     }
 
-    i[title="Go Back"] {
+    #close-history {
         opacity: 0;
         // animation: fade-out 0.25s forwards;
     }
@@ -54,11 +54,11 @@
         top: 0;
         transform: translate(-100%);
 
-        i[title="Show History"] {
+        #open-history {
             animation: fade-out 0.25s forwards;
         }
 
-        i[title="Go Back"] {
+        #close-history {
             animation: fade-in 0.5s forwards;
         }
     }

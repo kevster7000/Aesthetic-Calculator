@@ -15,3 +15,17 @@
     align-items: $align;
     flex-flow: $direction $wrap;
 }
+
+@mixin neumorphic($type) {
+    background-color: var(--#{$type}-BG-LIGHT);
+    background-image: linear-gradient(
+        135deg, 
+        var(--CALC-BG-DARK),
+        var(--CALC-BG-LIGHT), 
+        var(--CALC-BG-LIGHT), 
+        var(--CALC-BG-DARK));
+    border-radius: 32px;
+    border: var(--CALC-BORDER);
+    backdrop-filter: blur(2px);
+    box-shadow: var(--#{$type}-SHADOW);
+}

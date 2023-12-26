@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="author" content="Kevin Tang">
-    <meta name="description" content="An aesthetic and multi-themed calculator">
+    <meta name="description" content="A visually appealing and responsive calculator that supports PEMDAS with multiple themes and a history feature">
     <title>Aesthetic Calculator</title>
     <link rel="icon" href="./img/favicon.png">
     <link rel="stylesheet" href="css/style.css">
@@ -35,8 +35,8 @@
                 <button class="themes__btn">
                     <div class="themes__current"></div>
                     <span class="themes__text">Select Theme</span>
-                    <i title="Open Themes" class="fa-solid fa-chevron-down"></i>
-                    <i title="Close Themes" class="fa-solid fa-xmark"></i>
+                    <i id="open-themes" class="fa-solid fa-chevron-down"></i>
+                    <i id="close-themes" class="fa-solid fa-xmark"></i>
                 </button>
 
                 <div class="themes__panel">
@@ -60,8 +60,8 @@
                     <h3>Calculator Panel</h3>
 
                     <button id="calculator-history-btn">
-                        <i title="Show History" class="fa-solid fa-clock-rotate-left"></i>
-                        <i title="Go Back" class="fa-solid fa-arrow-down"></i>
+                        <i id="open-history" class="fa-solid fa-clock-rotate-left"></i>
+                        <i id="close-history" class="fa-solid fa-arrow-down"></i>
                     </button>
                         
                     <form action="" class="calculator__panel-input">
@@ -120,23 +120,21 @@
                     To see more keyboard interactions, click the button below or press K.
                 </p>
 
-                <button>
-                    <i class="fa-solid fa-chevron-up"></i>
-                    <i class="fa-solid fa-chevron-down"></i>
+                <button class="keyboard-shortcuts__btn">
+                    <i id="open-keyboard-shortcuts" class="fa-solid fa-chevron-up"></i>
+                    <i id="close-keyboard-shortcuts" class="fa-solid fa-chevron-down"></i>
                     <span class="">Show </span>Keyboard Shortcuts
                 </button>
 
-                <table>
+                <table class="keyboard-shortcuts__panel">
                     <thead>
                         <tr>
-                            <th>&nbsp;</th>
-                            <th>Keyboard Shortcut</th>
+                            <th>Shortcut</th>
                             <th>Description</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
-                            <td rowspan="10" style="text-orientation: sideways-right; writing-mode: vertical-lr;">Calculator</td>
                             <td>*</td>
                             <td>&#215; Multiply</td>
                         </tr>
@@ -150,7 +148,7 @@
                         </tr>
                         <tr>
                             <td>Backspace</td>
-                            <td><i class="fa-solid fa-delete-left" style="transform: scale(0.7) translateX(-50%); width: calc(1ch - 1px);"></i> Delete</td>
+                            <td><i class="fa-solid fa-delete-left"></i> Delete</td>
                         </tr>
                         <tr>
                             <td>Esc</td>
@@ -176,7 +174,6 @@
                             <td>Show Settings</td>
                         </tr>
                         <tr>
-                            <td rowspan="7" style="text-orientation: sideways-right; writing-mode: vertical-lr;">Button Navigation</td>
                             <td>Space</td>
                             <td>Press Button</td>
                         </tr>
@@ -209,7 +206,7 @@
             </div>
 
             <div class="settings">
-                <button><i title="Settings" class="fa-solid fa-gear"></i></button>
+                <button><i class="fa-solid fa-gear"></i></button>
                 <div class="settings__panel">
                     <form action="" class="thousands-separator">
                         <label for="">Thousands Separator</label>

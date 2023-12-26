@@ -17,20 +17,10 @@
     // make this a gradient
 
     .calculator {
+        @include neumorphic(CALC);
         @include flex(unset, unset, column);
         width: clamp(250px, 85vw, 475px);
         height: clamp(320px, 80vmax, 675px);
-        background-color: var(--CALC-BG-LIGHT);
-        background-image: linear-gradient(
-            135deg, 
-            var(--CALC-BG-DARK),
-            var(--CALC-BG-LIGHT), 
-            var(--CALC-BG-LIGHT), 
-            var(--CALC-BG-DARK));
-        box-shadow: var(--CALC-SHADOW);
-        border-radius: 32px;
-        border: var(--CALC-BORDER);
         padding: var(--SPACING-MD);
-        backdrop-filter: blur(2px);
     }
 }

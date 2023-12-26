@@ -87,7 +87,7 @@
         }
 
         &:hover, &:focus-visible {
-            text-shadow: var(--BTN-TSHADOW-OPERAND);
+            text-shadow: var(--BTN-TEXT-SHADOW-OPERAND);
         }
     }
 
@@ -108,7 +108,7 @@
         }
 
         &:hover, &:focus-visible {
-            text-shadow: var(--BTN-TSHADOW-OPERATOR);
+            text-shadow: var(--BTN-TEXT-SHADOW-OPERATOR);
         }
     }
 
@@ -129,7 +129,7 @@
         }
 
         &:hover, &:focus-visible {
-            text-shadow: var(--BTN-TSHADOW-SPECIAL);
+            text-shadow: var(--BTN-TEXT-SHADOW-SPECIAL);
         }
     }
 

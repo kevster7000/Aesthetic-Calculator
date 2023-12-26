@@ -11,6 +11,9 @@ header {
         font-size: clamp(1.25rem, 7vw, 2rem);
         text-align: center;
 
+        // good lord im too much of a perfectionist; gotta visually center this to keep me sane
+        transform: translateX(1.25%);
+
         // add some effect to this based on color theme
     }
 }

@@ -13,9 +13,10 @@
     }
 
     &__btn {
+        @include neumorphic(HEADER-BTN);
         @include flex;
         gap: var(--SPACING-SM);
-        padding: var(--SPACING-SM);
+        padding: var(--SPACING-MD);
         cursor: pointer;
 
         .themes__current {
@@ -36,15 +37,15 @@
             }
         }
 
-        i[title="Open Themes"] {
+        #open-themes {
             animation: fade-in 0.5s forwards;
         }
 
-        i[title="Close Themes"] {
+        #close-themes {
             position: absolute;
             right: 0;
             top: 50%;
-            transform: translate(-60%, -45%);
+            transform: translate(-80%, -45%);
             opacity: 0;
             
             // animation: fade-out 0.25s forwards;
@@ -52,11 +53,11 @@
 
         &.themes-active {
 
-            i[title="Open Themes"] {
+            #open-themes {
                 animation: fade-out 0.25s forwards;
             }
 
-            i[title="Close Themes"] {
+            #close-themes {
                 animation: fade-in 0.5s forwards;
             }
         }
