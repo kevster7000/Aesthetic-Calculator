@@ -57,20 +57,23 @@
         display: none;
         @include neumorphic(FOOTER-BTN);
         padding: var(--SPACING-MD);
-        margin-top: var(--SPACING-LG);
+        margin-top: var(--SPACING-MD);
         border-radius: 10px;
+        overflow: hidden;
 
         &.panel-active {
             display: block;
             animation: show-panel 1s backwards;
         }
 
+        // TODO
+
         @keyframes show-panel {
             from {
-                height: 0px;
+                height: 0;
             }
             to {
-                height: 100%;
+                height: auto;
             }
         }
 

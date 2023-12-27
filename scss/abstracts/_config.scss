@@ -29,3 +29,9 @@
     backdrop-filter: blur(2px);
     box-shadow: var(--#{$type}-SHADOW);
 }
+
+@mixin neumorphic-btn($type) {
+    @include neumorphic($type);
+    // TODO
+    // HOVER AND ACTIVE STATES
+}

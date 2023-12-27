@@ -24,7 +24,7 @@
             height: 15px;
             background: var(--MAIN-COLOR);
             border-radius: 50%;
-            border: 1px solid black;
+            border: 1px solid var(--TEXT-COLOR);
         }
 
         .themes__text {
@@ -70,7 +70,9 @@
         left: 0;
         gap: var(--SPACING-SM);
         padding: var(--SPACING-MD);
-        background-color: gainsboro;
+        @include neumorphic(HEADER-BTN);
+        border-radius: 10px;
+        margin-top: var(--SPACING-MD);
 
         &-option {
             width: 15px;

@@ -7,12 +7,12 @@
     width: 100%;
     margin: var(--SPACING-LG);
 
-    > button {
+    #open-settings {
+        @include neumorphic(FOOTER-BTN);
         position: absolute;
         right: 0;
         top: 0;
         translate: 0 -100%;
-        border: none;
         width: 40px;
         height: 40px;
         padding: var(--SPACING-SM);
@@ -20,15 +20,13 @@
         color: var(--TEXT-COLOR);
         cursor: pointer;
 
-        @include neumorphic(FOOTER-BTN);
-
         i {
             transition: transform 0.75s, text-shadow 0.5s;
         }
 
         &:is(:hover, :focus-visible) i {
-            transform: rotate(120deg) scale(1.15);
-            text-shadow: 1px -1px 2px rgb(189, 189, 189);
+            transform: rotate(120deg) scale(1.1);
+            text-shadow: 1px -1px 2px var(--TEXT-COLOR-SHADOW);
         }
     }
 
@@ -39,9 +37,9 @@
         position: absolute;
         right: 0;
         bottom: 40px;
-        @include flex(center, flex-start, column);
         gap: var(--SPACING-XS) var(--SPACING-SM);
-        margin-bottom: 1rem;
+        margin-bottom: var(--SPACING-MD);
+        display: none;
 
         button, form {
             @include flex(flex-start);
@@ -50,6 +48,8 @@
             background-color: transparent;
             border: 1px solid transparent;
             padding: var(--SPACING-SM);
+
+            // TODO
 
             &:hover {
                 border: 1px solid white;
@@ -60,6 +60,10 @@
             order: -1;
             accent-color: var(--TEXT-COLOR);
             border: 1px solid red;
+        }
+
+        &.panel-active {
+            @include flex(center, flex-start, column);
         }
     }
 }

@@ -7,13 +7,15 @@
 
     /****************** COLORS ******************/
     --MAIN-COLOR: #f7f7f7;
-    --MAIN-COLOR75: hsla(0, 0%, 97%, 0.75); //might need to increase the opacity
+    --MAIN-COLOR35: hsla(0, 0%, 97%, 0.35); //might need to increase the opacity
 
     --TEXT-COLOR: #111;
+    --TEXT-COLOR-SHADOW: hsla(0, 0%, 10%, 0.25);
     --TEXT-COLOR-OPPOSITE: #f7f7f7;
 
     --HEADER-BTN-BG-LIGHT: hsla(0, 0%, 95%, 0.55);
     --FOOTER-BTN-BG-LIGHT: hsla(0, 0%, 95%, 0.55);
+    
     --CALC-BG-LIGHT: hsla(0, 0%, 91%, 0.45);
     --CALC-BG-DARK: hsla(0, 0%, 73%, 0.35);
 
@@ -41,14 +43,11 @@
     --BTN-BG-SPECIAL-DARK80: hsla(192, 3%, 44%, 0.8);
     --BTN-BG-SPECIAL-DARK60: hsla(192, 3%, 44%, 0.6);
     
-    --BTN-SHADOW-COLOR: hsla(0, 0%, 21%, 0.375);
+    --BTN-SHADOW-COLOR: hsla(0, 0%, 23%, 0.35);
 
     --BTN-TEXT-SHADOW-OPERAND-COLOR: hsla(0, 0%, 53%, 0.55);
     --BTN-TEXT-SHADOW-OPERATOR-COLOR: hsla(204, 4%, 53%, 0.8);
     --BTN-TEXT-SHADOW-SPECIAL-COLOR: hsla(0, 0%, 72%, 0.5);
-
-    --PANEL-BG: ;
-    --PANEL-SHADOW-COLOR: ;
 
     /****************** SHADOWS ******************/
     --CALC-SHADOW: 
@@ -56,21 +55,23 @@
         2px 2px 24px var(--CALC-SHADOW-COLOR);
 
     --HEADER-BTN-SHADOW: 
-        2px 2px 7px var(--CALC-SHADOW-COLOR), 
+        -2px -2px 7px var(--MAIN-COLOR), 
         2px 2px 14px var(--CALC-SHADOW-COLOR);
 
     --FOOTER-BTN-SHADOW: 
-        1px 2px 10px var(--CALC-SHADOW-COLOR), 
+        -2px -2px 7px var(--MAIN-COLOR), 
         1px 2px 16px var(--CALC-SHADOW-COLOR);
 
-    --BTN-SHADOW: 3px 2px 16px var(--BTN-SHADOW-COLOR);
+    --BTN-SHADOW: 2px 2px 14px var(--BTN-SHADOW-COLOR);
     --BTN-SHADOW-ACTIVE: 
-        3px 2px 18px var(--BTN-SHADOW-COLOR),
-         1px 2px 7px var(--BTN-SHADOW-COLOR);
+        2px 2px 16px var(--BTN-SHADOW-COLOR),
+        1px 2px 6px var(--BTN-SHADOW-COLOR);
 
     --BTN-TEXT-SHADOW-OPERAND: 0 0 3px var(--BTN-TEXT-SHADOW-OPERAND-COLOR);
     --BTN-TEXT-SHADOW-OPERATOR: 0 0 3px var(--BTN-TEXT-SHADOW-OPERATOR-COLOR);
     --BTN-TEXT-SHADOW-SPECIAL: 0 0 3px var(--BTN-TEXT-SHADOW-SPECIAL-COLOR);
+
+    --TEXT-SHADOW: 0 0 3px var(--TEXT-COLOR-SHADOW);
 
     /****************** BORDERS ******************/
 

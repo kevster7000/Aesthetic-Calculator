@@ -31,6 +31,12 @@
     &:any-link {
         color: var(--TEXT-COLOR)
     }
+
+    // TODO
+    
+    &:hover {
+        text-shadow: var(--TEXT-SHADOW);
+    }
     
 }
 

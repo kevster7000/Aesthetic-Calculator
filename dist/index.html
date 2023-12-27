@@ -64,11 +64,10 @@
                         <i id="close-history" class="fa-solid fa-arrow-down"></i>
                     </button>
                         
-                    <form action="" class="calculator__panel-input">
-                        <p class="calculator__panel-input-prev">123 + 456</p>
-                        <label for="userInput">User Input</label>
-                        <input type="text" id="userInput" name="userInput" autocomplete="off">
-                    </form>
+                    <div class="calculator__panel-output">
+                        <p class="calculator__panel-output-prev">&nbsp;123</p>
+                        <p class="calculator__panel-output-main">&nbsp;123</p>
+                    </d>
                 </section>
 
                 <section class="calculator__btns">
@@ -116,7 +115,7 @@
             <!-- Make each keyword in the shortcut like the https://docs.github.com/en/desktop/overview/github-desktop-keyboard-shortcuts -->
             <div class="keyboard-shortcuts">
                 <p>
-                    Tip: You can use your keyboard to input any of the buttons on the calculator.
+                    <strong>Tip:</strong> You can use your keyboard to input any of the buttons on the calculator.
                     To see more keyboard interactions, click the button below or press K.
                 </p>
 
@@ -205,8 +204,14 @@
                 </table>
             </div>
 
+            <!-- TODO -->
+
+            <div class="credits">
+                <p>Photo by <a href="https://unsplash.com/@anniespratt?utm_source=your_app_name&utm_medium=referral" target="_blank">Annie Spratt</a> on <a href="https://unsplash.com/?utm_source=your_app_name&utm_medium=referral" target="_blank">Unsplash</a></p>
+            </div>
+
             <div class="settings">
-                <button><i class="fa-solid fa-gear"></i></button>
+                <button id="open-settings"><i class="fa-solid fa-gear"></i></button>
                 <div class="settings__panel">
                     <form action="" class="thousands-separator">
                         <label for="">Thousands Separator</label>

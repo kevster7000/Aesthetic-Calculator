@@ -68,8 +68,53 @@ function setThemes(themeStored) {
 }
 
 /**********************************************************************************/
+/*                                Background Image                                */
+/**********************************************************************************/
+
+initBackground();
+
+function initBackground() {
+    const imageContainer = document.querySelector("#outer-container");
+    
+    const positions = [
+        "left top",
+        "right top",
+        "right bottom",
+        "left bottom"
+    ];
+
+    setTimeout(() => {
+        imageContainer.style.setProperty("background-position", positions[1]);
+    }, 500);
+
+    setInterval(() => {
+        let newPosition = (Math.floor(Math.random() * 4) + 1) - 1;
+        console.log(newPosition);
+        imageContainer.style.setProperty("background-position", positions[newPosition]);
+    }, 5000);
+
+
+    // unsplash API
+    // on each new background request, update image and credits
+    
+    //for each image, check size
+    //if less than window width or height, you can do one of two things
+    // 1) set backgroun-size to cover
+    // 2) search for the next image
+
+    // ACTUALLY, I think you can search for a specific widthxhieght in the get req
+}
+
+
+
+
+
+
+
+/**********************************************************************************/
 /*                                Calculator Input                                */
 /**********************************************************************************/
+
 
 let input = document.querySelector("#userInput");
 
@@ -196,5 +241,12 @@ function initFooter() {
             keyboardShortcutsCloseButton.style.setProperty("animation", "fade-in 0.5s forwards");
             keyboardShortcutsClicked = true;
         }
+    });
+
+    const settingsButton = document.querySelector("#open-settings");
+    const settingsPanel = document.querySelector(".settings__panel");
+
+    settingsButton.addEventListener("click", () => {
+        settingsPanel.classList.toggle("panel-active");
     });
 }
