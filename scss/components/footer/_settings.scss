@@ -8,7 +8,7 @@
     margin: var(--SPACING-LG);
 
     #open-settings {
-        @include neumorphic(FOOTER-BTN);
+        @include neumorphic-btn(FOOTER);
         position: absolute;
         right: 0;
         top: 0;
@@ -19,19 +19,27 @@
         font-size: 1.5rem;
         color: var(--TEXT-COLOR);
         cursor: pointer;
+        z-index: 1;
 
         i {
-            transition: transform 0.75s, text-shadow 0.5s;
+            transition: rotate 0.75s, transform 0.75s, text-shadow 0.5s;
         }
 
         &:is(:hover, :focus-visible) i {
-            transform: rotate(120deg) scale(1.1);
+            rotate: 120deg;
+            transform: scale(1.1);
             text-shadow: 1px -1px 2px var(--TEXT-COLOR-SHADOW);
+        }
+
+        &:active i {
+            rotate: 120deg;
+            transform: scale(1);
+            transition: rotate 0.5s, transform 0.125s;
         }
     }
 
     &__panel {
-        @include neumorphic(FOOTER-BTN);
+        @include neumorphic(FOOTER);
         border-radius: 10px;
         padding: var(--SPACING-MD);
         position: absolute;
@@ -64,6 +72,17 @@
 
         &.panel-active {
             @include flex(center, flex-start, column);
+        }
+    }
+
+    .credits {
+        position: absolute;
+        right: 0;
+        bottom: 0;
+        translate: -60px;
+
+        a:any-link {
+            color: var(--TEXT-COLOR)
         }
     }
 }

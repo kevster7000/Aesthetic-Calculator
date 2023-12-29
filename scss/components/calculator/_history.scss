@@ -1,31 +1,14 @@
 @use "./../../abstracts" as *;
 
 #calculator-history-btn {
+    @include neumorphic-btn(FOOTER);
     width: 10%;
     aspect-ratio: 1/1;
     position: relative;
     left: 100%;
     top: 0;
     transform: translate(-100%);
-    border-radius: 1px;
-    cursor: pointer;
-    border: none;
-    outline-color: transparent;
-    border-radius: 50% 20px 0 50%;
-    background-color: var(--BTN-BG-SPECIAL-LIGHT80);
-    transition: 
-        border-radius 0.25s, 
-        filter 0.25s,
-        text-shadow 0.125s,
-        box-shadow 0.075s;
-
-    &:hover, &:focus-visible {
-        filter: brightness(1.2);
-    }
-
-    &:active {
-        filter: brightness(0.8);
-    }
+    border-radius: 50% 50% 0 50%;
 
     //TODO - add more styling to this button: gradient & shadow and hover/focus/active effects
 
@@ -46,13 +29,17 @@
         // animation: fade-out 0.25s forwards;
     }
 
-    &.history-active {
-        border-radius: 50% 0 20px 50%;
+    #close-history-mobile {
+        display: none;
+    }
 
-        // TODO - make button move to bottom
-        left: 100%;
-        top: 0;
-        transform: translate(-100%);
+    @include media-sm { //idk if this is the right size
+        //TODO - change close hisotyr icons
+
+    }
+
+    &.history-active {
+        border-radius: 50% 0 50% 50%;
 
         #open-history {
             animation: fade-out 0.25s forwards;
@@ -61,13 +48,104 @@
         #close-history {
             animation: fade-in 0.5s forwards;
         }
+
+        @include media-sm { //idk if this is the right size
+            // TODO - make button move to bottom - close history mobile
+
+            left: 100%;
+            top: 0;
+            transform: translate(-100%);
+        }
     }
 }
 
 .calculator__history {
+    @include neumorphic(CALC);
+    @include flex(unset, unset, column);
+    width: clamp(150px, 50vw, 325px);
+    height: clamp(320px, 82vh, 675px);
+    padding: var(--SPACING-MD);
+    order: 1;
 
     h3 {
         @extend %offscreen;
     }
+
+    &-header {
+        @include flex(flex-end, center);
+        padding: var(--SPACING-SM);
+
+        button {
+            @include neumorphic-btn(HEADER);
+            width: 30%;
+            cursor: pointer;
+            margin-right: var(--SPACING-XS);
+            padding: var(--SPACING-MD) var(--SPACING-SM);
+        }
+    }
+
+    &-entries {
+        flex-grow: 1;
+        padding: var(--SPACING-MD);
+
+        //TODO - scrollbar
+        overflow-y: auto;
+
+        .calculator__history-entry {
+            @include flex(center, flex-end, column);
+            border-top: 1px solid var(--CALC-SHADOW-COLOR);
+            padding: var(--SPACING-MD);
+
+            .entry-header {
+                width: 100%;
+                @include flex(center, center);
+
+                &-time {
+                    flex-grow: 1;
+                }
+
+                &-copy, &-delete {
+                    background-color: transparent;
+                    border: none;
+                    padding: var(--SPACING-SM);
+                    cursor: pointer;
+                    font-size: 1.1rem;
+                }
+            }
+
+            .entry-input {
+                width: 100%;
+                text-align: right;
+
+                margin-bottom: 3px;
+                overflow-x: auto;
+
+                //TODO in JS - same thing with Calc Panel
     
+                &::-webkit-scrollbar {
+                    height: 3px;
+                }
+    
+                &::-webkit-scrollbar-track {
+                    background: var(--TEXT-COLOR-OPPOSITE);
+                    border-radius: 10px;
+                }
+    
+                &::-webkit-scrollbar-thumb {
+                    background: var(--CALC-PANEL-SCROLLBAR);
+                    border-radius: 10px;
+                }
+                
+                &::-webkit-scrollbar-thumb:hover {
+                    background: var(--CALC-PANEL-SCROLLBAR-HOVER);
+                }
+            }
+
+            .entry-output {
+                width: 100%;
+                font-size: 1.5rem;
+                text-align: right;
+            }
+        }
+    }
 }

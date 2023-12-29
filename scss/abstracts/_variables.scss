@@ -7,14 +7,14 @@
 
     /****************** COLORS ******************/
     --MAIN-COLOR: #f7f7f7;
-    --MAIN-COLOR35: hsla(0, 0%, 97%, 0.35); //might need to increase the opacity
+    --MAIN-COLOR35: hsla(0, 0%, 97%, 0.35);
 
     --TEXT-COLOR: #111;
     --TEXT-COLOR-SHADOW: hsla(0, 0%, 10%, 0.25);
     --TEXT-COLOR-OPPOSITE: #f7f7f7;
 
-    --HEADER-BTN-BG-LIGHT: hsla(0, 0%, 95%, 0.55);
-    --FOOTER-BTN-BG-LIGHT: hsla(0, 0%, 95%, 0.55);
+    --CALC-PANEL-SCROLLBAR: hsla(0, 0%, 29%, 0.65);
+    --CALC-PANEL-SCROLLBAR-HOVER: hsla(0, 0%, 17%, 0.75);
     
     --CALC-BG-LIGHT: hsla(0, 0%, 91%, 0.45);
     --CALC-BG-DARK: hsla(0, 0%, 73%, 0.35);
@@ -54,17 +54,19 @@
         2px 2px 14px var(--CALC-SHADOW-COLOR), 
         2px 2px 24px var(--CALC-SHADOW-COLOR);
 
-    --HEADER-BTN-SHADOW: 
-        -2px -2px 7px var(--MAIN-COLOR), 
-        2px 2px 14px var(--CALC-SHADOW-COLOR);
+    --HISTORY-SHADOW: var(--CALC-SHADOW);
 
-    --FOOTER-BTN-SHADOW: 
-        -2px -2px 7px var(--MAIN-COLOR), 
-        1px 2px 16px var(--CALC-SHADOW-COLOR);
+    --HEADER-SHADOW: 
+        -2px -2px 8px var(--CALC-BORDER-COLOR), 
+        2px 2px 8px var(--BTN-SHADOW-COLOR);
+
+    --FOOTER-SHADOW: 
+        -2px -2px 8px var(--CALC-BORDER-COLOR), 
+        2px 2px 8px var(--BTN-SHADOW-COLOR);
 
     --BTN-SHADOW: 2px 2px 14px var(--BTN-SHADOW-COLOR);
     --BTN-SHADOW-ACTIVE: 
-        2px 2px 16px var(--BTN-SHADOW-COLOR),
+        1px 2px 16px var(--BTN-SHADOW-COLOR),
         1px 2px 6px var(--BTN-SHADOW-COLOR);
 
     --BTN-TEXT-SHADOW-OPERAND: 0 0 3px var(--BTN-TEXT-SHADOW-OPERAND-COLOR);
@@ -74,8 +76,6 @@
     --TEXT-SHADOW: 0 0 3px var(--TEXT-COLOR-SHADOW);
 
     /****************** BORDERS ******************/
-
-    //TODO
 
     --CALC-BORDER: 1px solid var(--CALC-BORDER-COLOR);
 

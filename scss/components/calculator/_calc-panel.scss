@@ -19,7 +19,6 @@
             text-align: right;
             flex-grow: 1;
             width: 100%;
-            overflow-x: auto;
             background-color: transparent;
             border: none;
             outline-color: transparent;
@@ -27,13 +26,29 @@
 
         &-prev {
             width: 100%;
-            text-align: end;
+            text-align: right;
             padding: var(--SPACING-SM);
-            margin-bottom: var(--SPACING-SM);
-            overflow-x: scroll;
+            padding-bottom: var(--SPACING-XS);
+            margin-bottom: 3px;
+            overflow-x: auto;
 
-            //TODO - edit the scrollbar
-            overflow: auto;
+            &::-webkit-scrollbar {
+                height: 3px;
+            }
+
+            &::-webkit-scrollbar-track {
+                background: var(--TEXT-COLOR-OPPOSITE);
+                border-radius: 10px;
+            }
+
+            &::-webkit-scrollbar-thumb {
+                background: var(--CALC-PANEL-SCROLLBAR);
+                border-radius: 10px;
+            }
+            
+            &::-webkit-scrollbar-thumb:hover {
+                background: var(--CALC-PANEL-SCROLLBAR-HOVER);
+            }
         }
     }
 }

@@ -12,6 +12,7 @@
     }
 
     button {
+        @include button(CALC);
         margin: var(--SPACING-SM);
         border-radius: 20px;
         border: none;
@@ -20,34 +21,6 @@
         font-size: 1.35rem;
         line-height: 1.35rem;
         outline-color: transparent;
-    
-        cursor: pointer;
-        transition: 
-            text-shadow 0.125s, 
-            filter 0.075s,
-            box-shadow 0.25s,
-            transform 0.25s;
-    
-        span {
-            position: relative;
-            z-index: 1;
-        }
-        
-        &:hover, &:focus-visible {
-            filter: brightness(1.055);
-            box-shadow: var(--BTN-SHADOW-ACTIVE);
-            transform: translate(0, -1%);
-        }
-    
-        &:active {
-            filter: brightness(0.925);
-            transform: translate(0, 1%);
-            transition: 
-                text-shadow 0.125s, 
-                filter 0.075s,
-                box-shadow 0.075s,
-                transform 0.0075s;
-        }
     
         &::before {
             content: "";

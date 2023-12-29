@@ -1,0 +1,131 @@
+@use "./../../abstracts" as *;
+
+.keyboard-shortcuts {
+    position: absolute;
+    left: 0;
+    top: 50%;
+    margin-left: var(--SPACING-LG);
+
+    &__btn {
+        @include neumorphic-btn(FOOTER);
+        padding: var(--SPACING-MD);
+        cursor: pointer;
+        position: relative;
+        transform: translateY(-50%);
+
+        #open-keyboard-shortcuts {
+            animation: fade-in 0.5s forwards;
+        }
+
+        #close-keyboard-shortcuts {
+            position: absolute;
+            left: 0%;
+            top: 50%;
+            transform: translate(80%, -45%);
+            opacity: 0;
+            
+            // animation: fade-out 0.25s forwards;
+        }
+
+        &.keyboard-shortcuts-active {
+
+            #open-keyboard-shortcuts {
+                animation: fade-out 0.25s forwards;
+            }
+
+            #close-keyboard-shortcuts {
+                animation: fade-in 0.5s forwards;
+            }
+        }
+    }
+
+    &__panel {
+        display: none;
+        @include neumorphic(FOOTER);
+        padding: var(--SPACING-MD);
+        border-radius: 10px;
+        position: relative;
+        border-collapse: collapse;
+        overflow: hidden;
+        animation: hide-keyboard-shortcuts-panel 0.75s forwards;
+
+        &.panel-active {
+            display: block;
+            animation: show-keyboard-shortcuts-panel 0.75s forwards;
+        }
+
+        @keyframes show-keyboard-shortcuts-panel {
+            from { 
+                height: 0; 
+                opacity: 0;
+            }
+            30% {
+                opacity: 0.5;
+            }
+            to { 
+                opacity: 1;
+                height: 572px; 
+            }
+        }
+
+        @keyframes hide-keyboard-shortcuts-panel {
+            from { 
+                display: block;
+                opacity: 1;
+                height: 572px; 
+            }
+            70% {
+                opacity: 0.5;
+            }
+            to { 
+                height: 0; 
+                opacity: 0;
+            }
+        }
+
+        tbody tr {
+            // border-top: 1px solid var(--TEXT-COLOR-SHADOW);
+            position: relative;
+
+            td:first-child {
+                padding: var(--SPACING-SM)  0 var(--SPACING-MD) 0;
+                position: relative;
+                padding-right: var(--SPACING-MD);
+
+                .kbd {
+                    display: inline;
+
+                    kbd {
+                        position: relative;
+                        z-index: 1;
+                        vertical-align: middle;
+                        border-radius: 5px;
+                        padding: 1px 5px;
+                        border: 1px solid var(--TEXT-COLOR);
+                        box-shadow: 0 1px 0 var(--TEXT-COLOR);
+                    }
+                }
+
+                .line {
+                    z-index: 0;
+                    width: 0px;
+                    height: 1px;
+                    background-color: var(--TEXT-COLOR);
+                    position: absolute;
+                    top: 50%;
+                    right: 0;
+                    transform: translate(calc(-1 * var(--SPACING-MD)), -50%);
+                }
+            }
+            
+            td:last-child {
+                font-size: 14px;                
+            }
+        }
+
+        th {
+            text-align: left;
+            padding-bottom: var(--SPACING-SM);
+        }
+    }
+}

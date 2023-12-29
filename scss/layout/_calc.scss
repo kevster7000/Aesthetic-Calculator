@@ -3,19 +3,13 @@
 #outer-container {
     height: 100vh;
     @include flex(unset, unset, column);
-
-    //FIND a better bg image or make one urself - make it move infintely with JS or CSS
     background-image: url("https://images.unsplash.com/photo-1596367407372-96cb88503db6?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D");
-    background-position: left top;
-    background-size: auto;
-    transition: background-position 20s ease;
-    // background-image: url("./../img/360_F_294561375_CBNtbEztfsJCvSMfJVPC0QhA5MEYdmvg.jpg");
-
+    background-position: center;
+    background-size: cover;
 }
 
 .calculator__container {
-    display: grid;
-    place-items: center;
+    @include flex(center, center);
     height: 100%;
     background-color: var(--MAIN-COLOR35);
 
@@ -25,7 +19,9 @@
         @include neumorphic(CALC);
         @include flex(unset, unset, column);
         width: clamp(250px, 85vw, 475px);
-        height: clamp(320px, 80vmax, 675px);
+        height: clamp(320px, 82vh, 675px);
         padding: var(--SPACING-MD);
+        position: relative;
+        z-index: 1;
     }
 }

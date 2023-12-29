@@ -18,10 +18,143 @@
 <body>
     <div id="outer-container">
         <header>
-            <a class="github__btn" href="./">
-                <i class="fa-brands fa-github"></i>
-                <span class="github__text">GitHub</span>
-            </a>
+            <!-- Make each keyword in the shortcut like the https://docs.github.com/en/desktop/overview/github-desktop-keyboard-shortcuts -->
+            <div class="keyboard-shortcuts">
+                <button class="keyboard-shortcuts__btn">
+                    <i id="open-keyboard-shortcuts" class="fa-solid fa-chevron-down"></i>
+                    <i id="close-keyboard-shortcuts" class="fa-solid fa-xmark"></i>
+                    Keyboard Shortcuts
+                </button>
+
+                <table class="keyboard-shortcuts__panel">
+                    <thead>
+                        <tr>
+                            <th>Shortcut</th>
+                            <th>Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <div class="kbd"><kbd>*</kbd></div>
+                                <div class="line"></div>
+                            </td>
+                            <td>Multiply</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="kbd"><kbd>/</kbd></div>
+                                <div class="line"></div>
+                            </td>
+                            <td>Divide</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="kbd"><kbd>Enter</kbd></div>
+                                <div class="line"></div>
+                            </td>
+                            <td>Equals</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="kbd"><kbd>Backspace</kbd></div>
+                                <div class="line"></div>
+                            </td>
+                            <td>Delete</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="kbd"><kbd>Esc</kbd></div>
+                                <div class="line"></div>
+                            </td>
+                            <td>Clear</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="kbd"><kbd>N</kbd></div>
+                                <div class="line"></div>
+                            </td>
+                            <td>New Background</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="kbd"><kbd>K</kbd></div>
+                                <div class="line"></div>
+                            </td>
+                            <td>Show Shortcuts</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="kbd"><kbd>H</kbd></div>
+                                <div class="line"></div>
+                            </td>
+                            <td>Show History</td>
+                        </tr>
+                            <td>
+                                <div class="kbd"><kbd>T</kbd></div>
+                                <div class="line"></div>
+                            </td>
+                            <td>Show Themes</td>
+                        </tr>
+                        </tr>
+                            <td>
+                                <div class="kbd"><kbd>S</kbd></div>
+                                <div class="line"></div>
+                            </td>
+                            <td>Show Settings</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="kbd"><kbd>Space</kbd></div>
+                                <div class="line"></div>
+                            </td>
+                            <td>Press Button</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="kbd"><kbd>Tab</kbd></div>
+                                <div class="line"></div>
+                            </td>
+                            <td>Next Button</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="kbd"><kbd>Shift</kbd> + <kbd>Tab</kbd></div>
+                                <div class="line"></div>
+                            </td>
+                            <td>Previous Button</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="kbd"><kbd>↑</kbd></div>
+                                <div class="line"></div>
+                            </td>
+                            <td>Move Up</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="kbd"><kbd>↓</kbd></div>
+                                <div class="line"></div>
+                            </td>
+                            <td>Move Down</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="kbd"><kbd>→</kbd></div>
+                                <div class="line"></div>
+                            </td>
+                            <td>Move Right</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="kbd"><kbd>←</kbd></div>
+                                <div class="line"></div>
+                            </td>
+                            <td>Move Left</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
 
             <h1>Aesthetic Calculator</h1>
 
@@ -46,22 +179,52 @@
         </header>
 
         <main class="calculator__container">
-            <div class="calculator">
-                <section class="calculator__history">
-                    <h3>Calculator History</h3>
+            <section class="calculator__history">
+                <h3>Calculator History</h3>
+
+                <div class="calculator__history-header">
+                    <button>Clear</button>
+                </div>
+
+                <div class="calculator__history-entries"> <!-- populated with JS -->
                     <div class="calculator__history-entry">
-
+                        <div class="entry-header">
+                            <p class="entry-header-time">10:00</p>
+                            <button class="entry-header-copy"><i class="fa-regular fa-copy"></i></button>
+                            <button class="entry-header-delete"><i class="fa-regular fa-trash-can"></i></but>
+                        </div>
+                        <p class="entry-input">123</p>
+                        <p class="entry-output">123</p>
                     </div>
-                    <!-- will be populated with js -->
-                    <!-- also make this scrollable -->
-                </section>
+                    <div class="calculator__history-entry">
+                        <div class="entry-header">
+                            <p class="entry-header-time">10:00</p>
+                            <button class="entry-header-copy"><i class="fa-regular fa-copy"></i></button>
+                            <button class="entry-header-delete"><i class="fa-regular fa-trash-can"></i></but>
+                        </div>
+                        <p class="entry-input">123</p>
+                        <p class="entry-output">123</p>
+                    </div>
+                    <div class="calculator__history-entry">
+                        <div class="entry-header">
+                            <p class="entry-header-time">10:00</p>
+                            <button class="entry-header-copy"><i class="fa-regular fa-copy"></i></button>
+                            <button class="entry-header-delete"><i class="fa-regular fa-trash-can"></i></but>
+                        </div>
+                        <p class="entry-input">12983740912873412387490123470123740981723098470192837409187230481720394871209384703</p>
+                        <p class="entry-output">123</p>
+                    </div>
 
+                </div>
+            </section>
+            <div class="calculator">
                 <section class="calculator__panel">
                     <h3>Calculator Panel</h3>
 
                     <button id="calculator-history-btn">
                         <i id="open-history" class="fa-solid fa-clock-rotate-left"></i>
-                        <i id="close-history" class="fa-solid fa-arrow-down"></i>
+                        <i id="close-history" class="fa-solid fa-xmark"></i>
+                        <i id="close-history-mobile" class="fa-solid fa-arrow-down"></i>
                     </button>
                         
                     <div class="calculator__panel-output">
@@ -112,105 +275,16 @@
         </main>
 
         <footer>
-            <!-- Make each keyword in the shortcut like the https://docs.github.com/en/desktop/overview/github-desktop-keyboard-shortcuts -->
-            <div class="keyboard-shortcuts">
-                <p>
-                    <strong>Tip:</strong> You can use your keyboard to input any of the buttons on the calculator.
-                    To see more keyboard interactions, click the button below or press K.
-                </p>
-
-                <button class="keyboard-shortcuts__btn">
-                    <i id="open-keyboard-shortcuts" class="fa-solid fa-chevron-up"></i>
-                    <i id="close-keyboard-shortcuts" class="fa-solid fa-chevron-down"></i>
-                    <span class="">Show </span>Keyboard Shortcuts
-                </button>
-
-                <table class="keyboard-shortcuts__panel">
-                    <thead>
-                        <tr>
-                            <th>Shortcut</th>
-                            <th>Description</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>*</td>
-                            <td>&#215; Multiply</td>
-                        </tr>
-                        <tr>
-                            <td>/</td>
-                            <td>&#247; Divide</td>
-                        </tr>
-                        <tr>
-                            <td>Enter</td>
-                            <td>= Equals</td>
-                        </tr>
-                        <tr>
-                            <td>Backspace</td>
-                            <td><i class="fa-solid fa-delete-left"></i> Delete</td>
-                        </tr>
-                        <tr>
-                            <td>Esc</td>
-                            <td>Clear</td>
-                        </tr>
-                        <tr>
-                            <td>N</td>
-                            <td>New Background</td>
-                        </tr>
-                        <tr>
-                            <td>K</td>
-                            <td>Show Keyboard <br> Shortcuts</td>
-                        </tr>
-                        <tr>
-                            <td>H</td>
-                            <td>Show History</td>
-                        </tr>
-                            <td>T</td>
-                            <td>Show Themes</td>
-                        </tr>
-                        </tr>
-                            <td>S</td>
-                            <td>Show Settings</td>
-                        </tr>
-                        <tr>
-                            <td>Space</td>
-                            <td>Press Button</td>
-                        </tr>
-                        <tr>
-                            <td>Tab</td>
-                            <td>Next Button</td>
-                        </tr>
-                        <tr>
-                            <td>Shift + Tab</td>
-                            <td>Previous Button</td>
-                        </tr>
-                        <tr>
-                            <td><i class="fa-solid fa-up-long"></i></td>
-                            <td>Move Up</td>
-                        </tr>
-                        <tr>
-                            <td><i class="fa-solid fa-down-long"></i></td>
-                            <td>Move Down</td>
-                        </tr>
-                        <tr>
-                            <td><i class="fa-solid fa-right-long"></i></td>
-                            <td>Move Right</td>
-                        </tr>
-                        <tr>
-                            <td><i class="fa-solid fa-left-long"></i></td>
-                            <td>Move Left</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-
-            <!-- TODO -->
-
-            <div class="credits">
-                <p>Photo by <a href="https://unsplash.com/@anniespratt?utm_source=your_app_name&utm_medium=referral" target="_blank">Annie Spratt</a> on <a href="https://unsplash.com/?utm_source=your_app_name&utm_medium=referral" target="_blank">Unsplash</a></p>
-            </div>
+            <a class="github__btn" href="./">
+                <i class="fa-brands fa-github"></i>
+                <span class="github__text">GitHub</span>
+            </a>
 
             <div class="settings">
+                <div class="credits">
+                    <p>Photo by <a href="https://unsplash.com/@anniespratt?utm_source=your_app_name&utm_medium=referral" target="_blank">Annie Spratt</a> on <a href="https://unsplash.com/?utm_source=your_app_name&utm_medium=referral" target="_blank">Unsplash</a></p>
+                </div>
+                
                 <button id="open-settings"><i class="fa-solid fa-gear"></i></button>
                 <div class="settings__panel">
                     <form action="" class="thousands-separator">
@@ -218,7 +292,7 @@
                         <input type="checkbox">
                     </form>
                     <button>
-                        <i class="fa-solid fa-trash"></i>
+                        <i class="fa-regular fa-trash-can"></i>
                         <span>Clear Background</span>
                     </button>
                 </div>

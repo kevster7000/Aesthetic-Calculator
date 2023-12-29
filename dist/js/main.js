@@ -61,7 +61,7 @@ function setThemes(themeStored) {
             document.documentElement.style.setProperty(colorVariables[i], themeColors[i]);
         }
         const themeCurrent = document.querySelector(".themes__current");
-        themeCurrent.style.setProperty("backgroundColor", themeColors[0]);
+        themeCurrent.style.setProperty("background-color", themeColors[0]);
         themeCurrent.title = incTheme;
         localStorage.setItem("theme", incTheme);
     }
@@ -71,53 +71,35 @@ function setThemes(themeStored) {
 /*                                Background Image                                */
 /**********************************************************************************/
 
-initBackground();
+// unsplash API
+// on each new background request, update image and credits
 
-function initBackground() {
-    const imageContainer = document.querySelector("#outer-container");
-    
-    const positions = [
-        "left top",
-        "right top",
-        "right bottom",
-        "left bottom"
-    ];
+//for each image, check size
+//if less than window width or height, you can do one of two things
+// 1) set backgroun-size to cover
+// 2) search for the next image
 
-    setTimeout(() => {
-        imageContainer.style.setProperty("background-position", positions[1]);
-    }, 500);
+// ACTUALLY, I think you can search for a specific widthxhieght in the get req
 
-    setInterval(() => {
-        let newPosition = (Math.floor(Math.random() * 4) + 1) - 1;
-        console.log(newPosition);
-        imageContainer.style.setProperty("background-position", positions[newPosition]);
-    }, 5000);
+/**********************************************************************************/
+/*                                Calculator Panel                                */
+/**********************************************************************************/
 
+initCalcPanel();
 
-    // unsplash API
-    // on each new background request, update image and credits
-    
-    //for each image, check size
-    //if less than window width or height, you can do one of two things
-    // 1) set backgroun-size to cover
-    // 2) search for the next image
+function initCalcPanel() {
+    const outputPrev = document.querySelector(".calculator__panel-output-prev");
 
-    // ACTUALLY, I think you can search for a specific widthxhieght in the get req
+    if(outputPrev.scrollWidth > outputPrev.clientWidth) { // check to see if horizontal scrollbar is visible
+        outputPrev.style.setProperty("margin-bottom", "0");
+    }
 }
-
-
-
-
-
-
 
 /**********************************************************************************/
 /*                                Calculator Input                                */
 /**********************************************************************************/
 
-
 let input = document.querySelector("#userInput");
-
 
 /* everytime they hit an arithmetic button, add onto the string in the display panel
 use this string for calculating and parsing */
@@ -152,8 +134,6 @@ Then, use regex to make sure this temp string is correctly formatted
 
 Example of regex for now: [0-9]*.[0-9]+[ ]*[+ or - or ...]
 */
-
-
 
 /* also make the user able to type any of the buttons such as , +, -, enter, etc rather than having to click everything*/
 const validKeys = ['']
@@ -214,20 +194,21 @@ Sort of like a dropdown, the history panel will slide down from the top of the c
 */
 
 /**********************************************************************************/
-/*                                     Footer                                     */
+/*                             Keyboard Shortcuts                                 */
 /**********************************************************************************/
 
 // TODO - create a click away function.
 // IF themes panel is open and the user clicks outside of it, the panel will close
 
-initFooter();
+initKeyboardShortcuts();
 
-function initFooter() {
+function initKeyboardShortcuts() {
     const keyboardShortcutsButton = document.querySelector(".keyboard-shortcuts__btn");
     const keyboardShortcutsPanel = document.querySelector(".keyboard-shortcuts__panel");
     const keyboardShortcutsCloseButton = document.querySelector(`#close-keyboard-shortcuts`);
 
     let keyboardShortcutsClicked = false;
+    let keyboardShortcutsClickedFirstTime = false;
 
     keyboardShortcutsButton.addEventListener("click", () => {
         keyboardShortcutsPanel.classList.toggle("panel-active");
@@ -241,8 +222,34 @@ function initFooter() {
             keyboardShortcutsCloseButton.style.setProperty("animation", "fade-in 0.5s forwards");
             keyboardShortcutsClicked = true;
         }
-    });
 
+        if(!keyboardShortcutsClickedFirstTime) {
+            keyboardShortcutsClickedFirstTime = true;
+            
+            const shortcutKeys = document.querySelectorAll(".kbd");
+            const shortcutLines = document.querySelectorAll("td .line");
+
+            for(let i = 0; i < shortcutKeys.length; i++) {
+                const spacing_md = getComputedStyle(document.documentElement).getPropertyValue("--SPACING-MD");
+                let stopLength = 
+                    shortcutKeys[i].offsetLeft + 
+                    shortcutKeys[i].offsetWidth + 
+                    (Number(spacing_md.substring(0, spacing_md.indexOf('r'))) * 16 * 2);
+
+                const newWidth = shortcutLines[i].offsetLeft - stopLength;
+                shortcutLines[i].style.setProperty("width", newWidth + "px");
+            }
+        }
+    });
+}
+
+/**********************************************************************************/
+/*                                    Settings                                    */
+/**********************************************************************************/
+
+initSettings();
+
+function initSettings() {
     const settingsButton = document.querySelector("#open-settings");
     const settingsPanel = document.querySelector(".settings__panel");
 

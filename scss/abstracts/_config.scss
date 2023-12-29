@@ -1,4 +1,4 @@
-// basic helper functions, mixins, and placeholders go here
+// helper functions, mixins, and placeholders go here
 
 %offscreen {
     position: absolute;
@@ -17,7 +17,7 @@
 }
 
 @mixin neumorphic($type) {
-    background-color: var(--#{$type}-BG-LIGHT);
+    background-color: var(--CALC-BG-LIGHT);
     background-image: linear-gradient(
         135deg, 
         var(--CALC-BG-DARK),
@@ -30,8 +30,56 @@
     box-shadow: var(--#{$type}-SHADOW);
 }
 
+@mixin button($type) {
+    cursor: pointer;
+
+    @if $type == CALC {
+        transition: 
+            text-shadow 0.125s, 
+            filter 0.08s,
+            box-shadow 0.25s,
+            transform 0.25s;
+
+        span {
+            position: relative;
+            z-index: 1;
+        }
+        
+        &:hover, &:focus-visible {
+            filter: brightness(1.05);
+            box-shadow: var(--BTN-SHADOW-ACTIVE);
+            transform: translate(0, -1%);
+        }
+
+        &:active {
+            filter: brightness(0.925);
+            transform: translate(0, 1%);
+            transition: 
+                text-shadow 0.125s, 
+                filter 0.075s,
+                box-shadow 0.075s,
+                transform 0.0075s;
+        }
+    }
+    @else {
+        transition: 
+            border-radius 0.25s, 
+            filter 0.25s,
+            text-shadow 0.125s,
+            box-shadow 0.25s;
+    
+        &:hover, &:focus-visible {
+            filter: brightness(1.05);
+        }
+    
+        &:active {
+            filter: brightness(0.95);
+            transition: filter 0.075s;
+        }
+    }
+}
+
 @mixin neumorphic-btn($type) {
     @include neumorphic($type);
-    // TODO
-    // HOVER AND ACTIVE STATES
+    @include button($type);
 }
