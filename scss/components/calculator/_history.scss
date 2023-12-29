@@ -33,14 +33,13 @@
         display: none;
     }
 
-    @include media-sm { //idk if this is the right size
-        //TODO - change close hisotyr icons
-
-    }
-
     &.history-active {
+        // TODO - make button move to bottom - close history mobile
         border-radius: 50% 0 50% 50%;
-
+        left: 100%;
+        top: 0;
+        transform: translate(-100%);
+        
         #open-history {
             animation: fade-out 0.25s forwards;
         }
@@ -48,24 +47,62 @@
         #close-history {
             animation: fade-in 0.5s forwards;
         }
+    }
 
-        @include media-sm { //idk if this is the right size
+    @include media-sm { //idk if this is the right size
+        //TODO - change close hisotyr icons
+
+        &.history-active {
             // TODO - make button move to bottom - close history mobile
-
-            left: 100%;
-            top: 0;
-            transform: translate(-100%);
-        }
+            border-radius: 50% 50% 0 50%;
+        }    
     }
 }
 
 .calculator__history {
     @include neumorphic(CALC);
-    @include flex(unset, unset, column);
     width: clamp(150px, 50vw, 325px);
     height: clamp(320px, 82vh, 675px);
     padding: var(--SPACING-MD);
     order: 1;
+    overflow: hidden;
+    display: none;
+    animation: hide-history-panel 0.35s 0.05s backwards;
+
+    &.history-panel-active {
+        @include flex(unset, unset, column);
+        animation: show-history-panel 0.35s forwards;
+    }
+
+    @keyframes show-history-panel {
+        from { 
+            width: 0; 
+            opacity: 0;
+        }
+        30% {
+            opacity: 0.8;
+        }
+        to { 
+            opacity: 1;
+            width: 325px;
+        }
+    }
+
+    @keyframes hide-history-panel {
+        from { 
+            @include flex(unset, unset, column);
+            opacity: 1;
+            width: 325px; 
+        }
+        70% {
+            opacity: 0.4;
+        }
+        to { 
+            width: 0; 
+            padding: 0;
+            opacity: 0;
+        }
+    }
 
     h3 {
         @extend %offscreen;
@@ -74,6 +111,11 @@
     &-header {
         @include flex(flex-end, center);
         padding: var(--SPACING-SM);
+        animation: fade-out 0.15s forwards;
+
+        &.history-header-active {
+            animation: fade-in 0.15s 0.125s backwards;
+        }
 
         button {
             @include neumorphic-btn(HEADER);
@@ -87,9 +129,32 @@
     &-entries {
         flex-grow: 1;
         padding: var(--SPACING-MD);
-
-        //TODO - scrollbar
+        padding-bottom: 0;
+        margin: var(--SPACING-SM);
         overflow-y: auto;
+        animation: fade-out 0.15s forwards;
+
+        &.entries-active {
+            animation: fade-in 0.15s 0.125s backwards;
+        }
+
+        &::-webkit-scrollbar {
+            width: 3px;
+        }
+
+        &::-webkit-scrollbar-track {
+            background: var(--TEXT-COLOR-OPPOSITE);
+            border-radius: 10px;
+        }
+
+        &::-webkit-scrollbar-thumb {
+            background: var(--CALC-PANEL-SCROLLBAR);
+            border-radius: 10px;
+        }
+        
+        &::-webkit-scrollbar-thumb:hover {
+            background: var(--CALC-PANEL-SCROLLBAR-HOVER);
+        }
 
         .calculator__history-entry {
             @include flex(center, flex-end, column);
@@ -116,11 +181,8 @@
             .entry-input {
                 width: 100%;
                 text-align: right;
-
                 margin-bottom: 3px;
                 overflow-x: auto;
-
-                //TODO in JS - same thing with Calc Panel
     
                 &::-webkit-scrollbar {
                     height: 3px;

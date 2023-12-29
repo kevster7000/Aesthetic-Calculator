@@ -47,11 +47,11 @@
         position: relative;
         border-collapse: collapse;
         overflow: hidden;
-        animation: hide-keyboard-shortcuts-panel 0.75s forwards;
+        animation: hide-keyboard-shortcuts-panel 0.5s forwards;
 
         &.panel-active {
             display: block;
-            animation: show-keyboard-shortcuts-panel 0.75s forwards;
+            animation: show-keyboard-shortcuts-panel 0.5s forwards;
         }
 
         @keyframes show-keyboard-shortcuts-panel {
@@ -60,7 +60,7 @@
                 opacity: 0;
             }
             30% {
-                opacity: 0.5;
+                opacity: 0.8;
             }
             to { 
                 opacity: 1;

@@ -39,7 +39,6 @@
   --CALC-SHADOW:
       2px 2px 14px var(--CALC-SHADOW-COLOR),
       2px 2px 24px var(--CALC-SHADOW-COLOR);
-  --HISTORY-SHADOW: var(--CALC-SHADOW);
   --HEADER-SHADOW:
       -2px -2px 8px var(--CALC-BORDER-COLOR),
       2px 2px 8px var(--BTN-SHADOW-COLOR);
@@ -290,6 +289,9 @@ form, input, button, label, textarea {
 }
 #calculator-history-btn.history-active {
   border-radius: 50% 0 50% 50%;
+  left: 100%;
+  top: 0;
+  transform: translate(-100%);
 }
 #calculator-history-btn.history-active #open-history {
   animation: fade-out 0.25s forwards;
@@ -299,9 +301,7 @@ form, input, button, label, textarea {
 }
 @media screen and (min-width: 576px) {
   #calculator-history-btn.history-active {
-    left: 100%;
-    top: 0;
-    transform: translate(-100%);
+    border-radius: 50% 50% 0 50%;
   }
 }
 
@@ -313,6 +313,16 @@ form, input, button, label, textarea {
   -webkit-backdrop-filter: blur(2px);
           backdrop-filter: blur(2px);
   box-shadow: var(--CALC-SHADOW);
+  width: clamp(150px, 50vw, 325px);
+  height: clamp(320px, 82vh, 675px);
+  padding: var(--SPACING-MD);
+  -ms-flex-order: 1;
+      order: 1;
+  overflow: hidden;
+  display: none;
+  animation: hide-history-panel 0.35s 0.05s backwards;
+}
+.calculator__history.history-panel-active {
   display: -ms-flexbox;
   display: flex;
   -ms-flex-pack: unset;
@@ -321,11 +331,42 @@ form, input, button, label, textarea {
       align-items: unset;
   -ms-flex-flow: column nowrap;
       flex-flow: column nowrap;
-  width: clamp(150px, 50vw, 325px);
-  height: clamp(320px, 82vh, 675px);
-  padding: var(--SPACING-MD);
-  -ms-flex-order: 1;
-      order: 1;
+  animation: show-history-panel 0.35s forwards;
+}
+@keyframes show-history-panel {
+  from {
+    width: 0;
+    opacity: 0;
+  }
+  30% {
+    opacity: 0.8;
+  }
+  to {
+    opacity: 1;
+    width: 325px;
+  }
+}
+@keyframes hide-history-panel {
+  from {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-pack: unset;
+        justify-content: unset;
+    -ms-flex-align: unset;
+        align-items: unset;
+    -ms-flex-flow: column nowrap;
+        flex-flow: column nowrap;
+    opacity: 1;
+    width: 325px;
+  }
+  70% {
+    opacity: 0.4;
+  }
+  to {
+    width: 0;
+    padding: 0;
+    opacity: 0;
+  }
 }
 .calculator__history-header {
   display: -ms-flexbox;
@@ -337,6 +378,10 @@ form, input, button, label, textarea {
   -ms-flex-flow: row nowrap;
       flex-flow: row nowrap;
   padding: var(--SPACING-SM);
+  animation: fade-out 0.15s forwards;
+}
+.calculator__history-header.history-header-active {
+  animation: fade-in 0.15s 0.125s backwards;
 }
 .calculator__history-header button {
   background-color: var(--CALC-BG-LIGHT);
@@ -364,7 +409,27 @@ form, input, button, label, textarea {
   -ms-flex-positive: 1;
       flex-grow: 1;
   padding: var(--SPACING-MD);
+  padding-bottom: 0;
+  margin: var(--SPACING-SM);
   overflow-y: auto;
+  animation: fade-out 0.15s forwards;
+}
+.calculator__history-entries.entries-active {
+  animation: fade-in 0.15s 0.125s backwards;
+}
+.calculator__history-entries::-webkit-scrollbar {
+  width: 3px;
+}
+.calculator__history-entries::-webkit-scrollbar-track {
+  background: var(--TEXT-COLOR-OPPOSITE);
+  border-radius: 10px;
+}
+.calculator__history-entries::-webkit-scrollbar-thumb {
+  background: var(--CALC-PANEL-SCROLLBAR);
+  border-radius: 10px;
+}
+.calculator__history-entries::-webkit-scrollbar-thumb:hover {
+  background: var(--CALC-PANEL-SCROLLBAR-HOVER);
 }
 .calculator__history-entries .calculator__history-entry {
   display: -ms-flexbox;
@@ -763,11 +828,11 @@ form, input, button, label, textarea {
   position: relative;
   border-collapse: collapse;
   overflow: hidden;
-  animation: hide-keyboard-shortcuts-panel 0.75s forwards;
+  animation: hide-keyboard-shortcuts-panel 0.5s forwards;
 }
 .keyboard-shortcuts__panel.panel-active {
   display: block;
-  animation: show-keyboard-shortcuts-panel 0.75s forwards;
+  animation: show-keyboard-shortcuts-panel 0.5s forwards;
 }
 @keyframes show-keyboard-shortcuts-panel {
   from {
@@ -775,7 +840,7 @@ form, input, button, label, textarea {
     opacity: 0;
   }
   30% {
-    opacity: 0.5;
+    opacity: 0.8;
   }
   to {
     opacity: 1;

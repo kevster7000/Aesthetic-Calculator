@@ -88,10 +88,10 @@ function setThemes(themeStored) {
 initCalcPanel();
 
 function initCalcPanel() {
-    const outputPrev = document.querySelector(".calculator__panel-output-prev");
+    const panelOutputPrev = document.querySelector(".calculator__panel-output-prev");
 
-    if(outputPrev.scrollWidth > outputPrev.clientWidth) { // check to see if horizontal scrollbar is visible
-        outputPrev.style.setProperty("margin-bottom", "0");
+    if(panelOutputPrev.scrollWidth > panelOutputPrev.clientWidth) { // check to see if horizontal scrollbar is visible
+        panelOutputPrev.style.setProperty("margin-bottom", "0");
     }
 }
 
@@ -153,12 +153,17 @@ initHistory();
 
 function initHistory() {
     const historyButton = document.querySelector("#calculator-history-btn");
-    const historyCloseButton = document.querySelector(`#close-history`);
-
+    const historyCloseButton = document.querySelector("#close-history");
+    const historyPanel = document.querySelector(".calculator__history");
+    const historyPanelEntries = document.querySelector(".calculator__history-entries");
+    const historyPanelHeader = document.querySelector(".calculator__history-header");
     let historyClicked = false;
 
     historyButton.addEventListener("click", () => {
         historyButton.classList.toggle("history-active");
+        historyPanel.classList.toggle("history-panel-active");
+        historyPanelEntries.classList.toggle("entries-active");
+        historyPanelHeader.classList.toggle("history-header-active");
 
         if(historyClicked) {
             historyCloseButton.style.setProperty("animation", "fade-out 0.25s forwards");
@@ -169,6 +174,14 @@ function initHistory() {
             historyClicked = true;
         }
     });
+
+    const entryInputs = document.querySelectorAll(".entry-input");
+    
+    for(let i = 0; i < entryInputs.length; i++) {
+        if(entryInputs[i].scrollWidth > entryInputs[i].clientWidth) { // check to see if horizontal scrollbar is visible
+            entryInputs[i].style.setProperty("margin-bottom", "0");
+        }
+    }
 }
 
 /* also make a history section
