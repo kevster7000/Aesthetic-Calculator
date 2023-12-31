@@ -17,11 +17,10 @@
         @include flex;
         gap: var(--SPACING-SM);
         padding: var(--SPACING-MD);
-        cursor: pointer;
 
         .themes__current {
-            width: 15px;
-            height: 15px;
+            width: 16px;
+            height: 16px;
             background-color: var(--MAIN-COLOR);
             border-radius: 50%;
             border: 1px solid var(--TEXT-COLOR);
@@ -75,12 +74,22 @@
         margin-top: var(--SPACING-MD);
 
         &-option {
-            width: 15px;
-            height: 15px;
+            width: 16px;
+            height: 16px;
             background: white;
             border-radius: 50%;
             border: 1px solid black;
             cursor: pointer;
+            transition: transform 0.15s;
+
+            &:hover, &:focus-visible {
+                transform: scale(1.125);
+            }
+
+            &:active {
+                transform: scale(0.975);
+                transition: transform 0.075s;
+            }
         }
 
         &.panel-active {

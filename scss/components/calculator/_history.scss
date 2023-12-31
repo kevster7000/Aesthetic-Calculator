@@ -1,61 +1,57 @@
 @use "./../../abstracts" as *;
 
-#calculator-history-btn {
-    @include neumorphic-btn(FOOTER);
-    width: 10%;
-    aspect-ratio: 1/1;
-    position: relative;
-    left: 100%;
-    top: 0;
-    transform: translate(-100%);
-    border-radius: 50% 50% 0 50%;
+.calculator__panel-header {
+    @include flex(flex-end, center);
 
-    //TODO - add more styling to this button: gradient & shadow and hover/focus/active effects
+    #calculator-history-btn {
+        @include neumorphic-btn(FOOTER);
+        width: 10%;
+        aspect-ratio: 1/1;
+        border-radius: 50% 50% 0 50%;
 
-    i {
-        display: inline-block;
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-    }
+        i {
+            display: inline-block;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
 
-    #open-history {
-        animation: fade-in 0.5s forwards;
-    }
-
-    #close-history {
-        opacity: 0;
-        // animation: fade-out 0.25s forwards;
-    }
-
-    #close-history-mobile {
-        display: none;
-    }
-
-    &.history-active {
-        // TODO - make button move to bottom - close history mobile
-        border-radius: 50% 0 50% 50%;
-        left: 100%;
-        top: 0;
-        transform: translate(-100%);
-        
         #open-history {
-            animation: fade-out 0.25s forwards;
+            animation: fade-in 0.5s forwards;
         }
 
         #close-history {
-            animation: fade-in 0.5s forwards;
+            opacity: 0;
+            // animation: fade-out 0.25s forwards;
         }
-    }
 
-    @include media-sm { //idk if this is the right size
-        //TODO - change close hisotyr icons
+        // TODO - close history mobile is the default, then media query
+        // TODO - make history come from top - for history panel
+
+        #close-history-mobile {
+            display: none;
+        }
 
         &.history-active {
-            // TODO - make button move to bottom - close history mobile
-            border-radius: 50% 50% 0 50%;
-        }    
+            border-radius: 50% 0 50% 50%;
+            
+            #open-history {
+                animation: fade-out 0.25s forwards;
+            }
+
+            #close-history {
+                animation: fade-in 0.5s forwards;
+            }
+        }
+
+        @include media-sm { //idk if this is the right size
+            //TODO - change close hisotyr icons
+
+            &.history-active {
+                border-radius: 50% 50% 0 50%;
+            }    
+        }
     }
 }
 
@@ -68,6 +64,7 @@
     overflow: hidden;
     display: none;
     animation: hide-history-panel 0.35s 0.05s backwards;
+    color: var(--TEXT-COLOR);
 
     &.history-panel-active {
         @include flex(unset, unset, column);
@@ -120,7 +117,6 @@
         button {
             @include neumorphic-btn(HEADER);
             width: 30%;
-            cursor: pointer;
             margin-right: var(--SPACING-XS);
             padding: var(--SPACING-MD) var(--SPACING-SM);
         }
@@ -159,7 +155,7 @@
         .calculator__history-entry {
             @include flex(center, flex-end, column);
             border-top: 1px solid var(--CALC-SHADOW-COLOR);
-            padding: var(--SPACING-MD);
+            padding: var(--SPACING-SM) 0;
 
             .entry-header {
                 width: 100%;
@@ -167,46 +163,68 @@
 
                 &-time {
                     flex-grow: 1;
+                    padding-left: var(--SPACING-MD);
                 }
 
                 &-copy, &-delete {
                     background-color: transparent;
+                    color: var(--TEXT-COLOR);
                     border: none;
-                    padding: var(--SPACING-SM);
+                    padding: var(--SPACING-MD);
                     cursor: pointer;
                     font-size: 1.1rem;
+                    line-height: 1rem;
+                    border-radius: 10px;
+                    transition: 
+                        transform 0.15s, 
+                        background-color 0.125s;
+
+                    &:hover, &:focus-visible {
+                        background-color: var(--PANEL-LIGHT);
+                    }
+        
+                    &:active {
+                        transform: scale(0.925);
+                        transition: transform 0.075s;
+                        background-color: var(--PANEL-DARK);
+                    }
                 }
             }
-
-            .entry-input {
+            
+            .entry-body {
                 width: 100%;
-                text-align: right;
-                margin-bottom: 3px;
-                overflow-x: auto;
-    
-                &::-webkit-scrollbar {
-                    height: 3px;
-                }
-    
-                &::-webkit-scrollbar-track {
-                    background: var(--TEXT-COLOR-OPPOSITE);
-                    border-radius: 10px;
-                }
-    
-                &::-webkit-scrollbar-thumb {
-                    background: var(--CALC-PANEL-SCROLLBAR);
-                    border-radius: 10px;
-                }
-                
-                &::-webkit-scrollbar-thumb:hover {
-                    background: var(--CALC-PANEL-SCROLLBAR-HOVER);
-                }
-            }
+                padding: 0 var(--SPACING-MD);
 
-            .entry-output {
-                width: 100%;
-                font-size: 1.5rem;
-                text-align: right;
+                .entry-input {
+                    width: 100%;
+                    text-align: right;
+                    margin-bottom: 3px;
+                    overflow-x: auto;
+        
+                    &::-webkit-scrollbar {
+                        height: 1px;
+                    }
+        
+                    &::-webkit-scrollbar-track {
+                        background: var(--TEXT-COLOR-OPPOSITE);
+                        border-radius: 10px;
+                    }
+        
+                    &::-webkit-scrollbar-thumb {
+                        background: var(--CALC-PANEL-SCROLLBAR);
+                        border-radius: 10px;
+                    }
+                    
+                    &::-webkit-scrollbar-thumb:hover {
+                        background: var(--CALC-PANEL-SCROLLBAR-HOVER);
+                    }
+                }
+
+                .entry-output {
+                    width: 100%;
+                    font-size: 1.5rem;
+                    text-align: right;
+                }
             }
         }
     }

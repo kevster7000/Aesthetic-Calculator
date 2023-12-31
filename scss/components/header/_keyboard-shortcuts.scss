@@ -5,11 +5,11 @@
     left: 0;
     top: 50%;
     margin-left: var(--SPACING-LG);
+    color: var(--TEXT-COLOR);
 
     &__btn {
         @include neumorphic-btn(FOOTER);
         padding: var(--SPACING-MD);
-        cursor: pointer;
         position: relative;
         transform: translateY(-50%);
 
@@ -84,7 +84,6 @@
         }
 
         tbody tr {
-            // border-top: 1px solid var(--TEXT-COLOR-SHADOW);
             position: relative;
 
             td:first-child {

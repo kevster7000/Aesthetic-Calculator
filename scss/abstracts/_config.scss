@@ -9,6 +9,23 @@
     white-space: nowrap;
 }
 
+%link {
+    display: inline-block;
+    transition: scale 0.125s;
+
+    &:any-link {
+        color: var(--TEXT-COLOR)
+    }
+
+    &:hover, &:focus-visible {
+        scale: 1.025;
+    }
+
+    &:active {
+        scale: 0.975;
+    }
+}
+
 @mixin flex($justify: center, $align: center, $direction: row, $wrap: nowrap) {
     display: flex;
     justify-content: $justify;
@@ -31,6 +48,7 @@
 }
 
 @mixin button($type) {
+    color: var(--TEXT-COLOR);
     cursor: pointer;
 
     @if $type == CALC {
@@ -66,15 +84,17 @@
             border-radius 0.25s, 
             filter 0.25s,
             text-shadow 0.125s,
-            box-shadow 0.25s;
+            box-shadow 0.25s,
+            scale 0.125s;
     
         &:hover, &:focus-visible {
             filter: brightness(1.05);
         }
     
         &:active {
+            scale: 0.975;
             filter: brightness(0.95);
-            transition: filter 0.075s;
+            transition: filter 0.075s, scale 0.075s;
         }
     }
 }

@@ -1,4 +1,4 @@
-import themes, {colorVariables} from "./themes.js";
+import themes, {colorVariables} from "./_themes.js";
 
 /**********************************************************************************/
 /*                                     Themes                                     */
@@ -95,6 +95,8 @@ function initCalcPanel() {
     }
 }
 
+// TODO both css and js - the main input will have a scroll only if the user is typing; once enter or submit, the main is only limited to its width aka no scrollbar
+
 /**********************************************************************************/
 /*                                Calculator Input                                */
 /**********************************************************************************/
@@ -149,6 +151,8 @@ window.addEventListener("keydown", (event) => {
 /*                                    History                                     */
 /**********************************************************************************/
 
+// TODO add a session storage to the history panel and load it as open/closed based on the session storage
+
 initHistory();
 
 function initHistory() {
@@ -184,7 +188,7 @@ function initHistory() {
     }
 }
 
-/* also make a history section
+/* 
     everytime the user hits enter or clicks =, if no error, store the displayed expression string as the key and the result as the value in session storage
     If the user hits the history button, display all of these key/value pairs in session storage on the side of the calculator.
 */
@@ -193,9 +197,6 @@ function initHistory() {
 
 
 /* 
-CLick on history button - show history panel on the right
-THe history panel should be the same height and width as the calculator itself
-
 CLicking on an entry in the history panel will copy it to the calculator
 each entry should also have an option to delete
 
@@ -209,6 +210,8 @@ Sort of like a dropdown, the history panel will slide down from the top of the c
 /**********************************************************************************/
 /*                             Keyboard Shortcuts                                 */
 /**********************************************************************************/
+
+// TODO add a session storage to the keyboard shortcut panel and it them as open/closed based on the session storage
 
 // TODO - create a click away function.
 // IF themes panel is open and the user clicks outside of it, the panel will close

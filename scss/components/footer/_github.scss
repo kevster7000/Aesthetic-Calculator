@@ -1,6 +1,7 @@
 @use "./../../abstracts" as *;
 
 .github__btn {
+    @extend %link;
     padding: var(--SPACING-SM);
     margin-left: var(--SPACING-XL);
     font-size: clamp(1.25rem, 5vw, 1.5rem);
@@ -26,18 +27,7 @@
         .github__text {
             display: inline;
         }
-    }
-
-    &:any-link {
-        color: var(--TEXT-COLOR)
-    }
-
-    // TODO
-    
-    &:hover {
-        text-shadow: var(--TEXT-SHADOW);
-    }
-    
+    }    
 }
 
 @include media-sm {

@@ -6,6 +6,7 @@
     bottom: 0;
     width: 100%;
     margin: var(--SPACING-LG);
+    color: var(--TEXT-COLOR);
 
     #open-settings {
         @include neumorphic-btn(FOOTER);
@@ -18,17 +19,15 @@
         padding: var(--SPACING-SM);
         font-size: 1.5rem;
         color: var(--TEXT-COLOR);
-        cursor: pointer;
         z-index: 1;
 
         i {
-            transition: rotate 0.75s, transform 0.75s, text-shadow 0.5s;
+            transition: rotate 0.75s, transform 0.75s;
         }
 
         &:is(:hover, :focus-visible) i {
             rotate: 120deg;
-            transform: scale(1.1);
-            text-shadow: 1px -1px 2px var(--TEXT-COLOR-SHADOW);
+            transform: scale(1.125);
         }
 
         &:active i {
@@ -45,29 +44,38 @@
         position: absolute;
         right: 0;
         bottom: 40px;
-        gap: var(--SPACING-XS) var(--SPACING-SM);
         margin-bottom: var(--SPACING-MD);
         display: none;
 
         button, form {
-            @include flex(flex-start);
+            @include flex(flex-start, center);
+            border-radius: 6px;
             gap: var(--SPACING-MD);
             width: 100%;
             background-color: transparent;
             border: 1px solid transparent;
             padding: var(--SPACING-SM);
+            cursor: pointer;
+            transition: background-color 0.125s;
+            color: var(--TEXT-COLOR);
 
-            // TODO
-
-            &:hover {
-                border: 1px solid white;
+            &:hover, &:focus-visible {
+                background-color: var(--PANEL-LIGHT);
+            }
+            
+            &:active {
+                background-color: var(--PANEL-DARK);
             }
         }
 
+        form label {
+            cursor: pointer;
+        }
+
         form input {
+            cursor: pointer;
             order: -1;
             accent-color: var(--TEXT-COLOR);
-            border: 1px solid red;
         }
 
         &.panel-active {
@@ -81,8 +89,8 @@
         bottom: 0;
         translate: -60px;
 
-        a:any-link {
-            color: var(--TEXT-COLOR)
+        a {
+            @extend %link;
         }
     }
 }

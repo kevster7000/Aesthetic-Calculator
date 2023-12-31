@@ -1,3 +1,4 @@
 *.map
 *.txt
 *.svg
+node_modules/

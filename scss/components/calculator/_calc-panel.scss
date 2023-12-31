@@ -4,6 +4,7 @@
     padding: var(--SPACING-MD);
     margin: var(--SPACING-SM);
     margin-bottom: 0;
+    color: var(--TEXT-COLOR);
 
     h3 {
         @extend %offscreen;
