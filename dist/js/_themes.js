@@ -19,8 +19,8 @@ import pinkTheme from "./themes/pink.js";
 
 const themes = {
     white: whiteTheme,
-    gray: ["#c0c0c0"],
-    black: blackTheme, //TODO
+    gray: grayTheme,
+    black: blackTheme,
     brown: ["#ae794a"],
     maroon: ["#b33333"],
     red: ["#f94d4d"],
@@ -36,12 +36,12 @@ const themes = {
     purple: ["#a00bc5"],
     magenta: ["#de1c8c"],
     pink: ["#fc919a"],
-    test: []
+    // test: []
 };
 
 export const colorVariables = [
     "--MAIN-COLOR",
-    "--MAIN-COLOR35",
+    "--MAIN-COLOR-COVER",
 
     "--TEXT-COLOR",
     "--TEXT-COLOR-OPPOSITE",
@@ -50,8 +50,11 @@ export const colorVariables = [
     "--PANEL-DARK",
     "--PANEL-SHADOW-COLOR",
 
-    "--CALC-PANEL-SCROLLBAR",
-    "--CALC-PANEL-SCROLLBAR-HOVER",
+    "--CALC-SCROLLBAR-TRACK",
+    "--CALC-SCROLLBAR",
+    "--CALC-SCROLLBAR-HOVER",
+
+    "--CALC-HISTORY-BORDER-COLOR",
 
     "--CALC-BG-LIGHT",
     "--CALC-BG-DARK",
@@ -85,6 +88,8 @@ export const colorVariables = [
     "--BTN-TEXT-SHADOW-OPERAND-COLOR",
     "--BTN-TEXT-SHADOW-OPERATOR-COLOR",
     "--BTN-TEXT-SHADOW-SPECIAL-COLOR",
+
+    "--BTN-HOVER-BRIGHTNESS",
 ];
 
 export default themes;

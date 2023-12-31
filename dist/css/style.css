@@ -3,14 +3,16 @@
   /* Default theme is white */
   /****************** COLORS ******************/
   --MAIN-COLOR: #f7f7f7;
-  --MAIN-COLOR35: hsla(0, 0%, 97%, 0.35);
+  --MAIN-COLOR-COVER: hsla(0, 0%, 97%, 0.35);
   --TEXT-COLOR: #111;
   --TEXT-COLOR-OPPOSITE: #f7f7f7;
   --PANEL-LIGHT: hsla(0, 0%, 96%, 0.95);
   --PANEL-DARK: hsla(0, 0%, 43%, 0.25);
   --PANEL-SHADOW-COLOR: hsla(0, 0%, 23%, 0.4);
-  --CALC-PANEL-SCROLLBAR: hsla(0, 0%, 29%, 0.65);
-  --CALC-PANEL-SCROLLBAR-HOVER: hsla(0, 0%, 17%, 0.75);
+  --CALC-SCROLLBAR-TRACK: #f7f7f7;
+  --CALC-SCROLLBAR: hsla(0, 0%, 29%, 0.65);
+  --CALC-SCROLLBAR-HOVER: hsla(0, 0%, 17%, 0.75);
+  --CALC-HISTORY-BORDER-COLOR: hsla(0, 0%, 55%, 0.75);
   --CALC-BG-LIGHT: hsla(0, 0%, 91%, 0.45);
   --CALC-BG-DARK: hsla(0, 0%, 73%, 0.35);
   --CALC-BORDER-COLOR: hsla(0, 0%, 96%, 0.95);
@@ -37,16 +39,17 @@
   --BTN-TEXT-SHADOW-OPERAND-COLOR: hsla(0, 0%, 53%, 0.55);
   --BTN-TEXT-SHADOW-OPERATOR-COLOR: hsla(204, 4%, 53%, 0.8);
   --BTN-TEXT-SHADOW-SPECIAL-COLOR: hsla(0, 0%, 72%, 0.5);
+  --BTN-HOVER-BRIGHTNESS: 1.075;
   /****************** SHADOWS ******************/
   --CALC-SHADOW:
       2px 2px 14px var(--CALC-SHADOW-COLOR),
       2px 2px 24px var(--CALC-SHADOW-COLOR);
   --HEADER-SHADOW:
       -2px -2px 8px var(--PANEL-LIGHT),
-      2px 2px 8px var(--PANEL-SHADOW-COLOR);
+      2px 2px 9px var(--PANEL-SHADOW-COLOR);
   --FOOTER-SHADOW:
       -2px -2px 8px var(--PANEL-LIGHT),
-      2px 2px 8px var(--PANEL-SHADOW-COLOR);
+      2px 2px 9px var(--PANEL-SHADOW-COLOR);
   --BTN-SHADOW:
       2px 2px 14px var(--BTN-SHADOW-COLOR);
   --BTN-SHADOW-ACTIVE:
@@ -55,8 +58,6 @@
   --BTN-TEXT-SHADOW-OPERAND: 0 0 3px var(--BTN-TEXT-SHADOW-OPERAND-COLOR);
   --BTN-TEXT-SHADOW-OPERATOR: 0 0 3px var(--BTN-TEXT-SHADOW-OPERATOR-COLOR);
   --BTN-TEXT-SHADOW-SPECIAL: 0 0 3px var(--BTN-TEXT-SHADOW-SPECIAL-COLOR);
-  /****************** BORDERS ******************/
-  --CALC-BORDER: 1px solid var(--CALC-BORDER-COLOR);
   /****************** SPACING (PADDING & MARGIN & GAP) ******************/
   --SPACING-XL: 1.25rem;
   --SPACING-LG: 1rem;
@@ -153,7 +154,7 @@ form, input, button, label, textarea {
   z-index: 1;
 }
 .calculator__btns button:hover, .calculator__btns button:focus-visible {
-  filter: brightness(1.05);
+  filter: brightness(1.075);
   box-shadow: var(--BTN-SHADOW-ACTIVE);
   transform: translate(0, -1%);
 }
@@ -256,15 +257,15 @@ form, input, button, label, textarea {
   height: 3px;
 }
 .calculator__panel-output-prev::-webkit-scrollbar-track {
-  background: var(--TEXT-COLOR-OPPOSITE);
+  background: var(--CALC-SCROLLBAR-TRACK);
   border-radius: 10px;
 }
 .calculator__panel-output-prev::-webkit-scrollbar-thumb {
-  background: var(--CALC-PANEL-SCROLLBAR);
+  background: var(--CALC-SCROLLBAR);
   border-radius: 10px;
 }
 .calculator__panel-output-prev::-webkit-scrollbar-thumb:hover {
-  background: var(--CALC-PANEL-SCROLLBAR-HOVER);
+  background: var(--CALC-SCROLLBAR-HOVER);
 }
 
 .calculator__panel-header {
@@ -281,7 +282,7 @@ form, input, button, label, textarea {
   background-color: var(--CALC-BG-LIGHT);
   background-image: linear-gradient(135deg, var(--CALC-BG-DARK), var(--CALC-BG-LIGHT), var(--CALC-BG-LIGHT), var(--CALC-BG-DARK));
   border-radius: 32px;
-  border: var(--CALC-BORDER);
+  border: 1px solid var(--CALC-BORDER-COLOR);
   -webkit-backdrop-filter: blur(2px);
           backdrop-filter: blur(2px);
   box-shadow: var(--FOOTER-SHADOW);
@@ -293,7 +294,7 @@ form, input, button, label, textarea {
   border-radius: 50% 50% 0 50%;
 }
 .calculator__panel-header #calculator-history-btn:hover, .calculator__panel-header #calculator-history-btn:focus-visible {
-  filter: brightness(1.05);
+  filter: brightness(var(--BTN-HOVER-BRIGHTNESS));
 }
 .calculator__panel-header #calculator-history-btn:active {
   scale: 0.975;
@@ -335,7 +336,7 @@ form, input, button, label, textarea {
   background-color: var(--CALC-BG-LIGHT);
   background-image: linear-gradient(135deg, var(--CALC-BG-DARK), var(--CALC-BG-LIGHT), var(--CALC-BG-LIGHT), var(--CALC-BG-DARK));
   border-radius: 32px;
-  border: var(--CALC-BORDER);
+  border: 1px solid var(--CALC-BORDER-COLOR);
   -webkit-backdrop-filter: blur(2px);
           backdrop-filter: blur(2px);
   box-shadow: var(--CALC-SHADOW);
@@ -414,7 +415,7 @@ form, input, button, label, textarea {
   background-color: var(--CALC-BG-LIGHT);
   background-image: linear-gradient(135deg, var(--CALC-BG-DARK), var(--CALC-BG-LIGHT), var(--CALC-BG-LIGHT), var(--CALC-BG-DARK));
   border-radius: 32px;
-  border: var(--CALC-BORDER);
+  border: 1px solid var(--CALC-BORDER-COLOR);
   -webkit-backdrop-filter: blur(2px);
           backdrop-filter: blur(2px);
   box-shadow: var(--HEADER-SHADOW);
@@ -426,7 +427,7 @@ form, input, button, label, textarea {
   padding: var(--SPACING-MD) var(--SPACING-SM);
 }
 .calculator__history-header button:hover, .calculator__history-header button:focus-visible {
-  filter: brightness(1.05);
+  filter: brightness(var(--BTN-HOVER-BRIGHTNESS));
 }
 .calculator__history-header button:active {
   scale: 0.975;
@@ -449,15 +450,15 @@ form, input, button, label, textarea {
   width: 3px;
 }
 .calculator__history-entries::-webkit-scrollbar-track {
-  background: var(--TEXT-COLOR-OPPOSITE);
+  background: var(--CALC-SCROLLBAR-TRACK);
   border-radius: 10px;
 }
 .calculator__history-entries::-webkit-scrollbar-thumb {
-  background: var(--CALC-PANEL-SCROLLBAR);
+  background: var(--CALC-SCROLLBAR);
   border-radius: 10px;
 }
 .calculator__history-entries::-webkit-scrollbar-thumb:hover {
-  background: var(--CALC-PANEL-SCROLLBAR-HOVER);
+  background: var(--CALC-SCROLLBAR-HOVER);
 }
 .calculator__history-entries .calculator__history-entry {
   display: -ms-flexbox;
@@ -468,7 +469,7 @@ form, input, button, label, textarea {
       align-items: flex-end;
   -ms-flex-flow: column nowrap;
       flex-flow: column nowrap;
-  border-top: 1px solid var(--CALC-SHADOW-COLOR);
+  border-top: 1px solid var(--CALC-HISTORY-BORDER-COLOR);
   padding: var(--SPACING-SM) 0;
 }
 .calculator__history-entries .calculator__history-entry .entry-header {
@@ -520,15 +521,15 @@ form, input, button, label, textarea {
   height: 1px;
 }
 .calculator__history-entries .calculator__history-entry .entry-body .entry-input::-webkit-scrollbar-track {
-  background: var(--TEXT-COLOR-OPPOSITE);
+  background: var(--CALC-SCROLLBAR-TRACK);
   border-radius: 10px;
 }
 .calculator__history-entries .calculator__history-entry .entry-body .entry-input::-webkit-scrollbar-thumb {
-  background: var(--CALC-PANEL-SCROLLBAR);
+  background: var(--CALC-SCROLLBAR);
   border-radius: 10px;
 }
 .calculator__history-entries .calculator__history-entry .entry-body .entry-input::-webkit-scrollbar-thumb:hover {
-  background: var(--CALC-PANEL-SCROLLBAR-HOVER);
+  background: var(--CALC-SCROLLBAR-HOVER);
 }
 .calculator__history-entries .calculator__history-entry .entry-body .entry-output {
   width: 100%;
@@ -579,7 +580,7 @@ form, input, button, label, textarea {
   background-color: var(--CALC-BG-LIGHT);
   background-image: linear-gradient(135deg, var(--CALC-BG-DARK), var(--CALC-BG-LIGHT), var(--CALC-BG-LIGHT), var(--CALC-BG-DARK));
   border-radius: 32px;
-  border: var(--CALC-BORDER);
+  border: 1px solid var(--CALC-BORDER-COLOR);
   -webkit-backdrop-filter: blur(2px);
           backdrop-filter: blur(2px);
   box-shadow: var(--FOOTER-SHADOW);
@@ -598,7 +599,7 @@ form, input, button, label, textarea {
   z-index: 1;
 }
 .settings #open-settings:hover, .settings #open-settings:focus-visible {
-  filter: brightness(1.05);
+  filter: brightness(var(--BTN-HOVER-BRIGHTNESS));
 }
 .settings #open-settings:active {
   scale: 0.975;
@@ -621,7 +622,7 @@ form, input, button, label, textarea {
   background-color: var(--CALC-BG-LIGHT);
   background-image: linear-gradient(135deg, var(--CALC-BG-DARK), var(--CALC-BG-LIGHT), var(--CALC-BG-LIGHT), var(--CALC-BG-DARK));
   border-radius: 32px;
-  border: var(--CALC-BORDER);
+  border: 1px solid var(--CALC-BORDER-COLOR);
   -webkit-backdrop-filter: blur(2px);
           backdrop-filter: blur(2px);
   box-shadow: var(--FOOTER-SHADOW);
@@ -712,7 +713,7 @@ form, input, button, label, textarea {
   background-color: var(--CALC-BG-LIGHT);
   background-image: linear-gradient(135deg, var(--CALC-BG-DARK), var(--CALC-BG-LIGHT), var(--CALC-BG-LIGHT), var(--CALC-BG-DARK));
   border-radius: 32px;
-  border: var(--CALC-BORDER);
+  border: 1px solid var(--CALC-BORDER-COLOR);
   -webkit-backdrop-filter: blur(2px);
           backdrop-filter: blur(2px);
   box-shadow: var(--HEADER-SHADOW);
@@ -731,7 +732,7 @@ form, input, button, label, textarea {
   padding: var(--SPACING-MD);
 }
 .themes__btn:hover, .themes__btn:focus-visible {
-  filter: brightness(1.05);
+  filter: brightness(var(--BTN-HOVER-BRIGHTNESS));
 }
 .themes__btn:active {
   scale: 0.975;
@@ -779,7 +780,7 @@ form, input, button, label, textarea {
   background-color: var(--CALC-BG-LIGHT);
   background-image: linear-gradient(135deg, var(--CALC-BG-DARK), var(--CALC-BG-LIGHT), var(--CALC-BG-LIGHT), var(--CALC-BG-DARK));
   border-radius: 32px;
-  border: var(--CALC-BORDER);
+  border: 1px solid var(--CALC-BORDER-COLOR);
   -webkit-backdrop-filter: blur(2px);
           backdrop-filter: blur(2px);
   box-shadow: var(--HEADER-SHADOW);
@@ -829,7 +830,7 @@ form, input, button, label, textarea {
   background-color: var(--CALC-BG-LIGHT);
   background-image: linear-gradient(135deg, var(--CALC-BG-DARK), var(--CALC-BG-LIGHT), var(--CALC-BG-LIGHT), var(--CALC-BG-DARK));
   border-radius: 32px;
-  border: var(--CALC-BORDER);
+  border: 1px solid var(--CALC-BORDER-COLOR);
   -webkit-backdrop-filter: blur(2px);
           backdrop-filter: blur(2px);
   box-shadow: var(--FOOTER-SHADOW);
@@ -841,7 +842,7 @@ form, input, button, label, textarea {
   transform: translateY(-50%);
 }
 .keyboard-shortcuts__btn:hover, .keyboard-shortcuts__btn:focus-visible {
-  filter: brightness(1.05);
+  filter: brightness(var(--BTN-HOVER-BRIGHTNESS));
 }
 .keyboard-shortcuts__btn:active {
   scale: 0.975;
@@ -869,7 +870,7 @@ form, input, button, label, textarea {
   background-color: var(--CALC-BG-LIGHT);
   background-image: linear-gradient(135deg, var(--CALC-BG-DARK), var(--CALC-BG-LIGHT), var(--CALC-BG-LIGHT), var(--CALC-BG-DARK));
   border-radius: 32px;
-  border: var(--CALC-BORDER);
+  border: 1px solid var(--CALC-BORDER-COLOR);
   -webkit-backdrop-filter: blur(2px);
           backdrop-filter: blur(2px);
   box-shadow: var(--FOOTER-SHADOW);
@@ -959,7 +960,7 @@ header {
   -ms-flex-flow: row nowrap;
       flex-flow: row nowrap;
   padding: var(--SPACING-MD);
-  background-color: var(--MAIN-COLOR35);
+  background-color: var(--MAIN-COLOR-COVER);
   position: relative;
 }
 header h1 {
@@ -996,7 +997,7 @@ footer {
       flex-flow: column nowrap;
   background-position: center;
   background-size: cover;
-  background-image: url("https://images.unsplash.com/photo-1513569771920-c9e1d31714af?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D");
+  background-image: url("https://images.unsplash.com/photo-1623212209063-a1295bdb54fc?q=80&w=1999&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D");
 }
 
 .calculator__container {
@@ -1009,13 +1010,13 @@ footer {
   -ms-flex-flow: row nowrap;
       flex-flow: row nowrap;
   height: 100%;
-  background-color: var(--MAIN-COLOR35);
+  background-color: var(--MAIN-COLOR-COVER);
 }
 .calculator__container .calculator {
   background-color: var(--CALC-BG-LIGHT);
   background-image: linear-gradient(135deg, var(--CALC-BG-DARK), var(--CALC-BG-LIGHT), var(--CALC-BG-LIGHT), var(--CALC-BG-DARK));
   border-radius: 32px;
-  border: var(--CALC-BORDER);
+  border: 1px solid var(--CALC-BORDER-COLOR);
   -webkit-backdrop-filter: blur(2px);
           backdrop-filter: blur(2px);
   box-shadow: var(--CALC-SHADOW);
@@ -1032,6 +1033,10 @@ footer {
   padding: var(--SPACING-MD);
   position: relative;
   z-index: 1;
+}
+
+.test {
+  color: #999999;
 }
 
 body {

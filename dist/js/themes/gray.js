@@ -1,49 +1,56 @@
 const grayTheme = [
-    "#f7f7f7", //main color
-    "hsla(0, 0%, 97%, 0.35)", //main color 35
+    "#999999", //main color
+    "hsla(0, 0%, 60%, .35)", //main color cover
 
-    "#111", //text color
-    "#f7f7f7", //text color opposite
+    //todo
 
-    "hsla(0, 0%, 96%, 0.95)", //panel light
-    "hsla(0, 0%, 43%, 0.25)", //panel dark
-    "hsla(0, 0%, 23%, 0.4)", //panel shadow
+    "#e9e7e1", //text color
+    "#e9e7e1", //text color opposite
 
-    "hsla(0, 0%, 29%, 0.65)", //calc scrollbar
-    "hsla(0, 0%, 17%, 0.75)", //calc scrollbar hover
+    "hsla(0, 0%, 32%, 0.9)", //panel light
+    "hsla(0, 0%, 27%, 0.75)", //panel dark
+    "hsla(0, 0%, 0%, 1)", //panel shadow
 
-    "hsla(0, 0%, 91%, 0.45)", //calc bg light
-    "hsla(0, 0%, 73%, 0.35)", //calc bg dark
+    "hsla(0, 0%, 35%, 0.85)", //calc scrollbar track 
+    "hsla(0, 0%, 72%, 0.9)", //calc scrollbar
+    "hsla(0, 0%, 91%, 0.9)", //calc scrollbar hover
 
-    "hsla(0, 0%, 96%, 0.95)", //calc border
-    "hsla(0, 0%, 57%, 0.75)", //calc shadow
+    "hsla(0, 0%, 28%, 0.95)", //calc history border color
 
-    "hsl(0, 0%, 97%)", //btn bg operand light
-    "hsla(0, 0%, 97%, 0.8)", //btn bg operand light 80
-    "hsla(0, 0%, 97%, 0.6)", //btn bg operand light 60
-    "hsl(0, 0%, 85%)", //btn bg operand dark
-    "hsla(0, 0%, 85%, 0.8)", //btn bg operand dark 80
-    "hsla(0, 0%, 85%, 0.6)", //btn bg operand dark 60
+    "hsla(230, 3%, 11%, 0.4)", //calc bg light
+    "hsla(227, 5%, 21%, 0.4)", //calc bg dark
 
-    "hsl(196, 45%, 93%)", //btn bg operator light
-    "hsla(196, 45%, 93%, 0.8)", //btn bg operator light 80
-    "hsla(196, 45%, 93%, 0.6)", //btn bg operator light 60
-    "hsl(204, 18%, 75%)", //btn bg operator dark
-    "hsla(204, 18%, 75%, 0.8)", //btn bg operator dark 80
-    "hsla(204, 18%, 75%, 0.6)", //btn bg operator dark 60
+    "hsla(230, 2%, 27%, 0.95)", //calc border
+    "hsla(0, 0%, 5%, 0.75)", //calc shadow 
 
-    "hsl(195, 2%, 67%)", //btn bg special light
-    "hsla(195, 2%, 67%, 0.8)", //btn bg special light 80
-    "hsla(195, 2%, 67%, 0.6)", //btn bg special light 60
-    "hsl(192, 3%, 44%)", //btn bg special dark
-    "hsla(192, 3%, 44%, 0.8)", //btn bg special dark 80
-    "hsla(192, 3%, 44%, 0.6)", //btn bg special dark 60
+    "hsl(222, 4%, 34%)", //btn bg operand light
+    "hsla(222, 4%, 34%, 0.8)", //btn bg operand light 80
+    "hsla(222, 4%, 34%, 0.6)", //btn bg operand light 60
+    "hsl(225, 2%, 19%)", //btn bg operand dark
+    "hsla(225, 2%, 19%, 0.8)", //btn bg operand dark 80
+    "hsla(225, 2%, 19%, 0.6)", //btn bg operand dark 60
 
-    "hsla(0, 0%, 23%, 0.35)", //btn shadow
+    "hsl(35, 76%, 57%)", //btn bg operator light
+    "hsla(35, 76%, 57%, 0.8)", //btn bg operator light 80
+    "hsla(35, 76%, 57%, 0.6)", //btn bg operator light 60
+    "hsl(27, 69%, 44%)", //btn bg operator dark
+    "hsla(27, 69%, 44%, 0.8)", //btn bg operator dark 80
+    "hsla(27, 69%, 44%, 0.6)", //btn bg operator dark 60
 
-    "hsla(0, 0%, 53%, 0.55)", //btn text shadow operand
-    "hsla(204, 0%, 53%, 0.8)", //btn text shadow operator
-    "hsla(0, 0%, 72%, 0.5)", //btn text shadow special
+    "hsl(205, 12%, 67%)", //btn bg special light
+    "hsla(205, 12%, 67%, 0.8)", //btn bg special light 80
+    "hsla(205, 12%, 67%, 0.6)", //btn bg special light 60
+    "hsl(209, 7%, 36%)", //btn bg special dark
+    "hsla(209, 7%, 36%, 0.8)", //btn bg special dark 80
+    "hsla(209, 7%, 36%, 0.6)", //btn bg special dark 60
+
+    "hsla(0, 0%, 0%, 0.75)", //btn shadow
+
+    "hsla(0, 0%, 79%, 0.65)", //btn text shadow operand
+    "hsla(54, 90%, 75%, 0.8)", //btn text shadow operator
+    "hsla(0, 0%, 73%, 0.5)", //btn text shadow special
+
+    "1.325", //btn hover brightness
 ];
 
 export default grayTheme;

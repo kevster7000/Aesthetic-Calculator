@@ -42,7 +42,7 @@
         var(--CALC-BG-LIGHT), 
         var(--CALC-BG-DARK));
     border-radius: 32px;
-    border: var(--CALC-BORDER);
+    border: 1px solid var(--CALC-BORDER-COLOR);
     backdrop-filter: blur(2px);
     box-shadow: var(--#{$type}-SHADOW);
 }
@@ -64,7 +64,7 @@
         }
         
         &:hover, &:focus-visible {
-            filter: brightness(1.05);
+            filter: brightness(1.075);
             box-shadow: var(--BTN-SHADOW-ACTIVE);
             transform: translate(0, -1%);
         }
@@ -88,7 +88,7 @@
             scale 0.125s;
     
         &:hover, &:focus-visible {
-            filter: brightness(1.05);
+            filter: brightness(var(--BTN-HOVER-BRIGHTNESS));
         }
     
         &:active {

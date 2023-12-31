@@ -3,7 +3,7 @@
 header {
     @include flex(center);
     padding: var(--SPACING-MD);
-    background-color: var(--MAIN-COLOR35);
+    background-color: var(--MAIN-COLOR-COVER);
     position: relative;
 
     h1 {

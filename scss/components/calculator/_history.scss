@@ -139,22 +139,22 @@
         }
 
         &::-webkit-scrollbar-track {
-            background: var(--TEXT-COLOR-OPPOSITE);
+            background: var(--CALC-SCROLLBAR-TRACK);
             border-radius: 10px;
         }
 
         &::-webkit-scrollbar-thumb {
-            background: var(--CALC-PANEL-SCROLLBAR);
+            background: var(--CALC-SCROLLBAR);
             border-radius: 10px;
         }
         
         &::-webkit-scrollbar-thumb:hover {
-            background: var(--CALC-PANEL-SCROLLBAR-HOVER);
+            background: var(--CALC-SCROLLBAR-HOVER);
         }
 
         .calculator__history-entry {
             @include flex(center, flex-end, column);
-            border-top: 1px solid var(--CALC-SHADOW-COLOR);
+            border-top: 1px solid var(--CALC-HISTORY-BORDER-COLOR);
             padding: var(--SPACING-SM) 0;
 
             .entry-header {
@@ -206,17 +206,17 @@
                     }
         
                     &::-webkit-scrollbar-track {
-                        background: var(--TEXT-COLOR-OPPOSITE);
+                        background: var(--CALC-SCROLLBAR-TRACK);
                         border-radius: 10px;
                     }
         
                     &::-webkit-scrollbar-thumb {
-                        background: var(--CALC-PANEL-SCROLLBAR);
+                        background: var(--CALC-SCROLLBAR);
                         border-radius: 10px;
                     }
                     
                     &::-webkit-scrollbar-thumb:hover {
-                        background: var(--CALC-PANEL-SCROLLBAR-HOVER);
+                        background: var(--CALC-SCROLLBAR-HOVER);
                     }
                 }
 

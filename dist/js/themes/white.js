@@ -1,6 +1,6 @@
 const whiteTheme = [
     "#f7f7f7", //main color
-    "hsla(0, 0%, 97%, 0.35)", //main color 35
+    "hsla(0, 0%, 97%, 0.35)", //main color cover
 
     "#111", //text color
     "#f7f7f7", //text color opposite
@@ -9,8 +9,11 @@ const whiteTheme = [
     "hsla(0, 0%, 43%, 0.25)", //panel dark
     "hsla(0, 0%, 23%, 0.4)", //panel shadow
 
+    "#f7f7f7", //calc scrollbar track
     "hsla(0, 0%, 29%, 0.65)", //calc scrollbar
     "hsla(0, 0%, 17%, 0.75)", //calc scrollbar hover
+
+    "hsla(0, 0%, 55%, 0.75)", //calc history border color
 
     "hsla(0, 0%, 91%, 0.45)", //calc bg light
     "hsla(0, 0%, 73%, 0.35)", //calc bg dark
@@ -44,6 +47,8 @@ const whiteTheme = [
     "hsla(0, 0%, 53%, 0.55)", //btn text shadow operand
     "hsla(204, 0%, 53%, 0.8)", //btn text shadow operator
     "hsla(0, 0%, 72%, 0.5)", //btn text shadow special
+
+    "1.075", //btn hover brightness
 ];
 
 export default whiteTheme;
