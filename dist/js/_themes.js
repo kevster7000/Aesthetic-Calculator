@@ -16,13 +16,14 @@ import indigoTheme from "./themes/indigo.js";
 import purpleTheme from "./themes/purple.js";
 import magentaTheme from "./themes/magenta.js";
 import pinkTheme from "./themes/pink.js";
+import testTheme from "./themes/test.js";
 
 const themes = {
     white: whiteTheme,
     gray: grayTheme,
     black: blackTheme,
-    brown: ["#ae794a"],
-    maroon: ["#b33333"],
+    brown: brownTheme,
+    maroon: maroonTheme,
     red: ["#f94d4d"],
     orange: ["#f48516"],
     amber: ["#ffbf00"],
@@ -36,7 +37,7 @@ const themes = {
     purple: ["#a00bc5"],
     magenta: ["#de1c8c"],
     pink: ["#fc919a"],
-    // test: []
+    // test: testTheme,
 };
 
 export const colorVariables = [

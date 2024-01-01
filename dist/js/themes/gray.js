@@ -28,21 +28,21 @@ const grayTheme = [
     "hsla(225, 5%, 66%, 0.8)", //btn bg operand dark 80
     "hsla(225, 5%, 66%, 0.6)", //btn bg operand dark 60
 
-    "hsl(74, 10%, 84%)", //btn bg operator light
-    "hsla(74, 10%, 84%, 0.8)", //btn bg operator light 80
-    "hsla(74, 10%, 84%, 0.6)", //btn bg operator light 60
-    "hsl(76, 7%, 59%)", //btn bg operator dark
-    "hsla(76, 7%, 59%, 0.8)", //btn bg operator dark 80
-    "hsla(76, 7%, 59%, 0.6)", //btn bg operator dark 60
+    "hsl(80, 19%, 84%)", //btn bg operator light
+    "hsla(80, 19%, 84%, 0.8)", //btn bg operator light 80
+    "hsla(80, 19%, 84%, 0.6)", //btn bg operator light 60
+    "hsl(81, 16%, 59%)", //btn bg operator dark
+    "hsla(81, 16%, 59%, 0.8)", //btn bg operator dark 80
+    "hsla(81, 16%, 59%, 0.6)", //btn bg operator dark 60
 
-    "hsl(34, 4%, 72%)", //btn bg special light
-    "hsla(34, 4%, 72%, 0.8)", //btn bg special light 80
-    "hsla(34, 4%, 72%, 0.6)", //btn bg special light 60
-    "hsl(37, 2%, 36%)", //btn bg special dark
-    "hsla(37, 2%, 36%, 0.8)", //btn bg special dark 80
-    "hsla(37, 2%, 36%, 0.6)", //btn bg special dark 60
+    "hsl(34, 11%, 76%)", //btn bg special light
+    "hsla(34, 11%, 76%, 0.8)", //btn bg special light 80
+    "hsla(34, 11%, 76%, 0.6)", //btn bg special light 60
+    "hsl(37, 6%, 43%)", //btn bg special dark
+    "hsla(37, 6%, 43%, 0.8)", //btn bg special dark 80
+    "hsla(37, 6%, 43%, 0.6)", //btn bg special dark 60
 
-    "hsla(0, 0%, 44%, 0.75)", //btn shadow
+    "hsla(0, 0%, 46%, 0.7)", //btn shadow
 
     "hsla(0, 0%, 44%, 0.65)", //btn text shadow operand
     "hsla(104, 9%, 35%, 0.5)", //btn text shadow operator

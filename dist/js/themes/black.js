@@ -42,7 +42,7 @@ const blackTheme = [
     "hsla(209, 7%, 36%, 0.8)", //btn bg special dark 80
     "hsla(209, 7%, 36%, 0.6)", //btn bg special dark 60
 
-    "hsla(0, 0%, 0%, 0.75)", //btn shadow
+    "hsla(0, 0%, 2%, 0.7)", //btn shadow
 
     "hsla(0, 0%, 79%, 0.65)", //btn text shadow operand
     "hsla(54, 90%, 75%, 0.8)", //btn text shadow operator
