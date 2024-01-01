@@ -388,7 +388,7 @@ form, input, button, label, textarea {
     width: 325px;
   }
   70% {
-    opacity: 0.4;
+    opacity: 0.5;
   }
   to {
     width: 0;
@@ -1036,7 +1036,7 @@ footer {
 }
 
 .test {
-  color: #999999;
+  color: #fbfbf2;
 }
 
 body {
