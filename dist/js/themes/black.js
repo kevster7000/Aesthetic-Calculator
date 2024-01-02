@@ -45,8 +45,8 @@ const blackTheme = [
     "hsla(0, 0%, 2%, 0.7)", //btn shadow
 
     "hsla(0, 0%, 79%, 0.65)", //btn text shadow operand
-    "hsla(54, 90%, 75%, 0.8)", //btn text shadow operator
-    "hsla(0, 0%, 73%, 0.5)", //btn text shadow special
+    "hsla(54, 86%, 75%, 0.45)", //btn text shadow operator
+    "hsla(0, 0%, 73%, 0.65)", //btn text shadow special
 
     "1.325", //btn hover brightness
 ];

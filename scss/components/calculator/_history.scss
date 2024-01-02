@@ -155,7 +155,7 @@
         .calculator__history-entry {
             @include flex(center, flex-end, column);
             border-top: 1px solid var(--CALC-HISTORY-BORDER-COLOR);
-            padding: var(--SPACING-SM) 0;
+            padding: var(--SPACING-MD) 0;
 
             .entry-header {
                 width: 100%;
