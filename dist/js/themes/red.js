@@ -1,6 +1,6 @@
 const redTheme = [
     "#f94d4d", //main color
-    "hsla(0, 93%, 64%, .45)", //main color cover
+    "hsla(0, 93%, 64%, .35)", //main color cover
 
     "#f1ede3", //text color
     "#322f2f", //text color opposite
