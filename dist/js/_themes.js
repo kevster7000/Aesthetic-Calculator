@@ -24,7 +24,7 @@ const themes = {
     black: blackTheme,
     brown: brownTheme,
     maroon: maroonTheme,
-    red: ["#f94d4d"],
+    red: redTheme,
     orange: ["#f48516"],
     amber: ["#ffbf00"],
     yellow: ["#ffff67"],
