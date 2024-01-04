@@ -1036,8 +1036,8 @@ footer {
 }
 
 .test {
-  color: hsl(345, 45%, 43%);
-  color: hsl(350, 94%, 80%);
+  color: #f8ffff;
+  color: hsl(178, 52%, 70%);
 }
 
 body {

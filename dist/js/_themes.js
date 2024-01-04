@@ -25,7 +25,7 @@ const themes = {
     yellow: yellowTheme,
     limeGreen: limeGreenTheme,
         green: greenTheme, //TODO
-        teal: tealTheme, //TODO - buttons are okay
+    teal: tealTheme,
         blue: blueTheme, //TODO
         purple: purpleTheme, //TODO
     pink: pinkTheme,
