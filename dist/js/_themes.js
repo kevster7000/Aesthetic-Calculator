@@ -28,7 +28,7 @@ const themes = {
         teal: tealTheme, //TODO - buttons are okay
         blue: blueTheme, //TODO
         purple: purpleTheme, //TODO
-        pink: pinkTheme, //TODO - buttons are gud - make more pink - hsl(354, ...) -> hsl(350, 100%, 88%);
+    pink: pinkTheme,
     // test: testTheme,
 };
 
