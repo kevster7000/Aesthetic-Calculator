@@ -20,15 +20,15 @@ const themes = {
     black: blackTheme,
     brown: brownTheme,
     maroon: maroonTheme,
-    red: redTheme, //TODO - too bright
-    orange: orangeTheme, //TODO - make more yello
-    yellow: yellowTheme, //TODO - buttons are great!
-    limeGreen: ["#70ea40"],
-    green: ["#24a42b"],
-    teal: tealTheme, //TODO - buttons are okay
-    blue: ["#3279e3"],
-    purple: ["#a513ca"],
-    pink: pinkTheme, //TODO - buttons are gud
+        red: redTheme, //TODO - too bright
+        orange: orangeTheme, //TODO - make more yello
+    yellow: yellowTheme,
+    limeGreen: limeGreenTheme,
+        green: greenTheme, //TODO
+        teal: tealTheme, //TODO - buttons are okay
+        blue: blueTheme, //TODO
+        purple: purpleTheme, //TODO
+        pink: pinkTheme, //TODO - buttons are gud - make more pink - hsl(354, ...) -> hsl(350, 100%, 88%);
     // test: testTheme,
 };
 
