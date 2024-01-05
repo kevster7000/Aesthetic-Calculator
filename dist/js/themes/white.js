@@ -44,9 +44,9 @@ const whiteTheme = [
 
     "hsla(0, 0%, 23%, 0.35)", //btn shadow
 
-    "hsla(0, 0%, 53%, 0.55)", //btn text shadow operand
-    "hsla(204, 0%, 53%, 0.8)", //btn text shadow operator
-    "hsla(0, 0%, 72%, 0.5)", //btn text shadow special
+    "hsla(0, 0%, 57%, 0.5)", //btn text shadow operand
+    "hsla(204, 0%, 57%, 0.75)", //btn text shadow operator
+    "hsla(0, 0%, 73%, 0.5)", //btn text shadow special
 
     "1.075", //btn hover brightness
 ];

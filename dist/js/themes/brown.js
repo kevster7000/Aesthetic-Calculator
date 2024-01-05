@@ -19,7 +19,7 @@ const brownTheme = [
     "hsla(30, 16%, 34%, 0.35)", //calc bg dark
 
     "hsla(32, 25%, 59%, 0.95)", //calc border
-    "hsla(33, 23%, 25%, 0.8)", //calc shadow 
+    "hsla(33, 23%, 23%, 0.8)", //calc shadow 
 
     "hsl(32, 22%, 70%)", //btn bg operand light
     "hsla(32, 22%, 70%, 0.8)", //btn bg operand light 80
@@ -46,7 +46,7 @@ const brownTheme = [
 
     "hsla(42, 87%, 88%, 0.5)", //btn text shadow operand
     "hsla(68, 28%, 27%, 0.75)", //btn text shadow operator
-    "hsla(49, 60%, 90%, 0.45)", //btn text shadow special
+    "hsla(49, 50%, 70%, 0.35)", //btn text shadow special
 
     "1.175", //btn hover brightness
 ];

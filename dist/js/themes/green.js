@@ -1,6 +1,6 @@
 const greenTheme = [
     "#24a42b", //main color
-    "hsla(123, 64%, 39%, 0.25)", //main color cover
+    "hsla(123, 34%, 39%, 0.25)", //main color cover
 
     "#eeefef", //text color
     "#eeefef", //text color opposite
@@ -11,36 +11,36 @@ const greenTheme = [
 
     "hsla(123, 65%, 10%, 0.85)", //calc scrollbar track
     "hsla(123, 55%, 84%, 0.9)", //calc scrollbar
-    "hsla(123, 89%, 18%, 0.9)", //calc scrollbar hover
+    "hsla(123, 89%, 94%, 0.9)", //calc scrollbar hover
 
     "hsla(123, 85%, 96%, 0.95)", //calc history border color
 
-    "hsla(123, 24%, 49%, 0.35)", //calc bg light
-    "hsla(123, 16%, 34%, 0.35)", //calc bg dark
+    "hsla(123, 24%, 45%, 0.35)", //calc bg light
+    "hsla(123, 17%, 31%, 0.35)", //calc bg dark
 
     "hsla(123, 28%, 61%, 0.95)", //calc border
     "hsla(123, 33%, 20%, 0.85)", //calc shadow
 
-    "hsl(116, 11%, 71%)", //btn bg operand light
-    "hsla(116, 11%, 71%, 0.8)", //btn bg operand light 80
-    "hsla(116, 11%, 71%, 0.6)", //btn bg operand light 60
-    "hsl(117, 15%, 50%)", //btn bg operand dark
-    "hsla(117, 15%, 50%, 0.8)", //btn bg operand dark 80
-    "hsla(117, 15%, 50%, 0.6)", //btn bg operand dark 60
+    "hsl(126, 17%, 72%)", //btn bg operand light
+    "hsla(126, 17%, 72%, 0.8)", //btn bg operand light 80
+    "hsla(126, 17%, 72%, 0.6)", //btn bg operand light 60
+    "hsl(117, 18%, 51%)", //btn bg operand dark
+    "hsla(117, 18%, 51%, 0.8)", //btn bg operand dark 80
+    "hsla(117, 18%, 51%, 0.6)", //btn bg operand dark 60
 
-    "hsl(54, 12%, 73%)", //btn bg operator light
-    "hsla(54, 12%, 73%, 0.8)", //btn bg operator light 80
-    "hsla(54, 12%, 73%, 0.6)", //btn bg operator light 60
-    "hsl(54, 14%, 50%)", //btn bg operator dark
-    "hsla(54, 14%, 50%, 0.8)", //btn bg operator dark 80
-    "hsla(54, 14%, 50%, 0.6)", //btn bg operator dark 60
+    "hsl(54, 14%, 68%)", //btn bg operator light
+    "hsla(54, 14%, 68%, 0.8)", //btn bg operator light 80
+    "hsla(54, 14%, 68%, 0.6)", //btn bg operator light 60
+    "hsl(46, 16%, 48%)", //btn bg operator dark
+    "hsla(46, 16%, 48%, 0.8)", //btn bg operator dark 80
+    "hsla(46, 16%, 48%, 0.6)", //btn bg operator dark 60
 
-    "hsl(187, 11%, 70%)", //btn bg special light
-    "hsla(187, 11%, 70%)", //btn bg special light 80
-    "hsla(187, 11%, 70%, 0.8)", //btn bg special light 60
-    "hsl(187, 12%, 48%)", //btn bg special dark
-    "hsla(187, 12%, 48%)", //btn bg special dark 80
-    "hsla(187, 12%, 48%, 0.8)", //btn bg special dark 60
+    "hsl(184, 11%, 69%)", //btn bg special light
+    "hsla(184, 11%, 69%)", //btn bg special light 80
+    "hsla(184, 11%, 69%, 0.8)", //btn bg special light 60
+    "hsl(197, 12%, 50%)", //btn bg special dark
+    "hsla(197, 12%, 50%)", //btn bg special dark 80
+    "hsla(197, 12%, 50%, 0.8)", //btn bg special dark 60
 
     "hsla(123, 11%, 20%, 0.55)", //btn shadow
 

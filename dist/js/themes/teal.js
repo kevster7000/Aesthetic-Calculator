@@ -1,6 +1,6 @@
 const tealTheme = [
     "#8bdad8", //main color
-    "hsla(178, 52%, 70%, .35)", //main color cover
+    "hsla(178, 42%, 70%, .35)", //main color cover
 
     "#111", //text color
     "#faffff", //text color opposite
@@ -15,7 +15,7 @@ const tealTheme = [
 
     "hsla(178, 95%, 97%, 0.95)", //calc history border color
 
-    "hsla(178, 37%, 80%, 0.35)", //calc bg light
+    "hsla(178, 36%, 80%, 0.35)", //calc bg light
     "hsla(178, 24%, 64%, 0.35)", //calc bg dark
 
     "hsla(178, 92%, 94%, 0.95)", //calc border

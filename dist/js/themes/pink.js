@@ -1,6 +1,6 @@
 const pinkTheme = [
     "#fc9cac", //main color
-    "hsla(350, 95%, 80%, .45)", //main color cover
+    "hsla(350, 91%, 90%, .45)", //main color cover
 
     "#111", //text color
     "#f1ede3", //text color opposite
@@ -15,10 +15,10 @@ const pinkTheme = [
 
     "hsla(50, 95%, 97%, 0.95)", //calc history border color
 
-    "hsla(350, 78%, 81%, 0.35)", //calc bg light
-    "hsla(350, 64%, 65%, 0.35)", //calc bg dark
+    "hsla(350, 69%, 81%, 0.35)", //calc bg light
+    "hsla(350, 65%, 70%, 0.35)", //calc bg dark
 
-    "hsla(350, 92%, 89%, 0.95)", //calc border
+    "hsla(350, 92%, 95%, 0.95)", //calc border
     "hsla(350, 33%, 45%, 0.85)", //calc shadow
 
     "hsl(350, 40%, 89%)", //btn bg operand light
@@ -42,7 +42,7 @@ const pinkTheme = [
     "hsla(345, 8%, 44%, 0.8)", //btn bg special dark 80
     "hsla(345, 8%, 44%, 0.6)", //btn bg special dark 60
 
-    "hsla(345, 45%, 42%, 0.6)", //btn shadow
+    "hsla(345, 40%, 50%, 0.45)", //btn shadow
 
     "hsla(345, 48%, 37%, 0.35)", //btn text shadow operand
     "hsla(54, 47%, 44%, 0.6)", //btn text shadow operator

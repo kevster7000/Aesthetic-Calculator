@@ -1,6 +1,6 @@
 const limeGreenTheme = [
     "#70ea40", //main color
-    "hsla(103, 80%, 58%, .35)", //main color cover
+    "hsla(103, 40%, 58%, .35)", //main color cover
 
     "#111", //text color
     "#ffffeb", //text color opposite
@@ -44,9 +44,9 @@ const limeGreenTheme = [
 
     "hsla(80, 34%, 32%, 0.625)", //btn shadow
 
-    "hsla(103, 19%, 34%, 0.45)", //btn text shadow operand
-    "hsla(194, 21%, 50%, 0.6)", //btn text shadow operator
-    "hsla(78, 65%, 81%, 0.35)", //btn text shadow special
+    "hsla(103, 19%, 40%, 0.45)", //btn text shadow operand
+    "hsla(60, 21%, 44%, 0.5)", //btn text shadow operator
+    "hsla(78, 42%, 64%, 0.35)", //btn text shadow special
 
     "1.175", //btn hover brightness
 ];

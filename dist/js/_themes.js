@@ -24,10 +24,10 @@ const themes = {
         orange: orangeTheme, //TODO - make more yello
     yellow: yellowTheme,
     limeGreen: limeGreenTheme,
-        green: greenTheme, //TODO
+    green: greenTheme,
     teal: tealTheme,
-        blue: blueTheme, //TODO
-        purple: purpleTheme, //TODO
+    blue: blueTheme,
+    purple: purpleTheme,
     pink: pinkTheme,
     // test: testTheme,
 };

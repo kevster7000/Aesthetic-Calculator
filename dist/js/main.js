@@ -39,9 +39,8 @@ function getTheme() {
 
 function setThemes(themeStored) {
     const themesContainer = document.querySelector(".themes__panel");
+    
     Object.keys(themes).forEach((theme) => {
-
-        // themesContainer.innerHTML += `<div id="${theme}" class="themes__panel-option" style="background-color: ${themes[theme][0]}">`;
 
         const newTheme = document.createElement("button");
         newTheme.id = theme;
@@ -224,7 +223,7 @@ function initKeyboardShortcuts() {
     const keyboardShortcutsCloseButton = document.querySelector(`#close-keyboard-shortcuts`);
 
     let keyboardShortcutsClicked = false;
-    let keyboardShortcutsClickedFirstTime = false;
+    let linesDrawn = false;
 
     keyboardShortcutsButton.addEventListener("click", () => {
         keyboardShortcutsPanel.classList.toggle("panel-active");
@@ -239,24 +238,27 @@ function initKeyboardShortcuts() {
             keyboardShortcutsClicked = true;
         }
 
-        if(!keyboardShortcutsClickedFirstTime) {
-            keyboardShortcutsClickedFirstTime = true;
-            
-            const shortcutKeys = document.querySelectorAll(".kbd");
-            const shortcutLines = document.querySelectorAll("td .line");
-
-            for(let i = 0; i < shortcutKeys.length; i++) {
-                const spacing_md = getComputedStyle(document.documentElement).getPropertyValue("--SPACING-MD");
-                let stopLength = 
-                    shortcutKeys[i].offsetLeft + 
-                    shortcutKeys[i].offsetWidth + 
-                    (Number(spacing_md.substring(0, spacing_md.indexOf('r'))) * 16 * 2);
-
-                const newWidth = shortcutLines[i].offsetLeft - stopLength;
-                shortcutLines[i].style.setProperty("width", newWidth + "px");
-            }
+        if(!linesDrawn) {
+            drawKeyboardShortcutLines();
+            linesDrawn = true;
         }
     });
+}
+
+function drawKeyboardShortcutLines() {
+    const shortcutKeys = document.querySelectorAll(".kbd");
+    const shortcutLines = document.querySelectorAll("td .line");
+
+    for(let i = 0; i < shortcutKeys.length; i++) {
+        const spacing_md = getComputedStyle(document.documentElement).getPropertyValue("--SPACING-MD");
+        let stopLength = 
+            shortcutKeys[i].offsetLeft + 
+            shortcutKeys[i].offsetWidth + 
+            (Number(spacing_md.substring(0, spacing_md.indexOf('r'))) * 16 * 2);
+
+        const newWidth = shortcutLines[i].offsetLeft - stopLength;
+        shortcutLines[i].style.setProperty("width", newWidth + "px");
+    }
 }
 
 /**********************************************************************************/

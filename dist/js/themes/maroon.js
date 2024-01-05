@@ -1,6 +1,6 @@
 const maroonTheme = [
     "#b33333", //main color
-    "hsla(0, 56%, 45%, .35)", //main color cover
+    "hsla(0, 49%, 45%, .35)", //main color cover
 
     "#e5e0da", //text color
     "#e9e1e1", //text color opposite
@@ -48,7 +48,7 @@ const maroonTheme = [
     "hsla(34, 28%, 27%, 0.75)", //btn text shadow operator
     "hsla(350, 22%, 78%, 0.45)", //btn text shadow special
 
-    "1.125", //btn hover brightness
+    "1.25", //btn hover brightness
 ];
 
 export default maroonTheme;
