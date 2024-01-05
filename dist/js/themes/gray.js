@@ -2,7 +2,7 @@ const grayTheme = [
     "#999999", //main color
     "hsla(0, 0%, 60%, .35)", //main color cover
 
-    "hsl(0, 1%, 11%)", //text color
+    "#1d1d1d", //text color
     "#fdfdfa", //text color opposite
 
     "hsla(0, 0%, 86%, 0.9)", //panel light

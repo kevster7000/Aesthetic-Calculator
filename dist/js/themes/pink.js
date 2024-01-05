@@ -19,7 +19,7 @@ const pinkTheme = [
     "hsla(350, 64%, 65%, 0.35)", //calc bg dark
 
     "hsla(350, 92%, 89%, 0.95)", //calc border
-    "hsla(350, 63%, 30%, 0.85)", //calc shadow
+    "hsla(350, 33%, 45%, 0.85)", //calc shadow
 
     "hsl(350, 40%, 89%)", //btn bg operand light
     "hsla(350, 40%, 89%, 0.8)", //btn bg operand light 80

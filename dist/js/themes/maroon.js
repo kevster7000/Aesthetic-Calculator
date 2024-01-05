@@ -2,7 +2,7 @@ const maroonTheme = [
     "#b33333", //main color
     "hsla(0, 56%, 45%, .35)", //main color cover
 
-    "#f1ede3", //text color
+    "#e5e0da", //text color
     "#e9e1e1", //text color opposite
 
     "hsla(0, 29%, 46%, 0.9)", //panel light
