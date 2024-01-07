@@ -1,5 +1,8 @@
 {
   "dependencies": {
     "unsplash-js": "^7.0.19"
+  },
+  "scripts": {
+    "build": "npm run build",
   }
 }
