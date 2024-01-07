@@ -44,8 +44,8 @@ const tealTheme = [
 
     "hsla(178, 30%, 42%, 0.65)", //btn shadow
 
-    "hsla(178, 27%, 49%, 0.5)", //btn text shadow operand
-    "hsla(194, 15%, 47%, 0.5)", //btn text shadow operator
+    "hsla(178, 27%, 49%, 0.45)", //btn text shadow operand
+    "hsla(194, 15%, 47%, 0.45)", //btn text shadow operator
     "hsla(185, 35%, 72%, 0.25)", //btn text shadow special
 
     "1.075", //btn hover brightness

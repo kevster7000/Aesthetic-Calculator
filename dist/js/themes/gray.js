@@ -44,8 +44,8 @@ const grayTheme = [
 
     "hsla(0, 0%, 46%, 0.7)", //btn shadow
 
-    "hsla(0, 0%, 44%, 0.65)", //btn text shadow operand
-    "hsla(104, 9%, 35%, 0.5)", //btn text shadow operator
+    "hsla(0, 0%, 44%, 0.5)", //btn text shadow operand
+    "hsla(104, 9%, 37%, 0.45)", //btn text shadow operator
     "hsla(40, 10%, 69%, 0.65)", //btn text shadow special
 
     "1.15", //btn hover brightness

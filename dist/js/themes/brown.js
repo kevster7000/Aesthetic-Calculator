@@ -44,8 +44,8 @@ const brownTheme = [
 
     "hsla(33, 25%, 31%, 0.7)", //btn shadow
 
-    "hsla(42, 87%, 88%, 0.5)", //btn text shadow operand
-    "hsla(68, 28%, 27%, 0.75)", //btn text shadow operator
+    "hsla(42, 82%, 85%, 0.45)", //btn text shadow operand
+    "hsla(68, 42%, 80%, 0.45)", //btn text shadow operator
     "hsla(49, 50%, 70%, 0.35)", //btn text shadow special
 
     "1.175", //btn hover brightness

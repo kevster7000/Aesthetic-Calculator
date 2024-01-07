@@ -12,7 +12,7 @@ import tealTheme from "./themes/teal.js";
 import blueTheme from "./themes/blue.js";
 import purpleTheme from "./themes/purple.js";
 import pinkTheme from "./themes/pink.js";
-import testTheme from "./themes/test.js";
+// import testTheme from "./themes/test.js";
 
 const themes = {
     white: whiteTheme,
@@ -20,8 +20,8 @@ const themes = {
     black: blackTheme,
     brown: brownTheme,
     maroon: maroonTheme,
-        red: redTheme, //TODO - too bright
-        orange: orangeTheme, //TODO - make more yello
+    red: redTheme,
+    orange: orangeTheme,
     yellow: yellowTheme,
     limeGreen: limeGreenTheme,
     green: greenTheme,

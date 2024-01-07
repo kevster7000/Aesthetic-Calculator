@@ -1,4 +1,4 @@
 *.map
 *.txt
-*.svg
+drawing.svg
 node_modules/

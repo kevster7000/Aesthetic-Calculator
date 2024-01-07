@@ -44,8 +44,8 @@ const pinkTheme = [
 
     "hsla(345, 40%, 50%, 0.45)", //btn shadow
 
-    "hsla(345, 48%, 37%, 0.35)", //btn text shadow operand
-    "hsla(54, 47%, 44%, 0.6)", //btn text shadow operator
+    "hsla(345, 48%, 40%, 0.35)", //btn text shadow operand
+    "hsla(54, 47%, 43%, 0.5)", //btn text shadow operator
     "hsla(348, 65%, 81%, 0.35)", //btn text shadow special
 
     "1.135", //btn hover brightness

@@ -44,8 +44,8 @@ const maroonTheme = [
 
     "hsla(0, 32%, 21%, 0.75)", //btn shadow
 
-    "hsla(0, 87%, 81%, 0.5)", //btn text shadow operand
-    "hsla(34, 28%, 27%, 0.75)", //btn text shadow operator
+    "hsla(0, 87%, 80%, 0.5)", //btn text shadow operand
+    "hsla(34, 67%, 84%, 0.5)", //btn text shadow operator
     "hsla(350, 22%, 78%, 0.45)", //btn text shadow special
 
     "1.25", //btn hover brightness

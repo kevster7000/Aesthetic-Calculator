@@ -44,8 +44,8 @@ const limeGreenTheme = [
 
     "hsla(80, 34%, 32%, 0.625)", //btn shadow
 
-    "hsla(103, 19%, 40%, 0.45)", //btn text shadow operand
-    "hsla(60, 21%, 44%, 0.5)", //btn text shadow operator
+    "hsla(103, 19%, 41%, 0.35)", //btn text shadow operand
+    "hsla(60, 21%, 44%, 0.35)", //btn text shadow operator
     "hsla(78, 42%, 64%, 0.35)", //btn text shadow special
 
     "1.175", //btn hover brightness

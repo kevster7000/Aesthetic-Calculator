@@ -44,8 +44,8 @@ const yellowTheme = [
 
     "hsla(60, 44%, 35%, 0.3)", //btn shadow
 
-    "hsla(60, 17%, 41%, 0.5)", //btn text shadow operand
-    "hsla(205, 21%, 40%, 0.45)", //btn text shadow operator
+    "hsla(60, 17%, 41%, 0.35)", //btn text shadow operand
+    "hsla(205, 21%, 40%, 0.35)", //btn text shadow operator
     "hsla(188, 75%, 83%, 0.35)", //btn text shadow special
 
     "1.075", //btn hover brightness
