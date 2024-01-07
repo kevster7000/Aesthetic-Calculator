@@ -25,6 +25,6 @@ jobs:
         run: |
           npm run build
           echo "UNSPLASH_ACCESS_KEY=${{ secrets.UNSPLASH_ACCESS_KEY }}" >> .env
-          npx gh-pages -d dist -a
+          npx gh-pages -d dist -b main -a
         env:
           REACT_APP_UNSPLASH_ACCESS_KEY: ${{ secrets.UNSPLASH_ACCESS_KEY }}
