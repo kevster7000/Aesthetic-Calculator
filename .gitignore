@@ -1,4 +1,5 @@
 *.map
 *.txt
+.env
 drawing.svg
 node_modules/
