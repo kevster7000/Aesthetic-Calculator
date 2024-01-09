@@ -104,6 +104,9 @@ function initCalc() {
         document.getElementsByClassName("btn-special")
     ];
 
+    const errorMessage = document.querySelector(".calculator-error");
+    let fadeError = undefined;
+
     let contFromPrevExpression = false;
 
     initCalcPanel();
@@ -133,7 +136,12 @@ function initCalc() {
                 panelOutputMain.textContent = "\u00A0";
             }
             else {
-                panelOutputMain.textContent = panelOutputMain.textContent.slice(0, panelOutputMain.textContent.length - 1);
+                if(panelOutputMain.textContent[panelOutputMain.textContent.length - 2] === ' ') {
+                    panelOutputMain.textContent = panelOutputMain.textContent.slice(0, panelOutputMain.textContent.length - 2);
+                }
+                else {
+                    panelOutputMain.textContent = panelOutputMain.textContent.slice(0, panelOutputMain.textContent.length - 1);
+                }
             }
         });
 
@@ -145,8 +153,21 @@ function initCalc() {
 
         //equals
         calcButtons[2][2].addEventListener("click", () => {
-            panelOutputPrev.textContent = panelOutputMain.textContent;
-            panelOutputMain.textContent = Calc.handleSubmit(panelOutputMain.textContent);
+            clearTimeout(fadeError);
+            errorMessage.style.setProperty("animation", "unset");
+            void errorMessage.offsetWidth;
+
+            if(Calc.validateExpression(panelOutputMain.textContent)) {
+                panelOutputPrev.textContent = panelOutputMain.textContent;
+                panelOutputMain.textContent = Calc.handleSubmit(panelOutputMain.textContent);
+
+                //add to history
+                //addHistoryEntry(panelOutputPrev.textContent, panelOutputMain.textContent);
+            }
+            else {
+                errorMessage.style.setProperty("animation", "fade-out 2.25s ease-in");
+                fadeError = setTimeout(() => errorMessage.style.setProperty("animation", "unset"), 2250);
+            }
         });
     }
 }
@@ -192,6 +213,11 @@ function initHistory() {
     }
 }
 
+//this function is used in the calculator section :)
+function addHistoryEntry(input, output) {
+    console.log("TODO headass")
+}
+
 /* 
     everytime the user hits enter or clicks =, if no error, store the displayed expression string as the key and the result as the value in session storage
     If the user hits the history button, display all of these key/value pairs in session storage on the side of the calculator.
@@ -216,9 +242,7 @@ Sort of like a dropdown, the history panel will slide down from the top of the c
 /**********************************************************************************/
 
 // TODO add a session storage to the keyboard shortcut panel and it them as open/closed based on the session storage
-
-// TODO - create a click away function.
-// IF themes panel is open and the user clicks outside of it, the panel will close
+// TODO create a new js file for this 2D array of stuff - also search up HTML tabindex
 
 initKeyboardShortcuts();
 
@@ -271,6 +295,9 @@ function drawKeyboardShortcutLines() {
 /**********************************************************************************/
 
 initSettings();
+
+// TODO - create a click away function.
+// IF themes panel is open and the user clicks outside of it, the panel will close
 
 function initSettings() {
     const settingsButton = document.querySelector("#open-settings");

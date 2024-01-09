@@ -10,6 +10,70 @@
         @extend %offscreen;
     }
 
+    &-header {
+        @include flex(space-between, center);
+    
+        .calculator-error {
+            justify-self: flex-start;
+            align-self: flex-start;
+            padding-left: var(--SPACING-MD);
+            opacity: 0;
+            color: var(--TEXT-COLOR);
+            animation: unset;
+        }
+    
+        #calculator-history-btn {
+            @include neumorphic-btn(FOOTER);
+            width: 10%;
+            aspect-ratio: 1/1;
+            border-radius: 50% 50% 0 50%;
+    
+            i {
+                display: inline-block;
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+            }
+    
+            #open-history {
+                animation: fade-in 0.5s forwards;
+            }
+    
+            #close-history {
+                opacity: 0;
+                // animation: fade-out 0.25s forwards;
+            }
+    
+            // TODO - close history mobile is the default, then media query
+            // TODO - make history come from top - for history panel
+    
+            #close-history-mobile {
+                display: none;
+            }
+    
+            &.history-active {
+                border-radius: 50% 0 50% 50%;
+                
+                #open-history {
+                    animation: fade-out 0.25s forwards;
+                }
+    
+                #close-history {
+                    animation: fade-in 0.5s forwards;
+                }
+            }
+    
+            @include media-sm { //idk if this is the right size
+                //TODO - change close hisotyr icons
+    
+                &.history-active {
+                    border-radius: 50% 50% 0 50%;
+                }    
+            }
+        }
+    }
+
     &-output {
         @include flex(center, flex-end, column);
         padding-top: 0.5rem;
