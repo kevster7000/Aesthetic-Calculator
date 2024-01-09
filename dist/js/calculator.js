@@ -157,7 +157,7 @@ function parseToInfix(exp) {
     return exp;
 }
 
-function infixToPostfix(exp) { //Stack :)
+function infixToPostfix(exp) { //Stacks :)
 
     //TODO
 

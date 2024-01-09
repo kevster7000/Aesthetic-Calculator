@@ -235,7 +235,16 @@ function initHistory() {
 
 //this function is used in the calculator section :)
 function addHistoryEntry(input, output) {
-    console.log("TODO headass")
+    console.log("TODO headass");
+    
+    // two things - create a new element and store the time/input/ouput in local storage !!!!!!!important local storage, not session
+    // everytime the page loads, load the calc history too -> TODO - add it to initHistory()
+    // the time is gonna be mm/dd/yyyy hh:mm XM
+    // as for the key, idk yet
+    // storing the data, idk either; maybe just an array of objects
+    
+
+    // anywho, every entry is a new element that has two event listeners - copy and delete - very self explanatory
 }
 
 /* 
