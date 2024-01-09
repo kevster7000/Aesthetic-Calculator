@@ -5,3 +5,4 @@ const api = createApi({
 });
 
 //TODO
+//- The bg image will need a default image (unless we automatically call the API)

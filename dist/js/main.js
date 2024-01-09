@@ -107,15 +107,26 @@ function initCalc() {
     const errorMessage = document.querySelector(".calculator-error");
     let fadeError = undefined;
 
+    // TODO - set true everytime you submit - if the user then hits an operator, save the output, but delete the prev
+    // if the user hits an operand, delete the output and prev
     let contFromPrevExpression = false;
 
-    initCalcPanel();
     initCalcButtons();
 
-    // TODO both css and js - the main input will have a scroll only if the user is typing; once enter or submit, the main is only limited to its width aka no scrollbar
-    function initCalcPanel() {
-        if(panelOutputPrev.scrollWidth > panelOutputPrev.clientWidth) { // check to see if horizontal scrollbar is visible
-            panelOutputPrev.style.setProperty("margin-bottom", "0");
+    // check to see if horizontal scrollbar is visible
+    function checkCalcPanelScroll() {
+        if(panelOutputPrev.scrollWidth > panelOutputPrev.clientWidth) {
+            panelOutputPrev.style.setProperty("margin-bottom", "0.25px");
+        }
+        else {
+            panelOutputPrev.style.setProperty("margin-bottom", "3px");
+        }
+
+        if(panelOutputMain.scrollWidth > panelOutputMain.clientWidth) {
+            panelOutputMain.style.setProperty("margin-bottom", "0.25px");
+        }
+        else {
+            panelOutputMain.style.setProperty("margin-bottom", "3px");
         }
     }
 
@@ -126,6 +137,10 @@ function initCalc() {
             for(let j = 0; j < calcButtons[i].length; j++) {
                 calcButtons[i][j].addEventListener("click", (event) => {
                     panelOutputMain.textContent = Calc.handleInput(event.target.textContent, panelOutputMain.textContent);
+
+                    //check to see if thousands separator is true, then create a new function to add commas at the end in here
+                    
+                    checkCalcPanelScroll();
                 });
             }
         }
@@ -143,12 +158,14 @@ function initCalc() {
                     panelOutputMain.textContent = panelOutputMain.textContent.slice(0, panelOutputMain.textContent.length - 1);
                 }
             }
+            checkCalcPanelScroll();
         });
 
         //clear
         calcButtons[2][1].addEventListener("click", () => {
             panelOutputMain.textContent = "\u00A0";
             panelOutputPrev.textContent = "\u00A0";
+            checkCalcPanelScroll();
         });
 
         //equals
@@ -161,6 +178,8 @@ function initCalc() {
                 panelOutputPrev.textContent = panelOutputMain.textContent;
                 panelOutputMain.textContent = Calc.handleSubmit(panelOutputMain.textContent);
 
+                //check to see if thousands separator is true, then create a new function to add commas at the end in here
+
                 //add to history
                 //addHistoryEntry(panelOutputPrev.textContent, panelOutputMain.textContent);
             }
@@ -168,6 +187,7 @@ function initCalc() {
                 errorMessage.style.setProperty("animation", "fade-out 2.25s ease-in");
                 fadeError = setTimeout(() => errorMessage.style.setProperty("animation", "unset"), 2250);
             }
+            checkCalcPanelScroll();
         });
     }
 }
@@ -238,11 +258,18 @@ Sort of like a dropdown, the history panel will slide down from the top of the c
 */
 
 /**********************************************************************************/
-/*                             Keyboard Shortcuts                                 */
+/*                                Button Navigation                               */
+/**********************************************************************************/
+
+// TODO create a new js file for this 2D array of stuff - also search up HTML tabindex
+// For all buttons, Remove the fact that you can hit enter and it clicks (only spacebar and click to hit a button)
+// instead, enter will submit the current expression at all times
+
+/**********************************************************************************/
+/*                            Keyboard Shortcuts Panel                            */
 /**********************************************************************************/
 
 // TODO add a session storage to the keyboard shortcut panel and it them as open/closed based on the session storage
-// TODO create a new js file for this 2D array of stuff - also search up HTML tabindex
 
 initKeyboardShortcuts();
 
@@ -298,6 +325,9 @@ initSettings();
 
 // TODO - create a click away function.
 // IF themes panel is open and the user clicks outside of it, the panel will close
+
+//TODO - thousands separator - this affects the calculator panel
+//by default, thousands separator is used (stopped by the decimal point)
 
 function initSettings() {
     const settingsButton = document.querySelector("#open-settings");

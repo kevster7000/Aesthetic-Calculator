@@ -1,6 +1,6 @@
 export function handleInput(btn, currExp) {
 
-    //this most likely can be optimized with regex, but there are many nuances from a typical expression that I could not write in the regex, so I just hardcoded this
+    //this most likely can be optimized with regex, but there are many nuances from a typical expression that idk how to write in regex, so I just hardcoded this
     //ik this is very ugly, sry
 
     let newExp = currExp;
@@ -9,22 +9,44 @@ export function handleInput(btn, currExp) {
     const validOperands = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "."]
     const validOperators = ["(", ")", "%", "-", "^", "\u00D7", "\u00F7", "+"];
 
-    const prevCharOperand = validOperands.includes(currExp[currExp.length - 1]);
+    const completeParenthesis = currExp[currExp.length - 1] === ")" && currExp !== "(";
+    const prevCharOperand = validOperands.includes(currExp[currExp.length - 1]) || currExp[currExp.length - 1] === '%' || completeParenthesis;
 
     // multiplication is \u00D7
     // division is \u00F7
     // nbsp is \u00A0
 
     if(validOperands.includes(btn)) { // OPERANDS
-
-        //TODO - decimal - i completely forgot dummy - only one decimal per operand
         
-        if(currExp === "\u00A0") newExp = btn;
+        if(currExp === "\u00A0") {
+            newExp = btn;
+        }
+        else if (btn === '.') {
+            let i = 1;
+            let validDecimal = true;
+            
+            do {
+                if(i >= currExp.length) break;
+                else if(currExp[currExp.length - i] === '.' || currExp[currExp.length - i] === '%' || currExp[currExp.length - i] === ')' || !validOperands.includes(currExp[currExp.length - i])) {
+                    validDecimal = false;
+                    break;
+                }
+                i++;
+            } while (validOperands.includes(currExp[currExp.length - i]));
+
+            if(validDecimal) newExp += btn;
+            else if(validOperators.slice(3).includes(currExp[currExp.length - 1])) newExp += " " + btn;
+        }
         else if(validOperators.slice(3).includes(currExp[currExp.length - 1])) {
-            if(currExp[currExp.length - 1] === '-' && (currExp === "-" || currExp.slice(currExp.length - 2) === "(-" || validOperators.slice(3).includes(currExp[currExp.length - 2]))) newExp += btn;
+            //handle negative
+            if(currExp[currExp.length - 1] === '-' && (currExp === "-" || currExp.slice(currExp.length - 2) === "(-" || validOperators.slice(3).includes(currExp[currExp.length - 2]))) {
+                newExp += btn;
+            }
             else newExp += " " + btn;
         }
-        else if(currExp[currExp.length - 1] !== ')') newExp += btn;
+        else if(currExp[currExp.length - 1] !== ')' && currExp[currExp.length - 1] !== '%') {
+            newExp += btn;
+        }
     }
     else if(validOperators.slice(4).includes(btn)) { // BASIC OPERATORS ^ * / +
 
@@ -35,32 +57,25 @@ export function handleInput(btn, currExp) {
     } 
     else if(btn === '-') { // MORE DETAILED OPERATORS ( ) % -
 
-        if(prevCharOperand || (validOperators.slice(3).includes(currExp[currExp.length - 1]) && !validOperators.slice(3).includes(currExp[currExp.length - 2]))) newExp += " " + btn;
+        if(currExp[currExp.length - 1] === "+") newExp = newExp.slice(0, newExp.length - 1) + btn;
+        else if(prevCharOperand || (validOperators.slice(4).includes(currExp[currExp.length - 1]) && !validOperators.slice(4).includes(currExp[currExp.length - 2]))) {
+            newExp += " " + btn;
+        }
         else if(currExp === "\u00A0") newExp = btn;
         else if(currExp[currExp.length - 1] === '(') newExp += btn;
     }
-    else if(btn === '(') {
-
-        //this was simple :O
-        newExp += btn;
+    else if(btn === '(') { 
+        if(validOperators.slice(3).includes(currExp[currExp.length - 1])) newExp += " " + btn;
+        else newExp += btn;
     }
     else if(btn === ")") {
-        const checkParathesisCount = currExp.split("(").length > currExp.split(")").length;
-        const completeParanthesis = prevCharOperand || currExp[currExp.length - 1] === "%";
-
-        //TODO
-        
-        newExp += btn;
-
-    }
-    else if(btn === "%") {
-
-        //TODO
-
-        if(prevCharOperand || completeParanthesis) {
+        if( (currExp.split("(").length > currExp.split(")").length) && 
+            (validOperands.includes(currExp[currExp.length - 1]) || currExp[currExp.length - 1] === '%' || currExp[currExp.length - 1] === ')')) {
             newExp += btn;
         }
-
+    }
+    else if(btn === "%") {
+        if(prevCharOperand && currExp[currExp.length - 1] !== "%") newExp += btn;
     }
     else {
         console.error(`No such input: ${btn}`);
@@ -71,7 +86,7 @@ export function handleInput(btn, currExp) {
 
 export function handleKeyboardInput() {
 
-    //maneuvering between buttons is done in keyboard.js, not here ty
+    //maneuvering between buttons is done in navigation.js, not here ty
 
     const validOperands = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "."]
     const validOperators = ["(", ")", "%", "-", "^", "*", "/", "+"];
@@ -100,7 +115,7 @@ export function validateExpression(exp) {
 
     //TODO - regex?
 
-    return false;
+    return true;
 }
 
 /* FOR REGEX, use a while loop until end of input string
@@ -111,12 +126,33 @@ Example of regex for now: [0-9]*.[0-9]+[ ]*[+ or - or ...]
 */
 
 export function handleSubmit(exp) {
-    return postfixToOutput(infixToPostfix(parseToInfix(exp)));
+    let output = postfixToOutput(infixToPostfix(parseToInfix(exp)));
+
+    /*
+    - The output should have a max number of digits
+    - Limit the width to a certain amount of characters
+    - use e notation when numbers get too big and when numbers get too small
+    - At a certain point, say the number is too large(infinity) or (when the number is too small) just 0
+
+    //num.toExponential(decimal points)
+    */
+
+    return output;
 }
 
 function parseToInfix(exp) {
 
-    //TODO - make all % into / 100 - all x(x) into x * (x) - all x. into x - all .x into 0.x
+    //TODO - make all x(x) into x * (x) - all x. into x - all .x into 0.x
+    /* 
+        as for %, this is a bit tricky
+        if next to operand x%, then directly change x into x*.01
+        if next to ), such as (x)% add: / 100)
+            the open parenthis - count the number of ) and match with (, then add another ( right outside the matching (
+
+        ex: (1+2)% => ((1+2)/100)
+        ex: (1+(2+3))% => ((1+(2+3))/100)
+    */
+
 
     return exp;
 }

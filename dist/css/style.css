@@ -72,7 +72,7 @@
   left: -10000px;
 }
 
-header h1 {
+header h1, .calculator__panel-output-main, .calculator__panel-output-prev {
   white-space: nowrap;
 }
 
@@ -307,7 +307,6 @@ form, input, button, label, textarea {
   padding-top: 0.5rem;
 }
 .calculator__panel-output-main {
-  padding: var(--SPACING-SM);
   font-size: 2.5rem;
   text-align: right;
   -ms-flex-positive: 1;
@@ -316,6 +315,24 @@ form, input, button, label, textarea {
   background-color: transparent;
   border: none;
   outline-color: transparent;
+  padding: var(--SPACING-SM);
+  padding-bottom: var(--SPACING-XS);
+  margin-bottom: 3px;
+  overflow-x: auto;
+}
+.calculator__panel-output-main::-webkit-scrollbar {
+  height: 3px;
+}
+.calculator__panel-output-main::-webkit-scrollbar-track {
+  background: var(--CALC-SCROLLBAR-TRACK);
+  border-radius: 10px;
+}
+.calculator__panel-output-main::-webkit-scrollbar-thumb {
+  background: var(--CALC-SCROLLBAR);
+  border-radius: 10px;
+}
+.calculator__panel-output-main::-webkit-scrollbar-thumb:hover {
+  background: var(--CALC-SCROLLBAR-HOVER);
 }
 .calculator__panel-output-prev {
   width: 100%;
