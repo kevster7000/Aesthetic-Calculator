@@ -1,9 +1,7 @@
 import themes, {colorVariables} from "./themes.js";
 import * as Calc from "./calculator.js";
 
-document.addEventListener("DOMContentLoaded", () => {
-    initApp();
-})
+document.addEventListener("DOMContentLoaded", initApp);
 
 function initApp() {
 
@@ -11,19 +9,30 @@ function initApp() {
 /*                                     Themes                                     */
 /**********************************************************************************/
 
-// TODO - create a click away function.
-// IF themes panel is open and the user clicks outside of it, the panel will close
-
 initThemes();
 
 function initThemes() {
+    const themesContainer = document.querySelector(".themes");
     const themesButton = document.querySelector(".themes__btn");
     const themesPanel = document.querySelector(".themes__panel");
     const themesCloseButton = document.querySelector(`#close-themes`);
 
     let themeClicked = false;
 
-    themesButton.addEventListener("click", () => {
+    themesButton.addEventListener("click", toggleThemesPanel);
+
+    // TODO - create a click away function.
+    // IF themes panel is open and the user clicks outside of it, the panel will close
+    /* window.addEventListener("click", (event) => {
+        if(themesPanel.classList[1] === "panel-active" && 
+            ((event.clientX < themesContainer.offsetLeft || event.clientX > themesContainer.offsetLeft + themesContainer.offsetWidth) || 
+            (event.clientY < themesContainer.offsetTop || event.clientY > themesContainer.offsetTop + themesContainer.offsetHeight))) {
+            console.log("asd");
+            //toggleThemesPanel();
+        }
+    }) */
+
+    function toggleThemesPanel() {
         themesPanel.classList.toggle("panel-active");
         themesButton.classList.toggle("themes-active");
 
@@ -35,7 +44,7 @@ function initThemes() {
             themesCloseButton.style.setProperty("animation", "fade-in 0.5s forwards");
             themeClicked = true;
         }
-    });
+    }
 
     setThemes(getTheme());
 }
@@ -113,25 +122,7 @@ function initCalc() {
 
     initCalcButtons();
 
-    // check to see if horizontal scrollbar is visible
-    function checkCalcPanelScroll() {
-        if(panelOutputPrev.scrollWidth > panelOutputPrev.clientWidth) {
-            panelOutputPrev.style.setProperty("margin-bottom", "0.25px");
-        }
-        else {
-            panelOutputPrev.style.setProperty("margin-bottom", "3px");
-        }
-
-        if(panelOutputMain.scrollWidth > panelOutputMain.clientWidth) {
-            panelOutputMain.style.setProperty("margin-bottom", "0.25px");
-        }
-        else {
-            panelOutputMain.style.setProperty("margin-bottom", "3px");
-        }
-    }
-
     function initCalcButtons() {
-
         //operands & operators
         for(let i = 0; i < 2; i++) {
             for(let j = 0; j < calcButtons[i].length; j++) {
@@ -178,7 +169,7 @@ function initCalc() {
                 panelOutputPrev.textContent = panelOutputMain.textContent;
                 panelOutputMain.textContent = Calc.handleSubmit(panelOutputMain.textContent);
 
-                //check to see if thousands separator is true, then create a new function to add commas at the end in here
+                //check to see if thousands separator is true, then create a new function (in calculator.js) to add commas
 
                 //add to history
                 //addHistoryEntry(panelOutputPrev.textContent, panelOutputMain.textContent);
@@ -190,13 +181,28 @@ function initCalc() {
             checkCalcPanelScroll();
         });
     }
+
+    // check to see if horizontal scrollbar is visible
+    function checkCalcPanelScroll() {
+        if(panelOutputPrev.scrollWidth > panelOutputPrev.clientWidth) {
+            panelOutputPrev.style.setProperty("margin-bottom", "0.25px");
+        }
+        else {
+            panelOutputPrev.style.setProperty("margin-bottom", "3px");
+        }
+
+        if(panelOutputMain.scrollWidth > panelOutputMain.clientWidth) {
+            panelOutputMain.style.setProperty("margin-bottom", "0.25px");
+        }
+        else {
+            panelOutputMain.style.setProperty("margin-bottom", "3px");
+        }
+    }
 }
 
 /**********************************************************************************/
 /*                                    History                                     */
 /**********************************************************************************/
-
-// TODO add a session storage to the history panel and load it as open/closed based on the session storage
 
 initHistory();
 
@@ -208,27 +214,39 @@ function initHistory() {
     const historyPanelHeader = document.querySelector(".calculator__history-header");
     let historyClicked = false;
 
-    historyButton.addEventListener("click", () => {
+    if(JSON.parse(sessionStorage.getItem("HistoryPanelOpen"))) toggleHistoryPanel(); //TODO - disable this for mobile
+    historyButton.addEventListener("click", toggleHistoryPanel);
+
+    function toggleHistoryPanel() {
         historyButton.classList.toggle("history-active");
         historyPanel.classList.toggle("history-panel-active");
         historyPanelEntries.classList.toggle("entries-active");
         historyPanelHeader.classList.toggle("history-header-active");
 
+        checkEntriesScroll();
+
         if(historyClicked) {
             historyCloseButton.style.setProperty("animation", "fade-out 0.25s forwards");
             historyClicked = false;
+            sessionStorage.setItem("HistoryPanelOpen", false);
         }
         else {
             historyCloseButton.style.setProperty("animation", "fade-in 0.5s forwards");
             historyClicked = true;
+            sessionStorage.setItem("HistoryPanelOpen", true);
         }
-    });
+    }
 
-    const entryInputs = document.querySelectorAll(".entry-input");
-    
-    for(let i = 0; i < entryInputs.length; i++) {
-        if(entryInputs[i].scrollWidth > entryInputs[i].clientWidth) { // check to see if horizontal scrollbar is visible
-            entryInputs[i].style.setProperty("margin-bottom", "0");
+    function checkEntriesScroll() {
+        const entryInputs = document.querySelectorAll(".entry-input");
+        
+        for(let i = 0; i < entryInputs.length; i++) {
+            if(entryInputs[i].scrollWidth > entryInputs[i].clientWidth) {
+                entryInputs[i].style.setProperty("margin-bottom", "0.25px");
+            }
+            else {
+                entryInputs[i].style.setProperty("margin-bottom", "3px");
+            }
         }
     }
 }
@@ -278,8 +296,6 @@ Sort of like a dropdown, the history panel will slide down from the top of the c
 /*                            Keyboard Shortcuts Panel                            */
 /**********************************************************************************/
 
-// TODO add a session storage to the keyboard shortcut panel and it them as open/closed based on the session storage
-
 initKeyboardShortcuts();
 
 function initKeyboardShortcuts() {
@@ -290,24 +306,29 @@ function initKeyboardShortcuts() {
     let keyboardShortcutsClicked = false;
     let linesDrawn = false;
 
-    keyboardShortcutsButton.addEventListener("click", () => {
+    if(JSON.parse(sessionStorage.getItem("KeyboardShortcutsOpen"))) toggleKeyboardShortcuts(); //TODO - disable this for mobile
+    keyboardShortcutsButton.addEventListener("click", toggleKeyboardShortcuts);
+
+    function toggleKeyboardShortcuts() {
         keyboardShortcutsPanel.classList.toggle("panel-active");
         keyboardShortcutsButton.classList.toggle("keyboard-shortcuts-active");
 
         if(keyboardShortcutsClicked) {
             keyboardShortcutsCloseButton.style.setProperty("animation", "fade-out 0.25s forwards");
             keyboardShortcutsClicked = false;
+            sessionStorage.setItem("KeyboardShortcutsOpen", false);
         }
         else {
             keyboardShortcutsCloseButton.style.setProperty("animation", "fade-in 0.5s forwards");
             keyboardShortcutsClicked = true;
+            sessionStorage.setItem("KeyboardShortcutsOpen", true);
         }
 
         if(!linesDrawn) {
             drawKeyboardShortcutLines();
             linesDrawn = true;
         }
-    });
+    }
 }
 
 function drawKeyboardShortcutLines() {

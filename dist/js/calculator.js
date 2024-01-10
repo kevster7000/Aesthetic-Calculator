@@ -25,8 +25,8 @@ export function handleInput(btn, currExp) {
             let i = 1;
             let validDecimal = true;
             
-            do {
-                if(i >= currExp.length) break;
+            do { //check operand for only one decimal
+                if(i > currExp.length) break;
                 else if(currExp[currExp.length - i] === '.' || currExp[currExp.length - i] === '%' || currExp[currExp.length - i] === ')' || !validOperands.includes(currExp[currExp.length - i])) {
                     validDecimal = false;
                     break;
@@ -111,19 +111,11 @@ export function handleKeyboardInput() {
     console.log("keyboard input");
 }
 
-export function validateExpression(exp) {
-
-    //TODO - regex?
-
+export function validateExpression(exp) { //this was simple :o
+    if(["(", "-", "^", "\u00D7", "\u00F7", "+"].includes(exp[exp.length - 1])) return false;
+    if(exp[exp.length - 1] === '.' && isNaN(exp[exp.length - 2])) return false;
     return true;
 }
-
-/* FOR REGEX, use a while loop until end of input string
-add each char to a temp string until we hit an operator such as (), +, -, etc
-Then, use regex to make sure this temp string is correctly formatted
-
-Example of regex for now: [0-9]*.[0-9]+[ ]*[+ or - or ...]
-*/
 
 export function handleSubmit(exp) {
     let output = postfixToOutput(infixToPostfix(parseToInfix(exp)));
@@ -141,18 +133,81 @@ export function handleSubmit(exp) {
 }
 
 function parseToInfix(exp) {
+    exp = exp.replaceAll(" ", "");
 
-    //TODO - make all x(x) into x * (x) - all x. into x - all .x into 0.x
-    /* 
-        as for %, this is a bit tricky
-        if next to operand x%, then directly change x into x*.01
-        if next to ), such as (x)% add: / 100)
-            the open parenthis - count the number of ) and match with (, then add another ( right outside the matching (
+    //this is just to make it easier for me
+    exp = exp.replaceAll("\u00D7", "*");
+    exp = exp.replaceAll("\u00F7", "/");
 
-        ex: (1+2)% => ((1+2)/100)
-        ex: (1+(2+3))% => ((1+(2+3))/100)
-    */
+    //match parentheses
+    const openParanthesisNum = exp.split("(").length - 1;
+    let closeParanthesisNum = exp.split(")").length - 1;
+    while(openParanthesisNum > closeParanthesisNum++) {
+        exp += ")";
+    }
 
+    //make all x(x) into x * (x)  and (x)(x) into (x) * (x)
+    const parenthesisToMultiplyRegex = /[%\d]\(|\)\(/g;
+    while(true) {
+        let i = exp.search(parenthesisToMultiplyRegex);
+
+        if(i === -1) break;
+        else {
+            exp = exp.slice(0, i + 1) + "*" + exp.slice(i + 1);
+        }
+    }
+
+    //make all x. into x and .x into 0.x
+    const simplifyDecimalRegex = /\d\.\D|\D\.\d/g;
+    while(true) {
+        let i = exp.search(simplifyDecimalRegex);
+
+        if(i === -1) break;
+        else if(isNaN(exp[i])){
+            exp = exp.slice(0, i + 1) + "0" + exp.slice(i + 1);
+        }
+        else {
+            exp = exp.slice(0, i + 1) + exp.slice(i + 2);
+        }
+    }
+    //edge cases
+    if(exp[0] === ".") exp = "0" + exp;
+    if(exp[exp.length - 1] === ".") exp = exp.slice(0, exp.length - 1);
+
+
+    //make all x% into 0.0x
+    const convertBasicPercentageRegex = /\d+(\.\d+)?\%/g;
+    while(true) {
+        let i = exp.search(convertBasicPercentageRegex);
+        if(i === -1) break;
+
+        const start = i;
+        let num = "";
+        while(exp[i] != "%") {
+            num += exp[i];
+            i++;
+        }
+        num = Number(num) / 100;
+        exp = exp.slice(0, start) + num + exp.slice(i + 1);
+    }
+
+    //make all (...)% into ((...)/100)
+    while(true) {
+        let i = exp.indexOf(")%");
+        if(i === -1) break;
+
+        const end = i + 1;
+        let numCloseParenthesis = 1;
+        let numOpenParenthesis = 0;
+
+        while(numOpenParenthesis !== numCloseParenthesis) {
+            i--;
+            if(exp[i] === ")") numCloseParenthesis++;
+            else if(exp[i] === "(") numOpenParenthesis++;
+        }
+
+        exp = exp.slice(0, i) + "(" + exp.slice(i, end) + "/100)" + exp.slice(end + 1);
+    }
 
     return exp;
 }
@@ -166,7 +221,8 @@ function infixToPostfix(exp) { //Stacks :)
 
 function postfixToOutput(exp) { //More Stack usage :)
 
+    let output = exp;
     //TODO
 
-    return exp;
+    return output;
 }
