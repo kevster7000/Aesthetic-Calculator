@@ -1,3 +1,5 @@
+const validOperands = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "."];
+
 export function handleInput(btn, currExp) {
 
     //this most likely can be optimized with regex, but there are many nuances from a typical expression that idk how to write in regex, so I just hardcoded this
@@ -5,8 +7,6 @@ export function handleInput(btn, currExp) {
 
     let newExp = currExp;
     currExp = currExp.replaceAll(" ", ""); //bye whitespace
-
-    const validOperands = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "."]
     const validOperators = ["(", ")", "%", "-", "^", "\u00D7", "\u00F7", "+"];
 
     const completeParenthesis = currExp[currExp.length - 1] === ")" && currExp !== "(";
@@ -20,6 +20,21 @@ export function handleInput(btn, currExp) {
         
         if(currExp === "\u00A0") {
             newExp = btn;
+        }
+        else if(btn === '0' && currExp[currExp.length - 1] === "0") {
+            let i = 1;
+            let validZero = false;
+
+            do {
+                if(i > currExp.length) break;
+                if(currExp[currExp.length - i] !== "0") {
+                    validZero = true; 
+                    break;
+                }
+                i++;
+            } while (validOperands.includes(currExp[currExp.length - i]));
+
+            if(validZero) newExp += btn;
         }
         else if (btn === '.') {
             let i = 1;
@@ -42,15 +57,20 @@ export function handleInput(btn, currExp) {
             if(currExp[currExp.length - 1] === '-' && (currExp === "-" || currExp.slice(currExp.length - 2) === "(-" || validOperators.slice(3).includes(currExp[currExp.length - 2]))) {
                 newExp += btn;
             }
+            else if(currExp[currExp.length - 1] === '^') newExp += btn;
             else newExp += " " + btn;
         }
         else if(currExp[currExp.length - 1] !== ')' && currExp[currExp.length - 1] !== '%') {
-            newExp += btn;
+            if(validOperators.includes(currExp[currExp.length - 2]) && currExp[currExp.length - 1] === "0") newExp = newExp.slice(0, newExp.length - 1) + btn;
+            else newExp += btn;
         }
     }
     else if(validOperators.slice(4).includes(btn)) { // BASIC OPERATORS ^ * / +
 
-        if(prevCharOperand) newExp += " " + btn;
+        if(prevCharOperand) {
+            if(btn === "^") newExp += btn;
+            else newExp += " " + btn;
+        }
         else if(validOperators.slice(3).includes(currExp[currExp.length - 1]) && !validOperators.slice(3).includes(currExp[currExp.length - 2])) {
             newExp = newExp.slice(0, newExp.length - 1) + btn;
         }
@@ -65,7 +85,8 @@ export function handleInput(btn, currExp) {
         else if(currExp[currExp.length - 1] === '(') newExp += btn;
     }
     else if(btn === '(') { 
-        if(validOperators.slice(3).includes(currExp[currExp.length - 1])) newExp += " " + btn;
+        if(currExp === "\u00A0") newExp = btn;
+        else if(validOperators.slice(3).includes(currExp[currExp.length - 1])) newExp += " " + btn;
         else newExp += btn;
     }
     else if(btn === ")") {
@@ -88,15 +109,14 @@ export function handleKeyboardInput() {
 
     //maneuvering between buttons is done in navigation.js, not here ty
 
-    const validOperands = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "."]
+    // multiplication is * => make sure to pass \u00D7
+    // division is / => make sure to pass \u00F7
+    // nbsp is \u00A0
     const validOperators = ["(", ")", "%", "-", "^", "*", "/", "+"];
 
     const specialCalcKeys = ["Enter", "backspace", "Esc"];
     const keyboardShortcuts = ["N", "K", "H", "T", "S"]
 
-    // multiplication is * => make sure to pass \u00D7
-    // division is / => make sure to pass \u00F7
-    // nbsp is \u00A0
 
     //TODO - utilize the above function and add some keyabord shortcuts
 
@@ -114,6 +134,8 @@ export function handleKeyboardInput() {
 export function validateExpression(exp) { //this was simple :o
     if(["(", "-", "^", "\u00D7", "\u00F7", "+"].includes(exp[exp.length - 1])) return false;
     if(exp[exp.length - 1] === '.' && isNaN(exp[exp.length - 2])) return false;
+    if(exp.indexOf("\u00F7 0") !== -1) return false;
+    
     return true;
 }
 
@@ -187,7 +209,7 @@ function parseToInfix(exp) {
             num += exp[i];
             i++;
         }
-        num = Number(num) / 100;
+        num = Number(new Big(num).div(100));
         exp = exp.slice(0, start) + num + exp.slice(i + 1);
     }
 
@@ -209,20 +231,151 @@ function parseToInfix(exp) {
         exp = exp.slice(0, i) + "(" + exp.slice(i, end) + "/100)" + exp.slice(end + 1);
     }
 
+    //console.log(exp);
     return exp;
 }
 
-function infixToPostfix(exp) { //Stacks :)
+function infixToPostfix(infixExp) {
+    let postfixExp = "";
+    let opStack = [];
+    let i = 0;
+    let openParanthesisNum = 0;
 
-    //TODO
+    const unaryConditions = ["*", "/", "^", "("];
+    const operatorPrecedence = new Map([
+        ['+', 0], ['-', 0],
+        ['*', 1], ['/', 1],
+        ['^', 2]
+    ]);
 
-    return exp;
+    while(i < infixExp.length) {
+
+        while(validOperands.includes(infixExp[i])) {
+
+            let unary = postfixExp[postfixExp.length - 1] === "u";
+            if(!validOperands.includes(postfixExp[postfixExp.length - 1]) && postfixExp.length !== 0 && !unary & postfixExp[postfixExp.length - 1] !== " ") postfixExp += " ";
+
+            if(unary) postfixExp = postfixExp.slice(0, postfixExp.length - 1);
+            postfixExp += infixExp[i];
+            i++;
+
+            if(!validOperands.includes(infixExp[i])) {
+                postfixExp += " "; 
+                break;
+            }
+        }
+
+        if(!validOperands.includes(infixExp[i])) {
+            if(infixExp[i] === '-' && (i === 0 || unaryConditions.includes(infixExp[i-1]))) { //unary
+                postfixExp += " " + infixExp[i] + "u";
+            }
+            else if(infixExp[i] === "(") {
+                opStack.push(infixExp[i]);
+                openParanthesisNum++;
+            }
+            else if(infixExp[i] === ")") {
+                while(opStack[opStack.length - 1] !== "(") {
+                    postfixExp += opStack.pop();
+                }
+                opStack.pop();
+                openParanthesisNum--;
+            }
+            else if(openParanthesisNum) {
+                opStack.push(infixExp[i]);
+            }
+            else if(opStack.length === 0) {
+                opStack.push(infixExp[i]);
+            }
+            else if(operatorPrecedence.get(infixExp[i]) > operatorPrecedence.get(opStack[opStack.length - 1])) {
+                opStack.push(infixExp[i]);
+            }
+            else if(operatorPrecedence.get(infixExp[i]) === operatorPrecedence.get(opStack[opStack.length - 1])) {
+                postfixExp += opStack.pop();
+                opStack.push(infixExp[i]);
+            }
+            else if(operatorPrecedence.get(infixExp[i]) < operatorPrecedence.get(opStack[opStack.length - 1])) {
+                while(operatorPrecedence.get(infixExp[i]) < operatorPrecedence.get(opStack[opStack.length - 1])) {
+                    if(opStack.length === 0) {
+                        break;
+                    }
+                    if(operatorPrecedence.get(infixExp[i]) === operatorPrecedence.get(opStack[opStack.length - 1])) {
+                        postfixExp += opStack.pop();
+                        break;
+                    }
+                    postfixExp += opStack.pop();
+                }
+                opStack.push(infixExp[i]);
+            }
+            i++;
+        }
+    }
+
+    while(opStack.length) {
+        postfixExp += opStack.pop();
+    }
+
+    console.log(postfixExp);
+    return postfixExp;
 }
 
-function postfixToOutput(exp) { //More Stack usage :)
+function postfixToOutput(exp) {
+    let valStack = [];
+    let i = 0;
 
-    let output = exp;
-    //TODO
+    while(i < exp.length) {
 
-    return output;
+        if(!isNaN(exp[i]) || (exp[i] === '-' && validOperands.includes(exp[i + 1]))) {  //something ab minus causes infinite loop: 6 * 6 - 3 + 9
+
+            let temp = "";
+            let neg = false;
+
+            if(exp[i] === '-') {
+                neg = true;
+                i++;
+            }
+
+            while(!isNaN(exp[i]) || exp[i] === ".") {
+                if(exp[i] === " ") {
+                    i++;
+                    break;
+                }
+                temp += exp[i];
+                i++;
+            }
+
+            temp = (neg) ? (-1 * Number(temp)) : Number(temp);
+            valStack.push(temp);
+        }
+
+        console.log(valStack);
+
+        while(isNaN(exp[i])) {
+            if(i >= exp.length || (exp[i] === "-" && (!isNaN(exp[i + 1]) || exp[i + 1] === " "))) break;
+
+            switch(exp[i]) {
+                case "-":
+                    valStack[valStack.length - 2] = Number(new Big(valStack[valStack.length - 2]).minus(valStack.pop()));
+                    break;
+                case "+":
+                    valStack[valStack.length - 2] = Number(new Big(valStack[valStack.length - 2]).plus(valStack.pop()));
+                    break;
+                case "*":
+                    valStack[valStack.length - 2] = Number(new Big(valStack[valStack.length - 2]).times(valStack.pop()));
+                    break;
+                case "/":
+                    valStack[valStack.length - 2] = Number(new Big(valStack[valStack.length - 2]).div(valStack.pop()));
+                    break;
+                case "^":
+                    valStack[valStack.length - 2] = Number(new Big(valStack[valStack.length - 2]).pow(valStack.pop()));
+                    break;
+            }
+            i++;
+        }
+
+        if(exp[i] === " ") i++;
+
+        console.log(valStack);
+    }
+
+    return valStack[0];
 }
