@@ -115,10 +115,7 @@ function initCalc() {
 
     const errorMessage = document.querySelector(".calculator-error");
     let fadeError = undefined;
-
-    // TODO - set true everytime you submit - if the user then hits an operator, save the output, but delete the prev
-    // if the user hits an operand, delete the output and prev
-    let contFromPrevExpression = false;
+    let justSubmitted = false;
 
     initCalcButtons();
 
@@ -127,10 +124,9 @@ function initCalc() {
         for(let i = 0; i < 2; i++) {
             for(let j = 0; j < calcButtons[i].length; j++) {
                 calcButtons[i][j].addEventListener("click", (event) => {
-                    panelOutputMain.textContent = Calc.handleInput(event.target.textContent, panelOutputMain.textContent);
-
-                    //check to see if thousands separator is true, then create a new function to add commas at the end in here
-                    
+                    panelOutputMain.textContent = Calc.handleInput(event.target.textContent, panelOutputMain.textContent, justSubmitted);
+                    if(justSubmitted) panelOutputPrev.textContent = "\u00A0";
+                    justSubmitted = false;
                     checkCalcPanelScroll();
                 });
             }
@@ -142,13 +138,18 @@ function initCalc() {
                 panelOutputMain.textContent = "\u00A0";
             }
             else {
-                if(panelOutputMain.textContent[panelOutputMain.textContent.length - 2] === ' ') {
+                if(panelOutputMain.textContent.includes("e")) {
+                    console.log('a')
+                }
+                else if(panelOutputMain.textContent[panelOutputMain.textContent.length - 2] === ' ') {
                     panelOutputMain.textContent = panelOutputMain.textContent.slice(0, panelOutputMain.textContent.length - 2);
                 }
                 else {
                     panelOutputMain.textContent = panelOutputMain.textContent.slice(0, panelOutputMain.textContent.length - 1);
                 }
             }
+            if(justSubmitted) panelOutputPrev.textContent = "\u00A0";
+            justSubmitted = false;
             checkCalcPanelScroll();
         });
 
@@ -156,6 +157,7 @@ function initCalc() {
         calcButtons[2][1].addEventListener("click", () => {
             panelOutputMain.textContent = "\u00A0";
             panelOutputPrev.textContent = "\u00A0";
+            justSubmitted = false;
             checkCalcPanelScroll();
         });
 
@@ -168,9 +170,7 @@ function initCalc() {
             if(Calc.validateExpression(panelOutputMain.textContent)) {
                 panelOutputPrev.textContent = panelOutputMain.textContent;
                 panelOutputMain.textContent = Calc.handleSubmit(panelOutputMain.textContent);
-
-                //check to see if thousands separator is true, then create a new function (in calculator.js) to add commas
-
+                justSubmitted = true;
                 //add to history
                 //addHistoryEntry(panelOutputPrev.textContent, panelOutputMain.textContent);
             }
@@ -346,26 +346,4 @@ function drawKeyboardShortcutLines() {
         shortcutLines[i].style.setProperty("width", newWidth + "px");
     }
 }
-
-/**********************************************************************************/
-/*                                    Settings                                    */
-/**********************************************************************************/
-
-initSettings();
-
-// TODO - create a click away function.
-// IF themes panel is open and the user clicks outside of it, the panel will close
-
-//TODO - thousands separator - this affects the calculator panel
-//by default, thousands separator is used (stopped by the decimal point)
-
-function initSettings() {
-    const settingsButton = document.querySelector("#open-settings");
-    const settingsPanel = document.querySelector(".settings__panel");
-
-    settingsButton.addEventListener("click", () => {
-        settingsPanel.classList.toggle("panel-active");
-    });
-}
-
 } // initApp()'s closing bracket

@@ -10,6 +10,7 @@
     &__btn {
         @include neumorphic-btn(FOOTER);
         padding: var(--SPACING-MD);
+        padding-right: calc(var(--SPACING-MD) + 2px);
         position: relative;
         transform: translateY(-50%);
 
@@ -64,7 +65,7 @@
             }
             to { 
                 opacity: 1;
-                height: 572px; 
+                height: 540px; 
             }
         }
 
@@ -72,7 +73,7 @@
             from { 
                 display: block;
                 opacity: 1;
-                height: 572px; 
+                height: 540px; 
             }
             70% {
                 opacity: 0.5;

@@ -3,12 +3,7 @@
 .github__btn {
     @extend %link;
     padding: var(--SPACING-SM);
-    margin-left: var(--SPACING-XL);
     font-size: clamp(1.25rem, 5vw, 1.5rem);
-    position: absolute;
-    left: 0;
-    bottom: -5px;
-    transform: translateY(-50%);
     font-weight: bold;
     text-decoration: none;
     background: none;

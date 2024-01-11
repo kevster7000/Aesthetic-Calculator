@@ -1,6 +1,11 @@
+//using Big.js: https://mikemcl.github.io/big.js/
+Big.DP = 40;
+Big.PE = 20;
+Big.NE = -7;
+
 const validOperands = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "."];
 
-export function handleInput(btn, currExp) {
+export function handleInput(btn, currExp, justSubmitted) {
 
     //this most likely can be optimized with regex, but there are many nuances from a typical expression that idk how to write in regex, so I just hardcoded this
     //ik this is very ugly, sry
@@ -18,10 +23,10 @@ export function handleInput(btn, currExp) {
 
     if(validOperands.includes(btn)) { // OPERANDS
         
-        if(currExp === "\u00A0") {
+        if(currExp === "\u00A0" || justSubmitted) { //if empty
             newExp = btn;
         }
-        else if(btn === '0' && currExp[currExp.length - 1] === "0") {
+        else if(btn === '0' && currExp[currExp.length - 1] === "0") { //make sure no excessive 0s
             let i = 1;
             let validZero = false;
 
@@ -36,7 +41,7 @@ export function handleInput(btn, currExp) {
 
             if(validZero) newExp += btn;
         }
-        else if (btn === '.') {
+        else if (btn === '.') { //makes sure only one . per operand
             let i = 1;
             let validDecimal = true;
             
@@ -52,7 +57,7 @@ export function handleInput(btn, currExp) {
             if(validDecimal) newExp += btn;
             else if(validOperators.slice(3).includes(currExp[currExp.length - 1])) newExp += " " + btn;
         }
-        else if(validOperators.slice(3).includes(currExp[currExp.length - 1])) {
+        else if(validOperators.slice(3).includes(currExp[currExp.length - 1])) { //following an operator
             //handle negative
             if(currExp[currExp.length - 1] === '-' && (currExp === "-" || currExp.slice(currExp.length - 2) === "(-" || validOperators.slice(3).includes(currExp[currExp.length - 2]))) {
                 newExp += btn;
@@ -60,46 +65,60 @@ export function handleInput(btn, currExp) {
             else if(currExp[currExp.length - 1] === '^') newExp += btn;
             else newExp += " " + btn;
         }
-        else if(currExp[currExp.length - 1] !== ')' && currExp[currExp.length - 1] !== '%') {
-            if(validOperators.includes(currExp[currExp.length - 2]) && currExp[currExp.length - 1] === "0") newExp = newExp.slice(0, newExp.length - 1) + btn;
+        else if(currExp[currExp.length - 1] !== ')' && currExp[currExp.length - 1] !== '%') { //following an operand
+            if((validOperators.includes(currExp[currExp.length - 2]) && currExp[currExp.length - 1] === "0") || currExp === "0") newExp = newExp.slice(0, newExp.length - 1) + btn;
             else newExp += btn;
         }
     }
     else if(validOperators.slice(4).includes(btn)) { // BASIC OPERATORS ^ * / +
 
-        if(prevCharOperand) {
+        if(prevCharOperand) { //folliwng an operand
             if(btn === "^") newExp += btn;
             else newExp += " " + btn;
         }
-        else if(validOperators.slice(3).includes(currExp[currExp.length - 1]) && !validOperators.slice(3).includes(currExp[currExp.length - 2])) {
+        else if(validOperators.slice(3).includes(currExp[currExp.length - 1]) && !validOperators.slice(3).includes(currExp[currExp.length - 2])) { //switching operators
             newExp = newExp.slice(0, newExp.length - 1) + btn;
         }
     } 
     else if(btn === '-') { // MORE DETAILED OPERATORS ( ) % -
 
-        if(currExp[currExp.length - 1] === "+") newExp = newExp.slice(0, newExp.length - 1) + btn;
-        else if(prevCharOperand || (validOperators.slice(4).includes(currExp[currExp.length - 1]) && !validOperators.slice(4).includes(currExp[currExp.length - 2]))) {
+        if(currExp[currExp.length - 1] === "+") { //switch between + and -
+            newExp = newExp.slice(0, newExp.length - 1) + btn;
+        }
+        else if(prevCharOperand || (validOperators.slice(4).includes(currExp[currExp.length - 1]) && !validOperators.slice(4).includes(currExp[currExp.length - 2]))) { //unary
             newExp += " " + btn;
         }
-        else if(currExp === "\u00A0") newExp = btn;
-        else if(currExp[currExp.length - 1] === '(') newExp += btn;
+        else if(currExp === "\u00A0") { //if empty
+            newExp = btn;
+        }
+        else if(currExp[currExp.length - 1] === '(') { //following an open parenthesis -> basically is empty
+            newExp += btn;
+        }
     }
     else if(btn === '(') { 
-        if(currExp === "\u00A0") newExp = btn;
-        else if(validOperators.slice(3).includes(currExp[currExp.length - 1])) newExp += " " + btn;
-        else newExp += btn;
+        if(currExp === "\u00A0") { //if empty
+            newExp = btn;
+        }
+        else if(validOperators.slice(3).includes(currExp[currExp.length - 1])) { //following an operator
+            newExp += " " + btn;
+        }
+        else { //else, user is able to freely input as many ( desired - also takes care of x(x)
+            newExp += btn;
+        }
     }
     else if(btn === ")") {
-        if( (currExp.split("(").length > currExp.split(")").length) && 
-            (validOperands.includes(currExp[currExp.length - 1]) || currExp[currExp.length - 1] === '%' || currExp[currExp.length - 1] === ')')) {
+        if( (currExp.split("(").length > currExp.split(")").length) &&  //match ( ) amount
+            (validOperands.includes(currExp[currExp.length - 1]) || currExp[currExp.length - 1] === '%' || currExp[currExp.length - 1] === ')')) { //make sure valid ) 
             newExp += btn;
         }
     }
     else if(btn === "%") {
-        if(prevCharOperand && currExp[currExp.length - 1] !== "%") newExp += btn;
+        if(prevCharOperand && currExp[currExp.length - 1] !== "%") { //only can follow an operand or complete (...)
+            newExp += btn;
+        }
     }
     else {
-        console.error(`No such input: ${btn}`);
+        console.error(`No such input: ${btn}`); //:)
     }
     
     return newExp;
@@ -115,7 +134,7 @@ export function handleKeyboardInput() {
     const validOperators = ["(", ")", "%", "-", "^", "*", "/", "+"];
 
     const specialCalcKeys = ["Enter", "backspace", "Esc"];
-    const keyboardShortcuts = ["N", "K", "H", "T", "S"]
+    const keyboardShortcuts = ["N", "K", "H", "T"]
 
 
     //TODO - utilize the above function and add some keyabord shortcuts
@@ -131,27 +150,23 @@ export function handleKeyboardInput() {
     console.log("keyboard input");
 }
 
-export function validateExpression(exp) { //this was simple :o
-    if(["(", "-", "^", "\u00D7", "\u00F7", "+"].includes(exp[exp.length - 1])) return false;
-    if(exp[exp.length - 1] === '.' && isNaN(exp[exp.length - 2])) return false;
-    if(exp.indexOf("\u00F7 0") !== -1) return false;
+export function validateExpression(exp) {
+    exp = exp.replaceAll(" ", "");
+    exp = exp.replaceAll("\u00F7", "/");
+
+    if(["(", "-", "^", "\u00D7", "/", "+"].includes(exp[exp.length - 1])) return false; //if ending with an operator
+    if(exp[exp.length - 1] === '.' && isNaN(exp[exp.length - 2])) return false; //if ending with an incomplete float
+
+    exp += "~";
+    const divisionByZeroRegex = /\/0[\(\)\%\-\+\*\/\^\~]|\/0\.0*\D|\/\.0+\D/g;
+    if(exp.search(divisionByZeroRegex) !== -1) return false; //if division by zero exists
     
     return true;
 }
 
 export function handleSubmit(exp) {
-    let output = postfixToOutput(infixToPostfix(parseToInfix(exp)));
-
-    /*
-    - The output should have a max number of digits
-    - Limit the width to a certain amount of characters
-    - use e notation when numbers get too big and when numbers get too small
-    - At a certain point, say the number is too large(infinity) or (when the number is too small) just 0
-
-    //num.toExponential(decimal points)
-    */
-
-    return output;
+    let output = new Big(postfixToOutput(infixToPostfix(parseToInfix(exp))));
+    return output.toString();
 }
 
 function parseToInfix(exp) {
@@ -209,8 +224,8 @@ function parseToInfix(exp) {
             num += exp[i];
             i++;
         }
-        num = Number(new Big(num).div(100));
-        exp = exp.slice(0, start) + num + exp.slice(i + 1);
+        num = new Big(num).div(100);
+        exp = exp.slice(0, start) + num.toString() + exp.slice(i + 1);
     }
 
     //make all (...)% into ((...)/100)
@@ -259,6 +274,7 @@ function infixToPostfix(infixExp) {
             postfixExp += infixExp[i];
             i++;
 
+            if(i > infixExp.length) break;
             if(!validOperands.includes(infixExp[i])) {
                 postfixExp += " "; 
                 break;
@@ -266,8 +282,10 @@ function infixToPostfix(infixExp) {
         }
 
         if(!validOperands.includes(infixExp[i])) {
+            if(i >= infixExp.length) break;
             if(infixExp[i] === '-' && (i === 0 || unaryConditions.includes(infixExp[i-1]))) { //unary
-                postfixExp += " " + infixExp[i] + "u";
+                if(postfixExp.length === 0) postfixExp += infixExp[i] + "u";
+                else postfixExp += " " + infixExp[i] + "u";
             }
             else if(infixExp[i] === "(") {
                 opStack.push(infixExp[i]);
@@ -314,7 +332,7 @@ function infixToPostfix(infixExp) {
         postfixExp += opStack.pop();
     }
 
-    console.log(postfixExp);
+    //console.log(postfixExp);
     return postfixExp;
 }
 
@@ -324,7 +342,7 @@ function postfixToOutput(exp) {
 
     while(i < exp.length) {
 
-        if(!isNaN(exp[i]) || (exp[i] === '-' && validOperands.includes(exp[i + 1]))) {  //something ab minus causes infinite loop: 6 * 6 - 3 + 9
+        if(!isNaN(exp[i]) || (exp[i] === '-' && validOperands.includes(exp[i + 1]))) {
 
             let temp = "";
             let neg = false;
@@ -343,30 +361,37 @@ function postfixToOutput(exp) {
                 i++;
             }
 
-            temp = (neg) ? (-1 * Number(temp)) : Number(temp);
-            valStack.push(temp);
+            let num = new Big(temp);
+            if(neg) num.s = -1;
+            valStack.push(num.toString());
         }
 
-        console.log(valStack);
+        //console.log(valStack);
 
         while(isNaN(exp[i])) {
-            if(i >= exp.length || (exp[i] === "-" && (!isNaN(exp[i + 1]) || exp[i + 1] === " "))) break;
+            if(i > exp.length || (exp[i] === "-" && (validOperands.includes(exp[i + 1])))) break;
 
+            let result = 0;
             switch(exp[i]) {
                 case "-":
-                    valStack[valStack.length - 2] = Number(new Big(valStack[valStack.length - 2]).minus(valStack.pop()));
+                    result = new Big(valStack[valStack.length - 2]).minus(new Big(valStack.pop()));
+                    valStack[valStack.length - 1] = result.toString();
                     break;
                 case "+":
-                    valStack[valStack.length - 2] = Number(new Big(valStack[valStack.length - 2]).plus(valStack.pop()));
+                    result = new Big(valStack[valStack.length - 2]).plus(new Big(valStack.pop()));
+                    valStack[valStack.length - 1] = result.toString();
                     break;
                 case "*":
-                    valStack[valStack.length - 2] = Number(new Big(valStack[valStack.length - 2]).times(valStack.pop()));
+                    result = new Big(valStack[valStack.length - 2]).times(new Big(valStack.pop()));
+                    valStack[valStack.length - 1] = result.toString();
                     break;
                 case "/":
-                    valStack[valStack.length - 2] = Number(new Big(valStack[valStack.length - 2]).div(valStack.pop()));
+                    result = new Big(valStack[valStack.length - 2]).div(new Big(valStack.pop()));
+                    valStack[valStack.length - 1] = result.toString();
                     break;
                 case "^":
-                    valStack[valStack.length - 2] = Number(new Big(valStack[valStack.length - 2]).pow(valStack.pop()));
+                    result = new Big(valStack[valStack.length - 2]).pow(new Big(valStack.pop()));
+                    valStack[valStack.length - 1] = result.toString();
                     break;
             }
             i++;
@@ -374,7 +399,7 @@ function postfixToOutput(exp) {
 
         if(exp[i] === " ") i++;
 
-        console.log(valStack);
+        //console.log(valStack);
     }
 
     return valStack[0];

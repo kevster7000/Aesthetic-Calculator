@@ -1,0 +1,10 @@
+@use "./../../abstracts" as *;
+
+.credits {
+    color: var(--TEXT-COLOR);
+    padding: var(--SPACING-SM);
+
+    a {
+        @extend %link;
+    }
+}

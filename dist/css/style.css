@@ -76,20 +76,20 @@ header h1, .calculator__panel-output-main, .calculator__panel-output-prev {
   white-space: nowrap;
 }
 
-.settings .credits a, .github__btn {
+.credits a, .github__btn {
   display: inline-block;
   transition: scale 0.125s;
 }
-.settings .credits a:-moz-any-link, .github__btn:-moz-any-link {
+.credits a:-moz-any-link, .github__btn:-moz-any-link {
   color: var(--TEXT-COLOR);
 }
-.settings .credits a:any-link, .github__btn:any-link {
+.credits a:any-link, .github__btn:any-link {
   color: var(--TEXT-COLOR);
 }
-.settings .credits a:hover, .github__btn:hover, .settings .credits a:focus-visible, .github__btn:focus-visible {
+.credits a:hover, .github__btn:hover, .credits a:focus-visible, .github__btn:focus-visible {
   scale: 1.025;
 }
-.settings .credits a:active, .github__btn:active {
+.credits a:active, .github__btn:active {
   scale: 0.975;
 }
 
@@ -564,12 +564,7 @@ form, input, button, label, textarea {
 
 .github__btn {
   padding: var(--SPACING-SM);
-  margin-left: var(--SPACING-XL);
   font-size: clamp(1.25rem, 5vw, 1.5rem);
-  position: absolute;
-  left: 0;
-  bottom: -5px;
-  transform: translateY(-50%);
   font-weight: bold;
   text-decoration: none;
   background: none;
@@ -593,121 +588,9 @@ form, input, button, label, textarea {
     display: block;
   }
 }
-.settings {
-  position: absolute;
-  right: 0;
-  bottom: 0;
-  width: 100%;
-  margin: var(--SPACING-LG);
+.credits {
   color: var(--TEXT-COLOR);
-}
-.settings #open-settings {
-  background-color: var(--CALC-BG-LIGHT);
-  background-image: linear-gradient(135deg, var(--CALC-BG-DARK), var(--CALC-BG-LIGHT), var(--CALC-BG-LIGHT), var(--CALC-BG-DARK));
-  border-radius: 32px;
-  border: 1px solid var(--CALC-BORDER-COLOR);
-  -webkit-backdrop-filter: blur(2px);
-          backdrop-filter: blur(2px);
-  box-shadow: var(--FOOTER-SHADOW);
-  color: var(--TEXT-COLOR);
-  cursor: pointer;
-  transition: border-radius 0.25s, filter 0.25s, text-shadow 0.125s, box-shadow 0.25s, scale 0.125s;
-  position: absolute;
-  right: 0;
-  top: 0;
-  translate: 0 -100%;
-  width: 40px;
-  height: 40px;
   padding: var(--SPACING-SM);
-  font-size: 1.5rem;
-  color: var(--TEXT-COLOR);
-  z-index: 1;
-}
-.settings #open-settings:hover, .settings #open-settings:focus-visible {
-  filter: brightness(var(--BTN-HOVER-BRIGHTNESS));
-}
-.settings #open-settings:active {
-  scale: 0.975;
-  filter: brightness(0.95);
-  transition: filter 0.075s, scale 0.075s;
-}
-.settings #open-settings i {
-  transition: rotate 0.75s, transform 0.75s;
-}
-.settings #open-settings:is(:hover, :focus-visible) i {
-  rotate: 120deg;
-  transform: scale(1.125);
-}
-.settings #open-settings:active i {
-  rotate: 120deg;
-  transform: scale(1);
-  transition: rotate 0.5s, transform 0.125s;
-}
-.settings__panel {
-  background-color: var(--CALC-BG-LIGHT);
-  background-image: linear-gradient(135deg, var(--CALC-BG-DARK), var(--CALC-BG-LIGHT), var(--CALC-BG-LIGHT), var(--CALC-BG-DARK));
-  border-radius: 32px;
-  border: 1px solid var(--CALC-BORDER-COLOR);
-  -webkit-backdrop-filter: blur(2px);
-          backdrop-filter: blur(2px);
-  box-shadow: var(--FOOTER-SHADOW);
-  border-radius: 10px;
-  padding: var(--SPACING-MD);
-  position: absolute;
-  right: 0;
-  bottom: 40px;
-  margin-bottom: var(--SPACING-MD);
-  display: none;
-}
-.settings__panel button, .settings__panel form {
-  display: -ms-flexbox;
-  display: flex;
-  -ms-flex-pack: start;
-      justify-content: flex-start;
-  -ms-flex-align: center;
-      align-items: center;
-  -ms-flex-flow: row nowrap;
-      flex-flow: row nowrap;
-  border-radius: 6px;
-  gap: var(--SPACING-MD);
-  width: 100%;
-  background-color: transparent;
-  border: 1px solid transparent;
-  padding: var(--SPACING-SM);
-  cursor: pointer;
-  transition: background-color 0.125s;
-  color: var(--TEXT-COLOR);
-}
-.settings__panel button:hover, .settings__panel button:focus-visible, .settings__panel form:hover, .settings__panel form:focus-visible {
-  background-color: var(--PANEL-LIGHT);
-}
-.settings__panel button:active, .settings__panel form:active {
-  background-color: var(--PANEL-DARK);
-}
-.settings__panel form label {
-  cursor: pointer;
-}
-.settings__panel form input {
-  cursor: pointer;
-  -ms-flex-order: -1;
-      order: -1;
-  accent-color: var(--TEXT-COLOR);
-}
-.settings__panel.panel-active {
-  display: -ms-flexbox;
-  display: flex;
-  -ms-flex-pack: center;
-      justify-content: center;
-  -ms-flex-align: start;
-      align-items: flex-start;
-  -ms-flex-flow: column nowrap;
-      flex-flow: column nowrap;
-}
-.settings .credits {
-  position: absolute;
-  right: 0;
-  bottom: 0;
-  translate: -60px;
 }
 .mobile-options {
   display: block;
@@ -863,6 +746,7 @@ form, input, button, label, textarea {
   cursor: pointer;
   transition: border-radius 0.25s, filter 0.25s, text-shadow 0.125s, box-shadow 0.25s, scale 0.125s;
   padding: var(--SPACING-MD);
+  padding-right: calc(var(--SPACING-MD) + 2px);
   position: relative;
   transform: translateY(-50%);
 }
@@ -920,14 +804,14 @@ form, input, button, label, textarea {
   }
   to {
     opacity: 1;
-    height: 572px;
+    height: 540px;
   }
 }
 @keyframes hide-keyboard-shortcuts-panel {
   from {
     display: block;
     opacity: 1;
-    height: 572px;
+    height: 540px;
   }
   70% {
     opacity: 0.5;
@@ -997,17 +881,18 @@ header h1 {
 
 footer {
   position: absolute;
-  left: 0;
+  right: 0;
   bottom: 0;
-  width: 100%;
+  margin-right: var(--SPACING-XL);
+  margin-bottom: var(--SPACING-LG);
   display: -ms-flexbox;
   display: flex;
-  -ms-flex-pack: justify;
-      justify-content: space-between;
-  -ms-flex-align: center;
-      align-items: center;
-  -ms-flex-flow: row nowrap;
-      flex-flow: row nowrap;
+  -ms-flex-pack: center;
+      justify-content: center;
+  -ms-flex-align: end;
+      align-items: flex-end;
+  -ms-flex-flow: column nowrap;
+      flex-flow: column nowrap;
 }
 
 #outer-container {
@@ -1022,6 +907,7 @@ footer {
       flex-flow: column nowrap;
   background-position: center;
   background-size: cover;
+  background-image: url("https://images.unsplash.com/photo-1576899244078-180364e39ca1?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D");
 }
 
 .calculator__container {

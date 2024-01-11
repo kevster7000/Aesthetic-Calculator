@@ -2,8 +2,9 @@
 
 footer {
     position: absolute;
-    left: 0;
+    right: 0;
     bottom: 0;
-    width: 100%;
-    @include flex(space-between);
+    margin-right: var(--SPACING-XL);
+    margin-bottom: var(--SPACING-LG);
+    @include flex(center, flex-end, column);
 }
