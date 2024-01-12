@@ -1,6 +1,9 @@
 import themes, {colorVariables} from "./themes.js";
 import * as Calc from "./calculator.js";
 
+// TODO - each keyboard shortcut should be place in its own event listener in its respective section
+// const keyboardShortcuts = ["N", "K", "H", "T"]
+
 document.addEventListener("DOMContentLoaded", initApp);
 
 function initApp() {
@@ -12,7 +15,6 @@ function initApp() {
 initThemes();
 
 function initThemes() {
-    const themesContainer = document.querySelector(".themes");
     const themesButton = document.querySelector(".themes__btn");
     const themesPanel = document.querySelector(".themes__panel");
     const themesCloseButton = document.querySelector(`#close-themes`);
@@ -96,148 +98,329 @@ function setThemes(themeStored) {
 /*                                   Calculator                                   */
 /**********************************************************************************/
 
+//i tried to make sure each section has its variable scoped correctly, but these have to be global for history entries
+const panelOutputPrev = document.querySelector(".calculator__panel-output-prev");
+const panelOutputMain = document.querySelector(".calculator__panel-output-main");
+
+const calcButtons = [
+    document.getElementsByClassName("btn-operand"),
+    document.getElementsByClassName("btn-operator"),
+    document.getElementsByClassName("btn-special")
+];
+
+const errorMessage = document.querySelector(".calculator-error");
+let fadeError = undefined;
+let justSubmitted = false;
+let exponentialStopPoint = -1;
+
 initCalc();
 
 function initCalc() {
 
-    const panelOutputPrev = document.querySelector(".calculator__panel-output-prev");
-    const panelOutputMain = document.querySelector(".calculator__panel-output-main");
-
-    const calcButtons = [
-        document.getElementsByClassName("btn-operand"),
-        document.getElementsByClassName("btn-operator"),
-        document.getElementsByClassName("btn-special")
-    ];
-
-    const errorMessage = document.querySelector(".calculator-error");
-    let fadeError = undefined;
-    let justSubmitted = false;
-    let exponentialStopPoint = -1;
-
-    initCalcButtons();
-
-    function initCalcButtons() {
-        //operands & operators
-        for(let i = 0; i < 2; i++) {
-            for(let j = 0; j < calcButtons[i].length; j++) {
-                calcButtons[i][j].addEventListener("click", (event) => {
-
-                    if(exponentialStopPoint !== -1 && panelOutputMain.textContent.length === exponentialStopPoint && ["(", "%", "-", "^", "\u00D7", "\u00F7", "+"].includes(event.target.textContent)) {
-                        panelOutputMain.textContent = "(" + panelOutputMain.textContent + ")";
-                        exponentialStopPoint += 2;
-                    }
-
-                    panelOutputMain.textContent = Calc.handleInput(event.target.textContent, panelOutputMain.textContent, justSubmitted);
-
-                    if(panelOutputMain.textContent.length < exponentialStopPoint) {
-                        exponentialStopPoint = -1;
-                    }
-                    if(justSubmitted && !(panelOutputMain.textContent.length === exponentialStopPoint && event.target.textContent === ")")) {
-                        panelOutputPrev.textContent = "\u00A0";
-                        justSubmitted = false;
-                    }
-                    checkCalcPanelScroll();
-                });
-            }
+    //operands & operators buttons
+    for(let i = 0; i < 2; i++) {
+        for(let j = 0; j < calcButtons[i].length; j++) {
+            calcButtons[i][j].addEventListener("click", (event) => {
+                handleCalcInput(event.target.textContent);
+            });
         }
-
-        //delete
-        calcButtons[2][0].addEventListener("click", () => {
-            if(panelOutputMain.textContent.length <= 1) {
-                panelOutputMain.textContent = "\u00A0";
-            }
-            else {
-                if(panelOutputMain.textContent.includes("e") && panelOutputMain.textContent.length === exponentialStopPoint) {
-                    panelOutputMain.textContent = "\u00A0";
-                    exponentialStopPoint = -1;
-                }
-                else if(panelOutputMain.textContent[panelOutputMain.textContent.length - 2] === ' ') {
-                    panelOutputMain.textContent = panelOutputMain.textContent.slice(0, panelOutputMain.textContent.length - 2);
-                }
-                else {
-                    panelOutputMain.textContent = panelOutputMain.textContent.slice(0, panelOutputMain.textContent.length - 1);
-                }
-            }
-            if(justSubmitted) {
-                panelOutputPrev.textContent = "\u00A0";
-                justSubmitted = false;
-            }
-            checkCalcPanelScroll();
-        });
-
-        //clear
-        calcButtons[2][1].addEventListener("click", () => {
-            panelOutputMain.textContent = "\u00A0";
-            panelOutputPrev.textContent = "\u00A0";
-            exponentialStopPoint = -1;
-            justSubmitted = false;
-            checkCalcPanelScroll();
-        });
-
-        //equals
-        calcButtons[2][2].addEventListener("click", () => {
-            clearTimeout(fadeError);
-            errorMessage.style.setProperty("animation", "unset");
-            void errorMessage.offsetWidth; //the only line i copied from ChatGPT - smth ab resetting this element on the DOM, idk but it works
-
-            if(Calc.validateExpression(panelOutputMain.textContent)) {
-                panelOutputPrev.textContent = panelOutputMain.textContent;
-                panelOutputMain.textContent = Calc.handleSubmit(panelOutputMain.textContent);
-                justSubmitted = true;
-
-                if(panelOutputMain.scrollWidth > panelOutputMain.clientWidth && panelOutputMain.textContent.includes(".")) { //fit width
-                    let resizedMain = new Big(panelOutputMain.textContent);
-                    
-                    while(panelOutputMain.scrollWidth > panelOutputMain.clientWidth) {
-                        resizedMain = new Big(resizedMain.toPrecision(resizedMain.c.length - 1));
-                        panelOutputMain.textContent = resizedMain.toString();
-                        console.log(resizedMain);
-                    }
-                }
-
-                if(panelOutputMain.textContent.includes("e")) {
-                    exponentialStopPoint = panelOutputMain.textContent.length;
-                }
-                else {
-                    exponentialStopPoint = -1;
-                }
-
-                //add to history
-                //addHistoryEntry(panelOutputPrev.textContent, panelOutputMain.textContent);
-            }
-            else {
-                errorMessage.style.setProperty("animation", "fade-out 2.25s ease-in");
-                fadeError = setTimeout(() => errorMessage.style.setProperty("animation", "unset"), 2250);
-            }
-            checkCalcPanelScroll();
-        });
     }
 
-    // check to see if horizontal scrollbar is visible
-    function checkCalcPanelScroll() {
-        if(panelOutputPrev.scrollWidth > panelOutputPrev.clientWidth) {
-            panelOutputPrev.style.setProperty("margin-bottom", "0.25px");
-        }
-        else {
-            panelOutputPrev.style.setProperty("margin-bottom", "3px");
+    //delete button
+    calcButtons[2][0].addEventListener("click", handleCalcDelete);
+
+    //clear button
+    calcButtons[2][1].addEventListener("click", handleCalcClear);
+
+    //equals button
+    calcButtons[2][2].addEventListener("click", handleCalcSubmit);
+
+    //TODO
+    //keyboard integration
+    // multiplication is * => make sure to pass \u00D7
+    // division is / => make sure to pass \u00F7
+    // nbsp is \u00A0
+    const validOperands = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "."];
+    const validOperators = ["(", ")", "%", "-", "^", "*", "/", "+"];
+    const specialCalcKeys = ["Enter", "backspace", "Esc"];
+
+
+    //calculator operands & operators
+    function handleCalcInput(btn) {
+        if(exponentialStopPoint !== -1 && panelOutputMain.textContent.length === exponentialStopPoint && ["(", "%", "-", "^", "\u00D7", "\u00F7", "+"].includes(btn)) {
+            panelOutputMain.textContent = "(" + panelOutputMain.textContent + ")";
+            exponentialStopPoint += 2;
         }
 
-        if(panelOutputMain.scrollWidth > panelOutputMain.clientWidth) {
-            panelOutputMain.style.setProperty("margin-bottom", "0.25px");
+        panelOutputMain.textContent = Calc.handleInput(btn, panelOutputMain.textContent, justSubmitted);
+
+        if(panelOutputMain.textContent.length < exponentialStopPoint) {
+            exponentialStopPoint = -1;
+        }
+        if(justSubmitted && !(panelOutputMain.textContent.length === exponentialStopPoint && btn === ")")) {
+            panelOutputPrev.textContent = "\u00A0";
+            justSubmitted = false;
+        }
+        checkCalcPanelScroll();
+    }
+
+    //calculator delete
+    function handleCalcDelete() {
+        if(panelOutputMain.textContent.length <= 1 || justSubmitted) {
+            panelOutputMain.textContent = "\u00A0";
         }
         else {
-            panelOutputMain.style.setProperty("margin-bottom", "3px");
+            if(panelOutputMain.textContent.includes("e") && panelOutputMain.textContent.length === exponentialStopPoint) {
+                panelOutputMain.textContent = "\u00A0";
+                exponentialStopPoint = -1;
+            }
+            else if(panelOutputMain.textContent[panelOutputMain.textContent.length - 2] === ' ') {
+                panelOutputMain.textContent = panelOutputMain.textContent.slice(0, panelOutputMain.textContent.length - 2);
+            }
+            else {
+                panelOutputMain.textContent = panelOutputMain.textContent.slice(0, panelOutputMain.textContent.length - 1);
+            }
         }
+        if(justSubmitted) {
+            panelOutputPrev.textContent = "\u00A0";
+            justSubmitted = false;
+        }
+        checkCalcPanelScroll();
+    }
+
+    //calculator clear
+    function handleCalcClear() {
+        panelOutputMain.textContent = "\u00A0";
+        panelOutputPrev.textContent = "\u00A0";
+        exponentialStopPoint = -1;
+        justSubmitted = false;
+        checkCalcPanelScroll();
+    }
+
+    //calculator submit
+    function handleCalcSubmit() {
+        clearTimeout(fadeError);
+        errorMessage.style.setProperty("animation", "unset");
+        void errorMessage.offsetWidth;
+
+        if(Calc.validateExpression(panelOutputMain.textContent)) {
+            panelOutputPrev.textContent = panelOutputMain.textContent;
+            panelOutputMain.textContent = Calc.handleSubmit(panelOutputMain.textContent);
+            justSubmitted = true;
+
+            //fit width
+            if(panelOutputMain.scrollWidth > panelOutputMain.clientWidth && panelOutputMain.textContent.includes(".")) {
+                let resizedMain = new Big(panelOutputMain.textContent);
+                
+                while(panelOutputMain.scrollWidth > panelOutputMain.clientWidth) {
+                    resizedMain = new Big(resizedMain.toPrecision(resizedMain.c.length - 1));
+                    panelOutputMain.textContent = resizedMain.toString();
+                    console.log(resizedMain);
+                }
+            }
+
+            if(panelOutputMain.textContent.includes("e")) {
+                exponentialStopPoint = panelOutputMain.textContent.length;
+            }
+            else {
+                exponentialStopPoint = -1;
+            }
+
+            //add to history
+            let time = new Date();
+            addHistoryEntry({
+                id: time.getTime(), 
+                date: time, 
+                input: panelOutputPrev.textContent, 
+                output: panelOutputMain.textContent
+            }, true);
+        }
+        else {
+            errorMessage.style.setProperty("animation", "fade-out 2.25s ease-in");
+            fadeError = setTimeout(() => errorMessage.style.setProperty("animation", "unset"), 2250);
+        }
+        checkCalcPanelScroll();
+    }
+}
+
+// check to see if horizontal scrollbar is visible
+function checkCalcPanelScroll() {
+    if(panelOutputPrev.scrollWidth > panelOutputPrev.clientWidth) {
+        panelOutputPrev.style.setProperty("margin-bottom", "0.25px");
+    }
+    else {
+        panelOutputPrev.style.setProperty("margin-bottom", "3px");
+    }
+
+    if(panelOutputMain.scrollWidth > panelOutputMain.clientWidth) {
+        panelOutputMain.style.setProperty("margin-bottom", "0.25px");
+    }
+    else {
+        panelOutputMain.style.setProperty("margin-bottom", "3px");
     }
 }
 
 /**********************************************************************************/
-/*                                    History                                     */
+/*                                History Entries                                 */
 /**********************************************************************************/
 
 initHistory();
 
 function initHistory() {
+    
+    if(localStorage.getItem("history")) {
+        let entries = JSON.parse(localStorage.getItem("history"));
+        for(let i = 0; i < entries.length; i++) {
+            entries[i].date = new Date(entries[i].id);
+            addHistoryEntry(entries[i], false);
+        }
+        initHistoryButtons();
+    }
+    else {
+        localStorage.setItem("history", "");
+        const historyPanelEntries = document.querySelector(".calculator__history-entries");
+        historyPanelEntries.innerHTML = `<p class="calculator__history-empty">Your history log is empty!</p>`;
+    }
+}
+
+/*  
+    newEntry = {
+        id: number,
+        date: new Date(), 
+        input: string, 
+        output: string
+    } 
+
+    addToLocalStorage = boolean; 
+    - if true, add to local storage, else skip error checking and add to DOM
+*/
+function addHistoryEntry(newEntry, addToLocalStorage) {
+    const currentEntries = document.querySelector(".calculator__history-entries");
+    let loggedEntries;
+    try {
+        loggedEntries = JSON.parse(localStorage.getItem("history"));
+    }
+    catch {
+        loggedEntries = [];
+    }
+
+    //check if empty
+    if(addToLocalStorage) {
+        if(currentEntries.firstElementChild.textContent === "Your history log is empty!") currentEntries.innerHTML = "";
+        else { //check if duplicate
+            let prevInput = currentEntries.lastElementChild.querySelector(".entry-input").textContent;
+            let prevOutput = currentEntries.lastElementChild.querySelector(".entry-output").textContent;
+            if(newEntry.input === prevInput && newEntry.output === prevOutput) return;
+        }
+    }
+
+    const entryTemplate = `
+        <div id="entry${newEntry.id}" class="calculator__history-entry">
+            <div class="entry-header">
+                <p class="entry-header-time">${newEntry.date.toLocaleString()}</p>
+                <button class="entry-header-copy" title="copy"><i class="fa-regular fa-copy"></i></button>
+                <button class="entry-header-delete" title="delete"><i class="fa-regular fa-trash-can"></i></but>
+            </div>
+            <div class="entry-body">
+                <p class="entry-input">${newEntry.input}</p>
+                <p class="entry-output">${newEntry.output}</p>
+            </div>
+        </div>`;
+    
+    //append entry to local storage
+    if(addToLocalStorage) {
+        loggedEntries.push(newEntry);
+        localStorage.setItem("history", JSON.stringify(loggedEntries));
+    }
+
+    //append entry to document
+    currentEntries.innerHTML += entryTemplate;
+    const newEntryElement = document.querySelector(`#entry${newEntry.id}`);
+    
+    //check for overflow/scrollbar
+    const newEntryInput = newEntryElement.querySelector(".entry-input");
+    if(newEntryInput.scrollWidth > newEntryInput.clientWidth) {
+        newEntryInput.style.setProperty("margin-bottom", "0.25px");
+    }
+    else {
+        newEntryInput.style.setProperty("margin-bottom", "3px");
+    }
+
+    if(addToLocalStorage) initHistoryButtons();
+}
+
+function initHistoryButtons() {
+    const entries = document.getElementsByClassName("calculator__history-entry");
+
+    for(let i = 0; i < entries.length; i++) {
+        
+        entries[i].querySelector(".entry-header-copy").addEventListener("click", (event) => {
+            let entry = event.target.parentElement.parentElement;
+            if(entry.classList[0] === "entry-header") entry = entry.parentElement;
+
+            panelOutputPrev.textContent = entry.querySelector(".entry-input").textContent;
+            panelOutputMain.textContent = entry.querySelector(".entry-output").textContent;
+            justSubmitted = true;
+            if(panelOutputMain.textContent.includes("e")) {
+                exponentialStopPoint = panelOutputMain.textContent.length;
+            }
+            else {
+                exponentialStopPoint = -1;
+            }
+        });
+
+        entries[i].querySelector(".entry-header-delete").addEventListener("click", (event) => {
+            let entry = event.target.parentElement.parentElement;
+            if(entry.classList[0] === "entry-header") entry = entry.parentElement;
+
+            entry.remove();
+
+            const entriesContainer = document.querySelector(".calculator__history-entries")
+
+            if(entriesContainer.children.length === 0) {
+                entriesContainer.innerHTML = `<p class="calculator__history-empty">Your history log is empty!</p>`;
+                localStorage.setItem("history", "");
+            }
+            else {
+                const loggedEntries = JSON.parse(localStorage.getItem("history"));
+                loggedEntries.splice(binarySearchForID(Number(entry.id.slice(5))), 1);
+                localStorage.setItem("history", JSON.stringify(loggedEntries));
+            }
+        });
+    }
+}
+
+function binarySearchForID(targetID) {
+    const loggedEntries = JSON.parse(localStorage.getItem("history"));
+    let low = 0;
+    let high = loggedEntries.length - 1;
+    let mid = undefined;
+
+    while(high >= low) {
+        mid = low + Math.floor((high - low) / 2);
+
+        if(loggedEntries[mid].id === targetID) {
+            return mid;
+        }
+        
+        if(loggedEntries[mid].id < targetID) {
+            low = mid + 1;
+        }
+        else if(loggedEntries[mid].id > targetID) {
+            high = mid - 1;
+        }
+    }
+
+    return -1;
+}
+
+/**********************************************************************************/
+/*                                 History Panel                                  */
+/**********************************************************************************/
+
+initHistoryPanel();
+
+function initHistoryPanel() {
     const historyButton = document.querySelector("#calculator-history-btn");
     const historyCloseButton = document.querySelector("#close-history");
     const historyPanel = document.querySelector(".calculator__history");
@@ -246,11 +429,9 @@ function initHistory() {
     const historyClearBtn = historyPanelHeader.querySelector("button");
     let historyClicked = false;
 
-    loadHistory();
-
     historyClearBtn.addEventListener("click", clearHistory);
     historyButton.addEventListener("click", toggleHistoryPanel);
-    if(JSON.parse(sessionStorage.getItem("HistoryPanelOpen"))) toggleHistoryPanel(); //TODO - disable this for mobile
+    if(JSON.parse(sessionStorage.getItem("HistoryPanelOpen"))) toggleHistoryPanel(); // TODO - disable this for mobile && window.innerWidth >= ___px
 
     function toggleHistoryPanel() {
         historyButton.classList.toggle("history-active");
@@ -272,99 +453,15 @@ function initHistory() {
 
     function clearHistory() {
         localStorage.setItem("history", "");
-        loadHistory();
+        historyPanelEntries.innerHTML = `<p class="calculator__history-empty">Your history log is empty!</p>`;
     }
 }
-
-function loadHistory() {
-    if(localStorage.getItem("history")) {
-        /*
-        let entries = JSON.parse(localStorage.getItem("history"));
-        for(let i = 0; i < entries.length) {
-            addHistoryEntry(entries[i]);
-        }
-        */
-        checkEntriesScroll();
-    }
-    else {
-        // TODO add an empty text in the history panel
-    }
-
-
-    function checkEntriesScroll() {
-        const entryInputs = document.querySelectorAll(".entry-input");
-        
-        for(let i = 0; i < entryInputs.length; i++) {
-            if(entryInputs[i].scrollWidth > entryInputs[i].clientWidth) {
-                entryInputs[i].style.setProperty("margin-bottom", "0.25px");
-            }
-            else {
-                entryInputs[i].style.setProperty("margin-bottom", "3px");
-            }
-        }
-    }
-}
-
-/* this function is used in the calculator section :)
-takes an obj: {
-    date: new Date(), 
-    input: string, 
-    output: string
-} */
-
-
-// TODO - YO SHIT VERY MESSY KEV GET YO SELF TOGETHER - draw it out or sum idk but this code u got for history is absolutely nefariously dogpoo
-
-
-function addHistoryEntry(newEntry) {
-    let entries = JSON.parse(localStorage.getItem("history"));
-
-    const entryTemplate = `
-        <div id="entry${newEntry.date.getTime()}" class="calculator__history-entry">
-            <div class="entry-header">
-                <p class="entry-header-time">${newEntry.date.toLocaleString()}</p>
-                <button class="entry-header-copy" title="copy"><i class="fa-regular fa-copy"></i></button>
-                <button class="entry-header-delete" title="delete"><i class="fa-regular fa-trash-can"></i></but>
-            </div>
-            <div class="entry-body">
-                <p class="entry-input">${newEntry.input}</p>
-                <p class="entry-output">${newEntry.output}</p>
-            </div>
-        </div>`;
-    
-        //TODO
-    
-    // two things - create a new element and store the time/input/ouput in local storage !!!!!!!important local storage, not session
-    // everytime the page loads, load the calc history too -> TODO - add it to initHistory()
-    // the time is gonna be mm/dd/yyyy hh:mm XM
-    // as for the key, idk yet
-    // storing the data, idk either; maybe just an array of objects
-    
-
-    // anywho, every entry is a new element that has two event listeners - copy and delete - very self explanatory
-}
-
-/* 
-    everytime the user hits enter or clicks =, if no error, store the displayed expression string as the key and the result as the value in session storage
-    If the user hits the history button, display all of these key/value pairs in session storage on the side of the calculator.
-*/
-
-/* 
-CLicking on an entry in the history panel will copy it to the calculator
-each entry should also have an option to delete
-
-At the top of the history panel, there should be a clear button that really just clears the session storage
-
-Once the window gets too small for the history panel to open up on the side, it will instead be integrated into the calculator.
-Sort of like a dropdown, the history panel will slide down from the top of the calculator, but leaves the calculator panel visible.
-
-*/
 
 /**********************************************************************************/
 /*                                Button Navigation                               */
 /**********************************************************************************/
 
-// TODO create a new js file for this 2D array of stuff - also search up HTML tabindex
+// TODO - navigation.js - 2D array of stuff - also search up HTML tabindex
 // For all buttons, Remove the fact that you can hit enter and it clicks (only spacebar and click to hit a button)
 // instead, enter will submit the current expression at all times
 
@@ -372,6 +469,7 @@ Sort of like a dropdown, the history panel will slide down from the top of the c
 /*                            Keyboard Shortcuts Panel                            */
 /**********************************************************************************/
 
+//TODO - this will be diplay:none on mobile, so make a condition (window.innerWidth) to see if you should execute this function
 initKeyboardShortcuts();
 
 function initKeyboardShortcuts() {
@@ -382,7 +480,7 @@ function initKeyboardShortcuts() {
     let keyboardShortcutsClicked = false;
     let linesDrawn = false;
 
-    if(JSON.parse(sessionStorage.getItem("KeyboardShortcutsOpen"))) toggleKeyboardShortcuts(); //TODO - disable this for mobile
+    if(JSON.parse(sessionStorage.getItem("KeyboardShortcutsOpen"))) toggleKeyboardShortcuts();
     keyboardShortcutsButton.addEventListener("click", toggleKeyboardShortcuts);
 
     function toggleKeyboardShortcuts() {

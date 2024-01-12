@@ -6,6 +6,11 @@
     margin-bottom: 0;
     color: var(--TEXT-COLOR);
 
+    // this is for mobile - obv, add a transition
+    // position: relative;
+    // top: 100%;
+    // translate: 0 -100%;
+
     h3 {
         @extend %offscreen;
     }

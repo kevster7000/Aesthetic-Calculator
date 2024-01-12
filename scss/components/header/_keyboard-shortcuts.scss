@@ -41,6 +41,10 @@
     }
 
     &__panel {
+
+        //TODO - i alr know that this gonna cause problems with responsiveness
+        // Maybe, wrap the entire table (panel) in a div????
+
         display: none;
         @include neumorphic(FOOTER);
         padding: var(--SPACING-MD);

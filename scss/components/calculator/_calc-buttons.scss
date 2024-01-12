@@ -7,6 +7,11 @@
     padding: var(--SPACING-MD);
     padding-top: var(--SPACING-SM);
 
+    // this is for mobile
+    // transition: translate 3s ease-out;
+    // position: relative;
+    // translate: 0 100%;
+
     h3 {
         @extend %offscreen;
     }

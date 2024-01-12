@@ -1,5 +1,11 @@
 @use "./../../abstracts" as *;
 
+/*
+TODO
+Once the window gets too small for the history panel to open up on the side, it will instead be integrated into the calculator.
+Sort of like a dropdown, the history panel will slide down from the top of the calculator, but leaves the calculator panel visible.
+*/
+
 .calculator__history {
     @include neumorphic(CALC);
     width: clamp(150px, 50vw, 325px);
@@ -10,6 +16,13 @@
     display: none;
     animation: hide-history-panel 0.35s 0.05s backwards;
     color: var(--TEXT-COLOR);
+
+    // this is for mobile
+    // position: absolute;
+    // z-index: 2;
+    // width: clamp(250px, 85vw, 475px); //need to apply this to the show-history-panel keyframe as well
+    // // actually, you would need to change the entire show-history-panel keyframe
+    // // dont include neumorphic
 
     &.history-panel-active {
         @include flex(unset, unset, column);
@@ -26,7 +39,7 @@
         }
         to { 
             opacity: 1;
-            width: 325px;
+            width: clamp(150px, 50vw, 325px);
         }
     }
 
@@ -34,7 +47,7 @@
         from { 
             @include flex(unset, unset, column);
             opacity: 1;
-            width: 325px; 
+            width: clamp(150px, 50vw, 325px);
         }
         70% {
             opacity: 0.5;
@@ -61,9 +74,8 @@
 
         button {
             @include neumorphic-btn(HEADER);
-            width: 30%;
             margin-right: var(--SPACING-XS);
-            padding: var(--SPACING-MD) var(--SPACING-SM);
+            padding: var(--SPACING-MD) calc(var(--SPACING-XL) + var(--SPACING-SM));
         }
     }
 
@@ -97,10 +109,15 @@
             background: var(--CALC-SCROLLBAR-HOVER);
         }
 
+        .calculator__history-empty {
+            text-align: center;
+        }
+
         .calculator__history-entry {
             @include flex(center, flex-end, column);
             border-top: 1px solid var(--CALC-HISTORY-BORDER-COLOR);
             padding: var(--SPACING-MD) 0;
+            overflow: hidden;
 
             .entry-header {
                 width: 100%;
@@ -109,6 +126,7 @@
                 &-time {
                     flex-grow: 1;
                     padding-left: var(--SPACING-MD);
+                    @extend %nowrap;
                 }
 
                 &-copy, &-delete {
@@ -169,6 +187,8 @@
                     width: 100%;
                     font-size: 1.5rem;
                     text-align: right;
+
+                    // for mobile, make the font-size the same as the main
                 }
             }
         }

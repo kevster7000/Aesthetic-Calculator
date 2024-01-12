@@ -72,7 +72,7 @@
   left: -10000px;
 }
 
-header h1, .calculator__panel-output-main, .calculator__panel-output-prev {
+header h1, .calculator__history-entries .calculator__history-entry .entry-header-time, .calculator__panel-output-main, .calculator__panel-output-prev {
   white-space: nowrap;
 }
 
@@ -364,6 +364,11 @@ form, input, button, label, textarea {
   background: var(--CALC-SCROLLBAR-HOVER);
 }
 
+/*
+TODO
+Once the window gets too small for the history panel to open up on the side, it will instead be integrated into the calculator.
+Sort of like a dropdown, the history panel will slide down from the top of the calculator, but leaves the calculator panel visible.
+*/
 .calculator__history {
   background-color: var(--CALC-BG-LIGHT);
   background-image: linear-gradient(135deg, var(--CALC-BG-DARK), var(--CALC-BG-LIGHT), var(--CALC-BG-LIGHT), var(--CALC-BG-DARK));
@@ -403,7 +408,7 @@ form, input, button, label, textarea {
   }
   to {
     opacity: 1;
-    width: 325px;
+    width: clamp(150px, 50vw, 325px);
   }
 }
 @keyframes hide-history-panel {
@@ -417,7 +422,7 @@ form, input, button, label, textarea {
     -ms-flex-flow: column nowrap;
         flex-flow: column nowrap;
     opacity: 1;
-    width: 325px;
+    width: clamp(150px, 50vw, 325px);
   }
   70% {
     opacity: 0.5;
@@ -454,9 +459,8 @@ form, input, button, label, textarea {
   color: var(--TEXT-COLOR);
   cursor: pointer;
   transition: border-radius 0.25s, filter 0.25s, text-shadow 0.125s, box-shadow 0.25s, scale 0.125s;
-  width: 30%;
   margin-right: var(--SPACING-XS);
-  padding: var(--SPACING-MD) var(--SPACING-SM);
+  padding: var(--SPACING-MD) calc(var(--SPACING-XL) + var(--SPACING-SM));
 }
 .calculator__history-header button:hover, .calculator__history-header button:focus-visible {
   filter: brightness(var(--BTN-HOVER-BRIGHTNESS));
@@ -492,6 +496,9 @@ form, input, button, label, textarea {
 .calculator__history-entries::-webkit-scrollbar-thumb:hover {
   background: var(--CALC-SCROLLBAR-HOVER);
 }
+.calculator__history-entries .calculator__history-empty {
+  text-align: center;
+}
 .calculator__history-entries .calculator__history-entry {
   display: -ms-flexbox;
   display: flex;
@@ -503,6 +510,7 @@ form, input, button, label, textarea {
       flex-flow: column nowrap;
   border-top: 1px solid var(--CALC-HISTORY-BORDER-COLOR);
   padding: var(--SPACING-MD) 0;
+  overflow: hidden;
 }
 .calculator__history-entries .calculator__history-entry .entry-header {
   width: 100%;
@@ -950,6 +958,7 @@ footer {
   padding: var(--SPACING-MD);
   position: relative;
   z-index: 1;
+  overflow: hidden;
 }
 
 body {

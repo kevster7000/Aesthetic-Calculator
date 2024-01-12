@@ -12,7 +12,7 @@ export function handleInput(btn, currExp, justSubmitted) {
     //ik this is very ugly, sry
 
     let newExp = currExp;
-    currExp = currExp.replaceAll(" ", ""); //bye whitespace
+    currExp = currExp.replaceAll(" ", "");
 
     const validOperators = ["(", ")", "%", "-", "^", "\u00D7", "\u00F7", "+"];
 
@@ -110,7 +110,7 @@ export function handleInput(btn, currExp, justSubmitted) {
     }
     else if(btn === ")") {
         if( (currExp.split("(").length > currExp.split(")").length) &&  //match ( ) amount
-            (validOperands.includes(currExp[currExp.length - 1]) || currExp[currExp.length - 1] === '%' || currExp[currExp.length - 1] === ')')) { //make sure valid ) 
+            (validOperands.includes(currExp[currExp.length - 1]) || currExp[currExp.length - 1] === '%' || currExp[currExp.length - 1] === ')')) { //make sure valid 
             newExp += btn;
         }
     }
@@ -124,32 +124,6 @@ export function handleInput(btn, currExp, justSubmitted) {
     }
     
     return newExp;
-}
-
-export function handleKeyboardInput() {
-
-    //maneuvering between buttons is done in navigation.js, not here ty
-
-    // multiplication is * => make sure to pass \u00D7
-    // division is / => make sure to pass \u00F7
-    // nbsp is \u00A0
-    const validOperators = ["(", ")", "%", "-", "^", "*", "/", "+"];
-
-    const specialCalcKeys = ["Enter", "backspace", "Esc"];
-    const keyboardShortcuts = ["N", "K", "H", "T"]
-
-
-    //TODO - utilize the above function and add some keyabord shortcuts
-
-    /*window.addEventListener("keydown", (event) => { //the event listener goes in main
-        if(validKeys.includes(event.key)) { //this is where the handleKeyboardInput() func goes in main
-            //error handling //this error handling is the purpose of this function
-    
-            
-        }
-
-    });*/
-    console.log("keyboard input");
 }
 
 export function validateExpression(exp) {
