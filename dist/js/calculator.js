@@ -1,9 +1,10 @@
 //using Big.js: https://mikemcl.github.io/big.js/
-Big.DP = 40;
-Big.PE = 20;
+Big.DP = 30;
+Big.PE = 16;
 Big.NE = -7;
 
 const validOperands = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "."];
+let exponentialStore = "";
 
 export function handleInput(btn, currExp, justSubmitted) {
 
@@ -12,6 +13,7 @@ export function handleInput(btn, currExp, justSubmitted) {
 
     let newExp = currExp;
     currExp = currExp.replaceAll(" ", ""); //bye whitespace
+
     const validOperators = ["(", ")", "%", "-", "^", "\u00D7", "\u00F7", "+"];
 
     const completeParenthesis = currExp[currExp.length - 1] === ")" && currExp !== "(";
@@ -76,7 +78,7 @@ export function handleInput(btn, currExp, justSubmitted) {
             if(btn === "^") newExp += btn;
             else newExp += " " + btn;
         }
-        else if(validOperators.slice(3).includes(currExp[currExp.length - 1]) && !validOperators.slice(3).includes(currExp[currExp.length - 2])) { //switching operators
+        else if(validOperators.slice(3).includes(currExp[currExp.length - 1]) && !validOperators.slice(3).includes(currExp[currExp.length - 2]) && currExp.slice(currExp.length - 2, currExp.length) !== "(-" && currExp != "-") { //switching operators
             newExp = newExp.slice(0, newExp.length - 1) + btn;
         }
     } 
@@ -91,7 +93,7 @@ export function handleInput(btn, currExp, justSubmitted) {
         else if(currExp === "\u00A0") { //if empty
             newExp = btn;
         }
-        else if(currExp[currExp.length - 1] === '(') { //following an open parenthesis -> basically is empty
+        else if(currExp[currExp.length - 1] === '(') { //following an open parenthesis
             newExp += btn;
         }
     }
@@ -118,7 +120,7 @@ export function handleInput(btn, currExp, justSubmitted) {
         }
     }
     else {
-        console.error(`No such input: ${btn}`); //:)
+        console.error(`No such input: ${btn}`);
     }
     
     return newExp;
@@ -157,7 +159,7 @@ export function validateExpression(exp) {
     if(["(", "-", "^", "\u00D7", "/", "+"].includes(exp[exp.length - 1])) return false; //if ending with an operator
     if(exp[exp.length - 1] === '.' && isNaN(exp[exp.length - 2])) return false; //if ending with an incomplete float
 
-    exp += "~";
+    exp += "~"; //account for edge case
     const divisionByZeroRegex = /\/0[\(\)\%\-\+\*\/\^\~]|\/0\.0*\D|\/\.0+\D/g;
     if(exp.search(divisionByZeroRegex) !== -1) return false; //if division by zero exists
     
@@ -175,6 +177,19 @@ function parseToInfix(exp) {
     //this is just to make it easier for me
     exp = exp.replaceAll("\u00D7", "*");
     exp = exp.replaceAll("\u00F7", "/");
+
+    //parse out exponential
+    if(exp.includes("e")) {
+        let i = exp.indexOf('e') + 2;
+        while(!isNaN(exp[i]) && i < exp.length) {
+            i++;
+        }
+        exponentialStore = exp.slice(exp.indexOf("e"), i);
+        exp = exp.slice(0, exp.indexOf("e")) + exp.slice(i);
+    }
+    else {
+        exponentialStore = "";
+    }
 
     //match parentheses
     const openParanthesisNum = exp.split("(").length - 1;
@@ -283,7 +298,7 @@ function infixToPostfix(infixExp) {
 
         if(!validOperands.includes(infixExp[i])) {
             if(i >= infixExp.length) break;
-            if(infixExp[i] === '-' && (i === 0 || unaryConditions.includes(infixExp[i-1]))) { //unary
+            if(infixExp[i] === '-' && (i === 0 || unaryConditions.includes(infixExp[i - 1]))) { //unary
                 if(postfixExp.length === 0) postfixExp += infixExp[i] + "u";
                 else postfixExp += " " + infixExp[i] + "u";
             }
@@ -338,6 +353,7 @@ function infixToPostfix(infixExp) {
 
 function postfixToOutput(exp) {
     let valStack = [];
+    let firstOperand = true;
     let i = 0;
 
     while(i < exp.length) {
@@ -364,6 +380,12 @@ function postfixToOutput(exp) {
             let num = new Big(temp);
             if(neg) num.s = -1;
             valStack.push(num.toString());
+
+            if(firstOperand && exponentialStore.length !== 0) {
+                valStack[0] = valStack[0] + exponentialStore;
+                firstOperand = false;
+                exponentialStore = "";
+            }
         }
 
         //console.log(valStack);
@@ -390,7 +412,14 @@ function postfixToOutput(exp) {
                     valStack[valStack.length - 1] = result.toString();
                     break;
                 case "^":
-                    result = new Big(valStack[valStack.length - 2]).pow(new Big(valStack.pop()));
+                    let top = Number(valStack.pop());
+                    try {
+                        result = new Big(valStack[valStack.length - 1]).pow(top);
+                    }
+                    catch {
+                        console.log("Unprecise Calculation");
+                        result = Number(valStack[valStack.length - 1]) ** (top);
+                    }
                     valStack[valStack.length - 1] = result.toString();
                     break;
             }

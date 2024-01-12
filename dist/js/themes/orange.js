@@ -31,16 +31,16 @@ const orangeTheme = [
     "hsl(40, 28%, 73%)", //btn bg operator light
     "hsla(40, 28%, 73%, 0.8)", //btn bg operator light 80
     "hsla(40, 28%, 73%, 0.6)", //btn bg operator light 60
-    "hsl(25, 17%, 51%)", //btn bg operator dark
-    "hsla(25, 17%, 51%, 0.8)", //btn bg operator dark 80
-    "hsla(25, 17%, 51%, 0.6)", //btn bg operator dark 60
+    "hsl(25, 17%, 52%)", //btn bg operator dark
+    "hsla(25, 17%, 52%, 0.8)", //btn bg operator dark 80
+    "hsla(25, 17%, 52%, 0.6)", //btn bg operator dark 60
 
     "hsl(104, 28%, 74%)", //btn bg special light
     "hsla(104, 28%, 74%, 0.8)", //btn bg special light 80
     "hsla(104, 28%, 74%, 0.6)", //btn bg special light 60
-    "hsl(135, 22%, 48%)", //btn bg special dark
-    "hsla(135, 22%, 48%, 0.8)", //btn bg special dark 80
-    "hsla(135, 22%, 48%, 0.6)", //btn bg special dark 60
+    "hsl(135, 22%, 49%)", //btn bg special dark
+    "hsla(135, 22%, 49%, 0.8)", //btn bg special dark 80
+    "hsla(135, 22%, 49%, 0.6)", //btn bg special dark 60
 
     "hsla(27, 51%, 30%, 0.5)", //btn shadow
 

@@ -31,16 +31,16 @@ const blackTheme = [
     "hsl(35, 70%, 61%)", //btn bg operator light
     "hsla(35, 70%, 61%, 0.8)", //btn bg operator light 80
     "hsla(35, 70%, 61%, 0.6)", //btn bg operator light 60
-    "hsl(27, 59%, 41%)", //btn bg operator dark
-    "hsla(27, 59%, 41%, 0.8)", //btn bg operator dark 80
-    "hsla(27, 59%, 41%, 0.6)", //btn bg operator dark 60
+    "hsl(27, 59%, 42%)", //btn bg operator dark
+    "hsla(27, 59%, 42%, 0.8)", //btn bg operator dark 80
+    "hsla(27, 59%, 42%, 0.6)", //btn bg operator dark 60
 
     "hsl(205, 12%, 67%)", //btn bg special light
     "hsla(205, 12%, 67%, 0.8)", //btn bg special light 80
     "hsla(205, 12%, 67%, 0.6)", //btn bg special light 60
-    "hsl(209, 7%, 36%)", //btn bg special dark
-    "hsla(209, 7%, 36%, 0.8)", //btn bg special dark 80
-    "hsla(209, 7%, 36%, 0.6)", //btn bg special dark 60
+    "hsl(209, 7%, 39%)", //btn bg special dark
+    "hsla(209, 7%, 39%, 0.8)", //btn bg special dark 80
+    "hsla(209, 7%, 39%, 0.6)", //btn bg special dark 60
 
     "hsla(0, 0%, 2%, 0.7)", //btn shadow
 

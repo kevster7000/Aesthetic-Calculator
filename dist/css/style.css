@@ -173,13 +173,6 @@ form, input, button, label, textarea {
   width: 85%;
   height: 85%;
 }
-.calculator__btns #calculator__theme-header {
-  font-size: 1.3rem;
-  grid-column: 1/3;
-}
-.calculator__btns #calculator__theme-header::before {
-  width: 93%;
-}
 .calculator__btns .btn-operand {
   color: var(--TEXT-COLOR);
   background-color: var(--BTN-BG-OPERAND-LIGHT);
@@ -202,15 +195,29 @@ form, input, button, label, textarea {
 .calculator__btns .btn-operator:hover, .calculator__btns .btn-operator:focus-visible {
   text-shadow: var(--BTN-TEXT-SHADOW-OPERATOR);
 }
-.calculator__btns .btn-special, .calculator__btns #calculator__theme-header {
+.calculator__btns .btn-special {
   color: var(--TEXT-COLOR-OPPOSITE);
   background-color: var(--BTN-BG-SPECIAL-LIGHT);
   background-image: linear-gradient(135deg, var(--BTN-BG-SPECIAL-LIGHT), var(--BTN-BG-SPECIAL-DARK));
 }
-.calculator__btns .btn-special::before, .calculator__btns #calculator__theme-header::before {
+.calculator__btns .btn-special::before {
   background-image: linear-gradient(135deg, var(--BTN-BG-SPECIAL-DARK80), var(--BTN-BG-SPECIAL-DARK60), transparent, var(--BTN-BG-SPECIAL-LIGHT60), var(--BTN-BG-SPECIAL-LIGHT80));
 }
-.calculator__btns .btn-special:hover, .calculator__btns .btn-special:focus-visible, .calculator__btns #calculator__theme-header:hover, .calculator__btns #calculator__theme-header:focus-visible {
+.calculator__btns .btn-special:hover, .calculator__btns .btn-special:focus-visible {
+  text-shadow: var(--BTN-TEXT-SHADOW-SPECIAL);
+}
+.calculator__btns #calculator__theme-header {
+  font-size: 1.3rem;
+  grid-column: 1/3;
+  color: var(--TEXT-COLOR-OPPOSITE);
+  background-color: var(--BTN-BG-SPECIAL-LIGHT);
+  background-image: linear-gradient(150deg, var(--BTN-BG-SPECIAL-LIGHT), var(--BTN-BG-SPECIAL-DARK));
+}
+.calculator__btns #calculator__theme-header::before {
+  width: 93%;
+  background-image: linear-gradient(150deg, var(--BTN-BG-SPECIAL-DARK80), var(--BTN-BG-SPECIAL-DARK60), transparent, var(--BTN-BG-SPECIAL-LIGHT60), var(--BTN-BG-SPECIAL-LIGHT80));
+}
+.calculator__btns #calculator__theme-header:hover, .calculator__btns #calculator__theme-header:focus-visible {
   text-shadow: var(--BTN-TEXT-SHADOW-SPECIAL);
 }
 .calculator__btns #btn-eq, .calculator__btns #btn-add, .calculator__btns #btn-sub, .calculator__btns #btn-mul, .calculator__btns #btn-div, .calculator__btns #btn-exp, .calculator__btns #btn-dec {

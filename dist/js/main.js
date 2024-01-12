@@ -21,16 +21,12 @@ function initThemes() {
 
     themesButton.addEventListener("click", toggleThemesPanel);
 
-    // TODO - create a click away function.
-    // IF themes panel is open and the user clicks outside of it, the panel will close
-    /* window.addEventListener("click", (event) => {
-        if(themesPanel.classList[1] === "panel-active" && 
-            ((event.clientX < themesContainer.offsetLeft || event.clientX > themesContainer.offsetLeft + themesContainer.offsetWidth) || 
-            (event.clientY < themesContainer.offsetTop || event.clientY > themesContainer.offsetTop + themesContainer.offsetHeight))) {
-            console.log("asd");
-            //toggleThemesPanel();
+    //click away
+    window.addEventListener("click", (event) => {
+        if(themesPanel.classList[1] === "panel-active" && !themesPanel.contains(event.target) && !themesButton.contains(event.target)) {
+            toggleThemesPanel();
         }
-    }) */
+    })
 
     function toggleThemesPanel() {
         themesPanel.classList.toggle("panel-active");
@@ -116,6 +112,7 @@ function initCalc() {
     const errorMessage = document.querySelector(".calculator-error");
     let fadeError = undefined;
     let justSubmitted = false;
+    let exponentialStopPoint = -1;
 
     initCalcButtons();
 
@@ -124,9 +121,21 @@ function initCalc() {
         for(let i = 0; i < 2; i++) {
             for(let j = 0; j < calcButtons[i].length; j++) {
                 calcButtons[i][j].addEventListener("click", (event) => {
+
+                    if(exponentialStopPoint !== -1 && panelOutputMain.textContent.length === exponentialStopPoint && ["(", "%", "-", "^", "\u00D7", "\u00F7", "+"].includes(event.target.textContent)) {
+                        panelOutputMain.textContent = "(" + panelOutputMain.textContent + ")";
+                        exponentialStopPoint += 2;
+                    }
+
                     panelOutputMain.textContent = Calc.handleInput(event.target.textContent, panelOutputMain.textContent, justSubmitted);
-                    if(justSubmitted) panelOutputPrev.textContent = "\u00A0";
-                    justSubmitted = false;
+
+                    if(panelOutputMain.textContent.length < exponentialStopPoint) {
+                        exponentialStopPoint = -1;
+                    }
+                    if(justSubmitted && !(panelOutputMain.textContent.length === exponentialStopPoint && event.target.textContent === ")")) {
+                        panelOutputPrev.textContent = "\u00A0";
+                        justSubmitted = false;
+                    }
                     checkCalcPanelScroll();
                 });
             }
@@ -138,8 +147,9 @@ function initCalc() {
                 panelOutputMain.textContent = "\u00A0";
             }
             else {
-                if(panelOutputMain.textContent.includes("e")) {
-                    console.log('a')
+                if(panelOutputMain.textContent.includes("e") && panelOutputMain.textContent.length === exponentialStopPoint) {
+                    panelOutputMain.textContent = "\u00A0";
+                    exponentialStopPoint = -1;
                 }
                 else if(panelOutputMain.textContent[panelOutputMain.textContent.length - 2] === ' ') {
                     panelOutputMain.textContent = panelOutputMain.textContent.slice(0, panelOutputMain.textContent.length - 2);
@@ -148,8 +158,10 @@ function initCalc() {
                     panelOutputMain.textContent = panelOutputMain.textContent.slice(0, panelOutputMain.textContent.length - 1);
                 }
             }
-            if(justSubmitted) panelOutputPrev.textContent = "\u00A0";
-            justSubmitted = false;
+            if(justSubmitted) {
+                panelOutputPrev.textContent = "\u00A0";
+                justSubmitted = false;
+            }
             checkCalcPanelScroll();
         });
 
@@ -157,6 +169,7 @@ function initCalc() {
         calcButtons[2][1].addEventListener("click", () => {
             panelOutputMain.textContent = "\u00A0";
             panelOutputPrev.textContent = "\u00A0";
+            exponentialStopPoint = -1;
             justSubmitted = false;
             checkCalcPanelScroll();
         });
@@ -165,12 +178,30 @@ function initCalc() {
         calcButtons[2][2].addEventListener("click", () => {
             clearTimeout(fadeError);
             errorMessage.style.setProperty("animation", "unset");
-            void errorMessage.offsetWidth;
+            void errorMessage.offsetWidth; //the only line i copied from ChatGPT - smth ab resetting this element on the DOM, idk but it works
 
             if(Calc.validateExpression(panelOutputMain.textContent)) {
                 panelOutputPrev.textContent = panelOutputMain.textContent;
                 panelOutputMain.textContent = Calc.handleSubmit(panelOutputMain.textContent);
                 justSubmitted = true;
+
+                if(panelOutputMain.scrollWidth > panelOutputMain.clientWidth && panelOutputMain.textContent.includes(".")) { //fit width
+                    let resizedMain = new Big(panelOutputMain.textContent);
+                    
+                    while(panelOutputMain.scrollWidth > panelOutputMain.clientWidth) {
+                        resizedMain = new Big(resizedMain.toPrecision(resizedMain.c.length - 1));
+                        panelOutputMain.textContent = resizedMain.toString();
+                        console.log(resizedMain);
+                    }
+                }
+
+                if(panelOutputMain.textContent.includes("e")) {
+                    exponentialStopPoint = panelOutputMain.textContent.length;
+                }
+                else {
+                    exponentialStopPoint = -1;
+                }
+
                 //add to history
                 //addHistoryEntry(panelOutputPrev.textContent, panelOutputMain.textContent);
             }
@@ -212,18 +243,20 @@ function initHistory() {
     const historyPanel = document.querySelector(".calculator__history");
     const historyPanelEntries = document.querySelector(".calculator__history-entries");
     const historyPanelHeader = document.querySelector(".calculator__history-header");
+    const historyClearBtn = historyPanelHeader.querySelector("button");
     let historyClicked = false;
 
-    if(JSON.parse(sessionStorage.getItem("HistoryPanelOpen"))) toggleHistoryPanel(); //TODO - disable this for mobile
+    loadHistory();
+
+    historyClearBtn.addEventListener("click", clearHistory);
     historyButton.addEventListener("click", toggleHistoryPanel);
+    if(JSON.parse(sessionStorage.getItem("HistoryPanelOpen"))) toggleHistoryPanel(); //TODO - disable this for mobile
 
     function toggleHistoryPanel() {
         historyButton.classList.toggle("history-active");
         historyPanel.classList.toggle("history-panel-active");
         historyPanelEntries.classList.toggle("entries-active");
         historyPanelHeader.classList.toggle("history-header-active");
-
-        checkEntriesScroll();
 
         if(historyClicked) {
             historyCloseButton.style.setProperty("animation", "fade-out 0.25s forwards");
@@ -236,6 +269,27 @@ function initHistory() {
             sessionStorage.setItem("HistoryPanelOpen", true);
         }
     }
+
+    function clearHistory() {
+        localStorage.setItem("history", "");
+        loadHistory();
+    }
+}
+
+function loadHistory() {
+    if(localStorage.getItem("history")) {
+        /*
+        let entries = JSON.parse(localStorage.getItem("history"));
+        for(let i = 0; i < entries.length) {
+            addHistoryEntry(entries[i]);
+        }
+        */
+        checkEntriesScroll();
+    }
+    else {
+        // TODO add an empty text in the history panel
+    }
+
 
     function checkEntriesScroll() {
         const entryInputs = document.querySelectorAll(".entry-input");
@@ -251,9 +305,34 @@ function initHistory() {
     }
 }
 
-//this function is used in the calculator section :)
-function addHistoryEntry(input, output) {
-    console.log("TODO headass");
+/* this function is used in the calculator section :)
+takes an obj: {
+    date: new Date(), 
+    input: string, 
+    output: string
+} */
+
+
+// TODO - YO SHIT VERY MESSY KEV GET YO SELF TOGETHER - draw it out or sum idk but this code u got for history is absolutely nefariously dogpoo
+
+
+function addHistoryEntry(newEntry) {
+    let entries = JSON.parse(localStorage.getItem("history"));
+
+    const entryTemplate = `
+        <div id="entry${newEntry.date.getTime()}" class="calculator__history-entry">
+            <div class="entry-header">
+                <p class="entry-header-time">${newEntry.date.toLocaleString()}</p>
+                <button class="entry-header-copy" title="copy"><i class="fa-regular fa-copy"></i></button>
+                <button class="entry-header-delete" title="delete"><i class="fa-regular fa-trash-can"></i></but>
+            </div>
+            <div class="entry-body">
+                <p class="entry-input">${newEntry.input}</p>
+                <p class="entry-output">${newEntry.output}</p>
+            </div>
+        </div>`;
+    
+        //TODO
     
     // two things - create a new element and store the time/input/ouput in local storage !!!!!!!important local storage, not session
     // everytime the page loads, load the calc history too -> TODO - add it to initHistory()
@@ -269,9 +348,6 @@ function addHistoryEntry(input, output) {
     everytime the user hits enter or clicks =, if no error, store the displayed expression string as the key and the result as the value in session storage
     If the user hits the history button, display all of these key/value pairs in session storage on the side of the calculator.
 */
-
-// USE session storage to store history
-
 
 /* 
 CLicking on an entry in the history panel will copy it to the calculator
