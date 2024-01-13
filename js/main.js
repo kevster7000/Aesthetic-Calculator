@@ -147,6 +147,11 @@ async function newBackgroundImage() {
         let currTheme = getTheme();
         if(currTheme === "limeGreen") currTheme = "lime green";
         const response = await fetch(`https://source.unsplash.com/random/${window.innerWidth}x${window.innerHeight}/?${currTheme}`);
+
+        if(!response.ok) {
+            throw new Error();
+        }
+        
         backgroundContainer.style.setProperty("background-image", `url("${response.url}")`);
         localStorage.setItem("image", response.url);
     }
