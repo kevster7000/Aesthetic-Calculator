@@ -42,7 +42,7 @@ const pinkTheme = [
     "hsla(345, 8%, 44%, 0.8)", //btn bg special dark 80
     "hsla(345, 8%, 44%, 0.6)", //btn bg special dark 60
 
-    "hsla(345, 40%, 50%, 0.45)", //btn shadow
+    "hsla(345, 36%, 49%, 0.45)", //btn shadow
 
     "hsla(345, 48%, 40%, 0.35)", //btn text shadow operand
     "hsla(54, 47%, 43%, 0.5)", //btn text shadow operator

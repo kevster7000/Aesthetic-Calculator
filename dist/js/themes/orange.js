@@ -1,6 +1,6 @@
 const orangeTheme = [
     "#f47911", //main color
-    "hsla(27, 62%, 51%, 0.35)", //main color cover
+    "hsla(27, 62%, 45%, 0.35)", //main color cover
 
     "#fffaeb", //text color
     "#fffaeb", //text color opposite

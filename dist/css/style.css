@@ -1,45 +1,91 @@
 @import url("https://fonts.googleapis.com/css2?family=Montserrat&display=swap");
+@media (prefers-color-scheme: light) {
+  :root {
+    /****************** COLORS ******************/
+    --MAIN-COLOR: #f7f7f7;
+    --MAIN-COLOR-COVER: hsla(0, 0%, 97%, 0.35);
+    --TEXT-COLOR: #111;
+    --TEXT-COLOR-OPPOSITE: #f7f7f7;
+    --PANEL-LIGHT: hsla(0, 0%, 96%, 0.95);
+    --PANEL-DARK: hsla(0, 0%, 43%, 0.25);
+    --PANEL-SHADOW-COLOR: hsla(0, 0%, 23%, 0.4);
+    --CALC-SCROLLBAR-TRACK: #f7f7f7;
+    --CALC-SCROLLBAR: hsla(0, 0%, 29%, 0.65);
+    --CALC-SCROLLBAR-HOVER: hsla(0, 0%, 17%, 0.75);
+    --CALC-HISTORY-BORDER-COLOR: hsla(0, 0%, 55%, 0.75);
+    --CALC-BG-LIGHT: hsla(0, 0%, 91%, 0.45);
+    --CALC-BG-DARK: hsla(0, 0%, 73%, 0.35);
+    --CALC-BORDER-COLOR: hsla(0, 0%, 96%, 0.95);
+    --CALC-SHADOW-COLOR: hsla(0, 0%, 57%, 0.75);
+    --BTN-BG-OPERAND-LIGHT: hsl(0, 0%, 97%);
+    --BTN-BG-OPERAND-LIGHT80: hsla(0, 0%, 97%, 0.8);
+    --BTN-BG-OPERAND-LIGHT60: hsla(0, 0%, 97%, 0.6);
+    --BTN-BG-OPERAND-DARK: hsl(0, 0%, 85%);
+    --BTN-BG-OPERAND-DARK80: hsla(0, 0%, 85%, 0.8);
+    --BTN-BG-OPERAND-DARK60: hsla(0, 0%, 85%, 0.6);
+    --BTN-BG-OPERATOR-LIGHT: hsl(196, 45%, 93%);
+    --BTN-BG-OPERATOR-LIGHT80: hsla(196, 45%, 93%, 0.8);
+    --BTN-BG-OPERATOR-LIGHT60: hsla(196, 45%, 93%, 0.6);
+    --BTN-BG-OPERATOR-DARK: hsl(204, 18%, 75%);
+    --BTN-BG-OPERATOR-DARK80: hsla(204, 18%, 75%, 0.8);
+    --BTN-BG-OPERATOR-DARK60: hsla(204, 18%, 75%, 0.6);
+    --BTN-BG-SPECIAL-LIGHT: hsl(195, 2%, 67%);
+    --BTN-BG-SPECIAL-LIGHT80: hsla(195, 2%, 67%, 0.8);
+    --BTN-BG-SPECIAL-LIGHT60: hsla(195, 2%, 67%, 0.6);
+    --BTN-BG-SPECIAL-DARK: hsl(192, 3%, 44%);
+    --BTN-BG-SPECIAL-DARK80: hsla(192, 3%, 44%, 0.8);
+    --BTN-BG-SPECIAL-DARK60: hsla(192, 3%, 44%, 0.6);
+    --BTN-SHADOW-COLOR: hsla(0, 0%, 23%, 0.35);
+    --BTN-TEXT-SHADOW-OPERAND-COLOR: hsla(0, 0%, 53%, 0.55);
+    --BTN-TEXT-SHADOW-OPERATOR-COLOR: hsla(204, 4%, 53%, 0.8);
+    --BTN-TEXT-SHADOW-SPECIAL-COLOR: hsla(0, 0%, 72%, 0.5);
+    --BTN-HOVER-BRIGHTNESS: 1.075;
+  }
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    /****************** COLORS ******************/
+    --MAIN-COLOR: #333333;
+    --MAIN-COLOR-COVER: hsla(0, 0%, 27%, 0.35);
+    --TEXT-COLOR: #e9e7e1;
+    --TEXT-COLOR-OPPOSITE: #e9e7e1;
+    --PANEL-LIGHT: hsla(0, 0%, 32%, 0.9);
+    --PANEL-DARK: hsla(0, 0%, 27%, 0.75);
+    --PANEL-SHADOW-COLOR: hsla(0, 0%, 0%, 1);
+    --CALC-SCROLLBAR-TRACK: hsla(0, 0%, 38%, 0.85);
+    --CALC-SCROLLBAR: hsla(0, 0%, 76%, 0.9);
+    --CALC-SCROLLBAR-HOVER: hsla(0, 0%, 91%, 0.9);
+    --CALC-HISTORY-BORDER-COLOR: hsla(0, 0%, 48%, 0.95);
+    --CALC-BG-LIGHT: hsla(230, 3%, 11%, 0.4);
+    --CALC-BG-DARK: hsla(227, 5%, 21%, 0.4);
+    --CALC-BORDER-COLOR: hsla(230, 2%, 27%, 0.95);
+    --CALC-SHADOW-COLOR: hsla(0, 0%, 5%, 0.75);
+    --BTN-BG-OPERAND-LIGHT: hsl(222, 4%, 35%);
+    --BTN-BG-OPERAND-LIGHT80: hsla(222, 4%, 35%, 0.8);
+    --BTN-BG-OPERAND-LIGHT60: hsla(222, 4%, 35%, 0.6);
+    --BTN-BG-OPERAND-DARK: hsl(225, 2%, 19%);
+    --BTN-BG-OPERAND-DARK80: hsla(225, 2%, 19%, 0.8);
+    --BTN-BG-OPERAND-DARK60: hsla(225, 2%, 19%, 0.6);
+    --BTN-BG-OPERATOR-LIGHT: hsl(35, 70%, 61%);
+    --BTN-BG-OPERATOR-LIGHT80: hsla(35, 70%, 61%, 0.8);
+    --BTN-BG-OPERATOR-LIGHT60: hsla(35, 70%, 61%, 0.6);
+    --BTN-BG-OPERATOR-DARK: hsl(27, 59%, 42%);
+    --BTN-BG-OPERATOR-DARK80: hsla(27, 59%, 42%, 0.8);
+    --BTN-BG-OPERATOR-DARK60: hsla(27, 59%, 42%, 0.6);
+    --BTN-BG-SPECIAL-LIGHT: hsl(205, 12%, 67%);
+    --BTN-BG-SPECIAL-LIGHT80: hsla(205, 12%, 67%, 0.8);
+    --BTN-BG-SPECIAL-LIGHT60: hsla(205, 12%, 67%, 0.6);
+    --BTN-BG-SPECIAL-DARK: hsl(209, 7%, 39%);
+    --BTN-BG-SPECIAL-DARK80: hsla(209, 7%, 39%, 0.8);
+    --BTN-BG-SPECIAL-DARK60: hsla(209, 7%, 39%, 0.6);
+    --BTN-SHADOW-COLOR: hsla(0, 0%, 2%, 0.7);
+    --BTN-TEXT-SHADOW-OPERAND-COLOR: hsla(0, 0%, 79%, 0.65);
+    --BTN-TEXT-SHADOW-OPERATOR-COLOR: hsla(54, 86%, 75%, 0.45);
+    --BTN-TEXT-SHADOW-SPECIAL-COLOR: hsla(0, 0%, 73%, 0.65);
+    --BTN-HOVER-BRIGHTNESS: 1.325;
+  }
+}
 :root {
-  /* Default theme is white */
-  /****************** COLORS ******************/
-  --MAIN-COLOR: #f7f7f7;
-  --MAIN-COLOR-COVER: hsla(0, 0%, 97%, 0.35);
-  --TEXT-COLOR: #111;
-  --TEXT-COLOR-OPPOSITE: #f7f7f7;
-  --PANEL-LIGHT: hsla(0, 0%, 96%, 0.95);
-  --PANEL-DARK: hsla(0, 0%, 43%, 0.25);
-  --PANEL-SHADOW-COLOR: hsla(0, 0%, 23%, 0.4);
-  --CALC-SCROLLBAR-TRACK: #f7f7f7;
-  --CALC-SCROLLBAR: hsla(0, 0%, 29%, 0.65);
-  --CALC-SCROLLBAR-HOVER: hsla(0, 0%, 17%, 0.75);
-  --CALC-HISTORY-BORDER-COLOR: hsla(0, 0%, 55%, 0.75);
-  --CALC-BG-LIGHT: hsla(0, 0%, 91%, 0.45);
-  --CALC-BG-DARK: hsla(0, 0%, 73%, 0.35);
-  --CALC-BORDER-COLOR: hsla(0, 0%, 96%, 0.95);
-  --CALC-SHADOW-COLOR: hsla(0, 0%, 57%, 0.75);
-  --BTN-BG-OPERAND-LIGHT: hsl(0, 0%, 97%);
-  --BTN-BG-OPERAND-LIGHT80: hsla(0, 0%, 97%, 0.8);
-  --BTN-BG-OPERAND-LIGHT60: hsla(0, 0%, 97%, 0.6);
-  --BTN-BG-OPERAND-DARK: hsl(0, 0%, 85%);
-  --BTN-BG-OPERAND-DARK80: hsla(0, 0%, 85%, 0.8);
-  --BTN-BG-OPERAND-DARK60: hsla(0, 0%, 85%, 0.6);
-  --BTN-BG-OPERATOR-LIGHT: hsl(196, 45%, 93%);
-  --BTN-BG-OPERATOR-LIGHT80: hsla(196, 45%, 93%, 0.8);
-  --BTN-BG-OPERATOR-LIGHT60: hsla(196, 45%, 93%, 0.6);
-  --BTN-BG-OPERATOR-DARK: hsl(204, 18%, 75%);
-  --BTN-BG-OPERATOR-DARK80: hsla(204, 18%, 75%, 0.8);
-  --BTN-BG-OPERATOR-DARK60: hsla(204, 18%, 75%, 0.6);
-  --BTN-BG-SPECIAL-LIGHT: hsl(195, 2%, 67%);
-  --BTN-BG-SPECIAL-LIGHT80: hsla(195, 2%, 67%, 0.8);
-  --BTN-BG-SPECIAL-LIGHT60: hsla(195, 2%, 67%, 0.6);
-  --BTN-BG-SPECIAL-DARK: hsl(192, 3%, 44%);
-  --BTN-BG-SPECIAL-DARK80: hsla(192, 3%, 44%, 0.8);
-  --BTN-BG-SPECIAL-DARK60: hsla(192, 3%, 44%, 0.6);
-  --BTN-SHADOW-COLOR: hsla(0, 0%, 23%, 0.35);
-  --BTN-TEXT-SHADOW-OPERAND-COLOR: hsla(0, 0%, 53%, 0.55);
-  --BTN-TEXT-SHADOW-OPERATOR-COLOR: hsla(204, 4%, 53%, 0.8);
-  --BTN-TEXT-SHADOW-SPECIAL-COLOR: hsla(0, 0%, 72%, 0.5);
-  --BTN-HOVER-BRIGHTNESS: 1.075;
   /****************** SHADOWS ******************/
   --CALC-SHADOW:
       2px 2px 14px var(--CALC-SHADOW-COLOR),
@@ -924,7 +970,6 @@ footer {
       flex-flow: column nowrap;
   background-position: center;
   background-size: cover;
-  background-image: url("https://images.unsplash.com/photo-1576899244078-180364e39ca1?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D");
 }
 
 .calculator__container {

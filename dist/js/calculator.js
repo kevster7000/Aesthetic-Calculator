@@ -9,7 +9,7 @@ let exponentialStore = "";
 export function handleInput(btn, currExp, justSubmitted) {
 
     //this most likely can be optimized with regex, but there are many nuances from a typical expression that idk how to write in regex, so I just hardcoded this
-    //ik this is very ugly, sry
+    //ik this is very ugly, sry to whoever happens to read this
 
     let newExp = currExp;
     currExp = currExp.replaceAll(" ", "");
@@ -393,7 +393,7 @@ function postfixToOutput(exp) {
                         result = new Big(valStack[valStack.length - 1]).pow(top);
                     }
                     catch {
-                        console.log("Unprecise Calculation");
+                        console.warn("Unprecise Calculation");
                         result = Number(valStack[valStack.length - 1]) ** (top);
                     }
                     valStack[valStack.length - 1] = result.toString();

@@ -1,10 +1,6 @@
 import themes, {colorVariables} from "./themes.js";
 import * as Calc from "./calculator.js";
 
-Big.DP = 30;
-Big.PE = 16;
-Big.NE = -7;
-
 document.addEventListener("DOMContentLoaded", initApp);
 
 function initApp() {
@@ -32,7 +28,6 @@ function initThemes() {
     const themesButton = document.querySelector(".themes__btn");
     const themesPanel = document.querySelector(".themes__panel");
     const themesCloseButton = document.querySelector(`#close-themes`);
-
     let themeClicked = false;
 
     themesButton.addEventListener("click", toggleThemesPanel);
@@ -71,12 +66,20 @@ function initThemes() {
             themeClicked = true;
         }
     }
-
+    
     setThemes(getTheme());
 }
 
 function getTheme() {
-    return localStorage.getItem("theme") ?? "white";
+    if(localStorage.getItem("theme")) {
+        return localStorage.getItem("theme");
+    }
+    
+    if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        return "black";
+    } else {
+        return "white";
+    }
 }
 
 function setThemes(themeStored) {
@@ -91,6 +94,7 @@ function setThemes(themeStored) {
         newTheme.style.backgroundColor = themes[theme][0];
         newTheme.addEventListener("click", () => {
             updateTheme(themes[theme], theme);
+            newBackgroundImage();
         });
         themesContainer.append(newTheme);
 
@@ -112,12 +116,95 @@ function setThemes(themeStored) {
 /*                                Background Image                                */
 /**********************************************************************************/
 
+const backgroundContainer = document.querySelector("#outer-container");
+
 initBackgroundImage();
 
 function initBackgroundImage() {
-    const backgroundContainer = document.querySelector("#outer-container");
     const newBackgroundButton = document.querySelector("#calculator__theme-header");
-    const credits = document.querySelector(".credits");
+
+    newBackgroundButton.addEventListener("click", newBackgroundImage);
+
+    setDefaultImage();
+
+    //keyboard integration
+    window.addEventListener("keydown", (event) => {
+        if(isDesktop && !event.repeat && event.key.toUpperCase() === "N") {
+            newBackgroundButton.classList.add("pressed");
+            newBackgroundImage();
+        }
+    });
+
+    window.addEventListener("keyup", (event) => {
+        if(event.key.toUpperCase() === "N") {
+            newBackgroundButton.classList.remove("pressed");
+        }
+    });
+}
+
+async function newBackgroundImage() {
+    try {
+        let currTheme = getTheme();
+        if(currTheme === "limeGreen") currTheme = "lime green";
+        const response = await fetch(`https://source.unsplash.com/random/${window.innerWidth}x${window.innerHeight}/?${currTheme}`);
+        backgroundContainer.style.setProperty("background-image", `url("${response.url}")`);
+        localStorage.setItem("image", response.url);
+    }
+    catch {
+        console.error("Couldn't Get Image");
+    }
+}
+
+function setDefaultImage() {
+    if(localStorage.getItem("image")) {
+        backgroundContainer.style.setProperty("background-image", `url("${localStorage.getItem("image")}")`);
+    }
+    else {
+        switch(getTheme()) {
+            case "white":
+                backgroundContainer.style.setProperty("background-image", `url("https://images.unsplash.com/photo-1596367407372-96cb88503db6?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D")`);
+                break;
+            case "gray":
+                backgroundContainer.style.setProperty("background-image", `url("https://images.unsplash.com/photo-1623212209063-a1295bdb54fc?q=80&w=1999&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D")`);
+                break;
+            case "black":
+                backgroundContainer.style.setProperty("background-image", `url("https://images.unsplash.com/photo-1513569771920-c9e1d31714af?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D")`);
+                break;
+            case "brown":
+                backgroundContainer.style.setProperty("background-image", `url("https://images.unsplash.com/photo-1576899244078-180364e39ca1?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D")`);
+                break;
+            case "maroon":
+                backgroundContainer.style.setProperty("background-image", `url("https://images.unsplash.com/photo-1595502427603-3a6b5077ab78?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D")`);
+                break;
+            case "red":
+                backgroundContainer.style.setProperty("background-image", `url("https://images.unsplash.com/photo-1589592800927-a46aad4abd82?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D")`);
+                break;
+            case "orange":
+                backgroundContainer.style.setProperty("background-image", `url("https://images.unsplash.com/photo-1548504769-900b70ed122e?q=80&w=1780&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D")`);
+                break;
+            case "yellow":
+                backgroundContainer.style.setProperty("background-image", `url("https://images.unsplash.com/photo-1523111104692-1def874394b6?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D")`);
+                break;
+            case "limeGreen":
+                backgroundContainer.style.setProperty("background-image", `url("https://images.unsplash.com/photo-1497211419994-14ae40a3c7a3?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D")`);
+                break;
+            case "green":
+                backgroundContainer.style.setProperty("background-image", `url("https://images.unsplash.com/photo-1488330890490-c291ecf62571?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D")`);
+                break;
+            case "teal":
+                backgroundContainer.style.setProperty("background-image", `url("https://images.unsplash.com/photo-1521080755838-d2311117f767?q=80&w=1924&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D")`);
+                break;
+            case "blue":
+                backgroundContainer.style.setProperty("background-image", `url("https://images.unsplash.com/photo-1523633589114-88eaf4b4f1a8?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D")`);
+                break;
+            case "purple":
+                backgroundContainer.style.setProperty("background-image", `url("https://images.unsplash.com/photo-1482686115713-0fbcaced6e28?q=80&w=2067&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D")`);
+                break;
+            case "pink":
+                backgroundContainer.style.setProperty("background-image", `url("https://images.unsplash.com/photo-1520052205864-92d242b3a76b?q=80&w=2069&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D")`);
+                break;
+        }
+    }
 }
 
 /**********************************************************************************/
