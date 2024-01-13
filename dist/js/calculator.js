@@ -127,6 +127,8 @@ export function handleInput(btn, currExp, justSubmitted) {
 }
 
 export function validateExpression(exp) {
+    if(exp.length === 0 || exp === "\u00A0") return false; //if empty expression
+
     exp = exp.replaceAll(" ", "");
     exp = exp.replaceAll("\u00F7", "/");
 

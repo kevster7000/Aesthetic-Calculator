@@ -75,7 +75,7 @@ Sort of like a dropdown, the history panel will slide down from the top of the c
         button {
             @include neumorphic-btn(HEADER);
             margin-right: var(--SPACING-XS);
-            padding: var(--SPACING-MD) calc(var(--SPACING-XL) + var(--SPACING-SM));
+            padding: var(--SPACING-MD) var(--SPACING-LG);
         }
     }
 
@@ -84,6 +84,7 @@ Sort of like a dropdown, the history panel will slide down from the top of the c
         padding: var(--SPACING-MD);
         padding-bottom: 0;
         margin: var(--SPACING-SM);
+        overflow-x: hidden;
         overflow-y: auto;
         animation: fade-out 0.15s forwards;
 
@@ -111,13 +112,14 @@ Sort of like a dropdown, the history panel will slide down from the top of the c
 
         .calculator__history-empty {
             text-align: center;
+            @extend %nowrap;
+            animation: fade-in 0.35s;
         }
 
         .calculator__history-entry {
             @include flex(center, flex-end, column);
             border-top: 1px solid var(--CALC-HISTORY-BORDER-COLOR);
             padding: var(--SPACING-MD) 0;
-            overflow: hidden;
 
             .entry-header {
                 width: 100%;
@@ -163,6 +165,7 @@ Sort of like a dropdown, the history panel will slide down from the top of the c
                     text-align: right;
                     margin-bottom: 3px;
                     overflow-x: auto;
+                    @extend %nowrap;
         
                     &::-webkit-scrollbar {
                         height: 1px;

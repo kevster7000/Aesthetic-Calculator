@@ -1,12 +1,26 @@
 import themes, {colorVariables} from "./themes.js";
 import * as Calc from "./calculator.js";
 
-// TODO - each keyboard shortcut should be place in its own event listener in its respective section
-// const keyboardShortcuts = ["N", "K", "H", "T"]
+Big.DP = 30;
+Big.PE = 16;
+Big.NE = -7;
 
 document.addEventListener("DOMContentLoaded", initApp);
 
 function initApp() {
+
+//this for keyboard integration - only apply if the device is desktop
+let isDesktop = false;
+if(window.innerWidth > 768) isDesktop = true;
+
+window.addEventListener("resize", () => {
+    if(window.innerWidth > 768 || isDesktop) isDesktop = true;
+})
+
+//reset for keyboard integration
+window.addEventListener("keydown", (event) => {
+    if(event.key === "Enter") event.preventDefault();
+})
 
 /**********************************************************************************/
 /*                                     Themes                                     */
@@ -23,12 +37,26 @@ function initThemes() {
 
     themesButton.addEventListener("click", toggleThemesPanel);
 
-    //click away
-    window.addEventListener("click", (event) => {
-        if(themesPanel.classList[1] === "panel-active" && !themesPanel.contains(event.target) && !themesButton.contains(event.target)) {
+    //keyboard integration
+    window.addEventListener("keydown", (event) => {
+        if(isDesktop && !event.repeat && event.key.toUpperCase() === "T") {
+            themesButton.classList.add("pressed");
             toggleThemesPanel();
         }
-    })
+    });
+
+    window.addEventListener("keyup", (event) => {
+        if(event.key.toUpperCase() === "T") {
+            themesButton.classList.remove("pressed");
+        }
+    });
+
+    //click away
+    window.addEventListener("click", (event) => {
+        if(themesPanel.classList.contains("panel-active") && !themesPanel.contains(event.target) && !themesButton.contains(event.target)) {
+            toggleThemesPanel();
+        }
+    });
 
     function toggleThemesPanel() {
         themesPanel.classList.toggle("panel-active");
@@ -84,15 +112,13 @@ function setThemes(themeStored) {
 /*                                Background Image                                */
 /**********************************************************************************/
 
-// unsplash API
-// on each new background request, update image and credits
+initBackgroundImage();
 
-//for each image, check size
-//if less than window width or height, you can do one of two things
-// 1) set backgroun-size to cover
-// 2) search for the next image
-
-// ACTUALLY, I think you can search for a specific widthxhieght in the get req
+function initBackgroundImage() {
+    const backgroundContainer = document.querySelector("#outer-container");
+    const newBackgroundButton = document.querySelector("#calculator__theme-header");
+    const credits = document.querySelector(".credits");
+}
 
 /**********************************************************************************/
 /*                                   Calculator                                   */
@@ -135,15 +161,87 @@ function initCalc() {
     //equals button
     calcButtons[2][2].addEventListener("click", handleCalcSubmit);
 
-    //TODO
-    //keyboard integration
     // multiplication is * => make sure to pass \u00D7
     // division is / => make sure to pass \u00F7
     // nbsp is \u00A0
     const validOperands = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "."];
     const validOperators = ["(", ")", "%", "-", "^", "*", "/", "+"];
-    const specialCalcKeys = ["Enter", "backspace", "Esc"];
 
+    //keyboard integration
+    window.addEventListener("keydown", (event) => {
+        if(isDesktop) {
+            
+            let key = event.key;
+            if(key === "*") key = "\u00D7";
+            if(key === "/") key = "\u00F7";
+
+            if(validOperands.includes(event.key) || validOperators.includes(event.key)) {
+                handleCalcInput(key)
+            }
+            else if(key === "Enter") {
+                handleCalcSubmit();
+                key = "=";
+            }
+            else if(key === "Backspace") {
+                handleCalcDelete();
+            }
+            else if(key === "Escape") {
+                handleCalcClear();
+                key = "Clear";
+            }
+
+            //apply pressed class
+            if(key === "Backspace") {
+                for(let i = 0; i < calcButtons[2].length; i++) {
+                    if(calcButtons[2][i].id === "btn-del") {
+                        calcButtons[2][i].classList.add("pressed");
+                        break;
+                    }
+                }
+            }
+            else {
+                for(let i = 0; i < 3; i++) {
+                    for(let j = 0; j < calcButtons[i].length; j++) {
+                        if(calcButtons[i][j].textContent === key) {
+                            calcButtons[i][j].classList.add("pressed");
+                            break;
+                        }
+                    }
+                }
+            }
+        }
+    });
+
+    //remove pressed class
+    window.addEventListener("keyup", (event) => {
+        let key = event.key;
+        if(key === "*") key = "\u00D7";
+        if(key === "/") key = "\u00F7";
+        if(key === "Enter") key = "=";
+        if(key === "Escape") key = "Clear";
+
+        if(key === "Backspace") {
+            for(let i = 0; i < calcButtons[2].length; i++) {
+                if(calcButtons[2][i].id === "btn-del") {
+                    calcButtons[2][i].classList.remove("pressed");
+                    break;
+                }
+            }
+        }
+        else {
+            let found = false;
+            for(let i = 0; i < 3; i++) {
+                if(found) break;
+                for(let j = 0; j < calcButtons[i].length; j++) {
+                    if(calcButtons[i][j].textContent === key) {
+                        calcButtons[i][j].classList.remove("pressed");
+                        found = true;
+                        break;
+                    }
+                }
+            }
+        }
+    });
 
     //calculator operands & operators
     function handleCalcInput(btn) {
@@ -229,7 +327,7 @@ function initCalc() {
             //add to history
             let time = new Date();
             addHistoryEntry({
-                id: time.getTime(), 
+                id: String(time.getTime()), 
                 date: time, 
                 input: panelOutputPrev.textContent, 
                 output: panelOutputMain.textContent
@@ -271,7 +369,7 @@ function initHistory() {
     if(localStorage.getItem("history")) {
         let entries = JSON.parse(localStorage.getItem("history"));
         for(let i = 0; i < entries.length; i++) {
-            entries[i].date = new Date(entries[i].id);
+            entries[i].date = new Date(entries[i].date);
             addHistoryEntry(entries[i], false);
         }
         initHistoryButtons();
@@ -285,7 +383,7 @@ function initHistory() {
 
 /*  
     newEntry = {
-        id: number,
+        id: string,
         date: new Date(), 
         input: string, 
         output: string
@@ -346,6 +444,7 @@ function addHistoryEntry(newEntry, addToLocalStorage) {
         newEntryInput.style.setProperty("margin-bottom", "3px");
     }
 
+    //reapply event listeners
     if(addToLocalStorage) initHistoryButtons();
 }
 
@@ -354,6 +453,7 @@ function initHistoryButtons() {
 
     for(let i = 0; i < entries.length; i++) {
         
+        //copy btn
         entries[i].querySelector(".entry-header-copy").addEventListener("click", (event) => {
             let entry = event.target.parentElement.parentElement;
             if(entry.classList[0] === "entry-header") entry = entry.parentElement;
@@ -367,8 +467,10 @@ function initHistoryButtons() {
             else {
                 exponentialStopPoint = -1;
             }
+            checkCalcPanelScroll();
         });
 
+        //delete btn
         entries[i].querySelector(".entry-header-delete").addEventListener("click", (event) => {
             let entry = event.target.parentElement.parentElement;
             if(entry.classList[0] === "entry-header") entry = entry.parentElement;
@@ -383,7 +485,7 @@ function initHistoryButtons() {
             }
             else {
                 const loggedEntries = JSON.parse(localStorage.getItem("history"));
-                loggedEntries.splice(binarySearchForID(Number(entry.id.slice(5))), 1);
+                loggedEntries.splice(binarySearchForID(entry.id.slice(5)), 1);
                 localStorage.setItem("history", JSON.stringify(loggedEntries));
             }
         });
@@ -431,7 +533,21 @@ function initHistoryPanel() {
 
     historyClearBtn.addEventListener("click", clearHistory);
     historyButton.addEventListener("click", toggleHistoryPanel);
-    if(JSON.parse(sessionStorage.getItem("HistoryPanelOpen"))) toggleHistoryPanel(); // TODO - disable this for mobile && window.innerWidth >= ___px
+    if(JSON.parse(sessionStorage.getItem("HistoryPanelOpen")) && window.innerWidth > 768) toggleHistoryPanel();
+
+    //keyboard integration
+    window.addEventListener("keydown", (event) => {
+        if(isDesktop && !event.repeat && event.key.toUpperCase() === "H") {
+            historyButton.classList.add("pressed");
+            toggleHistoryPanel();
+        }
+    });
+
+    window.addEventListener("keyup", (event) => {
+        if(event.key.toUpperCase() === "H") {
+            historyButton.classList.remove("pressed");
+        }
+    });
 
     function toggleHistoryPanel() {
         historyButton.classList.toggle("history-active");
@@ -458,14 +574,6 @@ function initHistoryPanel() {
 }
 
 /**********************************************************************************/
-/*                                Button Navigation                               */
-/**********************************************************************************/
-
-// TODO - navigation.js - 2D array of stuff - also search up HTML tabindex
-// For all buttons, Remove the fact that you can hit enter and it clicks (only spacebar and click to hit a button)
-// instead, enter will submit the current expression at all times
-
-/**********************************************************************************/
 /*                            Keyboard Shortcuts Panel                            */
 /**********************************************************************************/
 
@@ -483,6 +591,20 @@ function initKeyboardShortcuts() {
     if(JSON.parse(sessionStorage.getItem("KeyboardShortcutsOpen"))) toggleKeyboardShortcuts();
     keyboardShortcutsButton.addEventListener("click", toggleKeyboardShortcuts);
 
+    //keyboard integration
+    window.addEventListener("keydown", (event) => {
+        if(isDesktop && !event.repeat && event.key.toUpperCase() === "K") {
+            keyboardShortcutsButton.classList.add("pressed");
+            toggleKeyboardShortcuts();
+        }
+    });
+
+    window.addEventListener("keyup", (event) => {
+        if(event.key.toUpperCase() === "K") {
+            keyboardShortcutsButton.classList.remove("pressed");
+        }
+    });
+    
     function toggleKeyboardShortcuts() {
         keyboardShortcutsPanel.classList.toggle("panel-active");
         keyboardShortcutsButton.classList.toggle("keyboard-shortcuts-active");

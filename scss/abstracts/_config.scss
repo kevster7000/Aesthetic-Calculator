@@ -69,7 +69,7 @@
             transform: translate(0, -1%);
         }
 
-        &:active {
+        &:active, &.pressed {
             filter: brightness(0.925);
             transform: translate(0, 1%);
             transition: 
@@ -83,7 +83,6 @@
         transition: 
             border-radius 0.25s, 
             filter 0.25s,
-            text-shadow 0.125s,
             box-shadow 0.25s,
             scale 0.125s;
     
@@ -91,10 +90,12 @@
             filter: brightness(var(--BTN-HOVER-BRIGHTNESS));
         }
     
-        &:active {
+        &:active, &.pressed {
             scale: 0.975;
             filter: brightness(0.95);
-            transition: filter 0.075s, scale 0.075s;
+            transition: 
+                filter 0.075s,
+                scale 0.075s;
         }
     }
 }

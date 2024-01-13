@@ -28,7 +28,7 @@
         }
     
         #calculator-history-btn {
-            @include neumorphic-btn(FOOTER);
+            @include neumorphic-btn(HEADER);
             width: 10%;
             aspect-ratio: 1/1;
             border-radius: 50% 50% 0 50%;
