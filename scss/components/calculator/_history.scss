@@ -1,37 +1,37 @@
 @use "./../../abstracts" as *;
 
-/*
-TODO
-Once the window gets too small for the history panel to open up on the side, it will instead be integrated into the calculator.
-Sort of like a dropdown, the history panel will slide down from the top of the calculator, but leaves the calculator panel visible.
-*/
-
 .calculator__history {
-    @include neumorphic(CALC);
-    width: clamp(150px, 50vw, 325px);
-    height: clamp(320px, 82vh, 675px);
+    @include flex(unset, unset, column);
     padding: var(--SPACING-MD);
+    position: absolute;
+    top: 30vh;
+    transform: translateY(calc(-0.32 * clamp(100px, 80vh, 425px)));
+    z-index: 2;
+    width: clamp(150px, 95vw, 310px);
+    height: var(--HISTORY-PANEL-MOBILE-HEIGHT);
+    align-self: flex-start;
+    visibility: hidden;
+    animation: none;
     order: 1;
-    overflow: hidden;
-    display: none;
-    animation: hide-history-panel 0.35s 0.05s backwards;
     color: var(--TEXT-COLOR);
-
-    // this is for mobile
-    // position: absolute;
-    // z-index: 2;
-    // width: clamp(250px, 85vw, 475px); //need to apply this to the show-history-panel keyframe as well
-    // // actually, you would need to change the entire show-history-panel keyframe
-    // // dont include neumorphic
-
+    animation: none;
+    
     &.history-panel-active {
-        @include flex(unset, unset, column);
-        animation: show-history-panel 0.35s forwards;
+        visibility: visible;
+        animation: show-history-panel-mobile 0.75s forwards;
     }
 
-    @keyframes show-history-panel {
+    &.history-panel-mobile-fade-out {
+        animation: fade-out 0.25s forwards !important;
+    }
+
+    &.history-panel-mobile-fade-in {
+        animation: fade-in 0.25s forwards !important;
+    }
+
+    @keyframes show-history-panel-mobile {
         from { 
-            width: 0; 
+            height: 0; 
             opacity: 0;
         }
         30% {
@@ -39,22 +39,21 @@ Sort of like a dropdown, the history panel will slide down from the top of the c
         }
         to { 
             opacity: 1;
-            width: clamp(150px, 50vw, 325px);
+            height: var(--HISTORY-PANEL-MOBILE-HEIGHT);
         }
     }
 
-    @keyframes hide-history-panel {
-        from { 
-            @include flex(unset, unset, column);
+    @keyframes hide-history-panel-mobile {
+        from {
             opacity: 1;
-            width: clamp(150px, 50vw, 325px);
+            visibility: visible;
+            height: var(--HISTORY-PANEL-MOBILE-HEIGHT);
         }
         70% {
-            opacity: 0.5;
+            opacity: 0.8;
         }
         to { 
-            width: 0; 
-            padding: 0;
+            height: 0;
             opacity: 0;
         }
     }
@@ -66,16 +65,17 @@ Sort of like a dropdown, the history panel will slide down from the top of the c
     &-header {
         @include flex(flex-end, center);
         padding: var(--SPACING-SM);
-        animation: fade-out 0.15s forwards;
+        animation: fade-out 1.25s forwards;
 
         &.history-header-active {
-            animation: fade-in 0.15s 0.125s backwards;
+            animation: fade-in 0.25s backwards;
         }
 
         button {
             @include neumorphic-btn(HEADER);
             margin-right: var(--SPACING-XS);
             padding: var(--SPACING-MD) var(--SPACING-LG);
+            font-size: var(--FS-SM);
         }
     }
 
@@ -86,14 +86,14 @@ Sort of like a dropdown, the history panel will slide down from the top of the c
         margin: var(--SPACING-SM);
         overflow-x: hidden;
         overflow-y: auto;
-        animation: fade-out 0.15s forwards;
+        animation: fade-out 1.5s forwards;
 
         &.entries-active {
-            animation: fade-in 0.15s 0.125s backwards;
+            animation: fade-in 0.25s backwards;
         }
 
         &::-webkit-scrollbar {
-            width: 3px;
+            width: 2px;
         }
 
         &::-webkit-scrollbar-track {
@@ -114,6 +114,7 @@ Sort of like a dropdown, the history panel will slide down from the top of the c
             text-align: center;
             @extend %nowrap;
             animation: fade-in 0.35s;
+            font-size: var(--FS-SM);
         }
 
         .calculator__history-entry {
@@ -129,6 +130,7 @@ Sort of like a dropdown, the history panel will slide down from the top of the c
                     flex-grow: 1;
                     padding-left: var(--SPACING-MD);
                     @extend %nowrap;
+                    font-size: var(--FS-SM);
                 }
 
                 &-copy, &-delete {
@@ -137,12 +139,16 @@ Sort of like a dropdown, the history panel will slide down from the top of the c
                     border: none;
                     padding: var(--SPACING-MD);
                     cursor: pointer;
-                    font-size: 1.1rem;
+                    font-size: var(--FS-SM);
                     line-height: 1rem;
                     border-radius: 10px;
                     transition: 
                         transform 0.15s, 
                         background-color 0.125s;
+                    
+                    > i {
+                        scale: 1.1;
+                    }
 
                     &:hover, &:focus-visible {
                         background-color: var(--PANEL-LIGHT);
@@ -166,6 +172,7 @@ Sort of like a dropdown, the history panel will slide down from the top of the c
                     margin-bottom: 3px;
                     overflow-x: auto;
                     @extend %nowrap;
+                    font-size: var(--FS-SM);
         
                     &::-webkit-scrollbar {
                         height: 1px;
@@ -188,11 +195,212 @@ Sort of like a dropdown, the history panel will slide down from the top of the c
 
                 .entry-output {
                     width: 100%;
-                    font-size: 1.5rem;
+                    font-size: var(--FS-MD);
                     text-align: right;
-
-                    // for mobile, make the font-size the same as the main
+                    overflow-x: auto;
+                    @extend %nowrap;
+        
+                    &::-webkit-scrollbar {
+                        height: 1px;
+                    }
+        
+                    &::-webkit-scrollbar-track {
+                        background: var(--CALC-SCROLLBAR-TRACK);
+                        border-radius: 10px;
+                    }
+        
+                    &::-webkit-scrollbar-thumb {
+                        background: var(--CALC-SCROLLBAR);
+                        border-radius: 10px;
+                    }
+                    
+                    &::-webkit-scrollbar-thumb:hover {
+                        background: var(--CALC-SCROLLBAR-HOVER);
+                    }
                 }
+            }
+        }
+    }
+}
+
+@include media-landscape {
+    .calculator__history {
+        top: 0;
+        transform: translateY(0);
+        height: clamp(80px, 80vh, 300px);
+    }
+}
+
+@include media-xs {
+    .calculator__history {
+        transform: translateY(calc(-0.32 * clamp(340px, 75vh, 610px)));
+        width: clamp(280px, 94vw, 450px);
+    }
+}
+
+@include media-xs-landscape {
+    .calculator__history {
+        top: 0;
+        transform: translateY(0);
+        width: clamp(300px, 96vw, 550px);
+    }
+}
+
+@include media-sm {
+    .calculator__history {
+        transform: translateY(calc(-0.32 * clamp(510px, 84vh, 720px)));
+        width: clamp(495px, 75vw, 530px);
+
+        &-entries::-webkit-scrollbar {
+            width: 3px;
+        }
+    }
+}
+
+@include media-sm-landscape {
+    .calculator__history {
+        top: 0;
+        transform: translateY(0);
+        width: clamp(525px, 90vw, 700px);
+    }
+}
+
+@include media-md {
+    .calculator__history {
+        @include neumorphic(CALC);
+        width: clamp(225px, 37vw, 307.5px);
+        height: clamp(450px, 80vh, 615px);
+        position: static;
+        z-index: 0;
+        align-self: center;
+        visibility: visible;
+        overflow: hidden;
+        display: none;
+        animation: hide-history-panel 0.35s 0.05s backwards;
+        transform: translateY(0);
+
+        &.history-panel-active {
+            @include flex(unset, unset, column);
+            animation: show-history-panel 0.35s forwards;
+        }
+        
+        @keyframes show-history-panel {
+            from { 
+                width: 0; 
+                opacity: 0;
+            }
+            30% {
+                opacity: 0.8;
+            }
+            to { 
+                opacity: 1;
+                width: clamp(225px, 37vw, 307.5px);
+            }
+        }
+
+        @keyframes hide-history-panel {
+            from { 
+                @include flex(unset, unset, column);
+                opacity: 1;
+                width: clamp(225px, 37vw, 307.5px);
+            }
+            70% {
+                opacity: 0.5;
+            }
+            to { 
+                width: 0; 
+                padding: 0;
+                opacity: 0;
+            }
+        }
+
+        &-header {
+            animation: fade-out 0.15s forwards;
+    
+            &.history-header-active {
+                animation: fade-in 0.15s 0.125s backwards;
+            }
+        }
+    
+        &-entries {
+            animation: fade-out 0.15s forwards;
+    
+            &.entries-active {
+                animation: fade-in 0.15s 0.125s backwards;
+            }
+        }
+    }
+}
+
+@include media-lg {
+    .calculator__history {
+        width: 325px;
+        height: clamp(550px, 81vh, 650px);
+
+        @keyframes show-history-panel {
+            from { 
+                width: 0; 
+                opacity: 0;
+            }
+            30% {
+                opacity: 0.8;
+            }
+            to { 
+                opacity: 1;
+                width: 325px;
+            }
+        }
+
+        @keyframes hide-history-panel {
+            from { 
+                @include flex(unset, unset, column);
+                opacity: 1;
+                width: 325px;
+            }
+            70% {
+                opacity: 0.5;
+            }
+            to { 
+                width: 0; 
+                padding: 0;
+                opacity: 0;
+            }
+        }
+    }
+}
+
+@include media-xl {
+    .calculator__history {
+        width: max(325px, 20.5vw);
+        height: max(650px, 41vw);
+
+        @keyframes show-history-panel {
+            from { 
+                width: 0; 
+                opacity: 0;
+            }
+            30% {
+                opacity: 0.8;
+            }
+            to { 
+                opacity: 1;
+                width: max(325px, 20.5vw);
+            }
+        }
+
+        @keyframes hide-history-panel {
+            from { 
+                @include flex(unset, unset, column);
+                opacity: 1;
+                width: max(325px, 20.5vw);
+            }
+            70% {
+                opacity: 0.5;
+            }
+            to { 
+                width: 0; 
+                padding: 0;
+                opacity: 0;
             }
         }
     }

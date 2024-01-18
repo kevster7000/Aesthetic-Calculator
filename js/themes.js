@@ -36,6 +36,8 @@ export const colorVariables = [
     "--MAIN-COLOR",
     "--MAIN-COLOR-COVER",
 
+    "--MOBILE-PANEL",
+
     "--TEXT-COLOR",
     "--TEXT-COLOR-OPPOSITE",
 

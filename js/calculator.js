@@ -174,17 +174,6 @@ function parseToInfix(exp) {
         exp += ")";
     }
 
-    //make all x(x) into x * (x)  and (x)(x) into (x) * (x)
-    const parenthesisToMultiplyRegex = /[%\d]\(|\)\(/g;
-    while(true) {
-        let i = exp.search(parenthesisToMultiplyRegex);
-
-        if(i === -1) break;
-        else {
-            exp = exp.slice(0, i + 1) + "*" + exp.slice(i + 1);
-        }
-    }
-
     //make all x. into x and .x into 0.x
     const simplifyDecimalRegex = /\d\.\D|\D\.\d/g;
     while(true) {
@@ -202,6 +191,16 @@ function parseToInfix(exp) {
     if(exp[0] === ".") exp = "0" + exp;
     if(exp[exp.length - 1] === ".") exp = exp.slice(0, exp.length - 1);
 
+    //make all x(x) into x * (x)  and (x)(x) into (x) * (x)
+    const parenthesisToMultiplyRegex = /[%\d]\(|\)\(/g;
+    while(true) {
+        let i = exp.search(parenthesisToMultiplyRegex);
+
+        if(i === -1) break;
+        else {
+            exp = exp.slice(0, i + 1) + "*" + exp.slice(i + 1);
+        }
+    }
 
     //make all x% into 0.0x
     const convertBasicPercentageRegex = /\d+(\.\d+)?\%/g;

@@ -2,11 +2,13 @@ const redTheme = [
     "#f94d4d", //main color
     "hsla(0, 50%, 50%, 0.35)", //main color cover
 
+    "hsl(0, 69%, 59%)", //mobile panel
+
     "#f1ede3", //text color
     "#f1ede3", //text color opposite
 
     "hsla(0, 81%, 72%, 0.9)", //panel light
-    "hsla(0, 45%, 48%, 0.85)", //panel dark
+    "hsla(0, 46%, 48%, 0.85)", //panel dark
     "hsla(0, 72%, 19%, 0.95)", //panel shadow
 
     "hsla(0, 85%, 95%, 0.85)", //calc scrollbar track

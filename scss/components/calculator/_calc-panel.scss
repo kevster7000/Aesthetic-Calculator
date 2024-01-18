@@ -5,11 +5,34 @@
     margin: var(--SPACING-SM);
     margin-bottom: 0;
     color: var(--TEXT-COLOR);
+    position: relative;
+    animation: none;
 
-    // this is for mobile - obv, add a transition
-    // position: relative;
-    // top: 100%;
-    // translate: 0 -100%;
+    &.mobile-active {
+        animation: slide-down 0.85s forwards;
+    }
+
+    @keyframes slide-down {
+        from {
+            top: 0%;
+            translate: 0 0;
+        }
+        to {
+            top: 100%;
+            translate: 0 -100%;
+        }
+    }
+
+    @keyframes slide-up {
+        from {
+            top: 100%;
+            translate: 0 -100%;
+        }
+        to {
+            top: 0%;
+            translate: 0 0%;
+        }
+    }
 
     h3 {
         @extend %offscreen;
@@ -25,14 +48,16 @@
             opacity: 0;
             color: var(--TEXT-COLOR);
             animation: unset;
+            font-size: var(--FS-SM);
         }
     
         #calculator-history-btn {
             @include neumorphic-btn(HEADER);
-            width: 10%;
+            width: var(--FS-XL);
             aspect-ratio: 1/1;
             border-radius: 50% 50% 0 50%;
-    
+            font-size: var(--FS-SM);
+        
             i {
                 display: inline-block;
                 position: absolute;
@@ -46,15 +71,13 @@
             }
     
             #close-history {
+                display: none;
                 opacity: 0;
                 // animation: fade-out 0.25s forwards;
             }
-    
-            // TODO - close history mobile is the default, then media query
-            // TODO - make history come from top - for history panel
-    
+
             #close-history-mobile {
-                display: none;
+                opacity: 0;
             }
     
             &.history-active {
@@ -67,14 +90,10 @@
                 #close-history {
                     animation: fade-in 0.5s forwards;
                 }
-            }
-    
-            @include media-sm { //idk if this is the right size
-                //TODO - change close hisotyr icons
-    
-                &.history-active {
-                    border-radius: 50% 50% 0 50%;
-                }    
+
+                #close-history-mobile {
+                    animation: fade-in 0.5s forwards;
+                }
             }
         }
     }
@@ -85,7 +104,7 @@
 
         &-main {
             @extend %nowrap;
-            font-size: 2.5rem;
+            font-size: var(--FS-XL);
             text-align: right;
             flex-grow: 1;
             width: 100%;
@@ -93,7 +112,7 @@
             border: none;
             outline-color: transparent;
             padding: var(--SPACING-SM);
-            padding-bottom: var(--SPACING-XS);
+            padding-bottom: 0;
             margin-bottom: 3px;
             overflow-x: auto;
             
@@ -121,9 +140,10 @@
             width: 100%;
             text-align: right;
             padding: var(--SPACING-SM);
-            padding-bottom: var(--SPACING-XS);
+            padding-bottom: 0;
             margin-bottom: 3px;
             overflow-x: auto;
+            font-size: var(--FS-SM);
 
             &::-webkit-scrollbar {
                 height: 3px;
@@ -142,6 +162,31 @@
             &::-webkit-scrollbar-thumb:hover {
                 background: var(--CALC-SCROLLBAR-HOVER);
             }
+        }
+    }
+}
+
+@include media-md {
+    .calculator__panel {
+        animation: none;
+
+        &.mobile-active {
+            animation: none;
+        }
+
+        &-header #calculator-history-btn {
+
+            #close-history {
+                display: inline-block;
+            }
+
+            #close-history-mobile {
+                display: none;
+            }
+
+            &.history-active {
+                border-radius: 50% 50% 0 50%;
+            } 
         }
     }
 }

@@ -8,3 +8,18 @@ footer {
     margin-bottom: var(--SPACING-LG);
     @include flex(center, flex-end, column);
 }
+
+@media screen and (max-width: 1120px) {
+    footer {
+        @include flex(flex-end, flex-end, row);
+        margin-bottom: var(--SPACING-MD);
+
+        .github__btn {
+            order: 1;
+
+            i {
+                font-size: var(--FS-MD);
+            }
+        }
+    }
+}

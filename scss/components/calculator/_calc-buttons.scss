@@ -1,16 +1,104 @@
 @use "./../../abstracts/" as *;
 
+@mixin calculator-btn-layout($mobile) {
+    @if $mobile {
+        grid-template-areas: 
+            "sev eig nin cle div pa1"
+            "fou fiv six del mul pa2"
+            "one two thr equ sub per"
+            "zer dec nbg nbg add exp"
+        ;
+        grid-template-rows: repeat(4, 1fr);
+        grid-template-columns: repeat(6, 1fr);
+        #btn-b0 { grid-area: zer;}
+        #btn-b1 { grid-area: one;}
+        #btn-b2 { grid-area: two;}
+        #btn-b3 { grid-area: thr;}
+        #btn-b4 { grid-area: fou;}
+        #btn-b5 { grid-area: fiv;}
+        #btn-b6 { grid-area: six;}
+        #btn-b7 { grid-area: sev;}
+        #btn-b8 { grid-area: eig;}
+        #btn-b9 { grid-area: nin;}
+        #btn-dec { grid-area: dec;}
+        #btn-add { grid-area: add;}
+        #btn-sub { grid-area: sub;}
+        #btn-mul { grid-area: mul;}
+        #btn-exp { grid-area: exp;}
+        #btn-per { grid-area: per;}
+        #btn-pa1 { grid-area: pa1;}
+        #btn-pa2 { grid-area: pa2;}
+        #btn-eq { grid-area: equ;}
+        #btn-cle { grid-area: cle;}
+        #btn-del { grid-area: del;}
+        #calculator__theme-header { grid-area: nbg;}
+    }
+    @else {
+        grid-template-areas: unset;
+        #btn-b0 { grid-area: unset;}
+        #btn-b1 { grid-area: unset;}
+        #btn-b2 { grid-area: unset;}
+        #btn-b3 { grid-area: unset;}
+        #btn-b4 { grid-area: unset;}
+        #btn-b5 { grid-area: unset;}
+        #btn-b6 { grid-area: unset;}
+        #btn-b7 { grid-area: unset;}
+        #btn-b8 { grid-area: unset;}
+        #btn-b9 { grid-area: unset;}
+        #btn-dec { grid-area: unset;}
+        #btn-add { grid-area: unset;}
+        #btn-sub { grid-area: unset;}
+        #btn-mul { grid-area: unset;}
+        #btn-exp { grid-area: unset;}
+        #btn-per { grid-area: unset;}
+        #btn-pa1 { grid-area: unset;}
+        #btn-pa2 { grid-area: unset;}
+        #btn-eq { grid-area: unset;}
+        #btn-cle { grid-area: unset;}
+        #btn-del { grid-area: unset;}
+        #calculator__theme-header { grid-area: 1/1/2/3;}
+    }
+}
+
 .calculator__btns {
     flex-grow: 1;
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     padding: var(--SPACING-MD);
     padding-top: var(--SPACING-SM);
+    animation: none;
 
-    // this is for mobile
-    // transition: translate 3s ease-out;
-    // position: relative;
-    // translate: 0 100%;
+    &.mobile-active {
+        animation: hide-buttons-mobile 0.75s forwards;
+    }
+
+    @keyframes hide-buttons-mobile {
+        from {
+            opacity: 1;
+            translate: 0 0;
+        }
+        70% {
+            opacity: 0.5;
+        }
+        to {
+            opacity: 0;
+            translate: 0 110%;
+        }
+    }
+
+    @keyframes show-buttons-mobile {
+        from {
+            opacity: 0;
+            translate: 0 110%;
+        }
+        30% {
+            opacity: 0.5;
+        }
+        to {
+            opacity: 1;
+            translate: 0 0%;
+        }
+    }
 
     h3 {
         @extend %offscreen;
@@ -19,12 +107,12 @@
     button {
         @include button(CALC);
         margin: var(--SPACING-SM);
-        border-radius: 20px;
+        border-radius: clamp(11.25px, 3vmin, 20px);
         border: none;
         position: relative;
         box-shadow: var(--BTN-SHADOW);
-        font-size: 1.35rem;
-        line-height: 1.35rem;
+        font-size: var(--FS-BTN-MD);
+        line-height: var(--FS-BTN-MD);
         outline-color: transparent;
     
         &::before {
@@ -33,7 +121,7 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            border-radius: 16px;
+            border-radius: clamp(9px, 2.75vmin, 16px);
             width: 85%;
             height: 85%;
         }
@@ -103,7 +191,7 @@
     }
 
     #calculator__theme-header {
-        font-size: 1.3rem;
+        font-size: var(--FS-BTN-SM);
         grid-column: 1/3;
 
         color: var(--TEXT-COLOR-OPPOSITE);
@@ -128,6 +216,69 @@
     }
 
     #btn-eq, #btn-add, #btn-sub, #btn-mul, #btn-div, #btn-exp, #btn-dec {
-        font-size: 1.75rem;
+        font-size: var(--FS-BTN-LG);
+    }
+}
+
+@include media-landscape {
+    .calculator__btns {
+        @include calculator-btn-layout(true);
+
+        button {
+            border-radius: 6.25px;
+        
+            &::before {
+                border-radius: 5px
+            }
+        }
+    }
+}
+
+@include media-xs-landscape {
+    .calculator__btns {
+        @include calculator-btn-layout(true);
+    }
+}
+
+@include media-sm-landscape {
+    .calculator__btns {
+        @include calculator-btn-layout(true);
+
+        button {
+            border-radius: clamp(11.25px, 3vmin, 20px); //TODO??
+        
+            &::before {
+                border-radius: clamp(9px, 2.75vmin, 16px); //TODO??
+            }
+        }
+    }
+}
+
+@include media-md {
+    .calculator__btns {
+        @include calculator-btn-layout(false);
+
+        &.mobile-active {
+            animation: none;
+        }
+
+        button {
+            border-radius: clamp(11.25px, 3vmin, 20px);
+        
+            &::before {
+                border-radius: clamp(9px, 2.75vmin, 16px);
+            }
+        }
+    }
+}
+
+
+@include media-xl {
+    .calculator__btns button {
+        border-radius: max(20px, 1.3vw);
+    
+        &::before {
+            border-radius: max(16px, 1.04vw);
+        }
     }
 }

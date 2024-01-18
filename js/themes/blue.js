@@ -2,6 +2,8 @@ const blueTheme = [
     "#3279e3", //main color
     "hsla(216, 32%, 54%, 0.35)", //main color cover
 
+    "hsl(216, 42%, 46%)", //mobile panel
+
     "#f1ede3", //text color
     "#f1ede3", //text color opposite
 

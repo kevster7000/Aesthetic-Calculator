@@ -3,8 +3,16 @@
 .credits {
     color: var(--TEXT-COLOR);
     padding: var(--SPACING-SM);
+    font-size: var(--FS-SM);
+    display: none;
 
     a {
         @extend %link;
+    }
+}
+
+@include media-md {
+    .credits {
+        display: block;
     }
 }

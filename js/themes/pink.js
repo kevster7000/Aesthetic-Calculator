@@ -2,11 +2,13 @@ const pinkTheme = [
     "#fc9cac", //main color
     "hsla(350, 91%, 90%, .45)", //main color cover
 
+    "hsl(350, 92%, 86%)", //mobile panel
+
     "#111", //text color
     "#f1ede3", //text color opposite
 
-    "hsla(350, 100%, 90%, 0.95)", //panel light
-    "hsla(350, 55%, 61%, 0.85)", //panel dark
+    "hsla(350, 100%, 92%, 0.95)", //panel light
+    "hsla(350, 59%, 72%, 0.85)", //panel dark
     "hsla(350, 65%, 22%, 0.95)", //panel shadow
 
     "hsla(350, 100%, 96%, 0.85)", //calc scrollbar track

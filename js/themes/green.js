@@ -2,11 +2,13 @@ const greenTheme = [
     "#24a42b", //main color
     "hsla(123, 34%, 39%, 0.25)", //main color cover
 
+    "hsl(129, 29%, 37%)", //mobile panel
+
     "#eeefef", //text color
     "#eeefef", //text color opposite
 
-    "hsla(123, 28%, 65%, 0.85)", //panel light
-    "hsla(123, 21%, 47%, 0.85)", //panel dark
+    "hsla(123, 28%, 66%, 0.85)", //panel light
+    "hsla(123, 21%, 49%, 0.85)", //panel dark
     "hsla(123, 49%, 10%, 0.95)", //panel shadow
 
     "hsla(123, 65%, 10%, 0.85)", //calc scrollbar track

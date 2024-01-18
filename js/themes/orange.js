@@ -2,11 +2,13 @@ const orangeTheme = [
     "#f47911", //main color
     "hsla(27, 62%, 45%, 0.35)", //main color cover
 
+    "hsl(27, 81%, 56%)", //mobile panel
+
     "#fffaeb", //text color
     "#fffaeb", //text color opposite
 
-    "hsla(27, 95%, 70%, 0.9)", //panel light
-    "hsla(27, 55%, 49%, 0.85)", //panel dark
+    "hsla(27, 94%, 68%, 0.9)", //panel light
+    "hsla(24, 59%, 51%, 0.85)", //panel dark
     "hsla(27, 72%, 20%, 0.95)", //panel shadow
 
     "hsla(27, 55%, 95%, 0.85)", //calc scrollbar track

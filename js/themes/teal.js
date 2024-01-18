@@ -2,11 +2,13 @@ const tealTheme = [
     "#8bdad8", //main color
     "hsla(178, 42%, 70%, .35)", //main color cover
 
+    "hsl(178, 40%, 78%)", //mobile panel
+
     "#111", //text color
     "#faffff", //text color opposite
 
-    "hsla(178, 95%, 96%, 0.95)", //panel light
-    "hsla(178, 35%, 57%, 0.85)", //panel dark
+    "hsla(178, 95%, 95%, 0.95)", //panel light
+    "hsla(178, 31%, 60%, 0.85)", //panel dark
     "hsla(178, 45%, 28%, 0.95)", //panel shadow
 
     "hsla(178, 100%, 96%, 0.85)", //calc scrollbar track

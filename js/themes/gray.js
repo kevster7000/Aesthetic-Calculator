@@ -2,11 +2,13 @@ const grayTheme = [
     "#999999", //main color
     "hsla(0, 0%, 60%, .35)", //main color cover
 
+    "hsl(0, 0%, 80%)", //mobile panel
+
     "#1d1d1d", //text color
     "#fdfdfa", //text color opposite
 
     "hsla(0, 0%, 86%, 0.9)", //panel light
-    "hsla(0, 0%, 57%, 0.75)", //panel dark
+    "hsla(0, 0%, 62%, 0.75)", //panel dark
     "hsla(0, 0%, 19%, 0.75)", //panel shadow
 
     "hsla(0, 0%, 85%, 0.85)", //calc scrollbar track 

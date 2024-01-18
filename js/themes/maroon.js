@@ -2,11 +2,13 @@ const maroonTheme = [
     "#b33333", //main color
     "hsla(0, 49%, 45%, .35)", //main color cover
 
+    "hsl(0, 37%, 36%)", //mobile panel
+
     "#e5e0da", //text color
     "#e9e1e1", //text color opposite
 
     "hsla(0, 29%, 46%, 0.9)", //panel light
-    "hsla(0, 21%, 40%, 0.85)", //panel dark
+    "hsla(0, 43%, 23%, 0.85)", //panel dark
     "hsla(0, 58%, 11%, 0.95)", //panel shadow
 
     "hsla(0, 65%, 15%, 0.85)", //calc scrollbar track 

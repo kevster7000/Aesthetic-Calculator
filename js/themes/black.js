@@ -2,11 +2,13 @@ const blackTheme = [
     "#333333", //main color
     "hsla(0, 0%, 27%, .35)", //main color cover
 
+    "hsl(221, 2%, 15%)", //mobile panel
+
     "#e9e7e1", //text color
     "#e9e7e1", //text color opposite
 
     "hsla(0, 0%, 32%, 0.9)", //panel light
-    "hsla(0, 0%, 27%, 0.75)", //panel dark
+    "hsla(0, 0%, 28%, 0.75)", //panel dark
     "hsla(0, 0%, 0%, 1)", //panel shadow
 
     "hsla(0, 0%, 38%, 0.85)", //calc scrollbar track 

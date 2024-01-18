@@ -2,11 +2,13 @@ const whiteTheme = [
     "#f7f7f7", //main color
     "hsla(0, 0%, 97%, 0.35)", //main color cover
 
+    "hsl(0, 0%, 93%)", //mobile panel
+
     "#111", //text color
     "#f7f7f7", //text color opposite
 
     "hsla(0, 0%, 96%, 0.95)", //panel light
-    "hsla(0, 0%, 43%, 0.25)", //panel dark
+    "hsla(0, 0%, 49%, 0.25)", //panel dark
     "hsla(0, 0%, 23%, 0.4)", //panel shadow
 
     "#f7f7f7", //calc scrollbar track

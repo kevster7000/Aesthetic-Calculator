@@ -3,7 +3,7 @@
 .github__btn {
     @extend %link;
     padding: var(--SPACING-SM);
-    font-size: clamp(1.25rem, 5vw, 1.5rem);
+    font-size: var(--FS-MD);
     font-weight: bold;
     text-decoration: none;
     background: none;
@@ -11,21 +11,11 @@
     display: none;
 
     i {
-        font-size: 1.75rem;
+        font-size: var(--FS-BTN-LG);
     }
-
-    .github__text {
-        display: none;
-    }
-
-    @include media-md {
-        .github__text {
-            display: inline;
-        }
-    }    
 }
 
-@include media-sm {
+@include media-md {
     .github__btn {
         display: block;
     }

@@ -1,12 +1,7 @@
 @use "./../../abstracts" as *;
 
 .themes {
-    display: none;
-    position: absolute;
-    right: 0;
-    top: 50%;
-    transform: translateY(-50%);
-    margin-right: var(--SPACING-XL);
+    display: block;
 
     h2 {
         @extend %offscreen;
@@ -14,9 +9,10 @@
 
     &__btn {
         @include neumorphic-btn(HEADER);
-        @include flex;
+        display: none;
         gap: var(--SPACING-SM);
         padding: var(--SPACING-MD);
+        font-size: var(--FS-SM);
 
         .themes__current {
             width: 16px;
@@ -24,16 +20,6 @@
             background-color: var(--MAIN-COLOR);
             border-radius: 50%;
             border: 1px solid var(--TEXT-COLOR);
-        }
-
-        .themes__text {
-            display: none;
-        }
-
-        @include media-md {
-            .themes__text {
-                display: inline;
-            }
         }
 
         #open-themes {
@@ -63,19 +49,56 @@
     }
 
     &__panel {
-        z-index: 1;
+        @include neumorphic(CALC);
+        z-index: 3;
         display: none;
         position: absolute;
-        left: 0;
-        gap: var(--SPACING-SM);
-        padding: var(--SPACING-MD);
-        @include neumorphic(HEADER);
-        border-radius: 10px;
-        margin-top: var(--SPACING-MD);
+        top: calc(30vh + 2 * var(--SPACING-MD) + var(--FS-XL));
+        left: 50%;
+        transform: translate(-50%, -32%);
+        width: clamp(150px, 95vw, 310px);
+        height: clamp(100px, 80vh, 425px);
+        gap: var(--SPACING-MD);
+        padding: calc(var(--SPACING-XL) * 4);
+
+        &-mobile-current {
+            @include flex;
+            gap: var(--SPACING-MD);
+            color: var(--TEXT-COLOR);
+            font-size: var(--FS-LG);
+            position: absolute;
+            top: 20%;
+            left: 50%;
+            transform: translateX(-50%);
+            @extend %nowrap;
+
+            .themes__current {
+                width: var(--FS-LG);
+                height: var(--FS-LG);
+                background-color: var(--MAIN-COLOR);
+                border-radius: 50%;
+                border: 1px solid var(--TEXT-COLOR);
+            }
+        }
+
+        &-mobile-close {
+            @include button(HEADER);
+            background-color: transparent;
+            border: none;
+            position: absolute;
+            top: var(--SPACING-XL);
+            right: var(--SPACING-XL);
+            font-size: var(--FS-LG);
+            line-height: var(--FS-LG);
+
+            &:active {
+                scale: 0.9;
+            }
+        }
 
         &-option {
-            width: 16px;
-            height: 16px;
+            width: calc(var(--FS-LG) * 1.5);
+            height: calc(var(--FS-LG) * 1.5);
             background: white;
             border-radius: 50%;
             border: 1px solid black;
@@ -87,19 +110,119 @@
             }
 
             &:active {
-                transform: scale(0.975);
+                transform: scale(0.85);
                 transition: transform 0.075s;
             }
         }
 
         &.panel-active {
             @include flex(center, center, row, wrap);
+            align-content: center;
+            animation: fade-in 0.25s forwards;
         }
     }
 }
 
+@include media-landscape {
+    .themes .themes__panel {
+        top: calc(2 * var(--SPACING-MD) + var(--FS-XL));
+        transform: translate(-50%, 0);
+        height: clamp(80px, 80vh, 300px);
+    }
+}
+
+@include media-xs {
+    .themes .themes__panel {
+        width: clamp(280px, 94vw, 450px);
+        height: clamp(340px, 75vh, 610px);
+    }
+}
+
+@include media-xs-landscape {
+    .themes .themes__panel {
+        top: calc(2 * var(--SPACING-MD) + var(--FS-XL));
+        transform: translate(-50%, 0);
+        width: clamp(300px, 96vw, 550px);
+        height: clamp(200px, 85vh, 420px);
+    }
+}
+
 @include media-sm {
+    .themes .themes__panel {
+        width: clamp(495px, 75vw, 530px);
+        height: clamp(510px, 84vh, 720px);
+    }
+}
+
+@include media-sm-landscape {
+    .themes .themes__panel {
+        top: calc(2 * var(--SPACING-MD) + var(--FS-XL));
+        transform: translate(-50%, 0);
+        width: clamp(525px, 90vw, 700px);
+        height: clamp(260px, 80vh, 575px);
+    }
+}
+
+@include media-md {
     .themes {
-        display: block;
+        position: absolute;
+        right: 0;
+        top: 50%;
+        transform: translateY(-50%);
+        margin-right: var(--SPACING-XL);
+
+        &__btn {
+            @include flex;
+        }
+    
+        #{&}__panel {
+            @include neumorphic(HEADER);
+            z-index: 1;
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            transform: translateX(0%);
+            height: auto;
+            width: auto;
+            gap: var(--SPACING-SM);
+            padding: var(--SPACING-MD);
+            border-radius: 10px;
+            margin-top: var(--SPACING-MD);
+            width: unset;
+            height: unset;
+
+            &-mobile-current {
+                display: none;
+            }
+    
+            &-mobile-close {
+                display: none;
+            }
+    
+            &-option {
+                width: var(--FS-SM);
+                height: var(--FS-SM);
+                background: white;
+                border-radius: 50%;
+                border: 1px solid black;
+                cursor: pointer;
+                transition: transform 0.15s;
+    
+                &:hover, &:focus-visible {
+                    transform: scale(1.125);
+                }
+    
+                &:active {
+                    transform: scale(0.95);
+                    transition: transform 0.075s;
+                }
+            }
+    
+            &.panel-active {
+                @include flex(center, center, row, wrap);
+                animation: none;
+            }
+        }
     }
 }

@@ -8,7 +8,8 @@ header {
 
     h1 {
         @extend %nowrap;
-        font-size: clamp(1.25rem, 7vw, 2rem);
+        font-size: var(--FS-LG);
+        line-height: var(--FS-XL);
         text-align: center;
         color: var(--TEXT-COLOR);
         transform: translateX(1.25%);

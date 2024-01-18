@@ -1,42 +1,53 @@
 // media queries go here
-@mixin media-xl {
-    @media screen and (min-width: 1280px) {
+
+//be default, we are writing for 0 - 319 portrait
+
+@mixin media-landscape {  // 0 - 319
+    @media screen and (max-width: 319.9px) and (min-aspect-ratio: 8/10) {
+        @content;
+    }  
+}
+
+@mixin media-xs  { // 320 - 575 
+    @media screen and (min-width: 320px) {
         @content;
     }
 }
 
-@mixin media-lg {
-    @media screen and (min-width: 1024px) {
+@mixin media-xs-landscape { // 320 - 575 
+    @media screen and (min-width: 320px) and (max-width: 575.9px) and (min-aspect-ratio: 19/20) {
         @content;
     }
 }
 
-@mixin media-md {
+@mixin media-sm { // 576 - 767
+    @media screen and (min-width: 576px) {
+        @content;
+    }
+}
+
+@mixin media-sm-landscape { // 576 - 767
+    @media screen and (min-width: 576px) and (max-width: 767.9px) and (min-aspect-ratio: 20.5/19) {
+        @content;
+    }
+}
+
+//breakpoint between desktop and mobile
+
+@mixin media-md { // 768 - 1023
     @media screen and (min-width: 768px) {
         @content;
     }
 }
 
-@mixin media-sm {
-    @media screen and (min-width: 576px) { //add orientation portrait to this
+@mixin media-lg { // 1024 - 1279
+    @media screen and (min-width: 1024px) {
         @content;
     }
 }
 
-@mixin media-sm-landscape {
-    @media screen and (min-width: 576px) and (orientation: landscape) {
-        @content;
-    }
-}
-
-@mixin media-xs {
-    @media screen and (min-width: 320px) { //add orientation portrait to this
-        @content;
-    }
-}
-
-@mixin media-xs-landscape {
-    @media screen and (min-width: 320px) and (orientation: landscape) {
+@mixin media-xl { // >= 1280
+    @media screen and (min-width: 1280px) {
         @content;
     }
 }

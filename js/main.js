@@ -5,12 +5,73 @@ document.addEventListener("DOMContentLoaded", initApp);
 
 function initApp() {
 
-//this for keyboard integration - only apply if the device is desktop
+//disable keyboard shortcuts for mobile devices
+let keyboardShortcutsOpen = false;
 let isDesktop = false;
-if(window.innerWidth > 768) isDesktop = true;
+if(window.innerWidth >= 768) {
+    isDesktop = true;
+    initKeyboardShortcuts();
+}
+else {
+    sessionStorage.setItem("KeyboardShortcutsOpen", false);
+}
 
+let delay = 250;
+let linesResize = false;
+
+const historyPanel = document.querySelector(".calculator__history");
+const calculator = document.querySelector(".calculator");
+let prevWidth = window.innerWidth;
 window.addEventListener("resize", () => {
-    if(window.innerWidth > 768 || isDesktop) isDesktop = true;
+
+    //enable keyboard shortcuts only if desktop
+    if(window.innerWidth >= 768 || isDesktop) {
+        isDesktop = true;
+
+        if(!keyboardShortcutsOpen) initKeyboardShortcuts();
+
+        if (!linesResize) {
+            drawKeyboardShortcutLines();
+            linesResize = true;
+            setTimeout(() => {
+                linesResize = false;
+            }, delay);
+        }  
+    }
+
+    //adjust history panel mobile height
+    if(prevWidth < 768) {
+        document.documentElement.style.setProperty("--HISTORY-PANEL-MOBILE-HEIGHT", 
+        `${calculator.offsetHeight - calcPanel.offsetHeight + getRealValue("", "var(--SPACING-MD)")}px`);
+    }
+
+    if(prevWidth < 768 && window.innerWidth >= 768) {
+        //remove mobile cover is opened
+        if(mobileOptionsPanel.classList.contains("panel-active")) toggleMobileOptions();
+
+        //remove animation from calculator
+        calculator.style.setProperty("animation", "none");
+
+        //remove history panel mobile animations
+        historyPanel.classList.remove("history-panel-mobile-fade-in");
+        historyPanel.classList.remove("history-panel-mobile-fade-out");
+    }
+    else if(prevWidth >= 768 && window.innerWidth < 768) {
+        if(themeClicked) calculator.style.setProperty("animation", "fade-out 0.25s forwards");
+        document.documentElement.style.setProperty("--HISTORY-PANEL-MOBILE-HEIGHT", 
+        `${calculator.offsetHeight - calcPanel.offsetHeight + getRealValue("", "var(--SPACING-MD)")}px`);
+    }
+
+    //restyle the history panel upon the breakpoint of 768px
+    if(((prevWidth < 768 && window.innerWidth >= 768) || (prevWidth >= 768 && window.innerWidth < 768)) && historyClicked) {
+        toggleHistoryAnimation(true);
+        toggleHistoryPanel();
+    }
+    else if(((prevWidth < 768 && window.innerWidth >= 768) || (prevWidth >= 768 && window.innerWidth < 768))) {
+        toggleHistoryAnimation(true);
+    }
+
+    prevWidth = window.innerWidth;
 })
 
 //reset for keyboard integration
@@ -22,15 +83,20 @@ window.addEventListener("keydown", (event) => {
 /*                                     Themes                                     */
 /**********************************************************************************/
 
+const themesButton = document.querySelector(".themes__btn");
+const themesPanel = document.querySelector(".themes__panel");
+const themesCloseButton = document.querySelector(`#close-themes`);
+let themeClicked = false;
+
 initThemes();
 
 function initThemes() {
-    const themesButton = document.querySelector(".themes__btn");
-    const themesPanel = document.querySelector(".themes__panel");
-    const themesCloseButton = document.querySelector(`#close-themes`);
-    let themeClicked = false;
+    const mobileOptionsThemes = document.querySelector(".mobile-options__themes-btn");
+    const mobileOptionsClose = document.querySelector(".themes__panel-mobile-close");
 
     themesButton.addEventListener("click", toggleThemesPanel);
+    mobileOptionsThemes.addEventListener("click", toggleThemesPanel);
+    mobileOptionsClose.addEventListener("click", toggleThemesPanel);
 
     //keyboard integration
     window.addEventListener("keydown", (event) => {
@@ -48,26 +114,39 @@ function initThemes() {
 
     //click away
     window.addEventListener("click", (event) => {
-        if(themesPanel.classList.contains("panel-active") && !themesPanel.contains(event.target) && !themesButton.contains(event.target)) {
+        if(window.innerWidth >= 768 && themesPanel.classList.contains("panel-active") && !themesPanel.contains(event.target) && !themesButton.contains(event.target)) {
             toggleThemesPanel();
         }
     });
 
-    function toggleThemesPanel() {
-        themesPanel.classList.toggle("panel-active");
-        themesButton.classList.toggle("themes-active");
+    setThemes(getTheme());
+}
 
+function toggleThemesPanel() {
+    themesPanel.classList.toggle("panel-active");
+    themesButton.classList.toggle("themes-active");
+
+    if(themeClicked) {
+        themesCloseButton.style.setProperty("animation", "fade-out 0.25s forwards");
+        themeClicked = false;
+    }
+    else {
+        themesCloseButton.style.setProperty("animation", "fade-in 0.5s forwards");
+        themeClicked = true;
+    }
+
+    if(window.innerWidth < 768) {
         if(themeClicked) {
-            themesCloseButton.style.setProperty("animation", "fade-out 0.25s forwards");
-            themeClicked = false;
+            calculator.style.setProperty("animation", "fade-out 0.25s forwards");
+            historyPanel.classList.add("history-panel-mobile-fade-out");
+            historyPanel.classList.remove("history-panel-mobile-fade-in");
         }
         else {
-            themesCloseButton.style.setProperty("animation", "fade-in 0.5s forwards");
-            themeClicked = true;
+            calculator.style.setProperty("animation", "fade-in 0.25s forwards");
+            historyPanel.classList.add("history-panel-mobile-fade-in");
+            historyPanel.classList.remove("history-panel-mobile-fade-out");
         }
     }
-    
-    setThemes(getTheme());
 }
 
 function getTheme() {
@@ -95,6 +174,7 @@ function setThemes(themeStored) {
         newTheme.addEventListener("click", () => {
             updateTheme(themes[theme], theme);
             newBackgroundImage();
+            if(window.innerWidth < 768) toggleThemesPanel();
         });
         themesContainer.append(newTheme);
 
@@ -105,9 +185,11 @@ function setThemes(themeStored) {
         for(let i = 0; i < colorVariables.length; i ++) {
             document.documentElement.style.setProperty(colorVariables[i], themeColors[i]);
         }
-        const themeCurrent = document.querySelector(".themes__current");
-        themeCurrent.style.setProperty("background-color", themeColors[0]);
-        themeCurrent.title = incTheme;
+        const themeCurrent = document.getElementsByClassName("themes__current");
+        for(let j = 0; j < themeCurrent.length; j++) {
+            themeCurrent[j].style.setProperty("background-color", themeColors[0]);
+            themeCurrent[j].title = incTheme;
+        }
         localStorage.setItem("theme", incTheme);
     }
 }
@@ -153,7 +235,8 @@ async function newBackgroundImage() {
         }
         
         backgroundContainer.style.setProperty("background-image", `url("${response.url}")`);
-        localStorage.setItem("image", response.url);
+        if(currTheme === "lime green") currTheme = "limeGreen";
+        localStorage.setItem("image", JSON.stringify([response.url, currTheme]));
     }
     catch {
         console.error("Couldn't Get Image");
@@ -161,8 +244,9 @@ async function newBackgroundImage() {
 }
 
 function setDefaultImage() {
-    if(localStorage.getItem("image")) {
-        backgroundContainer.style.setProperty("background-image", `url("${localStorage.getItem("image")}")`);
+    let currImage = JSON.parse(localStorage.getItem("image"));
+    if(currImage && currImage[1] === getTheme()) {
+        backgroundContainer.style.setProperty("background-image", `url("${currImage[0]}")`);
     }
     else {
         switch(getTheme()) {
@@ -216,7 +300,6 @@ function setDefaultImage() {
 /*                                   Calculator                                   */
 /**********************************************************************************/
 
-//i tried to make sure each section has its variable scoped correctly, but these have to be global for history entries
 const panelOutputPrev = document.querySelector(".calculator__panel-output-prev");
 const panelOutputMain = document.querySelector(".calculator__panel-output-main");
 
@@ -405,7 +488,7 @@ function initCalc() {
                 while(panelOutputMain.scrollWidth > panelOutputMain.clientWidth) {
                     resizedMain = new Big(resizedMain.toPrecision(resizedMain.c.length - 1));
                     panelOutputMain.textContent = resizedMain.toString();
-                    console.log(resizedMain);
+                    // console.log(resizedMain);
                 }
             }
 
@@ -612,25 +695,34 @@ function binarySearchForID(targetID) {
 /*                                 History Panel                                  */
 /**********************************************************************************/
 
+let historyClicked = false;
+const historyButton = document.querySelector("#calculator-history-btn");
+const historyCloseButton = document.querySelector("#close-history");
+const historyPanelEntries = document.querySelector(".calculator__history-entries");
+const historyPanelHeader = document.querySelector(".calculator__history-header");
+const historyClearBtn = historyPanelHeader.querySelector("button");
+const calcButtonsContainer = document.querySelector(".calculator__btns"); 
+const calcPanel = document.querySelector(".calculator__panel"); 
+
 initHistoryPanel();
 
 function initHistoryPanel() {
-    const historyButton = document.querySelector("#calculator-history-btn");
-    const historyCloseButton = document.querySelector("#close-history");
-    const historyPanel = document.querySelector(".calculator__history");
-    const historyPanelEntries = document.querySelector(".calculator__history-entries");
-    const historyPanelHeader = document.querySelector(".calculator__history-header");
-    const historyClearBtn = historyPanelHeader.querySelector("button");
-    let historyClicked = false;
+
+    document.documentElement.style.setProperty("--HISTORY-PANEL-MOBILE-HEIGHT", 
+    `${calculator.offsetHeight - calcPanel.offsetHeight + getRealValue("", "var(--SPACING-MD)")}px`);
 
     historyClearBtn.addEventListener("click", clearHistory);
-    historyButton.addEventListener("click", toggleHistoryPanel);
+    historyButton.addEventListener("click", () => {
+        toggleHistoryAnimation();
+        toggleHistoryPanel();
+    });
     if(JSON.parse(sessionStorage.getItem("HistoryPanelOpen")) && window.innerWidth > 768) toggleHistoryPanel();
 
     //keyboard integration
     window.addEventListener("keydown", (event) => {
         if(isDesktop && !event.repeat && event.key.toUpperCase() === "H") {
             historyButton.classList.add("pressed");
+            toggleHistoryAnimation();
             toggleHistoryPanel();
         }
     });
@@ -641,36 +733,71 @@ function initHistoryPanel() {
         }
     });
 
-    function toggleHistoryPanel() {
-        historyButton.classList.toggle("history-active");
-        historyPanel.classList.toggle("history-panel-active");
-        historyPanelEntries.classList.toggle("entries-active");
-        historyPanelHeader.classList.toggle("history-header-active");
-
-        if(historyClicked) {
-            historyCloseButton.style.setProperty("animation", "fade-out 0.25s forwards");
-            historyClicked = false;
-            sessionStorage.setItem("HistoryPanelOpen", false);
-        }
-        else {
-            historyCloseButton.style.setProperty("animation", "fade-in 0.5s forwards");
-            historyClicked = true;
-            sessionStorage.setItem("HistoryPanelOpen", true);
-        }
-    }
-
     function clearHistory() {
         localStorage.setItem("history", "");
         historyPanelEntries.innerHTML = `<p class="calculator__history-empty">Your history log is empty!</p>`;
     }
 }
 
+function toggleHistoryPanel() {
+    historyButton.classList.toggle("history-active");
+    historyPanel.classList.toggle("history-panel-active");
+    historyPanelEntries.classList.toggle("entries-active");
+    historyPanelHeader.classList.toggle("history-header-active");
+    calcButtonsContainer.classList.toggle("mobile-active");
+    calcPanel.classList.toggle("mobile-active");
+
+    if(historyClicked) {
+        historyCloseButton.style.setProperty("animation", "fade-out 0.25s forwards");
+        historyClicked = false;
+        sessionStorage.setItem("HistoryPanelOpen", false);
+
+        historyPanel.classList.remove("history-panel-mobile-fade-in");
+        historyPanel.classList.remove("history-panel-mobile-fade-out");
+    }
+    else {
+        historyCloseButton.style.setProperty("animation", "fade-in 0.5s forwards");
+        historyClicked = true;
+        sessionStorage.setItem("HistoryPanelOpen", true);
+    }
+}
+
+function toggleHistoryAnimation(resize = false) {
+
+    if(resize) {
+        historyPanel.style.setProperty("animation", "none");
+        calcPanel.style.setProperty("animation", "none");
+        calcButtonsContainer.style.setProperty("animation", "none");
+        return;
+    }
+
+    if(window.innerWidth < 768) {
+        if(historyClicked) {
+            historyPanel.style.setProperty("animation", "hide-history-panel-mobile 0.75s forwards");
+            calcPanel.style.setProperty("animation", "slide-up 0.85s forwards");
+            calcButtonsContainer.style.setProperty("animation", "show-buttons-mobile 0.85s forwards");
+        }
+        else {
+            historyPanel.style.setProperty("animation", "show-history-panel-mobile 0.75s forwards");
+            calcPanel.style.setProperty("animation", "slide-down 0.75s forwards");
+            calcButtonsContainer.style.setProperty("animation", "hide-buttons-mobile 0.75s forwards");
+        }
+    }
+    else {
+        calcPanel.style.setProperty("animation", "none");
+        calcButtonsContainer.style.setProperty("animation", "none");
+        if(historyClicked) {
+            historyPanel.style.setProperty("animation", "hide-history-panel 0.35s 0.05s backwards");
+        }
+        else {
+            historyPanel.style.setProperty("animation", "show-history-panel 0.35s forwards");
+        }
+    }
+}
+
 /**********************************************************************************/
 /*                            Keyboard Shortcuts Panel                            */
 /**********************************************************************************/
-
-//TODO - this will be diplay:none on mobile, so make a condition (window.innerWidth) to see if you should execute this function
-initKeyboardShortcuts();
 
 function initKeyboardShortcuts() {
     const keyboardShortcutsButton = document.querySelector(".keyboard-shortcuts__btn");
@@ -679,6 +806,7 @@ function initKeyboardShortcuts() {
 
     let keyboardShortcutsClicked = false;
     let linesDrawn = false;
+    keyboardShortcutsOpen = true;
 
     if(JSON.parse(sessionStorage.getItem("KeyboardShortcutsOpen"))) toggleKeyboardShortcuts();
     keyboardShortcutsButton.addEventListener("click", toggleKeyboardShortcuts);
@@ -724,14 +852,60 @@ function drawKeyboardShortcutLines() {
     const shortcutLines = document.querySelectorAll("td .line");
 
     for(let i = 0; i < shortcutKeys.length; i++) {
-        const spacing_md = getComputedStyle(document.documentElement).getPropertyValue("--SPACING-MD");
-        let stopLength = 
-            shortcutKeys[i].offsetLeft + 
-            shortcutKeys[i].offsetWidth + 
-            (Number(spacing_md.substring(0, spacing_md.indexOf('r'))) * 16 * 2);
+        shortcutLines[i].style.setProperty("width", "0");
+        let spacing_md = parseFloat(getComputedStyle(document.documentElement).getPropertyValue("--SPACING-MD"));
+        let stopLength = shortcutKeys[i].offsetLeft + shortcutKeys[i].offsetWidth;
+        
+        if(isNaN(spacing_md)) {
+            spacing_md = Math.max(16, getRealValue(0.5, "vmin"));
+            stopLength += spacing_md;
+        }
+        else {
+            stopLength += (spacing_md * 16 * 2);
+        }
 
         const newWidth = shortcutLines[i].offsetLeft - stopLength;
         shortcutLines[i].style.setProperty("width", newWidth + "px");
     }
+}
+
+function getRealValue(value, unit) {
+    const dummy = document.createElement('div');
+    dummy.style.fontSize = `${value}${unit}`;
+    document.body.appendChild(dummy);
+    const computedValue = window.getComputedStyle(dummy).fontSize;
+    document.body.removeChild(dummy);
+    return parseFloat(computedValue);
+}
+
+/**********************************************************************************/
+/*                                 Mobile Options                                 */
+/**********************************************************************************/
+
+const mobileOptionsPanel = document.querySelector(".mobile-options__panel");
+const mobileOptionsCover = document.querySelector(".mobile-options__cover");
+
+initMobileOptions();
+
+function initMobileOptions() {
+    const mobileOptionsBtn = document.querySelector(".mobile-options__button");
+
+    mobileOptionsBtn.addEventListener("click", (event) => {
+        event.stopPropagation();
+        toggleMobileOptions();
+    });
+
+    //click away
+    window.addEventListener("click", () => {
+        if(mobileOptionsPanel.classList.contains("panel-active") && window.innerWidth < 768) {
+            mobileOptionsPanel.classList.remove("panel-active");
+            mobileOptionsCover.classList.remove("panel-active");
+        }
+    });
+}
+
+function toggleMobileOptions() {
+    mobileOptionsPanel.classList.toggle("panel-active");
+    mobileOptionsCover.classList.toggle("panel-active");
 }
 } // initApp()'s closing bracket

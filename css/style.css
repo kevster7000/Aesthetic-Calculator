@@ -4,6 +4,7 @@
     /****************** COLORS ******************/
     --MAIN-COLOR: #f7f7f7;
     --MAIN-COLOR-COVER: hsla(0, 0%, 97%, 0.35);
+    --MOBILE-PANEL: hsl(0, 0%, 94%);
     --TEXT-COLOR: #111;
     --TEXT-COLOR-OPPOSITE: #f7f7f7;
     --PANEL-LIGHT: hsla(0, 0%, 96%, 0.95);
@@ -47,6 +48,7 @@
     /****************** COLORS ******************/
     --MAIN-COLOR: #333333;
     --MAIN-COLOR-COVER: hsla(0, 0%, 27%, 0.35);
+    --MOBILE-PANEL: hsl(221, 2%, 18%);
     --TEXT-COLOR: #e9e7e1;
     --TEXT-COLOR-OPPOSITE: #e9e7e1;
     --PANEL-LIGHT: hsla(0, 0%, 32%, 0.9);
@@ -86,6 +88,8 @@
   }
 }
 :root {
+  --KEYBOARD-SHORTCUTS-HEIGHT: calc(12 * (19.2px + var(--SPACING-SM) + var(--SPACING-MD)) + var(--FS-SM) + 3px + var(--SPACING-SM) + (2 * var(--SPACING-MD)));
+  --HISTORY-PANEL-MOBILE-HEIGHT: clamp(100px, 80vh, 225px);
   /****************** SHADOWS ******************/
   --CALC-SHADOW:
       2px 2px 14px var(--CALC-SHADOW-COLOR),
@@ -102,20 +106,164 @@
   --BTN-TEXT-SHADOW-OPERATOR: 0 0 3px var(--BTN-TEXT-SHADOW-OPERATOR-COLOR);
   --BTN-TEXT-SHADOW-SPECIAL: 0 0 3px var(--BTN-TEXT-SHADOW-SPECIAL-COLOR);
   /****************** SPACING (PADDING & MARGIN & GAP) ******************/
-  --SPACING-XL: 1.25rem;
-  --SPACING-LG: 1rem;
-  --SPACING-MD: 0.5rem;
-  --SPACING-SM: 0.25rem;
-  --SPACING-XS: 0.125rem;
+  --SPACING-XL: clamp(0.5rem, 4.75vw, 1.25rem);
+  --SPACING-LG: clamp(0.35rem, 3.25vw, 1rem);
+  --SPACING-MD: clamp(0.125rem, 1.35vw, 0.5rem);
+  --SPACING-SM: clamp(0.0625rem, 0.75vw, 0.25rem);
+  --SPACING-XS: clamp(0.0325rem, 0.35vw, 0.125rem);
   /****************** FONT SIZES ******************/
-  --FS-MD: 1rem;
+  --FS-XL: clamp(1.25rem, 5.5vh, 3rem);
+  --FS-LG: clamp(0.5rem, 7.25vw, 1.5rem);
+  --FS-MD: clamp(0.75rem, 3vh, 1.5rem);
+  --FS-SM: clamp(0.5rem, 2.3vh, 1rem);
+  --FS-XS: clamp(11px, 2.5vw, 14px);
+  --FS-BTN-LG: clamp(0.8rem, 6.5vw, 1.75rem);
+  --FS-BTN-MD: clamp(0.6rem, 5vw, 1.35rem);
+  --FS-BTN-SM: clamp(0.35rem, 4vw, 1.25rem);
+}
+
+@media screen and (max-width: 319.9px) and (min-aspect-ratio: 8/10) {
+  :root {
+    --SPACING-XL: 10px;
+    --SPACING-LG: 6px;
+    --SPACING-MD: 3px;
+    --SPACING-SM: 2px;
+    --SPACING-XS: 1px;
+    --FS-XL: clamp(1rem, 7.75vh, 1.75rem);
+    --FS-LG: clamp(0.65rem, 6.125vw, 1.5rem);
+    --FS-MD: clamp(0.5rem, 4.5vh, 1.25rem);
+    --FS-SM: clamp(0.35rem, 3.25vh, 1rem);
+    --FS-XS: clamp(0.125px, 3.5vh, 0.75px);
+    --FS-BTN-LG: clamp(0.65rem, 4.25vw, 1.85rem);
+    --FS-BTN-MD: clamp(0.45rem, 3.5vw, 1.35rem);
+    --FS-BTN-SM: clamp(0.25rem, 2.8vw, 1.25rem);
+  }
+}
+@media screen and (min-width: 320px) {
+  :root {
+    --SPACING-XL: clamp(0.85rem, 4.75vw, 1.25rem);
+    --SPACING-LG: clamp(0.65rem, 3.25vw, 1rem);
+    --SPACING-MD: clamp(0.25rem, 1.35vw, 0.5rem);
+    --SPACING-SM: clamp(0.125rem, 0.75vw, 0.25rem);
+    --SPACING-XS: clamp(0.0625rem, 0.35vw, 0.125rem);
+    --FS-XL: clamp(1.5rem, 5.25vh, 3rem);
+    --FS-LG: clamp(1.5rem, 6.5vw, 2rem);
+    --FS-MD: clamp(1rem, 2.35vh, 1.5rem);
+    --FS-SM: clamp(12px, 2vh, 1rem);
+    --FS-XS: clamp(11px, 2.5vw, 14px);
+    --FS-BTN-LG: clamp(1.35rem, 6.15vw, 1.75rem);
+    --FS-BTN-MD: clamp(0.85rem, 4.5vw, 1.35rem);
+    --FS-BTN-SM: clamp(0.45rem, 3.95vw, 1.25rem);
+  }
+}
+@media screen and (min-width: 320px) and (max-width: 575.9px) and (min-aspect-ratio: 19/20) {
+  :root {
+    --SPACING-XL: clamp(0.8rem, 5vh, 1.25rem);
+    --SPACING-LG: clamp(0.6rem, 3vh, 1rem);
+    --SPACING-MD: clamp(0.2rem, 1.5vh, 0.5rem);
+    --SPACING-SM: clamp(0.12rem, 0.65vh, 0.25rem);
+    --SPACING-XS: clamp(0.062rem, 0.3vh, 0.125rem);
+    --FS-XL: clamp(1.35rem, 7.75vh, 2.25rem);
+    --FS-LG: clamp(0.75rem, 5.25vw, 1.55rem);
+    --FS-MD: clamp(0.5rem, 4.5vh, 1.25rem);
+    --FS-SM: clamp(0.25rem, 3vh, 1rem);
+    --FS-XS: clamp(0.125px, 3.5vh, 0.75px);
+    --FS-BTN-LG: clamp(1rem, 4.25vw, 1.85rem);
+    --FS-BTN-MD: clamp(0.55rem, 3.5vw, 1.35rem);
+    --FS-BTN-SM: clamp(0.5rem, 2.8vw, 1.25rem);
+  }
+}
+@media screen and (min-width: 576px) {
+  :root {
+    --SPACING-XL: 1.25rem;
+    --SPACING-LG: 1rem;
+    --SPACING-MD: 0.5rem;
+    --SPACING-SM: 0.25rem;
+    --SPACING-XS: 0.125rem;
+    --FS-XL: 2.5rem;
+    --FS-LG: 2rem;
+    --FS-MD: 1.45rem;
+    --FS-SM: 1rem;
+    --FS-XS: 14px;
+    --FS-BTN-LG: clamp(1.85rem, 5.75vw, 2rem);
+    --FS-BTN-MD: clamp(1.45rem, 3.75vw, 1.55rem);
+    --FS-BTN-SM: clamp(1.35rem, 3.35vw, 1.45rem);
+  }
+}
+@media screen and (min-width: 576px) and (max-width: 767.9px) and (min-aspect-ratio: 20.5/19) {
+  :root {
+    --SPACING-XL: clamp(0.85rem, 5vh, 1.25rem);
+    --SPACING-LG: clamp(0.65rem, 3vh, 1rem);
+    --SPACING-MD: clamp(0.25rem, 1.5vh, 0.5rem);
+    --SPACING-SM: clamp(0.125rem, 0.65vh, 0.25rem);
+    --SPACING-XS: clamp(0.0625rem, 0.3vh, 0.125rem);
+    --FS-XL: clamp(2rem, 5.5vh, 2.5rem);
+    --FS-LG: clamp(1.5rem, 5.25vh, 2rem);
+    --FS-MD: clamp(1.25rem, 4.5vh, 1.45rem);
+    --FS-SM: clamp(0.85rem, 4vh, 1rem);
+    --FS-XS: clamp(12px, 3.5vh, 14px);
+    --FS-BTN-LG: clamp(1.75rem, 4.15vw, 2rem);
+    --FS-BTN-MD: clamp(1.15rem, 2.85vw, 1.5rem);
+    --FS-BTN-SM: clamp(1rem, 2.65vw, 1.45rem);
+  }
+}
+@media screen and (min-width: 768px) {
+  :root {
+    --SPACING-XL: 1.25rem;
+    --SPACING-LG: clamp(0.5rem, 2vh, 1rem);
+    --SPACING-MD: clamp(0.35rem, 1vh, 0.5rem);
+    --SPACING-SM: clamp(0.15rem, 0.5vh, 0.25rem);
+    --SPACING-XS: 0.125rem;
+    --FS-XL: clamp(2.15rem, 5.25vh, 2.5rem);
+    --FS-LG: clamp(1.5rem, 7vw, 2rem);
+    --FS-MD: clamp(1.25rem, 2.25vw, 1.5rem);
+    --FS-SM: clamp(12px, 1.75vw, 1rem);
+    --FS-XS: clamp(11px, 1.5vw, 14px);
+    --FS-BTN-LG: clamp(1.5rem, 3.25vw, 1.75rem);
+    --FS-BTN-MD: clamp(1.2rem, 2.25vw ,1.35rem);
+    --FS-BTN-SM: clamp(1rem, 2.35vw, 1.285rem);
+  }
+}
+@media screen and (min-width: 1024px) {
+  :root {
+    --SPACING-XL: 1.25rem;
+    --SPACING-LG: 1rem;
+    --SPACING-MD: 0.5rem;
+    --SPACING-SM: 0.25rem;
+    --SPACING-XS: 0.125rem;
+    --FS-XL: 2.5rem;
+    --FS-LG: 2rem;
+    --FS-MD: clamp(1.15rem, 2.25vw, 1.5rem);
+    --FS-SM: 1rem;
+    --FS-XS: 14px;
+    --FS-BTN-LG: 1.75rem;
+    --FS-BTN-MD: 1.35rem;
+    --FS-BTN-SM: 1.285rem;
+  }
+}
+@media screen and (min-width: 1280px) {
+  :root {
+    --SPACING-XL: max(1.25rem, 1.25vw);
+    --SPACING-LG: max(1rem, 1vw);
+    --SPACING-MD: max(0.5rem, 0.5vw);
+    --SPACING-SM: max(0.25rem, 0.25vw);
+    --SPACING-XS: max(0.125rem, 0.125vw);
+    --FS-XL: max(2.5rem, 2.5vw);
+    --FS-LG: max(2rem, 2vw);
+    --FS-MD: max(1.5rem, 1.5vw);
+    --FS-SM: max(1rem, 1vw);
+    --FS-XS: max(14px, 0.875vw);
+    --FS-BTN-LG: max(1.75rem, 1.75vw);
+    --FS-BTN-MD: max(1.35rem, 1.35vw);
+    --FS-BTN-SM: max(1.285rem, 1.285vw);
+  }
 }
 .themes h2, .calculator__history h3, .calculator__panel h3, .calculator__btns h3 {
   position: absolute;
   left: -10000px;
 }
 
-header h1, .calculator__history-entries .calculator__history-empty, .calculator__history-entries .calculator__history-entry .entry-header-time, .calculator__history-entries .calculator__history-entry .entry-body .entry-input, .calculator__panel-output-main, .calculator__panel-output-prev {
+header h1, .themes__panel-mobile-current, .mobile-options__panel button, .mobile-options__panel a, .calculator__history-entries .calculator__history-empty, .calculator__history-entries .calculator__history-entry .entry-header-time, .calculator__history-entries .calculator__history-entry .entry-body .entry-input, .calculator__history-entries .calculator__history-entry .entry-body .entry-output, .calculator__panel-output-main, .calculator__panel-output-prev {
   white-space: nowrap;
 }
 
@@ -178,18 +326,48 @@ form, input, button, label, textarea {
   grid-template-columns: repeat(4, 1fr);
   padding: var(--SPACING-MD);
   padding-top: var(--SPACING-SM);
+  animation: none;
+}
+.calculator__btns.mobile-active {
+  animation: hide-buttons-mobile 0.75s forwards;
+}
+@keyframes hide-buttons-mobile {
+  from {
+    opacity: 1;
+    translate: 0 0;
+  }
+  70% {
+    opacity: 0.5;
+  }
+  to {
+    opacity: 0;
+    translate: 0 110%;
+  }
+}
+@keyframes show-buttons-mobile {
+  from {
+    opacity: 0;
+    translate: 0 110%;
+  }
+  30% {
+    opacity: 0.5;
+  }
+  to {
+    opacity: 1;
+    translate: 0 0%;
+  }
 }
 .calculator__btns button {
   color: var(--TEXT-COLOR);
   cursor: pointer;
   transition: text-shadow 0.125s, filter 0.08s, box-shadow 0.25s, transform 0.25s;
   margin: var(--SPACING-SM);
-  border-radius: 20px;
+  border-radius: clamp(11.25px, 3vmin, 20px);
   border: none;
   position: relative;
   box-shadow: var(--BTN-SHADOW);
-  font-size: 1.35rem;
-  line-height: 1.35rem;
+  font-size: var(--FS-BTN-MD);
+  line-height: var(--FS-BTN-MD);
   outline-color: transparent;
 }
 .calculator__btns button span {
@@ -212,7 +390,7 @@ form, input, button, label, textarea {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  border-radius: 16px;
+  border-radius: clamp(9px, 2.75vmin, 16px);
   width: 85%;
   height: 85%;
 }
@@ -250,7 +428,7 @@ form, input, button, label, textarea {
   text-shadow: var(--BTN-TEXT-SHADOW-SPECIAL);
 }
 .calculator__btns #calculator__theme-header {
-  font-size: 1.3rem;
+  font-size: var(--FS-BTN-SM);
   grid-column: 1/3;
   color: var(--TEXT-COLOR-OPPOSITE);
   background-color: var(--BTN-BG-SPECIAL-LIGHT);
@@ -264,14 +442,358 @@ form, input, button, label, textarea {
   text-shadow: var(--BTN-TEXT-SHADOW-SPECIAL);
 }
 .calculator__btns #btn-eq, .calculator__btns #btn-add, .calculator__btns #btn-sub, .calculator__btns #btn-mul, .calculator__btns #btn-div, .calculator__btns #btn-exp, .calculator__btns #btn-dec {
-  font-size: 1.75rem;
+  font-size: var(--FS-BTN-LG);
 }
 
+@media screen and (max-width: 319.9px) and (min-aspect-ratio: 8/10) {
+  .calculator__btns {
+    grid-template-areas: "sev eig nin cle div pa1" "fou fiv six del mul pa2" "one two thr equ sub per" "zer dec nbg nbg add exp";
+    grid-template-rows: repeat(4, 1fr);
+    grid-template-columns: repeat(6, 1fr);
+  }
+  .calculator__btns #btn-b0 {
+    grid-area: zer;
+  }
+  .calculator__btns #btn-b1 {
+    grid-area: one;
+  }
+  .calculator__btns #btn-b2 {
+    grid-area: two;
+  }
+  .calculator__btns #btn-b3 {
+    grid-area: thr;
+  }
+  .calculator__btns #btn-b4 {
+    grid-area: fou;
+  }
+  .calculator__btns #btn-b5 {
+    grid-area: fiv;
+  }
+  .calculator__btns #btn-b6 {
+    grid-area: six;
+  }
+  .calculator__btns #btn-b7 {
+    grid-area: sev;
+  }
+  .calculator__btns #btn-b8 {
+    grid-area: eig;
+  }
+  .calculator__btns #btn-b9 {
+    grid-area: nin;
+  }
+  .calculator__btns #btn-dec {
+    grid-area: dec;
+  }
+  .calculator__btns #btn-add {
+    grid-area: add;
+  }
+  .calculator__btns #btn-sub {
+    grid-area: sub;
+  }
+  .calculator__btns #btn-mul {
+    grid-area: mul;
+  }
+  .calculator__btns #btn-exp {
+    grid-area: exp;
+  }
+  .calculator__btns #btn-per {
+    grid-area: per;
+  }
+  .calculator__btns #btn-pa1 {
+    grid-area: pa1;
+  }
+  .calculator__btns #btn-pa2 {
+    grid-area: pa2;
+  }
+  .calculator__btns #btn-eq {
+    grid-area: equ;
+  }
+  .calculator__btns #btn-cle {
+    grid-area: cle;
+  }
+  .calculator__btns #btn-del {
+    grid-area: del;
+  }
+  .calculator__btns #calculator__theme-header {
+    grid-area: nbg;
+  }
+  .calculator__btns button {
+    border-radius: 6.25px;
+  }
+  .calculator__btns button::before {
+    border-radius: 5px;
+  }
+}
+@media screen and (min-width: 320px) and (max-width: 575.9px) and (min-aspect-ratio: 19/20) {
+  .calculator__btns {
+    grid-template-areas: "sev eig nin cle div pa1" "fou fiv six del mul pa2" "one two thr equ sub per" "zer dec nbg nbg add exp";
+    grid-template-rows: repeat(4, 1fr);
+    grid-template-columns: repeat(6, 1fr);
+  }
+  .calculator__btns #btn-b0 {
+    grid-area: zer;
+  }
+  .calculator__btns #btn-b1 {
+    grid-area: one;
+  }
+  .calculator__btns #btn-b2 {
+    grid-area: two;
+  }
+  .calculator__btns #btn-b3 {
+    grid-area: thr;
+  }
+  .calculator__btns #btn-b4 {
+    grid-area: fou;
+  }
+  .calculator__btns #btn-b5 {
+    grid-area: fiv;
+  }
+  .calculator__btns #btn-b6 {
+    grid-area: six;
+  }
+  .calculator__btns #btn-b7 {
+    grid-area: sev;
+  }
+  .calculator__btns #btn-b8 {
+    grid-area: eig;
+  }
+  .calculator__btns #btn-b9 {
+    grid-area: nin;
+  }
+  .calculator__btns #btn-dec {
+    grid-area: dec;
+  }
+  .calculator__btns #btn-add {
+    grid-area: add;
+  }
+  .calculator__btns #btn-sub {
+    grid-area: sub;
+  }
+  .calculator__btns #btn-mul {
+    grid-area: mul;
+  }
+  .calculator__btns #btn-exp {
+    grid-area: exp;
+  }
+  .calculator__btns #btn-per {
+    grid-area: per;
+  }
+  .calculator__btns #btn-pa1 {
+    grid-area: pa1;
+  }
+  .calculator__btns #btn-pa2 {
+    grid-area: pa2;
+  }
+  .calculator__btns #btn-eq {
+    grid-area: equ;
+  }
+  .calculator__btns #btn-cle {
+    grid-area: cle;
+  }
+  .calculator__btns #btn-del {
+    grid-area: del;
+  }
+  .calculator__btns #calculator__theme-header {
+    grid-area: nbg;
+  }
+}
+@media screen and (min-width: 576px) and (max-width: 767.9px) and (min-aspect-ratio: 20.5/19) {
+  .calculator__btns {
+    grid-template-areas: "sev eig nin cle div pa1" "fou fiv six del mul pa2" "one two thr equ sub per" "zer dec nbg nbg add exp";
+    grid-template-rows: repeat(4, 1fr);
+    grid-template-columns: repeat(6, 1fr);
+  }
+  .calculator__btns #btn-b0 {
+    grid-area: zer;
+  }
+  .calculator__btns #btn-b1 {
+    grid-area: one;
+  }
+  .calculator__btns #btn-b2 {
+    grid-area: two;
+  }
+  .calculator__btns #btn-b3 {
+    grid-area: thr;
+  }
+  .calculator__btns #btn-b4 {
+    grid-area: fou;
+  }
+  .calculator__btns #btn-b5 {
+    grid-area: fiv;
+  }
+  .calculator__btns #btn-b6 {
+    grid-area: six;
+  }
+  .calculator__btns #btn-b7 {
+    grid-area: sev;
+  }
+  .calculator__btns #btn-b8 {
+    grid-area: eig;
+  }
+  .calculator__btns #btn-b9 {
+    grid-area: nin;
+  }
+  .calculator__btns #btn-dec {
+    grid-area: dec;
+  }
+  .calculator__btns #btn-add {
+    grid-area: add;
+  }
+  .calculator__btns #btn-sub {
+    grid-area: sub;
+  }
+  .calculator__btns #btn-mul {
+    grid-area: mul;
+  }
+  .calculator__btns #btn-exp {
+    grid-area: exp;
+  }
+  .calculator__btns #btn-per {
+    grid-area: per;
+  }
+  .calculator__btns #btn-pa1 {
+    grid-area: pa1;
+  }
+  .calculator__btns #btn-pa2 {
+    grid-area: pa2;
+  }
+  .calculator__btns #btn-eq {
+    grid-area: equ;
+  }
+  .calculator__btns #btn-cle {
+    grid-area: cle;
+  }
+  .calculator__btns #btn-del {
+    grid-area: del;
+  }
+  .calculator__btns #calculator__theme-header {
+    grid-area: nbg;
+  }
+  .calculator__btns button {
+    border-radius: clamp(11.25px, 3vmin, 20px);
+  }
+  .calculator__btns button::before {
+    border-radius: clamp(9px, 2.75vmin, 16px);
+  }
+}
+@media screen and (min-width: 768px) {
+  .calculator__btns {
+    grid-template-areas: unset;
+  }
+  .calculator__btns #btn-b0 {
+    grid-area: unset;
+  }
+  .calculator__btns #btn-b1 {
+    grid-area: unset;
+  }
+  .calculator__btns #btn-b2 {
+    grid-area: unset;
+  }
+  .calculator__btns #btn-b3 {
+    grid-area: unset;
+  }
+  .calculator__btns #btn-b4 {
+    grid-area: unset;
+  }
+  .calculator__btns #btn-b5 {
+    grid-area: unset;
+  }
+  .calculator__btns #btn-b6 {
+    grid-area: unset;
+  }
+  .calculator__btns #btn-b7 {
+    grid-area: unset;
+  }
+  .calculator__btns #btn-b8 {
+    grid-area: unset;
+  }
+  .calculator__btns #btn-b9 {
+    grid-area: unset;
+  }
+  .calculator__btns #btn-dec {
+    grid-area: unset;
+  }
+  .calculator__btns #btn-add {
+    grid-area: unset;
+  }
+  .calculator__btns #btn-sub {
+    grid-area: unset;
+  }
+  .calculator__btns #btn-mul {
+    grid-area: unset;
+  }
+  .calculator__btns #btn-exp {
+    grid-area: unset;
+  }
+  .calculator__btns #btn-per {
+    grid-area: unset;
+  }
+  .calculator__btns #btn-pa1 {
+    grid-area: unset;
+  }
+  .calculator__btns #btn-pa2 {
+    grid-area: unset;
+  }
+  .calculator__btns #btn-eq {
+    grid-area: unset;
+  }
+  .calculator__btns #btn-cle {
+    grid-area: unset;
+  }
+  .calculator__btns #btn-del {
+    grid-area: unset;
+  }
+  .calculator__btns #calculator__theme-header {
+    grid-area: 1/1/2/3;
+  }
+  .calculator__btns.mobile-active {
+    animation: none;
+  }
+  .calculator__btns button {
+    border-radius: clamp(11.25px, 3vmin, 20px);
+  }
+  .calculator__btns button::before {
+    border-radius: clamp(9px, 2.75vmin, 16px);
+  }
+}
+@media screen and (min-width: 1280px) {
+  .calculator__btns button {
+    border-radius: max(20px, 1.3vw);
+  }
+  .calculator__btns button::before {
+    border-radius: max(16px, 1.04vw);
+  }
+}
 .calculator__panel {
   padding: var(--SPACING-MD);
   margin: var(--SPACING-SM);
   margin-bottom: 0;
   color: var(--TEXT-COLOR);
+  position: relative;
+  animation: none;
+}
+.calculator__panel.mobile-active {
+  animation: slide-down 0.85s forwards;
+}
+@keyframes slide-down {
+  from {
+    top: 0%;
+    translate: 0 0;
+  }
+  to {
+    top: 100%;
+    translate: 0 -100%;
+  }
+}
+@keyframes slide-up {
+  from {
+    top: 100%;
+    translate: 0 -100%;
+  }
+  to {
+    top: 0%;
+    translate: 0 0%;
+  }
 }
 .calculator__panel-header {
   display: -ms-flexbox;
@@ -291,6 +813,7 @@ form, input, button, label, textarea {
   opacity: 0;
   color: var(--TEXT-COLOR);
   animation: unset;
+  font-size: var(--FS-SM);
 }
 .calculator__panel-header #calculator-history-btn {
   background-color: var(--CALC-BG-LIGHT);
@@ -303,9 +826,10 @@ form, input, button, label, textarea {
   color: var(--TEXT-COLOR);
   cursor: pointer;
   transition: border-radius 0.25s, filter 0.25s, box-shadow 0.25s, scale 0.125s;
-  width: 10%;
+  width: var(--FS-XL);
   aspect-ratio: 1/1;
   border-radius: 50% 50% 0 50%;
+  font-size: var(--FS-SM);
 }
 .calculator__panel-header #calculator-history-btn:hover, .calculator__panel-header #calculator-history-btn:focus-visible {
   filter: brightness(var(--BTN-HOVER-BRIGHTNESS));
@@ -326,10 +850,11 @@ form, input, button, label, textarea {
   animation: fade-in 0.5s forwards;
 }
 .calculator__panel-header #calculator-history-btn #close-history {
+  display: none;
   opacity: 0;
 }
 .calculator__panel-header #calculator-history-btn #close-history-mobile {
-  display: none;
+  opacity: 0;
 }
 .calculator__panel-header #calculator-history-btn.history-active {
   border-radius: 50% 0 50% 50%;
@@ -340,10 +865,8 @@ form, input, button, label, textarea {
 .calculator__panel-header #calculator-history-btn.history-active #close-history {
   animation: fade-in 0.5s forwards;
 }
-@media screen and (min-width: 576px) {
-  .calculator__panel-header #calculator-history-btn.history-active {
-    border-radius: 50% 50% 0 50%;
-  }
+.calculator__panel-header #calculator-history-btn.history-active #close-history-mobile {
+  animation: fade-in 0.5s forwards;
 }
 .calculator__panel-output {
   display: -ms-flexbox;
@@ -357,7 +880,7 @@ form, input, button, label, textarea {
   padding-top: 0.5rem;
 }
 .calculator__panel-output-main {
-  font-size: 2.5rem;
+  font-size: var(--FS-XL);
   text-align: right;
   -ms-flex-positive: 1;
       flex-grow: 1;
@@ -366,7 +889,7 @@ form, input, button, label, textarea {
   border: none;
   outline-color: transparent;
   padding: var(--SPACING-SM);
-  padding-bottom: var(--SPACING-XS);
+  padding-bottom: 0;
   margin-bottom: 3px;
   overflow-x: auto;
 }
@@ -388,9 +911,10 @@ form, input, button, label, textarea {
   width: 100%;
   text-align: right;
   padding: var(--SPACING-SM);
-  padding-bottom: var(--SPACING-XS);
+  padding-bottom: 0;
   margin-bottom: 3px;
   overflow-x: auto;
+  font-size: var(--FS-SM);
 }
 .calculator__panel-output-prev::-webkit-scrollbar {
   height: 3px;
@@ -407,30 +931,24 @@ form, input, button, label, textarea {
   background: var(--CALC-SCROLLBAR-HOVER);
 }
 
-/*
-TODO
-Once the window gets too small for the history panel to open up on the side, it will instead be integrated into the calculator.
-Sort of like a dropdown, the history panel will slide down from the top of the calculator, but leaves the calculator panel visible.
-*/
-.calculator__history {
-  background-color: var(--CALC-BG-LIGHT);
-  background-image: linear-gradient(135deg, var(--CALC-BG-DARK), var(--CALC-BG-LIGHT), var(--CALC-BG-LIGHT), var(--CALC-BG-DARK));
-  border-radius: 32px;
-  border: 1px solid var(--CALC-BORDER-COLOR);
-  -webkit-backdrop-filter: blur(2px);
-          backdrop-filter: blur(2px);
-  box-shadow: var(--CALC-SHADOW);
-  width: clamp(150px, 50vw, 325px);
-  height: clamp(320px, 82vh, 675px);
-  padding: var(--SPACING-MD);
-  -ms-flex-order: 1;
-      order: 1;
-  overflow: hidden;
-  display: none;
-  animation: hide-history-panel 0.35s 0.05s backwards;
-  color: var(--TEXT-COLOR);
+@media screen and (min-width: 768px) {
+  .calculator__panel {
+    animation: none;
+  }
+  .calculator__panel.mobile-active {
+    animation: none;
+  }
+  .calculator__panel-header #calculator-history-btn #close-history {
+    display: inline-block;
+  }
+  .calculator__panel-header #calculator-history-btn #close-history-mobile {
+    display: none;
+  }
+  .calculator__panel-header #calculator-history-btn.history-active {
+    border-radius: 50% 50% 0 50%;
+  }
 }
-.calculator__history.history-panel-active {
+.calculator__history {
   display: -ms-flexbox;
   display: flex;
   -ms-flex-pack: unset;
@@ -439,11 +957,35 @@ Sort of like a dropdown, the history panel will slide down from the top of the c
       align-items: unset;
   -ms-flex-flow: column nowrap;
       flex-flow: column nowrap;
-  animation: show-history-panel 0.35s forwards;
+  padding: var(--SPACING-MD);
+  position: absolute;
+  top: 30vh;
+  transform: translateY(calc(-0.32 * clamp(100px, 80vh, 425px)));
+  z-index: 2;
+  width: clamp(150px, 95vw, 310px);
+  height: var(--HISTORY-PANEL-MOBILE-HEIGHT);
+  -ms-flex-item-align: start;
+      align-self: flex-start;
+  visibility: hidden;
+  animation: none;
+  -ms-flex-order: 1;
+      order: 1;
+  color: var(--TEXT-COLOR);
+  animation: none;
 }
-@keyframes show-history-panel {
+.calculator__history.history-panel-active {
+  visibility: visible;
+  animation: show-history-panel-mobile 0.75s forwards;
+}
+.calculator__history.history-panel-mobile-fade-out {
+  animation: fade-out 0.25s forwards !important;
+}
+.calculator__history.history-panel-mobile-fade-in {
+  animation: fade-in 0.25s forwards !important;
+}
+@keyframes show-history-panel-mobile {
   from {
-    width: 0;
+    height: 0;
     opacity: 0;
   }
   30% {
@@ -451,28 +993,20 @@ Sort of like a dropdown, the history panel will slide down from the top of the c
   }
   to {
     opacity: 1;
-    width: clamp(150px, 50vw, 325px);
+    height: var(--HISTORY-PANEL-MOBILE-HEIGHT);
   }
 }
-@keyframes hide-history-panel {
+@keyframes hide-history-panel-mobile {
   from {
-    display: -ms-flexbox;
-    display: flex;
-    -ms-flex-pack: unset;
-        justify-content: unset;
-    -ms-flex-align: unset;
-        align-items: unset;
-    -ms-flex-flow: column nowrap;
-        flex-flow: column nowrap;
     opacity: 1;
-    width: clamp(150px, 50vw, 325px);
+    visibility: visible;
+    height: var(--HISTORY-PANEL-MOBILE-HEIGHT);
   }
   70% {
-    opacity: 0.5;
+    opacity: 0.8;
   }
   to {
-    width: 0;
-    padding: 0;
+    height: 0;
     opacity: 0;
   }
 }
@@ -486,10 +1020,10 @@ Sort of like a dropdown, the history panel will slide down from the top of the c
   -ms-flex-flow: row nowrap;
       flex-flow: row nowrap;
   padding: var(--SPACING-SM);
-  animation: fade-out 0.15s forwards;
+  animation: fade-out 1.25s forwards;
 }
 .calculator__history-header.history-header-active {
-  animation: fade-in 0.15s 0.125s backwards;
+  animation: fade-in 0.25s backwards;
 }
 .calculator__history-header button {
   background-color: var(--CALC-BG-LIGHT);
@@ -504,6 +1038,7 @@ Sort of like a dropdown, the history panel will slide down from the top of the c
   transition: border-radius 0.25s, filter 0.25s, box-shadow 0.25s, scale 0.125s;
   margin-right: var(--SPACING-XS);
   padding: var(--SPACING-MD) var(--SPACING-LG);
+  font-size: var(--FS-SM);
 }
 .calculator__history-header button:hover, .calculator__history-header button:focus-visible {
   filter: brightness(var(--BTN-HOVER-BRIGHTNESS));
@@ -521,13 +1056,13 @@ Sort of like a dropdown, the history panel will slide down from the top of the c
   margin: var(--SPACING-SM);
   overflow-x: hidden;
   overflow-y: auto;
-  animation: fade-out 0.15s forwards;
+  animation: fade-out 1.5s forwards;
 }
 .calculator__history-entries.entries-active {
-  animation: fade-in 0.15s 0.125s backwards;
+  animation: fade-in 0.25s backwards;
 }
 .calculator__history-entries::-webkit-scrollbar {
-  width: 3px;
+  width: 2px;
 }
 .calculator__history-entries::-webkit-scrollbar-track {
   background: var(--CALC-SCROLLBAR-TRACK);
@@ -543,6 +1078,7 @@ Sort of like a dropdown, the history panel will slide down from the top of the c
 .calculator__history-entries .calculator__history-empty {
   text-align: center;
   animation: fade-in 0.35s;
+  font-size: var(--FS-SM);
 }
 .calculator__history-entries .calculator__history-entry {
   display: -ms-flexbox;
@@ -571,6 +1107,7 @@ Sort of like a dropdown, the history panel will slide down from the top of the c
   -ms-flex-positive: 1;
       flex-grow: 1;
   padding-left: var(--SPACING-MD);
+  font-size: var(--FS-SM);
 }
 .calculator__history-entries .calculator__history-entry .entry-header-copy, .calculator__history-entries .calculator__history-entry .entry-header-delete {
   background-color: transparent;
@@ -578,10 +1115,13 @@ Sort of like a dropdown, the history panel will slide down from the top of the c
   border: none;
   padding: var(--SPACING-MD);
   cursor: pointer;
-  font-size: 1.1rem;
+  font-size: var(--FS-SM);
   line-height: 1rem;
   border-radius: 10px;
   transition: transform 0.15s, background-color 0.125s;
+}
+.calculator__history-entries .calculator__history-entry .entry-header-copy > i, .calculator__history-entries .calculator__history-entry .entry-header-delete > i {
+  scale: 1.1;
 }
 .calculator__history-entries .calculator__history-entry .entry-header-copy:hover, .calculator__history-entries .calculator__history-entry .entry-header-copy:focus-visible, .calculator__history-entries .calculator__history-entry .entry-header-delete:hover, .calculator__history-entries .calculator__history-entry .entry-header-delete:focus-visible {
   background-color: var(--PANEL-LIGHT);
@@ -600,6 +1140,7 @@ Sort of like a dropdown, the history panel will slide down from the top of the c
   text-align: right;
   margin-bottom: 3px;
   overflow-x: auto;
+  font-size: var(--FS-SM);
 }
 .calculator__history-entries .calculator__history-entry .entry-body .entry-input::-webkit-scrollbar {
   height: 1px;
@@ -617,13 +1158,226 @@ Sort of like a dropdown, the history panel will slide down from the top of the c
 }
 .calculator__history-entries .calculator__history-entry .entry-body .entry-output {
   width: 100%;
-  font-size: 1.5rem;
+  font-size: var(--FS-MD);
   text-align: right;
+  overflow-x: auto;
+}
+.calculator__history-entries .calculator__history-entry .entry-body .entry-output::-webkit-scrollbar {
+  height: 1px;
+}
+.calculator__history-entries .calculator__history-entry .entry-body .entry-output::-webkit-scrollbar-track {
+  background: var(--CALC-SCROLLBAR-TRACK);
+  border-radius: 10px;
+}
+.calculator__history-entries .calculator__history-entry .entry-body .entry-output::-webkit-scrollbar-thumb {
+  background: var(--CALC-SCROLLBAR);
+  border-radius: 10px;
+}
+.calculator__history-entries .calculator__history-entry .entry-body .entry-output::-webkit-scrollbar-thumb:hover {
+  background: var(--CALC-SCROLLBAR-HOVER);
 }
 
+@media screen and (max-width: 319.9px) and (min-aspect-ratio: 8/10) {
+  .calculator__history {
+    top: 0;
+    transform: translateY(0);
+    height: clamp(80px, 80vh, 300px);
+  }
+}
+@media screen and (min-width: 320px) {
+  .calculator__history {
+    transform: translateY(calc(-0.32 * clamp(340px, 75vh, 610px)));
+    width: clamp(280px, 94vw, 450px);
+  }
+}
+@media screen and (min-width: 320px) and (max-width: 575.9px) and (min-aspect-ratio: 19/20) {
+  .calculator__history {
+    top: 0;
+    transform: translateY(0);
+    width: clamp(300px, 96vw, 550px);
+  }
+}
+@media screen and (min-width: 576px) {
+  .calculator__history {
+    transform: translateY(calc(-0.32 * clamp(510px, 84vh, 720px)));
+    width: clamp(495px, 75vw, 530px);
+  }
+  .calculator__history-entries::-webkit-scrollbar {
+    width: 3px;
+  }
+}
+@media screen and (min-width: 576px) and (max-width: 767.9px) and (min-aspect-ratio: 20.5/19) {
+  .calculator__history {
+    top: 0;
+    transform: translateY(0);
+    width: clamp(525px, 90vw, 700px);
+  }
+}
+@media screen and (min-width: 768px) {
+  .calculator__history {
+    background-color: var(--CALC-BG-LIGHT);
+    background-image: linear-gradient(135deg, var(--CALC-BG-DARK), var(--CALC-BG-LIGHT), var(--CALC-BG-LIGHT), var(--CALC-BG-DARK));
+    border-radius: 32px;
+    border: 1px solid var(--CALC-BORDER-COLOR);
+    -webkit-backdrop-filter: blur(2px);
+            backdrop-filter: blur(2px);
+    box-shadow: var(--CALC-SHADOW);
+    width: clamp(225px, 37vw, 307.5px);
+    height: clamp(450px, 80vh, 615px);
+    position: static;
+    z-index: 0;
+    -ms-flex-item-align: center;
+        align-self: center;
+    visibility: visible;
+    overflow: hidden;
+    display: none;
+    animation: hide-history-panel 0.35s 0.05s backwards;
+    transform: translateY(0);
+  }
+  .calculator__history.history-panel-active {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-pack: unset;
+        justify-content: unset;
+    -ms-flex-align: unset;
+        align-items: unset;
+    -ms-flex-flow: column nowrap;
+        flex-flow: column nowrap;
+    animation: show-history-panel 0.35s forwards;
+  }
+  @keyframes show-history-panel {
+    from {
+      width: 0;
+      opacity: 0;
+    }
+    30% {
+      opacity: 0.8;
+    }
+    to {
+      opacity: 1;
+      width: clamp(225px, 37vw, 307.5px);
+    }
+  }
+  @keyframes hide-history-panel {
+    from {
+      display: -ms-flexbox;
+      display: flex;
+      -ms-flex-pack: unset;
+          justify-content: unset;
+      -ms-flex-align: unset;
+          align-items: unset;
+      -ms-flex-flow: column nowrap;
+          flex-flow: column nowrap;
+      opacity: 1;
+      width: clamp(225px, 37vw, 307.5px);
+    }
+    70% {
+      opacity: 0.5;
+    }
+    to {
+      width: 0;
+      padding: 0;
+      opacity: 0;
+    }
+  }
+  .calculator__history-header {
+    animation: fade-out 0.15s forwards;
+  }
+  .calculator__history-header.history-header-active {
+    animation: fade-in 0.15s 0.125s backwards;
+  }
+  .calculator__history-entries {
+    animation: fade-out 0.15s forwards;
+  }
+  .calculator__history-entries.entries-active {
+    animation: fade-in 0.15s 0.125s backwards;
+  }
+}
+@media screen and (min-width: 1024px) {
+  .calculator__history {
+    width: 325px;
+    height: clamp(550px, 81vh, 650px);
+  }
+  @keyframes show-history-panel {
+    from {
+      width: 0;
+      opacity: 0;
+    }
+    30% {
+      opacity: 0.8;
+    }
+    to {
+      opacity: 1;
+      width: 325px;
+    }
+  }
+  @keyframes hide-history-panel {
+    from {
+      display: -ms-flexbox;
+      display: flex;
+      -ms-flex-pack: unset;
+          justify-content: unset;
+      -ms-flex-align: unset;
+          align-items: unset;
+      -ms-flex-flow: column nowrap;
+          flex-flow: column nowrap;
+      opacity: 1;
+      width: 325px;
+    }
+    70% {
+      opacity: 0.5;
+    }
+    to {
+      width: 0;
+      padding: 0;
+      opacity: 0;
+    }
+  }
+}
+@media screen and (min-width: 1280px) {
+  .calculator__history {
+    width: max(325px, 20.5vw);
+    height: max(650px, 41vw);
+  }
+  @keyframes show-history-panel {
+    from {
+      width: 0;
+      opacity: 0;
+    }
+    30% {
+      opacity: 0.8;
+    }
+    to {
+      opacity: 1;
+      width: max(325px, 20.5vw);
+    }
+  }
+  @keyframes hide-history-panel {
+    from {
+      display: -ms-flexbox;
+      display: flex;
+      -ms-flex-pack: unset;
+          justify-content: unset;
+      -ms-flex-align: unset;
+          align-items: unset;
+      -ms-flex-flow: column nowrap;
+          flex-flow: column nowrap;
+      opacity: 1;
+      width: max(325px, 20.5vw);
+    }
+    70% {
+      opacity: 0.5;
+    }
+    to {
+      width: 0;
+      padding: 0;
+      opacity: 0;
+    }
+  }
+}
 .github__btn {
   padding: var(--SPACING-SM);
-  font-size: clamp(1.25rem, 5vw, 1.5rem);
+  font-size: var(--FS-MD);
   font-weight: bold;
   text-decoration: none;
   background: none;
@@ -631,18 +1385,10 @@ Sort of like a dropdown, the history panel will slide down from the top of the c
   display: none;
 }
 .github__btn i {
-  font-size: 1.75rem;
-}
-.github__btn .github__text {
-  display: none;
-}
-@media screen and (min-width: 768px) {
-  .github__btn .github__text {
-    display: inline;
-  }
+  font-size: var(--FS-BTN-LG);
 }
 
-@media screen and (min-width: 576px) {
+@media screen and (min-width: 768px) {
   .github__btn {
     display: block;
   }
@@ -650,31 +1396,124 @@ Sort of like a dropdown, the history panel will slide down from the top of the c
 .credits {
   color: var(--TEXT-COLOR);
   padding: var(--SPACING-SM);
+  font-size: var(--FS-SM);
+  display: none;
+}
+@media screen and (min-width: 768px) {
+  .credits {
+    display: block;
+  }
 }
 .mobile-options {
-  display: block;
   position: absolute;
-  right: 0;
+  right: var(--SPACING-XL);
   top: 50%;
-  transform: translate(-50%);
-  margin-right: var(--SPACING-XL);
+  transform: translateY(-50%);
+  z-index: 5;
+}
+.mobile-options__button {
+  color: var(--TEXT-COLOR);
+  cursor: pointer;
+  border-radius: 10px;
+  padding: var(--SPACING-SM) var(--SPACING-MD);
+  background: none;
+  border: none;
+  font-size: var(--FS-LG);
+  transition: filter 0.125s, transform 0.125s;
+}
+.mobile-options__button:hover, .mobile-options__button:focus-visible {
+  filter: brightness(1.075);
+  transform: translate(0, -1%);
+}
+.mobile-options__button:active {
+  filter: brightness(0.925);
+  transform: translate(0, 1%);
+  transition: filter 0.075s, transform 0.075s;
+}
+.mobile-options__panel {
+  display: none;
+  position: absolute;
+  right: var(--SPACING-MD);
+  padding: var(--SPACING-MD);
+  background-color: var(--MOBILE-PANEL);
+  border-radius: 7px;
+  border: 1px solid var(--CALC-BORDER-COLOR);
+  box-shadow: 1px 2px 10px var(--CALC-SHADOW-COLOR);
+  animation: fade-out-mobile 0.25s backwards;
+}
+@keyframes fade-out-mobile {
+  from {
+    opacity: 1;
+    display: block;
+  }
+  to {
+    opacity: 0;
+  }
+}
+.mobile-options__panel.panel-active {
+  display: block;
+  animation: fade-in 0.25s forwards;
+}
+.mobile-options__panel button, .mobile-options__panel a {
+  color: var(--TEXT-COLOR);
+  cursor: pointer;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-pack: start;
+      justify-content: flex-start;
+  -ms-flex-align: center;
+      align-items: center;
+  -ms-flex-flow: row nowrap;
+      flex-flow: row nowrap;
+  gap: var(--SPACING-MD);
+  background-color: transparent;
+  border: none;
+  width: 100%;
+  text-align: left;
+  padding: var(--SPACING-MD);
+  text-decoration: none;
+  border-radius: 5px;
+  font-size: var(--FS-MD);
+  transition: background-color 0.125s, scale 0.125s;
+}
+.mobile-options__panel button:hover, .mobile-options__panel a:hover {
+  background-color: var(--PANEL-DARK);
+}
+.mobile-options__panel button:active, .mobile-options__panel a:active {
+  transform: translateY(1%);
+  scale: 0.975;
+  filter: brightness(0.95);
+}
+.mobile-options__panel .mobile-options__themes-current {
+  display: inline-block;
+  width: var(--FS-MD);
+  height: var(--FS-MD);
+  background-color: var(--MAIN-COLOR);
+  border-radius: 50%;
+  border: 1px solid var(--TEXT-COLOR);
+}
+.mobile-options__cover {
+  display: none;
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  background-color: transparent;
+  z-index: 4;
+}
+.mobile-options__cover.panel-active {
+  display: block;
 }
 
-@media screen and (min-width: 576px) {
-  h1 {
-    font-size: 2rem;
-  }
+@media screen and (min-width: 768px) {
   .mobile-options {
+    display: none;
+  }
+  .mobile-options__cover.panel-active {
     display: none;
   }
 }
 .themes {
-  display: none;
-  position: absolute;
-  right: 0;
-  top: 50%;
-  transform: translateY(-50%);
-  margin-right: var(--SPACING-XL);
+  display: block;
 }
 .themes__btn {
   background-color: var(--CALC-BG-LIGHT);
@@ -687,16 +1526,10 @@ Sort of like a dropdown, the history panel will slide down from the top of the c
   color: var(--TEXT-COLOR);
   cursor: pointer;
   transition: border-radius 0.25s, filter 0.25s, box-shadow 0.25s, scale 0.125s;
-  display: -ms-flexbox;
-  display: flex;
-  -ms-flex-pack: center;
-      justify-content: center;
-  -ms-flex-align: center;
-      align-items: center;
-  -ms-flex-flow: row nowrap;
-      flex-flow: row nowrap;
+  display: none;
   gap: var(--SPACING-SM);
   padding: var(--SPACING-MD);
+  font-size: var(--FS-SM);
 }
 .themes__btn:hover, .themes__btn:focus-visible {
   filter: brightness(var(--BTN-HOVER-BRIGHTNESS));
@@ -712,14 +1545,6 @@ Sort of like a dropdown, the history panel will slide down from the top of the c
   background-color: var(--MAIN-COLOR);
   border-radius: 50%;
   border: 1px solid var(--TEXT-COLOR);
-}
-.themes__btn .themes__text {
-  display: none;
-}
-@media screen and (min-width: 768px) {
-  .themes__btn .themes__text {
-    display: inline;
-  }
 }
 .themes__btn #open-themes {
   animation: fade-in 0.5s forwards;
@@ -738,25 +1563,74 @@ Sort of like a dropdown, the history panel will slide down from the top of the c
   animation: fade-in 0.5s forwards;
 }
 .themes__panel {
-  z-index: 1;
-  display: none;
-  position: absolute;
-  left: 0;
-  gap: var(--SPACING-SM);
-  padding: var(--SPACING-MD);
   background-color: var(--CALC-BG-LIGHT);
   background-image: linear-gradient(135deg, var(--CALC-BG-DARK), var(--CALC-BG-LIGHT), var(--CALC-BG-LIGHT), var(--CALC-BG-DARK));
   border-radius: 32px;
   border: 1px solid var(--CALC-BORDER-COLOR);
   -webkit-backdrop-filter: blur(2px);
           backdrop-filter: blur(2px);
-  box-shadow: var(--HEADER-SHADOW);
-  border-radius: 10px;
-  margin-top: var(--SPACING-MD);
+  box-shadow: var(--CALC-SHADOW);
+  z-index: 3;
+  display: none;
+  position: absolute;
+  top: calc(30vh + 2 * var(--SPACING-MD) + var(--FS-XL));
+  left: 50%;
+  transform: translate(-50%, -32%);
+  width: clamp(150px, 95vw, 310px);
+  height: clamp(100px, 80vh, 425px);
+  gap: var(--SPACING-MD);
+  padding: calc(var(--SPACING-XL) * 4);
+}
+.themes__panel-mobile-current {
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-pack: center;
+      justify-content: center;
+  -ms-flex-align: center;
+      align-items: center;
+  -ms-flex-flow: row nowrap;
+      flex-flow: row nowrap;
+  gap: var(--SPACING-MD);
+  color: var(--TEXT-COLOR);
+  font-size: var(--FS-LG);
+  position: absolute;
+  top: 20%;
+  left: 50%;
+  transform: translateX(-50%);
+}
+.themes__panel-mobile-current .themes__current {
+  width: var(--FS-LG);
+  height: var(--FS-LG);
+  background-color: var(--MAIN-COLOR);
+  border-radius: 50%;
+  border: 1px solid var(--TEXT-COLOR);
+}
+.themes__panel-mobile-close {
+  color: var(--TEXT-COLOR);
+  cursor: pointer;
+  transition: border-radius 0.25s, filter 0.25s, box-shadow 0.25s, scale 0.125s;
+  background-color: transparent;
+  border: none;
+  position: absolute;
+  top: var(--SPACING-XL);
+  right: var(--SPACING-XL);
+  font-size: var(--FS-LG);
+  line-height: var(--FS-LG);
+}
+.themes__panel-mobile-close:hover, .themes__panel-mobile-close:focus-visible {
+  filter: brightness(var(--BTN-HOVER-BRIGHTNESS));
+}
+.themes__panel-mobile-close:active, .themes__panel-mobile-close.pressed {
+  scale: 0.975;
+  filter: brightness(0.95);
+  transition: filter 0.075s, scale 0.075s;
+}
+.themes__panel-mobile-close:active {
+  scale: 0.9;
 }
 .themes__panel-option {
-  width: 16px;
-  height: 16px;
+  width: calc(var(--FS-LG) * 1.5);
+  height: calc(var(--FS-LG) * 1.5);
   background: white;
   border-radius: 50%;
   border: 1px solid black;
@@ -767,7 +1641,7 @@ Sort of like a dropdown, the history panel will slide down from the top of the c
   transform: scale(1.125);
 }
 .themes__panel-option:active {
-  transform: scale(0.975);
+  transform: scale(0.85);
   transition: transform 0.075s;
 }
 .themes__panel.panel-active {
@@ -779,14 +1653,123 @@ Sort of like a dropdown, the history panel will slide down from the top of the c
       align-items: center;
   -ms-flex-flow: row wrap;
       flex-flow: row wrap;
+  -ms-flex-line-pack: center;
+      align-content: center;
+  animation: fade-in 0.25s forwards;
 }
 
+@media screen and (max-width: 319.9px) and (min-aspect-ratio: 8/10) {
+  .themes .themes__panel {
+    top: calc(2 * var(--SPACING-MD) + var(--FS-XL));
+    transform: translate(-50%, 0);
+    height: clamp(80px, 80vh, 300px);
+  }
+}
+@media screen and (min-width: 320px) {
+  .themes .themes__panel {
+    width: clamp(280px, 94vw, 450px);
+    height: clamp(340px, 75vh, 610px);
+  }
+}
+@media screen and (min-width: 320px) and (max-width: 575.9px) and (min-aspect-ratio: 19/20) {
+  .themes .themes__panel {
+    top: calc(2 * var(--SPACING-MD) + var(--FS-XL));
+    transform: translate(-50%, 0);
+    width: clamp(300px, 96vw, 550px);
+    height: clamp(200px, 85vh, 420px);
+  }
+}
 @media screen and (min-width: 576px) {
+  .themes .themes__panel {
+    width: clamp(495px, 75vw, 530px);
+    height: clamp(510px, 84vh, 720px);
+  }
+}
+@media screen and (min-width: 576px) and (max-width: 767.9px) and (min-aspect-ratio: 20.5/19) {
+  .themes .themes__panel {
+    top: calc(2 * var(--SPACING-MD) + var(--FS-XL));
+    transform: translate(-50%, 0);
+    width: clamp(525px, 90vw, 700px);
+    height: clamp(260px, 80vh, 575px);
+  }
+}
+@media screen and (min-width: 768px) {
   .themes {
-    display: block;
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    margin-right: var(--SPACING-XL);
+  }
+  .themes__btn {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-pack: center;
+        justify-content: center;
+    -ms-flex-align: center;
+        align-items: center;
+    -ms-flex-flow: row nowrap;
+        flex-flow: row nowrap;
+  }
+  .themes .themes__panel {
+    background-color: var(--CALC-BG-LIGHT);
+    background-image: linear-gradient(135deg, var(--CALC-BG-DARK), var(--CALC-BG-LIGHT), var(--CALC-BG-LIGHT), var(--CALC-BG-DARK));
+    border-radius: 32px;
+    border: 1px solid var(--CALC-BORDER-COLOR);
+    -webkit-backdrop-filter: blur(2px);
+            backdrop-filter: blur(2px);
+    box-shadow: var(--HEADER-SHADOW);
+    z-index: 1;
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    transform: translateX(0%);
+    height: auto;
+    width: auto;
+    gap: var(--SPACING-SM);
+    padding: var(--SPACING-MD);
+    border-radius: 10px;
+    margin-top: var(--SPACING-MD);
+    width: unset;
+    height: unset;
+  }
+  .themes .themes__panel-mobile-current {
+    display: none;
+  }
+  .themes .themes__panel-mobile-close {
+    display: none;
+  }
+  .themes .themes__panel-option {
+    width: var(--FS-SM);
+    height: var(--FS-SM);
+    background: white;
+    border-radius: 50%;
+    border: 1px solid black;
+    cursor: pointer;
+    transition: transform 0.15s;
+  }
+  .themes .themes__panel-option:hover, .themes .themes__panel-option:focus-visible {
+    transform: scale(1.125);
+  }
+  .themes .themes__panel-option:active {
+    transform: scale(0.95);
+    transition: transform 0.075s;
+  }
+  .themes .themes__panel.panel-active {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-pack: center;
+        justify-content: center;
+    -ms-flex-align: center;
+        align-items: center;
+    -ms-flex-flow: row wrap;
+        flex-flow: row wrap;
+    animation: none;
   }
 }
 .keyboard-shortcuts {
+  display: none;
   position: absolute;
   left: 0;
   top: 50%;
@@ -808,6 +1791,7 @@ Sort of like a dropdown, the history panel will slide down from the top of the c
   padding-right: calc(var(--SPACING-MD) + 2px);
   position: relative;
   transform: translateY(-50%);
+  font-size: var(--FS-SM);
 }
 .keyboard-shortcuts__btn:hover, .keyboard-shortcuts__btn:focus-visible {
   filter: brightness(var(--BTN-HOVER-BRIGHTNESS));
@@ -848,6 +1832,7 @@ Sort of like a dropdown, the history panel will slide down from the top of the c
   border-collapse: collapse;
   overflow: hidden;
   animation: hide-keyboard-shortcuts-panel 0.5s forwards;
+  z-index: 2;
 }
 .keyboard-shortcuts__panel.panel-active {
   display: block;
@@ -865,14 +1850,14 @@ Sort of like a dropdown, the history panel will slide down from the top of the c
   }
   to {
     opacity: 1;
-    height: 415px;
+    height: var(--KEYBOARD-SHORTCUTS-HEIGHT);
   }
 }
 @keyframes hide-keyboard-shortcuts-panel {
   from {
     display: block;
     opacity: 1;
-    height: 415px;
+    height: var(--KEYBOARD-SHORTCUTS-HEIGHT);
     padding-bottom: var(--SPACING-MD);
   }
   70% {
@@ -896,16 +1881,16 @@ Sort of like a dropdown, the history panel will slide down from the top of the c
   display: inline;
 }
 .keyboard-shortcuts__panel tbody tr td:first-child .kbd kbd {
-  position: relative;
   z-index: 1;
   vertical-align: middle;
   border-radius: 5px;
   padding: 1px 5px;
   border: 1px solid var(--TEXT-COLOR);
   box-shadow: 0 1px 0 var(--TEXT-COLOR);
+  font-size: calc(var(--FS-XS) - 1px);
 }
 .keyboard-shortcuts__panel tbody tr td:first-child .line {
-  z-index: 0;
+  z-index: 3;
   width: 0px;
   height: 1px;
   background-color: var(--TEXT-COLOR);
@@ -915,13 +1900,19 @@ Sort of like a dropdown, the history panel will slide down from the top of the c
   transform: translate(calc(-1 * var(--SPACING-MD)), -50%);
 }
 .keyboard-shortcuts__panel tbody tr td:last-child {
-  font-size: 14px;
+  font-size: var(--FS-XS);
 }
 .keyboard-shortcuts__panel th {
   text-align: left;
   padding-bottom: var(--SPACING-SM);
+  font-size: var(--FS-SM);
 }
 
+@media screen and (min-width: 768px) {
+  .keyboard-shortcuts {
+    display: block;
+  }
+}
 header {
   display: -ms-flexbox;
   display: flex;
@@ -936,7 +1927,8 @@ header {
   position: relative;
 }
 header h1 {
-  font-size: clamp(1.25rem, 7vw, 2rem);
+  font-size: var(--FS-LG);
+  line-height: var(--FS-XL);
   text-align: center;
   color: var(--TEXT-COLOR);
   transform: translateX(1.25%);
@@ -958,6 +1950,26 @@ footer {
       flex-flow: column nowrap;
 }
 
+@media screen and (max-width: 1120px) {
+  footer {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-pack: end;
+        justify-content: flex-end;
+    -ms-flex-align: end;
+        align-items: flex-end;
+    -ms-flex-flow: row nowrap;
+        flex-flow: row nowrap;
+    margin-bottom: var(--SPACING-MD);
+  }
+  footer .github__btn {
+    -ms-flex-order: 1;
+        order: 1;
+  }
+  footer .github__btn i {
+    font-size: var(--FS-MD);
+  }
+}
 #outer-container {
   height: 100vh;
   display: -ms-flexbox;
@@ -977,12 +1989,13 @@ footer {
   display: flex;
   -ms-flex-pack: center;
       justify-content: center;
-  -ms-flex-align: center;
-      align-items: center;
+  -ms-flex-align: start;
+      align-items: flex-start;
   -ms-flex-flow: row nowrap;
       flex-flow: row nowrap;
   height: 100%;
   background-color: var(--MAIN-COLOR-COVER);
+  position: relative;
 }
 .calculator__container .calculator {
   background-color: var(--CALC-BG-LIGHT);
@@ -1000,10 +2013,149 @@ footer {
       align-items: unset;
   -ms-flex-flow: column nowrap;
       flex-flow: column nowrap;
-  width: clamp(250px, 85vw, 475px);
-  height: clamp(320px, 82vh, 675px);
   padding: var(--SPACING-MD);
-  position: relative;
+  position: absolute;
   z-index: 1;
   overflow: hidden;
+  animation: none;
+  width: clamp(150px, 95vw, 310px);
+  height: clamp(100px, 80vh, 425px);
+  top: 30vh;
+  transform: translateY(-32%);
+  border-radius: 16px;
+}
+
+@media screen and (max-width: 319.9px) and (min-aspect-ratio: 8/10) {
+  .calculator__container .calculator {
+    top: 0;
+    transform: translateY(0);
+    height: clamp(80px, 80vh, 300px);
+    border-radius: 12px;
+  }
+}
+@media screen and (max-width: 319.9px) and (min-aspect-ratio: 25/20) {
+  .calculator__panel .calculator__panel-output .calculator__panel-output-prev {
+    display: none;
+  }
+  .calculator__panel .calculator__panel-output .calculator__panel-output-main {
+    padding: none;
+    font-size: var(--FS-BTN-LG);
+  }
+}
+@media screen and (min-width: 320px) {
+  .calculator__container .calculator {
+    width: clamp(280px, 94vw, 450px);
+    height: clamp(340px, 75vh, 610px);
+    border-radius: clamp(22px, 5.5vw, 28px);
+  }
+}
+@media screen and (min-width: 320px) and (max-width: 575.9px) and (min-aspect-ratio: 25/19) {
+  .calculator__panel .calculator__panel-output .calculator__panel-output-prev {
+    display: none;
+  }
+  .calculator__panel .calculator__panel-output .calculator__panel-output-main {
+    padding: none;
+    font-size: var(--FS-BTN-LG);
+  }
+  .calculator__container .calculator {
+    top: 0;
+    transform: translateY(0);
+    width: clamp(300px, 85vw, 550px) !important;
+    border-radius: 22px !important;
+  }
+  .themes .themes__panel {
+    width: clamp(300px, 85vw, 550px) !important;
+  }
+  .calculator__history {
+    width: clamp(300px, 85vw, 550px) !important;
+  }
+  :root {
+    --FS-BTN-LG: clamp(0.85rem, 3.75vw, 1.65rem) !important;
+    --FS-BTN-MD: clamp(0.45rem, 3vw, 1.15rem) !important;
+    --FS-BTN-SM: clamp(0.25rem, 2.5vw, 0.9rem) !important;
+  }
+}
+@media screen and (min-width: 320px) and (max-width: 575.9px) and (min-aspect-ratio: 19/20) {
+  .calculator__container .calculator {
+    top: 0;
+    transform: translateY(0);
+    width: clamp(300px, 96vw, 550px);
+    height: clamp(200px, 85vh, 420px);
+    border-radius: 28px;
+  }
+}
+@media screen and (min-width: 576px) {
+  .calculator__container .calculator {
+    width: clamp(495px, 75vw, 530px);
+    height: clamp(510px, 84vh, 720px);
+  }
+}
+@media screen and (min-width: 576px) and (max-width: 767.9px) and (min-aspect-ratio: 25/16) {
+  .calculator__panel .calculator__panel-output .calculator__panel-output-prev {
+    display: none;
+  }
+  .calculator__panel .calculator__panel-output .calculator__panel-output-main {
+    padding: none;
+    font-size: var(--FS-BTN-LG);
+  }
+  .calculator__container .calculator {
+    top: 0;
+    transform: translateY(0);
+    width: clamp(500px, 80vw, 570px) !important;
+    border-radius: 20px !important;
+  }
+  .themes .themes__panel {
+    width: clamp(500px, 80vw, 570px) !important;
+  }
+  .calculator__history {
+    width: clamp(500px, 80vw, 570px) !important;
+  }
+  :root {
+    --FS-BTN-LG: clamp(1.35rem, 3.65vw, 1.75rem) !important;
+    --FS-BTN-MD: clamp(0.85rem, 2.65vw, 1.3rem) !important;
+    --FS-BTN-SM: clamp(0.75rem, 2.375vw, 1.15rem) !important;
+  }
+}
+@media screen and (min-width: 576px) and (max-width: 767.9px) and (min-aspect-ratio: 20.5/19) {
+  .calculator__container .calculator {
+    top: 0;
+    transform: translateY(0);
+    width: clamp(525px, 90vw, 700px);
+    height: clamp(260px, 80vh, 575px);
+    border-radius: 30px;
+  }
+}
+@media screen and (min-width: 768px) {
+  .calculator__container {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-pack: center;
+        justify-content: center;
+    -ms-flex-align: center;
+        align-items: center;
+    -ms-flex-flow: row nowrap;
+        flex-flow: row nowrap;
+    position: static;
+  }
+  .calculator__container .calculator {
+    position: relative;
+    top: unset;
+    transform: translateY(0);
+    width: clamp(375px, 55vw, 450px);
+    height: clamp(450px, 80vh, 615px);
+    border-radius: 32px;
+  }
+}
+@media screen and (min-width: 1024px) {
+  .calculator__container .calculator {
+    width: clamp(450px, 45vw, 475px);
+    height: clamp(550px, 81vh, 650px);
+  }
+}
+@media screen and (min-width: 1280px) {
+  .calculator__container .calculator {
+    width: max(475px, 30vw);
+    height: max(650px, 41.1vw);
+    border-radius: max(32px, 2.08vw);
+  }
 }/*# sourceMappingURL=style.css.map */

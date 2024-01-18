@@ -2,11 +2,13 @@ const limeGreenTheme = [
     "#70ea40", //main color
     "hsla(103, 40%, 58%, .35)", //main color cover
 
+    "hsl(97, 56%, 69%)", //mobile panel
+
     "#111", //text color
     "#ffffeb", //text color opposite
 
-    "hsla(103, 89%, 86%, 0.9)", //panel light
-    "hsla(103, 23%, 45%, 0.85)", //panel dark
+    "hsla(103, 87%, 84%, 0.9)", //panel light
+    "hsla(103, 29%, 57%, 0.85)", //panel dark
     "hsla(103, 51%, 18%, 0.95)", //panel shadow
 
     "hsla(103, 85%, 91%, 0.85)", //calc scrollbar track

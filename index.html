@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="author" content="Kevin Tang">
+    <meta name="keywords" content="Calculator, PEMDAS, History, Aesthetic">
     <meta name="description" content="A visually appealing and responsive calculator that supports PEMDAS with multiple themes, keyboard integration, and a history feature.">
     <title>Aesthetic Calculator</title>
     <link rel="icon" href="./assets/favicon.png">
@@ -14,6 +15,20 @@
         crossorigin="anonymous" referrerpolicy="no-referrer" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/big.js/5.2.2/big.min.js"></script>
     <script type="module" src="./js/main.js"></script>
+
+    <!-- SEO --
+        I know what it is, but I don't know much about implementing it. 
+        For now, this is just some boilerplate I found online.
+        Though, I don't think anyone will be using this website at all, so this won't do much :)
+    -->
+    <meta property="og:title" content="Aesthetic Calculator">
+    <meta property="og:description" content="Page description">
+    <meta property="og:image" content="https://kevster7000.github.io/Aesthetic-Calculator/assets/favicon.png">
+    <meta property="og:type" content="website">
+    <meta name="twitter:card" content="summary">
+    <meta property="og:url" content="https://kevster7000.github.io/Aesthetic-Calculator/">
+    <link rel="canonical" href="https://kevster7000.github.io/Aesthetic-Calculator/">
+    <link rel="apple-touch-icon" href="./assets/favicon.png">
 </head>
 
 <body id="outer-container">
@@ -122,9 +137,21 @@
 
         <h1>Aesthetic Calculator</h1>
 
-        <button class="mobile-options">
-            <i class="fa-solid fa-ellipsis-vertical"></i>
-        </button>
+        <div class="mobile-options">
+            <button class="mobile-options__button">
+                <i class="fa-solid fa-ellipsis-vertical"></i>
+            </button>
+            <div class="mobile-options__panel">
+                <button class="mobile-options__themes-btn">
+                    <div class="mobile-options__themes-current"></div>
+                    Select Theme
+                </button>
+                <a href="https://github.com/kevster7000/Aesthetic-Calculator" target="_blank">
+                    <i class="fa-brands fa-github"></i>
+                    View GitHub
+                </a>
+            </div>
+        </div>
 
         <nav class="themes">
             <h2>Select Theme</h2>
@@ -137,10 +164,18 @@
             </button>
 
             <div class="themes__panel">
+                <div class="themes__panel-mobile-current">
+                    Current Theme
+                    <div class="themes__current"></div>
+                </div>
+                <button class="themes__panel-mobile-close">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
                 <!-- populated with JS -->
             </div>
         </nav>
     </header>
+    <div class="mobile-options__cover"></div>
 
     <main class="calculator__container">
         <section class="calculator__history">
@@ -179,7 +214,7 @@
                 <button type="button" id="calculator__theme-header"><span>New Background</span></button>
 
                 <button type="button" id="btn-del" class="btn-special"><span><i class="fa-solid fa-delete-left"></i></span></button>
-                <button type="button"id="btn-cle" class="btn-special"><span>Clear</span></button>
+                <button type="button" id="btn-cle" class="btn-special"><span>Clear</span></button>
 
                 <button type="button" id="btn-pa1" class="btn-operator"><span>(</span></button>
                 <button type="button" id="btn-pa2" class="btn-operator"><span>)</span></button>
@@ -219,9 +254,9 @@
             <i class="fa-brands fa-github"></i>
             <span class="github__text">GitHub</span>
         </a>
-        <div class="credits">
-            <p>Photos from <a href="https://unsplash.com/" target="_blank">Unsplash</a></p>
-        </div>
+        <p class="credits">
+            Photos from <a href="https://unsplash.com/" target="_blank">Unsplash</a>
+        </p>
     </footer>
 </body>
 </html>

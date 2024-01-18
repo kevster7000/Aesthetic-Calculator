@@ -2,11 +2,13 @@ const yellowTheme = [
     "#ffff67", //main color
     "hsla(60, 65%, 60%, .3)", //main color cover
 
+    "hsl(57, 94%, 75%)", //mobile panel
+
     "#273227", //text color
     "#f1ede3", //text color opposite
 
     "hsla(60, 94%, 88%, 0.9)", //panel light
-    "hsla(60, 35%, 64%, 0.85)", //panel dark
+    "hsla(55, 49%, 64%, 0.85)", //panel dark
     "hsla(60, 47%, 33%, 0.95)", //panel shadow
 
     "hsla(60, 95%, 97%, 0.9)", //calc scrollbar track

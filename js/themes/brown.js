@@ -2,11 +2,13 @@ const brownTheme = [
     "#9b7350", //main color
     "hsla(28, 32%, 46%, .45)", //main color cover
 
+    "hsl(29, 22%, 47%)", //mobile panel
+
     "#ecf2e7", //text color
     "#ecf2e7", //text color opposite
 
     "hsla(29, 21%, 58%, 0.9)", //panel light
-    "hsla(29, 17%, 52%, 0.75)", //panel dark
+    "hsla(29, 19%, 38%, 0.75)", //panel dark
     "hsla(29, 48%, 14%, 0.95)", //panel shadow
 
     "hsla(30, 22%, 75%, 0.85)", //calc scrollbar track 

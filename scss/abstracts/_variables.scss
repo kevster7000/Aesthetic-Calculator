@@ -8,6 +8,8 @@
         --MAIN-COLOR: #f7f7f7;
         --MAIN-COLOR-COVER: hsla(0, 0%, 97%, 0.35);
 
+        --MOBILE-PANEL: hsl(0, 0%, 94%);
+
         --TEXT-COLOR: #111;
         --TEXT-COLOR-OPPOSITE: #f7f7f7;
 
@@ -64,6 +66,8 @@
         --MAIN-COLOR: #333333;
         --MAIN-COLOR-COVER: hsla(0, 0%, 27%, 0.35);
 
+        --MOBILE-PANEL: hsl(221, 2%, 18%);
+
         --TEXT-COLOR: #e9e7e1;
         --TEXT-COLOR-OPPOSITE: #e9e7e1;
 
@@ -115,6 +119,12 @@
 }
 
 :root {
+    //I couldn't figure out how to make the keyboard shortcuts panel's animation make its height go back to normal without making animation look broken
+    //So, I just hardcoded the height with math.
+    --KEYBOARD-SHORTCUTS-HEIGHT: calc(12 * (19.2px + var(--SPACING-SM) + var(--SPACING-MD)) + var(--FS-SM) + 3px + var(--SPACING-SM) + (2 * var(--SPACING-MD)));
+
+    --HISTORY-PANEL-MOBILE-HEIGHT: clamp(100px, 80vh, 225px);
+
     /****************** SHADOWS ******************/
     --CALC-SHADOW: 
         2px 2px 14px var(--CALC-SHADOW-COLOR), 
@@ -137,23 +147,184 @@
 
     /****************** SPACING (PADDING & MARGIN & GAP) ******************/
 
-    //TODO: MAKE ALL SPACING AND FONT-SIZES use the calc(function)
-    //THEN, make them all into certain media queries
-    //THIS WILL HANDLE ALL SPACING AND FONT SIZE RESPONSIVENESS
-
-    --SPACING-XL: 1.25rem;
-    --SPACING-LG: 1rem;
-    --SPACING-MD: 0.5rem;
-    --SPACING-SM: 0.25rem;
-    --SPACING-XS: 0.125rem;
-
-    @include media-lg {
-        // you get the memo kevin
-        // redefine all spacing in here
-    }
+    --SPACING-XL: clamp(0.5rem, 4.75vw, 1.25rem);
+    --SPACING-LG: clamp(0.35rem, 3.25vw, 1rem);
+    --SPACING-MD: clamp(0.125rem, 1.35vw, 0.5rem);
+    --SPACING-SM: clamp(0.0625rem, 0.75vw, 0.25rem);
+    --SPACING-XS: clamp(0.0325rem, 0.35vw, 0.125rem);
 
     /****************** FONT SIZES ******************/
 
-    //TODO
-    --FS-MD: 1rem;
+    --FS-XL: clamp(1.25rem, 5.5vh, 3rem);
+    --FS-LG: clamp(0.5rem, 7.25vw, 1.5rem);
+    --FS-MD: clamp(0.75rem, 3vh, 1.5rem);
+    --FS-SM: clamp(0.5rem, 2.3vh, 1rem);
+    --FS-XS: clamp(11px, 2.5vw, 14px);
+
+    --FS-BTN-LG: clamp(0.8rem, 6.5vw, 1.75rem);
+    --FS-BTN-MD: clamp(0.6rem, 5vw, 1.35rem);
+    --FS-BTN-SM: clamp(0.35rem, 4vw, 1.25rem);
+}
+
+@include media-landscape { // 0 - 319
+    :root {
+        --SPACING-XL: 10px;
+        --SPACING-LG: 6px;
+        --SPACING-MD: 3px;
+        --SPACING-SM: 2px;
+        --SPACING-XS: 1px;    
+    
+        --FS-XL: clamp(1rem, 7.75vh, 1.75rem);
+        --FS-LG: clamp(0.65rem, 6.125vw, 1.5rem);
+        --FS-MD: clamp(0.5rem, 4.5vh, 1.25rem);
+        --FS-SM: clamp(0.35rem, 3.25vh, 1rem);
+        --FS-XS: clamp(0.125px, 3.5vh, 0.75px);
+    
+        --FS-BTN-LG: clamp(0.65rem, 4.25vw, 1.85rem);
+        --FS-BTN-MD: clamp(0.45rem, 3.5vw, 1.35rem);
+        --FS-BTN-SM: clamp(0.25rem, 2.8vw, 1.25rem);
+    }
+}
+
+@include media-xs { // 320 - 575 
+    :root {
+        --SPACING-XL: clamp(0.85rem, 4.75vw, 1.25rem);
+        --SPACING-LG: clamp(0.65rem, 3.25vw, 1rem);
+        --SPACING-MD: clamp(0.25rem, 1.35vw, 0.5rem);
+        --SPACING-SM: clamp(0.125rem, 0.75vw, 0.25rem);
+        --SPACING-XS: clamp(0.0625rem, 0.35vw, 0.125rem);
+    
+        --FS-XL: clamp(1.5rem, 5.25vh, 3rem);
+        --FS-LG: clamp(1.5rem, 6.5vw, 2rem);
+        --FS-MD: clamp(1rem, 2.35vh, 1.5rem);
+        --FS-SM: clamp(12px, 2vh, 1rem);
+        --FS-XS: clamp(11px, 2.5vw, 14px);
+    
+        --FS-BTN-LG: clamp(1.35rem, 6.15vw, 1.75rem);
+        --FS-BTN-MD: clamp(0.85rem, 4.5vw, 1.35rem);
+        --FS-BTN-SM: clamp(0.45rem, 3.95vw, 1.25rem);
+    }
+}
+
+@include media-xs-landscape { // 320 - 575 
+    :root {
+        --SPACING-XL: clamp(0.8rem, 5vh, 1.25rem);
+        --SPACING-LG: clamp(0.6rem, 3vh, 1rem);
+        --SPACING-MD: clamp(0.2rem, 1.5vh, 0.5rem);
+        --SPACING-SM: clamp(0.12rem, 0.65vh, 0.25rem);
+        --SPACING-XS: clamp(0.062rem, 0.3vh, 0.125rem);
+    
+        --FS-XL: clamp(1.35rem, 7.75vh, 2.25rem);
+        --FS-LG: clamp(0.75rem, 5.25vw, 1.55rem);
+        --FS-MD: clamp(0.5rem, 4.5vh, 1.25rem);
+        --FS-SM: clamp(0.25rem, 3vh, 1rem);
+        --FS-XS: clamp(0.125px, 3.5vh, 0.75px);
+    
+        --FS-BTN-LG: clamp(1rem, 4.25vw, 1.85rem);
+        --FS-BTN-MD: clamp(0.55rem, 3.5vw, 1.35rem);
+        --FS-BTN-SM: clamp(0.5rem, 2.8vw, 1.25rem);
+    }
+}
+
+@include media-sm { // 576 - 767
+    :root {
+        --SPACING-XL: 1.25rem;
+        --SPACING-LG: 1rem;
+        --SPACING-MD: 0.5rem;
+        --SPACING-SM: 0.25rem;
+        --SPACING-XS: 0.125rem;
+    
+        --FS-XL: 2.5rem;
+        --FS-LG: 2rem;
+        --FS-MD: 1.45rem;
+        --FS-SM: 1rem;
+        --FS-XS: 14px;
+    
+        --FS-BTN-LG: clamp(1.85rem, 5.75vw, 2rem);
+        --FS-BTN-MD: clamp(1.45rem, 3.75vw, 1.55rem);
+        --FS-BTN-SM: clamp(1.35rem, 3.35vw, 1.45rem);
+    }
+}
+
+
+@include media-sm-landscape { // 576 - 767
+    :root {
+        --SPACING-XL: clamp(0.85rem, 5vh, 1.25rem);
+        --SPACING-LG: clamp(0.65rem, 3vh, 1rem);
+        --SPACING-MD: clamp(0.25rem, 1.5vh, 0.5rem);
+        --SPACING-SM: clamp(0.125rem, 0.65vh, 0.25rem);
+        --SPACING-XS: clamp(0.0625rem, 0.3vh, 0.125rem);
+    
+        --FS-XL: clamp(2rem, 5.5vh, 2.5rem);
+        --FS-LG: clamp(1.5rem, 5.25vh, 2rem);
+        --FS-MD: clamp(1.25rem, 4.5vh, 1.45rem);
+        --FS-SM: clamp(0.85rem, 4vh, 1rem);
+        --FS-XS: clamp(12px, 3.5vh, 14px);
+    
+        --FS-BTN-LG: clamp(1.75rem, 4.15vw, 2rem);
+        --FS-BTN-MD: clamp(1.15rem, 2.85vw, 1.5rem);
+        --FS-BTN-SM: clamp(1rem, 2.65vw, 1.45rem);
+    }
+}
+
+//breakpoint between desktop and mobile
+
+@include media-md { // 768 - 1023 
+    :root {
+        --SPACING-XL: 1.25rem;
+        --SPACING-LG: clamp(0.5rem, 2vh, 1rem);
+        --SPACING-MD: clamp(0.35rem, 1vh, 0.5rem);
+        --SPACING-SM: clamp(0.15rem, 0.5vh, 0.25rem);
+        --SPACING-XS: 0.125rem;
+    
+        --FS-XL: clamp(2.15rem, 5.25vh, 2.5rem);
+        --FS-LG: clamp(1.5rem, 7vw, 2rem);
+        --FS-MD: clamp(1.25rem, 2.25vw, 1.5rem);
+        --FS-SM: clamp(12px, 1.75vw, 1rem);
+        --FS-XS: clamp(11px, 1.5vw, 14px);
+    
+        --FS-BTN-LG: clamp(1.5rem, 3.25vw, 1.75rem);
+        --FS-BTN-MD: clamp(1.2rem, 2.25vw ,1.35rem);
+        --FS-BTN-SM: clamp(1rem, 2.35vw, 1.285rem);
+    }
+}
+
+@include media-lg { // 1024 - 1279
+    :root {
+        --SPACING-XL: 1.25rem;
+        --SPACING-LG: 1rem;
+        --SPACING-MD: 0.5rem;
+        --SPACING-SM: 0.25rem;
+        --SPACING-XS: 0.125rem;
+    
+        --FS-XL: 2.5rem;
+        --FS-LG: 2rem;
+        --FS-MD: clamp(1.15rem, 2.25vw, 1.5rem);
+        --FS-SM: 1rem;
+        --FS-XS: 14px;
+    
+        --FS-BTN-LG: 1.75rem;
+        --FS-BTN-MD: 1.35rem;
+        --FS-BTN-SM: 1.285rem;
+    }
+}
+
+@include media-xl { // >= 1280
+    :root {
+        --SPACING-XL: max(1.25rem, 1.25vw);
+        --SPACING-LG: max(1rem, 1vw);
+        --SPACING-MD: max(0.5rem, 0.5vw);
+        --SPACING-SM: max(0.25rem, 0.25vw);
+        --SPACING-XS: max(0.125rem, 0.125vw);
+
+        --FS-XL: max(2.5rem, 2.5vw);
+        --FS-LG: max(2rem, 2vw);
+        --FS-MD: max(1.5rem, 1.5vw);
+        --FS-SM: max(1rem, 1vw);
+        --FS-XS: max(14px, 0.875vw);
+    
+        --FS-BTN-LG: max(1.75rem, 1.75vw);
+        --FS-BTN-MD: max(1.35rem, 1.35vw);
+        --FS-BTN-SM: max(1.285rem, 1.285vw);
+    }
 }

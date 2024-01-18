@@ -1,6 +1,7 @@
 @use "./../../abstracts" as *;
 
 .keyboard-shortcuts {
+    display: none;
     position: absolute;
     left: 0;
     top: 50%;
@@ -13,6 +14,7 @@
         padding-right: calc(var(--SPACING-MD) + 2px);
         position: relative;
         transform: translateY(-50%);
+        font-size: var(--FS-SM);
 
         #open-keyboard-shortcuts {
             animation: fade-in 0.5s forwards;
@@ -41,10 +43,6 @@
     }
 
     &__panel {
-
-        //TODO - i alr know that this gonna cause problems with responsiveness
-        // Maybe, wrap the entire table (panel) in a div????
-
         display: none;
         @include neumorphic(HEADER);
         padding: var(--SPACING-MD);
@@ -53,6 +51,7 @@
         border-collapse: collapse;
         overflow: hidden;
         animation: hide-keyboard-shortcuts-panel 0.5s forwards;
+        z-index: 2;
 
         &.panel-active {
             display: block;
@@ -71,7 +70,7 @@
             }
             to { 
                 opacity: 1;
-                height: 415px; 
+                height: var(--KEYBOARD-SHORTCUTS-HEIGHT); 
             }
         }
 
@@ -79,7 +78,7 @@
             from { 
                 display: block;
                 opacity: 1;
-                height: 415px;
+                height: var(--KEYBOARD-SHORTCUTS-HEIGHT);
                 padding-bottom: var(--SPACING-MD);
             }
             70% {
@@ -104,18 +103,18 @@
                     display: inline;
 
                     kbd {
-                        position: relative;
                         z-index: 1;
                         vertical-align: middle;
                         border-radius: 5px;
                         padding: 1px 5px;
                         border: 1px solid var(--TEXT-COLOR);
                         box-shadow: 0 1px 0 var(--TEXT-COLOR);
+                        font-size: calc(var(--FS-XS) - 1px);
                     }
                 }
 
                 .line {
-                    z-index: 0;
+                    z-index: 3;
                     width: 0px;
                     height: 1px;
                     background-color: var(--TEXT-COLOR);
@@ -127,13 +126,20 @@
             }
             
             td:last-child {
-                font-size: 14px;                
+                font-size: var(--FS-XS);            
             }
         }
 
         th {
             text-align: left;
             padding-bottom: var(--SPACING-SM);
+            font-size: var(--FS-SM); 
         }
+    }
+}
+
+@include media-md {
+    .keyboard-shortcuts {
+        display: block;
     }
 }

@@ -2,11 +2,13 @@ const purpleTheme = [
     "#a513ca", //main color
     "hsla(288, 33%, 50%, 0.25)", //main color cover
 
+    "hsl(286, 37%, 57%)", //mobile panel
+
     "#fbfbf0", //text color
     "#fbfbf0", //text color opposite
 
-    "hsla(286, 55%, 70%, 0.9)", //panel light
-    "hsla(286, 37%, 58%, 0.85)", //panel dark
+    "hsla(286, 55%, 73%, 0.9)", //panel light
+    "hsla(286, 34%, 49%, 0.85)", //panel dark
     "hsla(286, 52%, 14%, 0.95)", //panel shadow
 
     "hsla(286, 85%, 91%, 0.85)", //calc scrollbar track
