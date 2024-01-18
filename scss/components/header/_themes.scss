@@ -50,6 +50,7 @@
 
     &__panel {
         @include neumorphic(CALC);
+        border-radius: 16px;
         z-index: 3;
         display: none;
         position: absolute;
@@ -67,7 +68,7 @@
             color: var(--TEXT-COLOR);
             font-size: var(--FS-LG);
             position: absolute;
-            top: 20%;
+            top: 15%;
             left: 50%;
             transform: translateX(-50%);
             @extend %nowrap;
@@ -128,6 +129,16 @@
         top: calc(2 * var(--SPACING-MD) + var(--FS-XL));
         transform: translate(-50%, 0);
         height: clamp(80px, 80vh, 300px);
+        border-radius: 12px;
+
+        &-mobile-current {
+            top: 5%;
+        }
+
+        &-option {
+            width: var(--FS-XL);
+            height: var(--FS-XL);
+        }
     }
 }
 
@@ -135,6 +146,13 @@
     .themes .themes__panel {
         width: clamp(280px, 94vw, 450px);
         height: clamp(340px, 75vh, 610px);
+        border-radius: clamp(22px, 5.5vw, 28px);
+
+        &-mobile-current {
+            top: 17%;
+            left: 50%;
+            transform: translateX(-50%);
+        }
     }
 }
 
@@ -144,6 +162,11 @@
         transform: translate(-50%, 0);
         width: clamp(300px, 96vw, 550px);
         height: clamp(200px, 85vh, 420px);
+        border-radius: 28px;
+
+        &-mobile-current {
+            top: 5%;
+        }
     }
 }
 
@@ -151,6 +174,12 @@
     .themes .themes__panel {
         width: clamp(495px, 75vw, 530px);
         height: clamp(510px, 84vh, 720px);
+
+        &-mobile-current {
+            top: 20%;
+            left: 50%;
+            transform: translateX(-50%);
+        }
     }
 }
 
@@ -160,6 +189,13 @@
         transform: translate(-50%, 0);
         width: clamp(525px, 90vw, 700px);
         height: clamp(260px, 80vh, 575px);
+        border-radius: 30px;
+
+        &-mobile-current {
+            top: 20%;
+            left: 50%;
+            transform: translateX(-50%);
+        }
     }
 }
 

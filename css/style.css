@@ -1570,6 +1570,7 @@ form, input, button, label, textarea {
   -webkit-backdrop-filter: blur(2px);
           backdrop-filter: blur(2px);
   box-shadow: var(--CALC-SHADOW);
+  border-radius: 16px;
   z-index: 3;
   display: none;
   position: absolute;
@@ -1594,7 +1595,7 @@ form, input, button, label, textarea {
   color: var(--TEXT-COLOR);
   font-size: var(--FS-LG);
   position: absolute;
-  top: 20%;
+  top: 15%;
   left: 50%;
   transform: translateX(-50%);
 }
@@ -1663,12 +1664,26 @@ form, input, button, label, textarea {
     top: calc(2 * var(--SPACING-MD) + var(--FS-XL));
     transform: translate(-50%, 0);
     height: clamp(80px, 80vh, 300px);
+    border-radius: 12px;
+  }
+  .themes .themes__panel-mobile-current {
+    top: 5%;
+  }
+  .themes .themes__panel-option {
+    width: var(--FS-XL);
+    height: var(--FS-XL);
   }
 }
 @media screen and (min-width: 320px) {
   .themes .themes__panel {
     width: clamp(280px, 94vw, 450px);
     height: clamp(340px, 75vh, 610px);
+    border-radius: clamp(22px, 5.5vw, 28px);
+  }
+  .themes .themes__panel-mobile-current {
+    top: 17%;
+    left: 50%;
+    transform: translateX(-50%);
   }
 }
 @media screen and (min-width: 320px) and (max-width: 575.9px) and (min-aspect-ratio: 19/20) {
@@ -1677,12 +1692,21 @@ form, input, button, label, textarea {
     transform: translate(-50%, 0);
     width: clamp(300px, 96vw, 550px);
     height: clamp(200px, 85vh, 420px);
+    border-radius: 28px;
+  }
+  .themes .themes__panel-mobile-current {
+    top: 5%;
   }
 }
 @media screen and (min-width: 576px) {
   .themes .themes__panel {
     width: clamp(495px, 75vw, 530px);
     height: clamp(510px, 84vh, 720px);
+  }
+  .themes .themes__panel-mobile-current {
+    top: 20%;
+    left: 50%;
+    transform: translateX(-50%);
   }
 }
 @media screen and (min-width: 576px) and (max-width: 767.9px) and (min-aspect-ratio: 20.5/19) {
@@ -1691,6 +1715,12 @@ form, input, button, label, textarea {
     transform: translate(-50%, 0);
     width: clamp(525px, 90vw, 700px);
     height: clamp(260px, 80vh, 575px);
+    border-radius: 30px;
+  }
+  .themes .themes__panel-mobile-current {
+    top: 20%;
+    left: 50%;
+    transform: translateX(-50%);
   }
 }
 @media screen and (min-width: 768px) {
@@ -2064,6 +2094,9 @@ footer {
     border-radius: 22px !important;
   }
   .themes .themes__panel {
+    border-radius: 22px !important;
+  }
+  .themes .themes__panel {
     width: clamp(300px, 85vw, 550px) !important;
   }
   .calculator__history {
@@ -2102,6 +2135,9 @@ footer {
     top: 0;
     transform: translateY(0);
     width: clamp(500px, 80vw, 570px) !important;
+    border-radius: 20px !important;
+  }
+  .themes .themes__panel {
     border-radius: 20px !important;
   }
   .themes .themes__panel {

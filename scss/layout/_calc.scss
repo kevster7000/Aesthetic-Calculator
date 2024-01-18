@@ -121,6 +121,10 @@
     }
 
     .themes .themes__panel {
+        border-radius: 22px !important;
+    }
+
+    .themes .themes__panel {
         width: clamp(300px, 85vw, 550px) !important;
     }
 
@@ -168,6 +172,10 @@
         top: 0;
         transform: translateY(0);
         width: clamp(500px, 80vw, 570px) !important;
+        border-radius: 20px !important;
+    }
+
+    .themes .themes__panel {
         border-radius: 20px !important;
     }
 
