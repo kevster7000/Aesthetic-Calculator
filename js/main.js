@@ -6,6 +6,8 @@ document.addEventListener("DOMContentLoaded", initApp);
 function initApp() {
 
 //disable keyboard shortcuts for mobile devices
+const keyboardShortcutsHead = document.querySelector(".keyboard-shortcuts__panel thead");
+const keyboardShortcutsBody = document.querySelector(".keyboard-shortcuts__panel tbody");
 let keyboardShortcutsOpen = false;
 let isDesktop = false;
 if(window.innerWidth >= 768) {
@@ -29,6 +31,9 @@ window.addEventListener("resize", () => {
         isDesktop = true;
 
         if(!keyboardShortcutsOpen) initKeyboardShortcuts();
+
+        document.documentElement.style.setProperty("--KEYBOARD-SHORTCUTS-HEIGHT", 
+        `${keyboardShortcutsBody.offsetHeight + keyboardShortcutsHead.offsetHeight + 2 * getRealValue("", "var(--SPACING-MD)")}px`);
 
         if (!linesResize) {
             drawKeyboardShortcutLines();
@@ -805,7 +810,6 @@ function initKeyboardShortcuts() {
     const keyboardShortcutsCloseButton = document.querySelector(`#close-keyboard-shortcuts`);
 
     let keyboardShortcutsClicked = false;
-    let linesDrawn = false;
     keyboardShortcutsOpen = true;
 
     if(JSON.parse(sessionStorage.getItem("KeyboardShortcutsOpen"))) toggleKeyboardShortcuts();
@@ -829,6 +833,9 @@ function initKeyboardShortcuts() {
         keyboardShortcutsPanel.classList.toggle("panel-active");
         keyboardShortcutsButton.classList.toggle("keyboard-shortcuts-active");
 
+        document.documentElement.style.setProperty("--KEYBOARD-SHORTCUTS-HEIGHT", 
+        `${keyboardShortcutsBody.offsetHeight + keyboardShortcutsHead.offsetHeight + 2 * getRealValue("", "var(--SPACING-MD)")}px`);
+
         if(keyboardShortcutsClicked) {
             keyboardShortcutsCloseButton.style.setProperty("animation", "fade-out 0.25s forwards");
             keyboardShortcutsClicked = false;
@@ -839,11 +846,8 @@ function initKeyboardShortcuts() {
             keyboardShortcutsClicked = true;
             sessionStorage.setItem("KeyboardShortcutsOpen", true);
         }
-
-        if(!linesDrawn) {
-            drawKeyboardShortcutLines();
-            linesDrawn = true;
-        }
+        
+        drawKeyboardShortcutLines();
     }
 }
 
