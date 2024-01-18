@@ -143,3 +143,9 @@
         display: block;
     }
 }
+
+@include media-xl {
+    .keyboard-shortcuts .keyboard-shortcuts__panel {
+        border-radius: max(10px, 0.65vw);
+    }
+}

@@ -15,8 +15,8 @@
         font-size: var(--FS-SM);
 
         .themes__current {
-            width: 16px;
-            height: 16px;
+            width: var(--FS-SM);
+            height: var(--FS-SM);
             background-color: var(--MAIN-COLOR);
             border-radius: 50%;
             border: 1px solid var(--TEXT-COLOR);
@@ -260,5 +260,11 @@
                 animation: none;
             }
         }
+    }
+}
+
+@include media-xl {
+    .themes .themes__panel {
+        border-radius: max(10px, 0.65vw);
     }
 }

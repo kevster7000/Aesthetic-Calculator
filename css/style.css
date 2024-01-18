@@ -115,7 +115,7 @@
   --FS-XL: clamp(1.25rem, 5.5vh, 3rem);
   --FS-LG: clamp(0.5rem, 7.25vw, 1.5rem);
   --FS-MD: clamp(0.75rem, 3vh, 1.5rem);
-  --FS-SM: clamp(0.5rem, 2.3vh, 1rem);
+  --FS-SM: clamp(0.5rem, 2.175vh, 1rem);
   --FS-XS: clamp(11px, 2.5vw, 14px);
   --FS-BTN-LG: clamp(0.8rem, 6.5vw, 1.75rem);
   --FS-BTN-MD: clamp(0.6rem, 5vw, 1.35rem);
@@ -132,8 +132,8 @@
     --FS-XL: clamp(1rem, 7.75vh, 1.75rem);
     --FS-LG: clamp(0.65rem, 6.125vw, 1.5rem);
     --FS-MD: clamp(0.5rem, 4.5vh, 1.25rem);
-    --FS-SM: clamp(0.35rem, 3.25vh, 1rem);
-    --FS-XS: clamp(0.125px, 3.5vh, 0.75px);
+    --FS-SM: clamp(0.25rem, 3vh, 1rem);
+    --FS-XS: clamp(0.125px, 2.5vh, 0.75px);
     --FS-BTN-LG: clamp(0.65rem, 4.25vw, 1.85rem);
     --FS-BTN-MD: clamp(0.45rem, 3.5vw, 1.35rem);
     --FS-BTN-SM: clamp(0.25rem, 2.8vw, 1.25rem);
@@ -146,7 +146,7 @@
     --SPACING-MD: clamp(0.25rem, 1.35vw, 0.5rem);
     --SPACING-SM: clamp(0.125rem, 0.75vw, 0.25rem);
     --SPACING-XS: clamp(0.0625rem, 0.35vw, 0.125rem);
-    --FS-XL: clamp(1.5rem, 5.25vh, 3rem);
+    --FS-XL: clamp(1.95rem, 5.25vh, 3rem);
     --FS-LG: clamp(1.5rem, 6.5vw, 2rem);
     --FS-MD: clamp(1rem, 2.35vh, 1.5rem);
     --FS-SM: clamp(12px, 2vh, 1rem);
@@ -197,10 +197,10 @@
     --SPACING-MD: clamp(0.25rem, 1.5vh, 0.5rem);
     --SPACING-SM: clamp(0.125rem, 0.65vh, 0.25rem);
     --SPACING-XS: clamp(0.0625rem, 0.3vh, 0.125rem);
-    --FS-XL: clamp(2rem, 5.5vh, 2.5rem);
+    --FS-XL: clamp(2rem, 6.75vh, 2.5rem);
     --FS-LG: clamp(1.5rem, 5.25vh, 2rem);
     --FS-MD: clamp(1.25rem, 4.5vh, 1.45rem);
-    --FS-SM: clamp(0.85rem, 4vh, 1rem);
+    --FS-SM: clamp(0.75rem, 2.75vh, 1rem);
     --FS-XS: clamp(12px, 3.5vh, 14px);
     --FS-BTN-LG: clamp(1.75rem, 4.15vw, 2rem);
     --FS-BTN-MD: clamp(1.15rem, 2.85vw, 1.5rem);
@@ -1117,8 +1117,10 @@ form, input, button, label, textarea {
   padding: var(--SPACING-MD);
   cursor: pointer;
   font-size: var(--FS-SM);
-  line-height: 1rem;
-  border-radius: 10px;
+  line-height: calc(var(--FS-SM) * 1.25);
+  border-radius: clamp(2px, 2.25vw, 8px);
+  display: grid;
+  place-content: center;
   transition: transform 0.15s, background-color 0.125s;
 }
 .calculator__history-entries .calculator__history-entry .entry-header-copy > i, .calculator__history-entries .calculator__history-entry .entry-header-delete > i {
@@ -1184,11 +1186,17 @@ form, input, button, label, textarea {
     transform: translateY(0);
     height: clamp(80px, 80vh, 300px);
   }
+  .calculator__history-entries .calculator__history-entry .entry-header :is(.entry-header-copy, .entry-header-delete) {
+    border-radius: clamp(2px, 1.75vh, 6px);
+  }
 }
 @media screen and (min-width: 320px) {
   .calculator__history {
     transform: translateY(calc(-0.32 * clamp(340px, 75vh, 610px)));
     width: clamp(280px, 94vw, 450px);
+  }
+  .calculator__history-entries .calculator__history-entry .entry-header :is(.entry-header-copy, .entry-header-delete) {
+    border-radius: clamp(4px, 2.25vw, 10px);
   }
 }
 @media screen and (min-width: 320px) and (max-width: 575.9px) and (min-aspect-ratio: 19/20) {
@@ -1196,6 +1204,9 @@ form, input, button, label, textarea {
     top: 0;
     transform: translateY(0);
     width: clamp(300px, 96vw, 550px);
+  }
+  .calculator__history-entries .calculator__history-entry .entry-header :is(.entry-header-copy, .entry-header-delete) {
+    border-radius: clamp(5px, 2vh, 10px);
   }
 }
 @media screen and (min-width: 576px) {
@@ -1212,6 +1223,9 @@ form, input, button, label, textarea {
     top: 0;
     transform: translateY(0);
     width: clamp(525px, 90vw, 700px);
+  }
+  .calculator__history-entries .calculator__history-entry .entry-header :is(.entry-header-copy, .entry-header-delete) {
+    border-radius: clamp(6px, 2vh, 10px);
   }
 }
 @media screen and (min-width: 768px) {
@@ -1293,6 +1307,9 @@ form, input, button, label, textarea {
   .calculator__history-entries.entries-active {
     animation: fade-in 0.15s 0.125s backwards;
   }
+  .calculator__history-entries .calculator__history-entry .entry-header :is(.entry-header-copy, .entry-header-delete) {
+    border-radius: max(9px, 0.585vw);
+  }
 }
 @media screen and (min-width: 1024px) {
   .calculator__history {
@@ -1339,6 +1356,7 @@ form, input, button, label, textarea {
   .calculator__history {
     width: max(325px, 20.5vw);
     height: max(650px, 41vw);
+    border-radius: max(32px, 2.08vw);
   }
   @keyframes show-history-panel {
     from {
@@ -1541,8 +1559,8 @@ form, input, button, label, textarea {
   transition: filter 0.075s, scale 0.075s;
 }
 .themes__btn .themes__current {
-  width: 16px;
-  height: 16px;
+  width: var(--FS-SM);
+  height: var(--FS-SM);
   background-color: var(--MAIN-COLOR);
   border-radius: 50%;
   border: 1px solid var(--TEXT-COLOR);
@@ -1799,6 +1817,11 @@ form, input, button, label, textarea {
     animation: none;
   }
 }
+@media screen and (min-width: 1280px) {
+  .themes .themes__panel {
+    border-radius: max(10px, 0.65vw);
+  }
+}
 .keyboard-shortcuts {
   display: none;
   position: absolute;
@@ -1942,6 +1965,11 @@ form, input, button, label, textarea {
 @media screen and (min-width: 768px) {
   .keyboard-shortcuts {
     display: block;
+  }
+}
+@media screen and (min-width: 1280px) {
+  .keyboard-shortcuts .keyboard-shortcuts__panel {
+    border-radius: max(10px, 0.65vw);
   }
 }
 header {

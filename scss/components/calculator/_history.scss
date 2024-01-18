@@ -140,8 +140,10 @@
                     padding: var(--SPACING-MD);
                     cursor: pointer;
                     font-size: var(--FS-SM);
-                    line-height: 1rem;
-                    border-radius: 10px;
+                    line-height: calc(var(--FS-SM) * 1.25);
+                    border-radius: clamp(2px, 2.25vw, 8px);
+                    display: grid;
+                    place-content: center;
                     transition: 
                         transform 0.15s, 
                         background-color 0.125s;
@@ -228,6 +230,10 @@
         top: 0;
         transform: translateY(0);
         height: clamp(80px, 80vh, 300px);
+
+        &-entries .calculator__history-entry .entry-header :is(.entry-header-copy, .entry-header-delete) {
+            border-radius: clamp(2px, 1.75vh, 6px);
+        }
     }
 }
 
@@ -235,6 +241,10 @@
     .calculator__history {
         transform: translateY(calc(-0.32 * clamp(340px, 75vh, 610px)));
         width: clamp(280px, 94vw, 450px);
+
+        &-entries .calculator__history-entry .entry-header :is(.entry-header-copy, .entry-header-delete) {
+            border-radius: clamp(4px, 2.25vw, 10px);
+        }
     }
 }
 
@@ -243,6 +253,10 @@
         top: 0;
         transform: translateY(0);
         width: clamp(300px, 96vw, 550px);
+
+        &-entries .calculator__history-entry .entry-header :is(.entry-header-copy, .entry-header-delete) {
+            border-radius: clamp(5px, 2vh, 10px);
+        }
     }
 }
 
@@ -262,6 +276,10 @@
         top: 0;
         transform: translateY(0);
         width: clamp(525px, 90vw, 700px);
+
+        &-entries .calculator__history-entry .entry-header :is(.entry-header-copy, .entry-header-delete) {
+            border-radius: clamp(6px, 2vh, 10px);
+        }
     }
 }
 
@@ -329,6 +347,10 @@
                 animation: fade-in 0.15s 0.125s backwards;
             }
         }
+
+        &-entries .calculator__history-entry .entry-header :is(.entry-header-copy, .entry-header-delete) {
+            border-radius: max(9px, 0.585vw);
+        }
     }
 }
 
@@ -373,6 +395,7 @@
     .calculator__history {
         width: max(325px, 20.5vw);
         height: max(650px, 41vw);
+        border-radius: max(32px, 2.08vw);
 
         @keyframes show-history-panel {
             from { 
