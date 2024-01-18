@@ -830,6 +830,7 @@ form, input, button, label, textarea {
   aspect-ratio: 1/1;
   border-radius: 50% 50% 0 50%;
   font-size: var(--FS-SM);
+  position: relative;
 }
 .calculator__panel-header #calculator-history-btn:hover, .calculator__panel-header #calculator-history-btn:focus-visible {
   filter: brightness(var(--BTN-HOVER-BRIGHTNESS));

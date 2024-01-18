@@ -36,8 +36,8 @@ This is my second web dev project, and it felt better than the first. Most of th
 - I am also exquisitely pleased with how I parsed the expression with regex and the calculation with stacks for infix/postfix shenanigans.
 - The only unprecise calculation that can occur is with exponents that are not **small integers**: `-100000 < exp < 100000`.
 - Not too proud of how I handled the conditions as the user types the expression; it works well though, and that's all that matters.
-- But mainly, I'm pretty disappointed with my pace for this project; I really wanted to finish earlier. womp womp. :slightly_frowning_face:
-- Also, since I don't know how to use Node.js yet, I'm still using the web browser environment, meaning I couldn't use the Unsplash API even though I really wanted to.
+- But mainly, I'm pretty disappointed with my pace for this project; I really wanted to finish earlier. womp womp.
+- Also, since I don't know how to use Node.js yet, I'm still using the web browser environment, meaning I couldn't use the Unsplash API even though I really wanted to. :slightly_frowning_face:
 - One thing that I did learn inadvertently is that I need to think about responsive design during the process and not at the end. For this project, I designed the responsive layouts last without much forethought, and good golly did it make the code filthy. I could've made this much cleaner by planning ahead, but I most likely won't touch this code ever again, so rewriting what I had would just take more time. Plus, I was already very close to finishing.
 
 > [!NOTE]
