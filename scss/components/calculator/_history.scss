@@ -125,12 +125,13 @@
             .entry-header {
                 width: 100%;
                 @include flex(center, center);
+                gap: var(--SPACING-XS);
 
                 &-time {
                     flex-grow: 1;
                     padding-left: var(--SPACING-MD);
                     @extend %nowrap;
-                    font-size: var(--FS-SM);
+                    font-size: calc(var(--FS-SM) * 1.1);
                 }
 
                 &-copy, &-delete {
@@ -139,7 +140,7 @@
                     border: none;
                     padding: var(--SPACING-MD);
                     cursor: pointer;
-                    font-size: var(--FS-SM);
+                    font-size: calc(var(--FS-SM) * 1.1);
                     line-height: calc(var(--FS-SM) * 1.25);
                     border-radius: clamp(2px, 2.25vw, 8px);
                     display: grid;
@@ -345,6 +346,19 @@
     
             &.entries-active {
                 animation: fade-in 0.15s 0.125s backwards;
+            }
+
+            .calculator__history-entry .entry-header {
+                gap: 0;
+
+                &-time {
+                    font-size: var(--FS-SM);
+                }
+
+                &-copy, &-delete {
+                    font-size: var(--FS-SM);
+                    line-height: var(--FS-SM);
+                }
             }
         }
 

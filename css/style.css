@@ -148,8 +148,8 @@
     --SPACING-XS: clamp(0.0625rem, 0.35vw, 0.125rem);
     --FS-XL: clamp(1.95rem, 5.25vh, 3rem);
     --FS-LG: clamp(1.5rem, 6.5vw, 2rem);
-    --FS-MD: clamp(1rem, 2.35vh, 1.5rem);
-    --FS-SM: clamp(12px, 2vh, 1rem);
+    --FS-MD: clamp(1rem, 2.45vh, 1.5rem);
+    --FS-SM: clamp(12px, 2.15vh, 1rem);
     --FS-XS: clamp(11px, 2.5vw, 14px);
     --FS-BTN-LG: clamp(1.35rem, 6.15vw, 1.75rem);
     --FS-BTN-MD: clamp(0.85rem, 4.5vw, 1.35rem);
@@ -1103,12 +1103,13 @@ form, input, button, label, textarea {
       align-items: center;
   -ms-flex-flow: row nowrap;
       flex-flow: row nowrap;
+  gap: var(--SPACING-XS);
 }
 .calculator__history-entries .calculator__history-entry .entry-header-time {
   -ms-flex-positive: 1;
       flex-grow: 1;
   padding-left: var(--SPACING-MD);
-  font-size: var(--FS-SM);
+  font-size: calc(var(--FS-SM) * 1.1);
 }
 .calculator__history-entries .calculator__history-entry .entry-header-copy, .calculator__history-entries .calculator__history-entry .entry-header-delete {
   background-color: transparent;
@@ -1116,7 +1117,7 @@ form, input, button, label, textarea {
   border: none;
   padding: var(--SPACING-MD);
   cursor: pointer;
-  font-size: var(--FS-SM);
+  font-size: calc(var(--FS-SM) * 1.1);
   line-height: calc(var(--FS-SM) * 1.25);
   border-radius: clamp(2px, 2.25vw, 8px);
   display: grid;
@@ -1306,6 +1307,16 @@ form, input, button, label, textarea {
   }
   .calculator__history-entries.entries-active {
     animation: fade-in 0.15s 0.125s backwards;
+  }
+  .calculator__history-entries .calculator__history-entry .entry-header {
+    gap: 0;
+  }
+  .calculator__history-entries .calculator__history-entry .entry-header-time {
+    font-size: var(--FS-SM);
+  }
+  .calculator__history-entries .calculator__history-entry .entry-header-copy, .calculator__history-entries .calculator__history-entry .entry-header-delete {
+    font-size: var(--FS-SM);
+    line-height: var(--FS-SM);
   }
   .calculator__history-entries .calculator__history-entry .entry-header :is(.entry-header-copy, .entry-header-delete) {
     border-radius: max(9px, 0.585vw);

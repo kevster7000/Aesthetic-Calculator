@@ -262,7 +262,7 @@ function setDefaultImage() {
                 backgroundContainer.style.setProperty("background-image", `url("https://images.unsplash.com/photo-1623212209063-a1295bdb54fc?q=80&w=1999&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D")`);
                 break;
             case "black":
-                backgroundContainer.style.setProperty("background-image", `url("https://images.unsplash.com/photo-1513569771920-c9e1d31714af?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D")`);
+                backgroundContainer.style.setProperty("background-image", `url("https://images.unsplash.com/photo-1478034460338-249ef2da6c0f?q=80&w=2073&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D")`);
                 break;
             case "brown":
                 backgroundContainer.style.setProperty("background-image", `url("https://images.unsplash.com/photo-1576899244078-180364e39ca1?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D")`);
