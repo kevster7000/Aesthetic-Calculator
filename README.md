@@ -1,6 +1,6 @@
 # [**Aesthetic Calculator**](https://kevster7000.github.io/Aesthetic-Calculator/)
 
-***A calculator that supports PEMDAS with multiple themes, keyboard integration, and a history feature.***
+***A visually appealing and responsive calculator that supports PEMDAS with multiple themes, keyboard integration, and a history feature.***
 
 <img src="./assets/themes.png" width="100%">
 
@@ -38,7 +38,7 @@ This is my second web dev project, and it felt better than the first. Most of th
 - Not too proud of how I handled the conditions as the user types the expression; it works well though, and that's all that matters.
 - But mainly, I'm pretty disappointed with my pace for this project; I really wanted to finish earlier. womp womp.
 - Also, since I don't know how to use Node.js yet, I'm still using the web browser environment, meaning I couldn't use the Unsplash API even though I really wanted to. :slightly_frowning_face:
-- One thing that I did learn inadvertently is that I need to think about responsive design during the process and not at the end. For this project, I designed the responsive layouts last without much forethought, and good golly did it make the code filthy. I could've made this much cleaner by planning ahead, but I most likely won't touch this code ever again, so rewriting what I had would just take more time. Plus, I was already very close to finishing.
+- One thing that I did learn inadvertently is that I need to think about responsive design during the process and not at the end. For this project, I designed the responsive layouts last without much forethought, and good golly did it make the code filthy. But that could also be the fact that I was getting tired of this project. I could've made this much cleaner, but I most likely won't touch this code ever again and rewriting what I had would just take more time, so I decided I wasn't going to.
 
 > [!NOTE]
 > The entire thing was tested by only one person which happens to be me, and I can only think of so much.<br>
